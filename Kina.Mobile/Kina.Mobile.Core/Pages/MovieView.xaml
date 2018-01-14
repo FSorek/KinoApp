@@ -1,0 +1,28 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kina.Mobile.Core.Pages.MovieView"
+             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
+             Title="Movie">
+    <ScrollView>
+        <StackLayout Spacing="0" Padding="0" BackgroundColor="White">
+            <StackLayout Orientation="Horizontal">
+                <Image Source="cat.jpeg" Aspect="AspectFill" HeightRequest="100" WidthRequest="80"/>
+                <Label FontSize="15" Text="{Binding TitleText}" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start" />
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
+                <Label FontSize="12" Text="Description" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
+            </StackLayout>
+            <StackLayout>
+                <Label FontSize="10" Text="{Binding DescriptionText}" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
+                <Label FontSize="12" Text="Check out the trailer on Youtube" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
+                <Label FontSize="10" Text="{Binding URLText}" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
+                <Button Scale=".5" FontSize="15" Text="I WAS THERE" Command="{Binding GoToRatePage}" BackgroundColor="Orange" Margin="5"/>
+            </StackLayout>
+            
+
+        </StackLayout>
+    </ScrollView>
+        
+</mvx:MvxContentPage>
