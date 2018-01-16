@@ -33,7 +33,7 @@ namespace Kina.Mobile.Core.ViewModels
 		public IMvxAsyncCommand GoToSecondPageCommand =>
 			new MvxAsyncCommand(async () =>
 			{
-				await _navigationService.Navigate<ShowsViewModel>();
+                await _navigationService.Navigate<ShowsViewModel>();
 			});
 
 		public IMvxCommand OpenGithubUrlCommand =>
