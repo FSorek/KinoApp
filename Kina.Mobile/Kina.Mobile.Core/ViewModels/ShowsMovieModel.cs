@@ -1,4 +1,5 @@
-﻿using MvvmCross.Core.Navigation;
+﻿using CoreMultikinoJson;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
@@ -67,9 +68,9 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToMovieViewAction()
         {
-            var param = movieID;
+            Showing showing = new Showing();
 
-            await _navigationService.Navigate<MainViewModel>();
+            await _navigationService.Navigate<FilterViewModel, Showing>(showing);
         }
 
         private void InitCommands()
