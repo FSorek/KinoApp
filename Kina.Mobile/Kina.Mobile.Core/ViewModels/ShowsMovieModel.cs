@@ -59,7 +59,7 @@ namespace Kina.Mobile.Core.ViewModels
             set { shows = value; }
         }
 
-        public ShowsMovieModel(int id, string title, List<ShowsShowsModel> shows, IMvxNavigationService navigationService)
+        public ShowsMovieModel(int id, string title, List<ShowsShowsModel> shows, double rating, IMvxNavigationService navigationService)
         {
             movieID = id;
             this.title = title;
