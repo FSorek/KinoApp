@@ -1,1 +1,1 @@
-# KinoApp
+# Kina Mobile Application
