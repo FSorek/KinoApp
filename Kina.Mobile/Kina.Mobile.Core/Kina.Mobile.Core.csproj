@@ -42,6 +42,19 @@
     <Compile Include="FormsApp.xaml.cs">
       <DependentUpon>FormsApp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\DataModel\Address.cs" />
+    <Compile Include="Model\DataModel\Cinema.cs" />
+    <Compile Include="Model\DataModel\Filmweb.cs" />
+    <Compile Include="Model\DataModel\MetaCritic.cs" />
+    <Compile Include="Model\DataModel\Movie.cs" />
+    <Compile Include="Model\DataModel\MovieList.cs" />
+    <Compile Include="Model\DataModel\Price.cs" />
+    <Compile Include="Model\DataModel\RottenTomatoes.cs" />
+    <Compile Include="Model\DataModel\Score.cs" />
+    <Compile Include="Model\DataModel\Show.cs" />
+    <Compile Include="Model\DataModel\ShowPrice.cs" />
+    <Compile Include="Model\DataModel\UserScore.cs" />
+    <Compile Include="Model\DataModel\Webscore.cs" />
     <Compile Include="Model\JsonReader.cs" />
     <Compile Include="Pages\FilterView.xaml.cs">
       <DependentUpon>FilterView.xaml</DependentUpon>
