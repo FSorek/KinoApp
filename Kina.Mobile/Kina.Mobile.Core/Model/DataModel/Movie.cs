@@ -19,6 +19,6 @@ namespace DataModel
         public String Music;
         public String Cinematography;
         public String Rating;
-        public Webscore Id_Webscore;
+        //public Webscore Id_Webscore;
     }
 }
