@@ -2,11 +2,8 @@
 using System;
 using System.Collections.Generic;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace Kina.Mobile.DataProvider.Models.AccessModels
+namespace Kina.Mobile.DataProvider.Models.AccessModels.Multikino
 {
     public partial class Multikino
     {
