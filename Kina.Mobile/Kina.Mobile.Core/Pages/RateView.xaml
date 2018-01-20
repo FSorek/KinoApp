@@ -15,16 +15,16 @@
             <ScrollView>
                 <StackLayout>
                     <Label Text="Screen" HorizontalOptions="Start"/>
-                    <StackLayout x:Name="ScreenStack" HeightRequest="32" Orientation="Horizontal">
+                    <StackLayout x:Name="ScreenStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
                         <Grid>
                             <Grid.Behaviors>
                                 <local:StarBehavior x:Name="scrStarOne"
                                                     StarName="starOne"
                                                     GroupName="screenStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference scrStarOne}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -33,9 +33,9 @@
                                                     StarName="starTwo"
                                                     GroupName="screenStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference scrStarTwo}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -44,9 +44,9 @@
                                                     StarName="starThree"
                                                     GroupName="screenStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference scrStarThree}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -55,9 +55,9 @@
                                                     StarName="starFour"
                                                     GroupName="screenStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference scrStarFour}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -67,23 +67,23 @@
                                                     GroupName="screenStars"
                                                     Rating="{Binding ScreenRate, Mode=OneWayToSource}"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference scrStarFive}, Path=IsMarked}"/>
                         </Grid>
                     </StackLayout>
                     <Label Text="Seats" HorizontalOptions="Start"/>
-                    <StackLayout x:Name="SeatsStack" HeightRequest="32" Orientation="Horizontal">
+                    <StackLayout x:Name="SeatsStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
                         <Grid>
                             <Grid.Behaviors>
                                 <local:StarBehavior x:Name="seatStarOne"
                                                     StarName="starOne"
                                                     GroupName="seatsStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference seatStarOne}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -92,9 +92,9 @@
                                                     StarName="starTwo"
                                                     GroupName="seatsStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference seatStarTwo}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -103,9 +103,9 @@
                                                     StarName="starThree" 
                                                     GroupName="seatsStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference seatStarThree}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -114,9 +114,9 @@
                                                     StarName="starFour" 
                                                     GroupName="seatsStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference seatStarFour}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -126,23 +126,23 @@
                                                     GroupName="seatsStars"
                                                     Rating="{Binding SeatsRate, Mode=OneWayToSource}"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference seatStarFive}, Path=IsMarked}"/>
                         </Grid>
                     </StackLayout>
                     <Label Text="Sound" HorizontalOptions="Start"/>
-                    <StackLayout x:Name="SoundStack" HeightRequest="32" Orientation="Horizontal">
+                    <StackLayout x:Name="SoundStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
                         <Grid>
                             <Grid.Behaviors>
                                 <local:StarBehavior x:Name="soundStarOne"
                                                     StarName="starOne"
                                                     GroupName="soundStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference soundStarOne}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -151,9 +151,9 @@
                                                     StarName="starTwo"
                                                     GroupName="soundStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference soundStarTwo}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -162,9 +162,9 @@
                                                     StarName="starThree"
                                                     GroupName="soundStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference soundStarThree}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -173,9 +173,9 @@
                                                     StarName="starFour"
                                                     GroupName="soundStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference soundStarFour}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -185,23 +185,23 @@
                                                     GroupName="soundStars"
                                                     Rating="{Binding SoundRate, Mode=OneWayToSource}"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference soundStarFive}, Path=IsMarked}"/>
                         </Grid>
                     </StackLayout>
                     <Label Text="Popcorn" HorizontalOptions="Start"/>
-                    <StackLayout x:Name="popStack" HeightRequest="32" Orientation="Horizontal">
+                    <StackLayout x:Name="popStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
                         <Grid>
                             <Grid.Behaviors>
                                 <local:StarBehavior x:Name="popStarOne"
                                                     StarName="starOne"
                                                     GroupName="popStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference popStarOne}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -210,9 +210,9 @@
                                                     StarName="starTwo"
                                                     GroupName="popStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference popStarTwo}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -221,9 +221,9 @@
                                                     StarName="starThree"
                                                     GroupName="popStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference popStarThree}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -232,9 +232,9 @@
                                                     StarName="starFour"
                                                     GroupName="popStars"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference popStarFour}, Path=IsMarked}"/>
                         </Grid>
                         <Grid>
@@ -244,9 +244,9 @@
                                                     GroupName="popStars"
                                                     Rating="{Binding PopcornRate, Mode=OneWayToSource}"/>
                             </Grid.Behaviors>
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 
-                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
                                    IsVisible="{Binding Source={x:Reference popStarFive}, Path=IsMarked}"/>
                         </Grid>
                     </StackLayout>

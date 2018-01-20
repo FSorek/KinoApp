@@ -24,8 +24,7 @@ namespace Kina.Mobile.Core.ViewModels
         public List<String> Cinemas { get; set; }
         public string SelectedCinema { get; set; }
 
-        public RateViewModel(IMvxNavigationService navigationService,
-            Services.IAppSettings settings)
+        public RateViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
 
@@ -45,7 +44,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task SubmitAction()
         {
-            await _navigationService.Navigate<MainViewModel>();
+            await GoBackAction();
         }
 
         private async Task GoBackAction()

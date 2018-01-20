@@ -11,6 +11,7 @@ namespace Kina.Mobile.Core.ViewModels
     class ShowsViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly Services.IAppSettings _settings;
 
         private List<ShowsMovieModel> movies;
 
@@ -20,22 +21,21 @@ namespace Kina.Mobile.Core.ViewModels
             set { SetProperty(ref movies, value); }
         }
 
-        public ShowsViewModel(IMvxNavigationService navigationService)
+        public ShowsViewModel(IMvxNavigationService navigationService, Services.IAppSettings settings)
         {
             _navigationService = navigationService;
+            _settings = settings;
 
-            JsonReader jsonReader = new JsonReader();
-            Multikino multikino = jsonReader.DeserializeMultikino();
-
+            DateTime d = new DateTime(2018, 1, 8);
             movies = new List<ShowsMovieModel>();
 
-            List<Film> films = multikino.Films;
-            foreach(Film f in multikino.Films)
+            List<Film> films = InitList();
+            foreach(Film f in films)
             {
                 List<ShowsShowsModel> shows = new List<ShowsShowsModel>();
                 foreach (Showing s in f.Showings)
                 {
-                    if (s.DateTime.Equals(new DateTime(2018, 1, 8)))
+                    if (s.DateTime.Equals(d))
                     {
                         foreach (Time t in s.Times)
                         {
@@ -50,29 +50,19 @@ namespace Kina.Mobile.Core.ViewModels
                 }
             }
 
-            #region Temporary hardcoded for preview
-            //shows.Add(new ShowsShowsModel(new DateTime(2018, 1, 1, 19, 16, 0)));
-            //shows.Add(new ShowsShowsModel(new DateTime(2018, 1, 5, 20, 16, 0)));
-            //shows.Add(new ShowsShowsModel(new DateTime(2018, 1, 5, 21, 16, 0)));
-            //shows.Add(new ShowsShowsModel(new DateTime(2018, 1, 5, 22, 16, 0)));
-            //shows.Add(new ShowsShowsModel(new DateTime(2018, 1, 5, 22, 16, 0)));
-            //shows.Add(new ShowsShowsModel(new DateTime(2018, 1, 5, 23, 16, 0)));
-            //shows.Add(new ShowsShowsModel(new DateTime(2018, 1, 6, 05, 16, 0)));
-
-            //movies.Add(new ShowsMovieModel(1, "xD", shows, _navigationService));
-
-            //shows = new List<ShowsShowsModel>();
-
-            //shows.Add(new ShowsShowsModel(new DateTime(2018, 1, 5, 13, 16, 0)));
-            //shows.Add(new ShowsShowsModel(new DateTime(2018, 1, 2, 11, 16, 0)));
-            //movies.Add(new ShowsMovieModel(2, "Title 2", shows, _navigationService));
-            #endregion
-
             InitCommands();
         }
 
         private void InitCommands()
         {
+        }
+
+        private List<Film> InitList()
+        {
+            JsonReader jsonReader = new JsonReader();
+            Multikino multikino = jsonReader.DeserializeMultikino();
+            List<Film> films = multikino.Films;
+            return films;
         }
     }
 }
