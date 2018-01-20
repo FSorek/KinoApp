@@ -43,7 +43,7 @@ namespace Kina.Mobile.Core.ViewModels
                         }
                         int id = 0;
                         int.TryParse(f.Id, out id);
-                        ShowsMovieModel movieModel = new ShowsMovieModel(id, f.Title, shows, _navigationService);
+                        ShowsMovieModel movieModel = new ShowsMovieModel(id, f.Title, shows, 3.5, _navigationService);
                         movies.Add(movieModel);
                         break;
                     }

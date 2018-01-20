@@ -21,19 +21,41 @@
                 <Grid RowSpacing="0">
                   <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
+                    <ColumnDefinition Width="14"/>
+                    <ColumnDefinition Width="14"/>
+                    <ColumnDefinition Width="14"/>
+                    <ColumnDefinition Width="14"/>
+                    <ColumnDefinition Width="14"/>
                   </Grid.ColumnDefinitions>
                   <Grid.RowDefinitions>
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                   </Grid.RowDefinitions>
                   <Label Text="{Binding Title}" Grid.Column="0" Grid.Row="0" Margin="2, 0"/>
-                  <xlf:RepeaterView x:TypeArguments="pvm:ShowsShowsModel" ItemsSource="{Binding Shows}" Orientation="Horizontal" Grid.Column="0" Grid.Row="1">
-                    <xlf:RepeaterView.ItemTemplate>
-                      <DataTemplate>
-                        <Label Text="{Binding Time}" Margin="2, 0" MinimumWidthRequest="40"/>
-                      </DataTemplate>
-                    </xlf:RepeaterView.ItemTemplate>
-                  </xlf:RepeaterView>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}" Grid.Row="0" Grid.Column="1"/>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}"
+                         IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}" Grid.Row="0" Grid.Column="2"/>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}" 
+                         IsVisible="{Binding IsStarredTwo}" Grid.Row="0" Grid.Column="2"/>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}" Grid.Row="0" Grid.Column="3"/>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}" 
+                         IsVisible="{Binding IsStarredThree}" Grid.Row="0" Grid.Column="3"/>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}" Grid.Row="0" Grid.Column="4"/>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}" 
+                         IsVisible="{Binding IsStarredFour}" Grid.Row="0" Grid.Column="4"/>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutline.png}" Grid.Row="0" Grid.Column="5"/>
+                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarked.png}" 
+                         IsVisible="{Binding IsStarredFive}" Grid.Row="0" Grid.Column="5"/>
+                  <ScrollView Orientation="Horizontal"  Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
+                    <xlf:RepeaterView x:TypeArguments="pvm:ShowsShowsModel" ItemsSource="{Binding Shows}" Orientation="Horizontal">
+                      <xlf:RepeaterView.ItemTemplate>
+                        <DataTemplate>
+                          <Label Text="{Binding Time}" Margin="2, 0" MinimumWidthRequest="40"/>
+                        </DataTemplate>
+                      </xlf:RepeaterView.ItemTemplate>
+                    </xlf:RepeaterView>
+                  </ScrollView>
                 </Grid>
               </ContentView>
             </DataTemplate>
