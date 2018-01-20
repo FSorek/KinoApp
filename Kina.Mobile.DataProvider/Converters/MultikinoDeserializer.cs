@@ -16,7 +16,7 @@ namespace Kina.Mobile.DataProvider.Converters
 
         public List<Movie> deserialize(Stream dataStream)
         {
-            using(var reader = new StreamReader(dataStream))
+            using (var reader = new StreamReader(dataStream))
             {
                 json = reader.ReadToEnd();
                 root = Multikino.FromJson(json);
