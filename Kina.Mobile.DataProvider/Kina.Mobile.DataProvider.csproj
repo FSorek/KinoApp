@@ -38,7 +38,8 @@
   <ItemGroup>
     <Compile Include="Converters\CinemaCityDeserializer.cs" />
     <Compile Include="Converters\MultikinoDeserializer.cs" />
-    <Compile Include="Models\AccessModels\MultikinoFilm.cs" />
+    <Compile Include="Models\AccessModels\CinemaCity.cs" />
+    <Compile Include="Models\AccessModels\Multikino.cs" />
     <Compile Include="Models\DataModels\Address.cs" />
     <Compile Include="Models\DataModels\Cinema.cs" />
     <Compile Include="Models\DataModels\Filmweb.cs" />

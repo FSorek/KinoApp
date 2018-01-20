@@ -8,6 +8,7 @@ namespace Kina.Mobile.DataProvider.Converters
 {
     class CinemaCityDeserializer
     {
-
+        private CinemaCity root;
+        private string json
     }
 }

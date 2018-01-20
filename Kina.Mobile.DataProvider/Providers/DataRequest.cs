@@ -41,13 +41,14 @@ namespace Kina.Mobile.DataProvider.Providers
 
         public async Task<List<Movie>> ProvideData(CinemaType cinemaType, int cinemaId)
         {
-            Stream dataString = await GetResponse(cinemaType, cinemaId);
+            Stream dataStream = await GetResponse(cinemaType, cinemaId);
             switch (cinemaType)
             {
                 case CinemaType.multikino:
 
                     break;
                 case CinemaType.cinemacity:
+
                     break;
             }
 
