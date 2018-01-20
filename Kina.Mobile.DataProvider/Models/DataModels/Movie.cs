@@ -1,8 +1,5 @@
 ﻿using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataModel
 {
@@ -20,5 +17,10 @@ namespace DataModel
         public String Cinematography;
         public String Rating;
         //public Webscore Id_Webscore;
+
+        // For easier providing data to shows view
+        private List<Show> shows;
+
+        internal List<Show> Shows { get => shows; set => shows = value; }
     }
 }
