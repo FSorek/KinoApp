@@ -32,7 +32,7 @@ namespace Kina.Mobile.Core
 
 			Resources.AppResources.Culture = Mvx.Resolve<Services.ILocalizeService>().GetCurrentCultureInfo();
 
-			RegisterAppStart<ViewModels.MainViewModel>();
+			RegisterAppStart<ViewModels.ShowsViewModel>();
 		}
 	}
 }
