@@ -6,12 +6,12 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    class UserScore
+    public class UserScore
     {
-        public int Id_UserScore;
-        public int Id_User;
-        public Cinema Id_Cinema;
-        public Movie Id_Movie;
-        public Score Id_Score;
+        public int Id_UserScore { get; set; }
+        public int Id_User { get; set; }
+        public Cinema Id_Cinema { get; set; }
+        public Movie Id_Movie { get; set; }
+        public Score Id_Score { get; set; }
     }
 }

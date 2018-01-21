@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    class Filmweb
+    public class Filmweb
     {
-        public int Id_Filmweb;
-        public int Score;
-        public DateTime Timestamp;
+        public int Id_Filmweb { get; set; }
+        public int Score { get; set; }
+        public DateTime Timestamp { get; set; }
     }
 }

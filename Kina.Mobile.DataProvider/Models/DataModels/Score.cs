@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    class Score
+    public class Score
     {
-        public int Id_Score;
-        public int Type;
-        public float Value;
+        public int Id_Score { get; set; }
+        public int Type { get; set; }
+        public float Value { get; set; }
     }
 }

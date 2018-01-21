@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    class Cinema
+    public class Cinema
     {
-        public int Id_Cinema;
-        public Address Id_Address;
-        public String Name;
-        public String Phone;
+        public int Id_Cinema { get; set; }
+        public Address Id_Address { get; set; }
+        public String Name { get; set; }
+        public String Phone { get; set; }
     }
 }

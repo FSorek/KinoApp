@@ -6,15 +6,17 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    class Show
+    public class Show
     {
-        public int Id_Show;
-        public Cinema Id_Cinema;
-        public Movie Id_Movie;
-        public DateTime ShowDate;
-        public String Start;
-        public int Room;
-        public bool is3D;
-        public String Language;
+        public int Id_Show { get; set; }
+        public Cinema Id_Cinema { get; set; }
+        public Movie Id_Movie { get; set; }
+        public DateTime ShowDate { get; set; }
+        public string Start { get; set; }
+        public int Room { get; set; }
+        public bool is3D { get; set; }
+        public String Language { get; set; }
+
+        //public string Time { get { return Start; } }
     }
 }

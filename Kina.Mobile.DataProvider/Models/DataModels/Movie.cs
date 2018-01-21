@@ -5,23 +5,21 @@ namespace DataModel
 {
     public class Movie
     {
-        public int Id_Movie;
-        public String Name;
-        public String Original_Name;
-        public String Length;
-        public String Director;
-        public String Writers;
-        public String Stars;
-        public String Storyline;
-        public String Trailer;
-        public String Music;
-        public String Cinematography;
-        public String Rating;
-        //public Webscore Id_Webscore;
+        public int Id_Movie{ get; set; }
+        public String Name{ get; set; }
+        public String Original_Name{ get; set; }
+        public String Length{ get; set; }
+        public String Director{ get; set; }
+        public String Writers{ get; set; }
+        public String Stars{ get; set; }
+        public String Storyline{ get; set; }
+        public String Trailer{ get; set; }
+        public String Music{ get; set; }
+        public String Cinematography{ get; set; }
+        public String Rating{ get; set; }
+        //public Webscore Id_Webscore{ get; set; }
 
         // For easier providing data to shows view
-        private List<Show> shows;
-
-        internal List<Show> Shows { get => shows; set => shows = value; }
+        public List<Show> Shows{ get; set; }
     }
 }

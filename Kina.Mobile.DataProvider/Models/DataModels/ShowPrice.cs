@@ -6,10 +6,10 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    class ShowPrice
+    public class ShowPrice
     {
-        public int Id_ShowPrice;
-        public Show Id_Show;
-        public Price Id_Price;
+        public int Id_ShowPrice { get; set; }
+        public Show Id_Show { get; set; }
+        public Price Id_Price { get; set; }
     }
 }

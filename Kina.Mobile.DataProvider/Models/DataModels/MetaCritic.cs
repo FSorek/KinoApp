@@ -6,11 +6,11 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    class MetaCritic
+    public class MetaCritic
     {
-        public int Id_MetaCritic;
-        public int Score;
-        public DateTime Timestamp;
+        public int Id_MetaCritic { get; set; }
+        public int Score { get; set; }
+        public DateTime Timestamp { get; set; }
     }
     
 }
