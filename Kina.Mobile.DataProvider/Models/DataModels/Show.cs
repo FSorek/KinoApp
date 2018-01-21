@@ -12,8 +12,8 @@ namespace DataModel
         public Cinema Id_Cinema;
         public Movie Id_Movie;
         public DateTime ShowDate;
-        public DateTime Start;
-        public DateTime Length;
+        public String Start;
+        public String Length;
         public int Room;
         public bool is3D;
         public String Language;
