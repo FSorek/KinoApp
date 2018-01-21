@@ -22,7 +22,7 @@ namespace Kina.Mobile.DataProvider.Converters
                 root = Multikino.FromJson(json);
             }
 
-            return new List<Movie>();
+            return MapMovie(root);
         }
 
         public List<Movie> MapMovie(Multikino from)
@@ -44,14 +44,15 @@ namespace Kina.Mobile.DataProvider.Converters
                     Stars = null,
                     Music = null,
                     Cinematography = null,
-                    Rating = null
-                });
-                MapShow(film);
+                    Rating = null,
+                    Shows = MapShow(film),
+            });
+                
             }
             return mappedList;
         }
 
-        public List<Show> MapShow(Film from)
+        private static List<Show> MapShow(Film from)
         {
             List<Show> mappedList = new List<Show>();
 
