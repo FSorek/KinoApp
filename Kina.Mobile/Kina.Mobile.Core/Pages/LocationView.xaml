@@ -5,20 +5,16 @@
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
              Title="Filter">
-  <StackLayout>
+  <StackLayout BackgroundColor="#404040">
+    <Label FontSize="12" Text="Location" XAlign="Center" BackgroundColor="#808000"/>
     <StackLayout Orientation="Horizontal">
       <Picker x:Name="LocationPicker"
          Title="Choose location"
          ItemsSource="{Binding Location}"
          SelectedItem="{Binding SelectedLocation, Mode=OneWayToSource}"
          HorizontalOptions="FillAndExpand"/>
-      <Button Text="Go"
-              Command="{Binding ConfimrLocationCommand}"
-              WidthRequest="64.0"
-              Margin="2, 2"/> 
+      <Button Scale=".5" FontSize="15" Text="Go" Command="{Binding ConfimrLocationCommand}" WidthRequest="64.0" BackgroundColor="Orange" Margin="2, 2"/> 
     </StackLayout>
-    <Button Image="Pin.png" Text="Share Your Location"
-            Command="{Binding AutoLocateCommand}"
-            Margin="8, 2"/>
+    <Button Scale=".5" FontSize="15" Image="Pin.png" Text="Share Your Location" Command="{Binding AutoLocateCommand}" BackgroundColor="Orange" Margin="5"/>
   </StackLayout>
 </mvx:MvxContentPage>

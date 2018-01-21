@@ -4,14 +4,20 @@ using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
-
+using System.Threading.Tasks;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    class ShowsViewModel : MvxViewModel
+    class ShowsViewModel : MvxViewModel<Showing>
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly Services.IAppSettings _settings;
+
+        private MvxAsyncCommand _goToMovieViewCommandCommand;
+
+        private Showing _parameter;
+
+        public IMvxAsyncCommand GoToMovieViewCommand => _goToMovieViewCommandCommand;
 
         private List<ShowsMovieModel> movies;
 
@@ -53,9 +59,17 @@ namespace Kina.Mobile.Core.ViewModels
             InitCommands();
         }
 
+
+        private async Task GoToMovieViewAction()
+        {
+            await _navigationService.Navigate<MovieViewModel>();
+        }
+
         private void InitCommands()
         {
+            _goToMovieViewCommandCommand = new MvxAsyncCommand(GoToMovieViewAction);
         }
+
 
         private List<Film> InitList()
         {
@@ -63,6 +77,11 @@ namespace Kina.Mobile.Core.ViewModels
             Multikino multikino = jsonReader.DeserializeMultikino();
             List<Film> films = multikino.Films;
             return films;
+        }
+
+        public override Task Initialize(Showing parameter)
+        {
+            throw new NotImplementedException();
         }
     }
 }

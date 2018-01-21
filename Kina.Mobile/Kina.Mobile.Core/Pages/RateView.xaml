@@ -6,13 +6,42 @@
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
              xmlns:local="clr-namespace:Kina.Mobile.Core.Behaviors;assembly=Kina.Mobile.Core"
              Title="Rate">
-    <StackLayout>
+  <ContentPage.Resources>
+    <ResourceDictionary>
+      <Style x:Key="CityTitle" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#fcca01"/>
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="BorderRadius" Value="10"/>
+        <Setter Property="FontSize" Value="12" />
+      </Style>
+      <Style x:Key="CityHeader" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#404040"/>
+        <Setter Property="TextColor" Value="Orange" />
+        <Setter Property="BorderRadius" Value="0"/>
+        <Setter Property="FontSize" Value="9" />
+      </Style>
+      <Style x:Key="CityText" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#404040"/>
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="BorderRadius" Value="0"/>
+        <Setter Property="FontSize" Value="9" />
+      </Style>
+      <Style x:Key="MultiHeader" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#404040"/>
+        <Setter Property="TextColor" Value="Magenta" />
+        <Setter Property="BorderRadius" Value="0"/>
+        <Setter Property="FontSize" Value="9" />
+      </Style>
+    </ResourceDictionary>
+  </ContentPage.Resources>
+  <ScrollView>
+    <StackLayout BackgroundColor="#404040">
         <StackLayout>
             <Picker x:Name="CinemaPicker"
                     Title="Select a cinema"
                     ItemsSource="{Binding Cinemas}"
                     SelectedItem="{Binding SelectedCinema, Mode=OneWayToSource}"/>
-            <ScrollView>
+            
                 <StackLayout>
                     <Label Text="Screen" HorizontalOptions="Start"/>
                     <StackLayout x:Name="ScreenStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
@@ -251,7 +280,7 @@
                         </Grid>
                     </StackLayout>
                 </StackLayout>
-            </ScrollView>
+            
         </StackLayout>
         <Button Text="Accept"
                 BackgroundColor="Green"
@@ -262,4 +291,5 @@
                 Command="{Binding GoBackCommand}"
                 Margin="32, 2"/>
     </StackLayout>
+  </ScrollView>
 </mvx:MvxContentPage>

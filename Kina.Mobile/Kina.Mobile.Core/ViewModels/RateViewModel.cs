@@ -4,11 +4,13 @@ using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
 
+
 namespace Kina.Mobile.Core.ViewModels
 {
     public class RateViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+
 
         private MvxAsyncCommand _submitCommandCommand;
         private MvxAsyncCommand _goBackCommandCommand;
@@ -44,12 +46,13 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task SubmitAction()
         {
-            await GoBackAction();
+            await _navigationService.Navigate<MovieViewModel>();
         }
 
         private async Task GoBackAction()
         {
             await _navigationService.Close(this);
         }
+
     }
 }

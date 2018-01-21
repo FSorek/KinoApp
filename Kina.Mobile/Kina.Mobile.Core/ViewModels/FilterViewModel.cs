@@ -63,7 +63,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToShowsPageAction()
         {
-            await _navigationService.Navigate<MainViewModel>();
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private async Task GoBackAction()
