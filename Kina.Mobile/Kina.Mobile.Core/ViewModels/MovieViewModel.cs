@@ -5,6 +5,7 @@ using System.Collections.Generic;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -19,6 +20,9 @@ namespace Kina.Mobile.Core.ViewModels
             //Temporary hard coded strings
             TitleText = "Simple Test Title";
             URLText = "www.Youtube.com";
+            Year = "2017";
+            Cast = " Hugh Jackman, Michelle Williams, Zac Efron";
+            Director = "Michael Gracey";
             DescriptionText = "Jak zawsze, na moje podziękowania zasługuje wiele osób, bez których ta książka wyglądałaby zupełnie inaczej. Przede wszystkim, mój redaktor i mój agent – Moshe Feder i Joshua Bilmes – dzięki którym projekty osiągają swój pełen potencjał. Jak również moja cudowna żona, Emily, która była dla mnie wielkim wsparciem i pomocą w procesie pisarskim.";
         }
 
@@ -28,10 +32,18 @@ namespace Kina.Mobile.Core.ViewModels
                 await _navigationService.Navigate<RateViewModel>(); //Change to RateView
             });
 
+        public IMvxCommand GoToTrailer =>
+            new MvxCommand(() =>
+            {
+                Device.OpenUri(new Uri("https://youtube.com"));
+            });
 
 
         public string TitleText { get; set; }
         public string URLText { get; set; }
         public string DescriptionText { get; set; }
+        public string Year { get; set; }
+        public string Cast { get; set; }
+        public string Director { get; set; }
     }
 }
