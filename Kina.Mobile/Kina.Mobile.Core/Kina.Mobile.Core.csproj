@@ -108,7 +108,6 @@
     <Compile Include="Helpers\TranslateExtension.cs" />
     <Compile Include="Services\ILocalizeService.cs" />
     <Compile Include="ViewModels\ShowsMovieModel.cs" />
-    <Compile Include="ViewModels\ShowsShowsModel.cs" />
     <Compile Include="ViewModels\ShowsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>
