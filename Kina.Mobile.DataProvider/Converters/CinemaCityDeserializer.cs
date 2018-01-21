@@ -9,18 +9,20 @@ using System.Threading.Tasks;
 
 namespace Kina.Mobile.DataProvider.Converters
 {
-    class CinemaCityDeserializer
+    public class CinemaCityDeserializer
     {
         private CinemaCity root;
-        private string json;
+        //private string json;
 
-        public List<Movie> deserialize(Stream dataStream)
+        public List<Movie> Deserialize(string json)
         {
-            using (var reader = new StreamReader(dataStream))
-            {
-                json = reader.ReadToEnd();
-                root = CinemaCity.FromJson(json);
-            }
+            //using (var reader = new StreamReader(dataStream))
+            //{
+            //    json = reader.ReadToEnd();
+            //    root = CinemaCity.FromJson(json);
+            //}
+            root = CinemaCity.FromJson(json);
+
             return MapMovie(root);
         }
 

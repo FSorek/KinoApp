@@ -9,18 +9,19 @@ using System.Threading.Tasks;
 
 namespace Kina.Mobile.DataProvider.Converters
 {
-    class MultikinoDeserializer
+    public class MultikinoDeserializer
     {
         private Multikino root;
-        private string json;
+        //private string json;
 
-        public List<Movie> Deserialize(Stream dataStream)
+        public List<Movie> Deserialize(string json)
         {
-            using (var reader = new StreamReader(dataStream))
-            {
-                json = reader.ReadToEnd();
-                root = Multikino.FromJson(json);
-            }
+            //using (var reader = new StreamReader(dataStream))
+            //{
+            //    json = reader.ReadToEnd();
+            //    root = Multikino.FromJson(json);
+            //}
+            root = Multikino.FromJson(json);
 
             return MapMovie(root);
         }
