@@ -3,6 +3,7 @@ using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
+using DataModel;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -44,7 +45,16 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task SubmitAction()
         {
-            await GoBackAction();
+            UserScore score = new UserScore();
+            score.Id_User = 1;
+            score.Id_Cinema = 1;
+            score.Id_Movie = 1;
+            score.Screen = ScreenRate;
+            score.Seat = SeatsRate;
+            score.Sound = SoundRate;
+            score.Popcorn = PopcornRate;
+            await MvxApp.Database.SaveUserScoreAsync(score);
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private async Task GoBackAction()

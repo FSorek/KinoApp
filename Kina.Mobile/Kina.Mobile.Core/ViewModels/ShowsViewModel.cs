@@ -16,6 +16,7 @@ namespace Kina.Mobile.Core.ViewModels
         private readonly Services.IAppSettings _settings;
 
         private List<ShowsMovieModel> movies;
+        private List<UserScore> userScore;
 
         public List<ShowsMovieModel> Movies
         {
@@ -39,7 +40,25 @@ namespace Kina.Mobile.Core.ViewModels
             {
                 if (m.Shows.Count != 0)
                 {
-                    movies.Add(new ShowsMovieModel(m, 3.5, _navigationService));
+                    double score = 0.0;
+                    GetScore(1, 1);
+                    if(userScore.Count != 0)
+                    {
+                        int i = 0;
+                        if(userScore != null)
+                        {
+                            foreach (UserScore s in userScore)
+                            {
+                                if(s.Id_Movie == 1 && s.Id_Cinema == 1)
+                                {
+                                    score += (s.Screen + s.Seat + s.Sound + s.Popcorn) / 4.0;
+                                    i++;
+                                }
+                            }
+                            score /= i;
+                        }
+                    }
+                    movies.Add(new ShowsMovieModel(m, score, _navigationService));
                 }
             }
 
@@ -57,8 +76,17 @@ namespace Kina.Mobile.Core.ViewModels
             //List<Film> films = multikino.Films;
             //return films;
 
-            Task.Run(() => dataRequestService.ProvideData(CinemaType.cinemacity, 1073)).Wait();
+            // Krewetka = 1073, multikino = 14
+            Task.Run(() => dataRequestService.ProvideData(CinemaType.multikino, 14)).Wait();
             Debug.WriteLine("I'm here");
+        }
+        private void GetScore(int movieId, int cinemaId)
+        {
+            Task.Run(() => GetScoreAsync(movieId, cinemaId)).Wait();
+        }
+        private async Task GetScoreAsync(int movieId, int cinemaId)
+        {
+            userScore = await MvxApp.Database.GetUserScoreAsync(cinemaId, movieId);
         }
     }
 }
