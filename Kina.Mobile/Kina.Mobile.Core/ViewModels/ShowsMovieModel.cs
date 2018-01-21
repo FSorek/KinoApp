@@ -85,7 +85,7 @@ namespace Kina.Mobile.Core.ViewModels
             InitCommands();
 
             // Value temporary hardcoded for preview
-            InitRating(3.5);
+            InitRating(rating);
         }
 
         private async Task GoToMovieViewAction()
