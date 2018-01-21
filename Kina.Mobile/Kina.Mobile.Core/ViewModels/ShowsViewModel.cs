@@ -1,9 +1,11 @@
-﻿using CoreMultikinoJson;
-using Kina.Mobile.Core.Model;
+﻿using DataModel;
+using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 
 namespace Kina.Mobile.Core.ViewModels
@@ -26,27 +28,18 @@ namespace Kina.Mobile.Core.ViewModels
             _navigationService = navigationService;
             _settings = settings;
 
-            DateTime d = new DateTime(2018, 1, 8);
+            DataRequestService dataRequestService = new DataRequestService();
+            InitList(dataRequestService);
+            List<Movie> movieList = dataRequestService.MovieList;
+
+            var today = DateTime.Today;
             movies = new List<ShowsMovieModel>();
 
-            List<Film> films = InitList();
-            foreach(Film f in films)
+            foreach(Movie m in movieList)
             {
-                List<ShowsShowsModel> shows = new List<ShowsShowsModel>();
-                foreach (Showing s in f.Showings)
+                if (m.Shows.Count != 0)
                 {
-                    if (s.DateTime.Equals(d))
-                    {
-                        foreach (Time t in s.Times)
-                        {
-                            shows.Add(new ShowsShowsModel(t.PurpleTime));
-                        }
-                        int id = 0;
-                        int.TryParse(f.Id, out id);
-                        ShowsMovieModel movieModel = new ShowsMovieModel(id, f.Title, shows, 3.5, _navigationService);
-                        movies.Add(movieModel);
-                        break;
-                    }
+                    movies.Add(new ShowsMovieModel(m, 3.5, _navigationService));
                 }
             }
 
@@ -57,12 +50,15 @@ namespace Kina.Mobile.Core.ViewModels
         {
         }
 
-        private List<Film> InitList()
+        private void InitList(DataRequestService dataRequestService)
         {
-            JsonReader jsonReader = new JsonReader();
-            Multikino multikino = jsonReader.DeserializeMultikino();
-            List<Film> films = multikino.Films;
-            return films;
+            //JsonReader jsonReader = new JsonReader();
+            //Multikino multikino = jsonReader.DeserializeMultikino();
+            //List<Film> films = multikino.Films;
+            //return films;
+
+            Task.Run(() => dataRequestService.ProvideData(CinemaType.cinemacity, 1073)).Wait();
+            Debug.WriteLine("I'm here");
         }
     }
 }
