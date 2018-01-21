@@ -8,6 +8,7 @@ namespace DataModel
         public int Id_Movie;
         public String Name;
         public String Original_Name;
+        public String Length;
         public String Director;
         public String Writers;
         public String Stars;

@@ -38,6 +38,7 @@ namespace Kina.Mobile.DataProvider.Converters
                     Director = film.InfoDirector,
                     Storyline = film.SynopsisShort,
                     Trailer = film.Videolink,
+                    Length = film.InfoRunningtime,
 
                     Original_Name = null,
                     Writers = null,
@@ -65,7 +66,6 @@ namespace Kina.Mobile.DataProvider.Converters
                         //id?
                         ShowDate = show.DateTime,
                         Start = time.PurpleTime,
-                        Length = from.InfoRunningtime,
                         is3D = (time.ScreenType == "3D"),
                         Language = time.Tags[0].Name,
 
