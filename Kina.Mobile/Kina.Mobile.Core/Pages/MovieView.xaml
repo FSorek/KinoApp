@@ -33,30 +33,25 @@
       </Style>
     </ResourceDictionary>
   </ContentPage.Resources>
-    <ScrollView>
-        <StackLayout Spacing="0" Padding="0" BackgroundColor="#404040">
-          <StackLayout>
-          </StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Image Source="cat.jpeg" Aspect="AspectFill" HeightRequest="100" WidthRequest="80"/>
-                <Label FontSize="15" Text="{Binding TitleText}" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start" />
-            </StackLayout>
-            <StackLayout>
-            <Button Scale=".5" FontSize="15" Text="Trailer" Command="{Binding OpenYoutubeUrlCommand}" Style="{StaticResource CityTitle}" Margin="5" />
-            </StackLayout>
-            <StackLayout Orientation="Horizontal" BackgroundColor="#808000">
-                <Label FontSize="12" Text="Description" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start"/>
-            </StackLayout>
-            <StackLayout>
-                <Label FontSize="10" Text="{Binding DescriptionText}" HorizontalOptions="Start" VerticalOptions="Start"/>
-                <Label FontSize="12" Text="Check out the trailer on Youtube" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start"/>
-                <Label FontSize="10" Text="{Binding URLText}" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start"/>
-                <Button Scale=".5" FontSize="15" Text="I WAS THERE" Command="{Binding GoToRatePage}" Style="{StaticResource CityTitle}" Margin="5"/>
-                <Button Scale=".5" FontSize="15" Text="Location" Command="{Binding GoToLocationPage}" Style="{StaticResource CityTitle}" Margin="5"/>
-            </StackLayout>
-            
-
-        </StackLayout>
-    </ScrollView>
-        
+  <ScrollView>
+    <StackLayout Spacing="0" Padding="0" BackgroundColor="#404040">
+      <StackLayout Orientation="Horizontal">
+        <Image Source="cat.jpeg" Aspect="AspectFill" HeightRequest="100" WidthRequest="80"/>
+        <Label FontSize="15" Text="{Binding TitleText}" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start" />
+      </StackLayout>
+      <StackLayout>
+        <Button Scale=".5" FontSize="15" Text="Trailer" Command="{Binding OpenYoutubeUrlCommand}" Style="{StaticResource CityTitle}" Margin="5" />
+      </StackLayout>
+      <StackLayout Orientation="Horizontal" BackgroundColor="#808000">
+        <Label FontSize="12" Text="Description" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start"/>
+      </StackLayout>
+      <StackLayout>
+        <Label FontSize="10" Text="{Binding DescriptionText}" HorizontalOptions="Start" VerticalOptions="Start"/>
+        <Label FontSize="12" Text="Check out the trailer on Youtube" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start"/>
+        <Label FontSize="10" Text="{Binding URLText}" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start"/>
+        <Button Scale=".5" FontSize="15" Text="I WAS THERE" Command="{Binding GoToRateViewCommand}" Style="{StaticResource CityTitle}" Margin="5"/>
+        <Button Scale=".5" FontSize="15" Text="Location" Command="{Binding GoToLocationViewCommand}" Style="{StaticResource CityTitle}" Margin="5"/>
+      </StackLayout>
+    </StackLayout>
+  </ScrollView>    
 </mvx:MvxContentPage>

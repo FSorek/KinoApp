@@ -44,9 +44,10 @@
           <xlf:RepeaterView.ItemTemplate>
             <DataTemplate>
               <ContentView>
-                <ContentView.GestureRecognizers>
+                <!--Commenting to be sure there is only one item which is tappable-->
+                <!--<ContentView.GestureRecognizers>
                   <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoToMovieViewCommand}"/>
-                </ContentView.GestureRecognizers>
+                </ContentView.GestureRecognizers>-->
                 <Grid RowSpacing="0">
                   <Grid.ColumnDefinitions>
                     <ColumnDefinition Width="*"/>
@@ -60,9 +61,10 @@
                     <RowDefinition Height="*"/>
                     <RowDefinition Height="*"/>
                   </Grid.RowDefinitions>
-                  <Button Text = "{Binding Title}" Grid.Row="0" Grid.Column ="0"
-  Style="{StaticResource CityTitle}" Command ="{Binding GoToMovieViewCommand}" />
-                 
+                  <Button Text = "{Binding Title}" Grid.Row="0" Grid.Column ="0" 
+                          Style="{StaticResource CityTitle}" Command ="{Binding GoToMovieViewCommand}"/>      
+                  <!--Leaving it in source code just for my own convenience-->
+                  <!--<Label Text="{Binding Title}" Grid.Column="0" Grid.Row="0""/>-->              
                   <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
                   <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
                          IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
