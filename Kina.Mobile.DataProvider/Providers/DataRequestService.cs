@@ -1,11 +1,9 @@
-﻿using System;
-using System.Threading.Tasks;
-using System.Net;
-using System.IO;
-using System.Collections.Generic;
-using DataModel;
+﻿using DataModel;
 using Kina.Mobile.DataProvider.Converters;
+using System;
+using System.Collections.Generic;
 using System.Net.Http;
+using System.Threading.Tasks;
 
 namespace Kina.Mobile.DataProvider.Providers
 {
@@ -74,11 +72,11 @@ namespace Kina.Mobile.DataProvider.Providers
                 default: MovieList = new List<Movie>(); break;
                 case CinemaType.multikino:
                     MultikinoDeserializer multikinoDeserializer = new MultikinoDeserializer();
-                    MovieList = multikinoDeserializer.Deserialize(dataString);
+                    MovieList = multikinoDeserializer.Deserialize(dataString, cinemaId);
                     break;
                 case CinemaType.cinemacity:
                     CinemaCityDeserializer cinemaCityDeserializer = new CinemaCityDeserializer();
-                    MovieList = cinemaCityDeserializer.Deserialize(dataString);
+                    MovieList = cinemaCityDeserializer.Deserialize(dataString, cinemaId);
                     break;
             }
         }

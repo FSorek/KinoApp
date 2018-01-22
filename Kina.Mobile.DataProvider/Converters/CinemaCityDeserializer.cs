@@ -14,7 +14,7 @@ namespace Kina.Mobile.DataProvider.Converters
         private CinemaCity root;
         //private string json;
 
-        public List<Movie> Deserialize(string json)
+        public List<Movie> Deserialize(string json, int cinemaId)
         {
             //using (var reader = new StreamReader(dataStream))
             //{
@@ -23,10 +23,10 @@ namespace Kina.Mobile.DataProvider.Converters
             //}
             root = CinemaCity.FromJson(json);
 
-            return MapMovie(root);
+            return MapMovie(root, cinemaId);
         }
 
-        public List<Movie> MapMovie(CinemaCity from)
+        public List<Movie> MapMovie(CinemaCity from, int cinemaId)
         {
             List<Movie> mappedList = new List<Movie>();
 
@@ -34,7 +34,7 @@ namespace Kina.Mobile.DataProvider.Converters
             {
                 mappedList.Add(new Movie
                 {
-                    //id?
+                    Id_Movie = film.Id,
                     Name = film.Name,
                     Director = null,
                     Storyline = null,
@@ -46,14 +46,14 @@ namespace Kina.Mobile.DataProvider.Converters
                     Music = null,
                     Cinematography = null,
                     Rating = null,
-                    Shows = MapShow(from, film.Id),
+                    Shows = MapShow(from, film.Id, cinemaId),
                 });
 
             }
             return mappedList;
         }
 
-        private static List<Show> MapShow(CinemaCity from, string id)
+        private static List<Show> MapShow(CinemaCity from, string id, int cinemaId)
         {
             List<Show> mappedList = new List<Show>();
 
@@ -62,7 +62,8 @@ namespace Kina.Mobile.DataProvider.Converters
                 if (show.FilmId != id) continue;
                     mappedList.Add(new Show
                     {
-                        //id?
+                        Id_Movie = id,
+                        Id_Cinema = cinemaId,
                         ShowDate = show.BusinessDay,
                         Start = show.EventDateTime.Remove(0,10),
                         is3D = (show.AttributeIds.Contains("2d")),
