@@ -5,11 +5,13 @@ using System;
 using System.Threading.Tasks;
 using DataModel;
 
+
 namespace Kina.Mobile.Core.ViewModels
 {
     public class RateViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+
 
         private MvxAsyncCommand _submitCommandCommand;
         private MvxAsyncCommand _goBackCommandCommand;
@@ -61,5 +63,6 @@ namespace Kina.Mobile.Core.ViewModels
         {
             await _navigationService.Close(this);
         }
+
     }
 }

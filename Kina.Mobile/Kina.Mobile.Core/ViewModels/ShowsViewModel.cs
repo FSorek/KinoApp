@@ -7,13 +7,18 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 
-
 namespace Kina.Mobile.Core.ViewModels
 {
-    class ShowsViewModel : MvxViewModel
+    class ShowsViewModel : MvxViewModel<Showing>
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly Services.IAppSettings _settings;
+
+        private MvxAsyncCommand _goToMovieViewCommandCommand;
+
+        //private Showing _parameter;
+
+        public IMvxAsyncCommand GoToMovieViewCommand => _goToMovieViewCommandCommand;
 
         private List<ShowsMovieModel> movies;
         private List<UserScore> userScore;
@@ -65,8 +70,15 @@ namespace Kina.Mobile.Core.ViewModels
             InitCommands();
         }
 
+
+        private async Task GoToMovieViewAction()
+        {
+            await _navigationService.Navigate<MovieViewModel>();
+        }
+
         private void InitCommands()
         {
+            _goToMovieViewCommandCommand = new MvxAsyncCommand(GoToMovieViewAction);
         }
 
         private void InitList(DataRequestService dataRequestService)
@@ -85,8 +97,14 @@ namespace Kina.Mobile.Core.ViewModels
             Task.Run(() => GetScoreAsync(movieId, cinemaId)).Wait();
         }
         private async Task GetScoreAsync(int movieId, int cinemaId)
+
         {
             userScore = await MvxApp.Database.GetUserScoreAsync(cinemaId, movieId);
+        }
+
+        public override Task Initialize(Showing parameter)
+        {
+            throw new NotImplementedException();
         }
     }
 }
