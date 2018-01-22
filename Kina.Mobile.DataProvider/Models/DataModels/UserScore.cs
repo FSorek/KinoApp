@@ -26,6 +26,6 @@ namespace DataModel
         [Column("Id_Cinema")]
         public int Id_Cinema { get; set; }
         [Column("Id_Movie")]
-        public int Id_Movie { get; set; }
+        public string Id_Movie { get; set; }
     }
 }

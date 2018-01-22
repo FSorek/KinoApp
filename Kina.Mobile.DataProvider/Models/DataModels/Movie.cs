@@ -5,7 +5,7 @@ namespace DataModel
 {
     public class Movie
     {
-        public int Id_Movie{ get; set; }
+        public String Id_Movie{ get; set; }
         public String Name{ get; set; }
         public String Original_Name{ get; set; }
         public String Length{ get; set; }

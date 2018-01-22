@@ -9,8 +9,8 @@ namespace DataModel
     public class Show
     {
         public int Id_Show { get; set; }
-        public Cinema Id_Cinema { get; set; }
-        public Movie Id_Movie { get; set; }
+        public int Id_Cinema { get; set; }
+        public String Id_Movie { get; set; }
         public DateTime ShowDate { get; set; }
         public string Start { get; set; }
         public int Room { get; set; }
