@@ -6,9 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    class Price
+    public class MovieList
     {
-        public int Id_Price;
-        public int Value;
+        public int Id_MovieList { get; set; }
+        public Show Id_Show { get; set; }
     }
 }

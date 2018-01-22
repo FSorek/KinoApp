@@ -26,8 +26,7 @@
                 <Label FontSize="12" Text="Description" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
             </StackLayout>
             <StackLayout  Spacing="0" Padding="0">
-                <Label FontSize="10" Text="{Binding DescriptionText}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>
-                
+                <Label FontSize="10" Text="{Binding DescriptionText}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>                
             </StackLayout>
           <Grid x:Name="controlGrid" RowSpacing="0" ColumnSpacing="0">
       <Grid.ColumnDefinitions>
@@ -38,10 +37,9 @@
             <ColumnDefinition Width="Auto" />
             <ColumnDefinition Width="Auto" />
       </Grid.ColumnDefinitions>
-                <Button Scale=".8" FontSize="15" Text="Trailer" Command="{Binding GoToTrailer}" BackgroundColor="#fcca01" Margin="0" Grid.Column ="3"/>
-                <Button Scale=".8" FontSize="15" Text="I WAS THERE" Command="{Binding GoToRatePage}" BackgroundColor="#fcca01" Margin="0" Grid.Column ="4"/>
+                <Button Scale=".8" FontSize="15" Text="Trailer" Command="{Binding OpenYoutubeUrlCommand}" BackgroundColor="#fcca01" Margin="0" Grid.Column ="3"/>
+                <Button Scale=".8" FontSize="15" Text="I WAS THERE" Command="{Binding GoToRateViewCommand}" BackgroundColor="#fcca01" Margin="0" Grid.Column ="4"/>
             </Grid>
         </StackLayout>
     </ScrollView>
-        
 </mvx:MvxContentPage>

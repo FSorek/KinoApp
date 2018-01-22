@@ -6,10 +6,9 @@ using System.Threading.Tasks;
 
 namespace DataModel
 {
-    class RottenTomatoes
+    public class Price
     {
-        public int Id_RottenTomatoes;
-        public int Score;
-        public DateTime Timestamp;
+        public int Id_Price { get; set; }
+        public int Value { get; set; }
     }
 }

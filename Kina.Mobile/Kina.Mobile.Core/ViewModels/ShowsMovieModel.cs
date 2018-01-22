@@ -1,6 +1,8 @@
 ﻿using CoreMultikinoJson;
+using DataModel;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
@@ -14,11 +16,13 @@ namespace Kina.Mobile.Core.ViewModels
         private MvxAsyncCommand _goToMovieViewCommandCommand;
         public ICommand GoToMovieViewCommand => _goToMovieViewCommandCommand;
 
+        private Movie movie;
+
         private bool[] isStarred;
-        private int movieID;
+        private string movieID;
         private string title;
 
-        private List<ShowsShowsModel> shows;
+        private List<Show> shows;
 
         public bool IsStarredOne
         {
@@ -41,7 +45,7 @@ namespace Kina.Mobile.Core.ViewModels
             get { return isStarred[4]; }
         }
 
-        public int MovieID
+        public string MovieID
         {
             get { return movieID; }
             set { movieID = value; }
@@ -53,17 +57,26 @@ namespace Kina.Mobile.Core.ViewModels
             set { title = value; }
         }
 
-        public List<ShowsShowsModel> Shows
+        public List<Show> Shows
         {
             get { return shows; }
             set { shows = value; }
         }
 
-        public ShowsMovieModel(int id, string title, List<ShowsShowsModel> shows, double rating, IMvxNavigationService navigationService)
+        public ShowsMovieModel(Movie movie, double rating, IMvxNavigationService navigationService)
         {
-            movieID = id;
-            this.title = title;
-            this.shows = shows;
+            var date = DateTime.Today.Date;
+            movieID = movie.Id_Movie;
+            title = movie.Name;
+            shows = new List<Show>();
+            foreach(Show s in movie.Shows)
+            {
+                if (s.ShowDate.Date.Equals(DateTime.Today.Date))
+                {
+                    shows.Add(s);
+                }
+            }
+            this.movie = movie;
 
             isStarred = new bool[5];
 
@@ -72,15 +85,15 @@ namespace Kina.Mobile.Core.ViewModels
             InitCommands();
 
             // Value temporary hardcoded for preview
-            InitRating(3.5);
+            InitRating(rating);
         }
 
         private async Task GoToMovieViewAction()
         {
-            Showing showing = new Showing();
+            Movie param = movie;
 
             //await _navigationService.Navigate<FilterViewModel, Showing>(showing);
-            await _navigationService.Navigate<MovieViewModel>();
+            await _navigationService.Navigate<MovieViewModel, Movie>(param);
         }
 
         private void InitCommands()

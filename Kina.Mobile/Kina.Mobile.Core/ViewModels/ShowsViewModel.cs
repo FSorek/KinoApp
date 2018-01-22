@@ -1,10 +1,11 @@
-﻿using CoreMultikinoJson;
-using Kina.Mobile.Core.Model;
+﻿using DataModel;
+using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
-
+using System.Diagnostics;
+using System.Threading.Tasks;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -14,6 +15,7 @@ namespace Kina.Mobile.Core.ViewModels
         private readonly Services.IAppSettings _settings;
 
         private List<ShowsMovieModel> movies;
+        private List<UserScore> userScore;
 
         public List<ShowsMovieModel> Movies
         {
@@ -26,43 +28,66 @@ namespace Kina.Mobile.Core.ViewModels
             _navigationService = navigationService;
             _settings = settings;
 
-            DateTime d = new DateTime(2018, 1, 8);
+            DataRequestService dataRequestService = new DataRequestService();
+            InitList(dataRequestService);
+            List<Movie> movieList = dataRequestService.MovieList;
+
+            var today = DateTime.Today;
             movies = new List<ShowsMovieModel>();
 
-            List<Film> films = InitList();
-            foreach(Film f in films)
+            foreach(Movie m in movieList)
             {
-                List<ShowsShowsModel> shows = new List<ShowsShowsModel>();
-                foreach (Showing s in f.Showings)
+                if (m.Shows.Count != 0)
                 {
-                    if (s.DateTime.Equals(d))
+                    double score = 0.0;
+                    GetScore(m.Id_Movie, m.Shows[0].Id_Cinema);
+                    if(userScore.Count != 0)
                     {
-                        foreach (Time t in s.Times)
+                        int i = 0;
+                        if(userScore != null)
                         {
-                            shows.Add(new ShowsShowsModel(t.PurpleTime));
+                            foreach (UserScore s in userScore)
+                            {
+                                if(s.Id_Movie.Equals(m.Id_Movie) && s.Id_Cinema == m.Shows[0].Id_Cinema)
+                                {
+                                    score += (s.Screen + s.Seat + s.Sound + s.Popcorn) / 4.0;
+                                    i++;
+                                }
+                            }
+                            score /= i;
                         }
-                        int id = 0;
-                        int.TryParse(f.Id, out id);
-                        ShowsMovieModel movieModel = new ShowsMovieModel(id, f.Title, shows, 3.5, _navigationService);
-                        movies.Add(movieModel);
-                        break;
                     }
+                    movies.Add(new ShowsMovieModel(m, score, _navigationService));
                 }
             }
-
-            InitCommands();
         }
 
-        private void InitCommands()
+        private void InitList(DataRequestService dataRequestService)
         {
+            // Older version using JsonReader for static testing
+            //JsonReader jsonReader = new JsonReader();
+            //Multikino multikino = jsonReader.DeserializeMultikino();
+            //List<Film> films = multikino.Films;
+            //return films;
+
+            // Krewetka = 1073, multikino = 14
+            Task.Run(() => dataRequestService.ProvideData(CinemaType.multikino, 14)).Wait();
+            Debug.WriteLine("I'm here");
+        }
+        private void GetScore(string movieId, int cinemaId)
+        {
+            Task.Run(() => GetScoreAsync(movieId, cinemaId)).Wait();
         }
 
-        private List<Film> InitList()
+        private async Task GetScoreAsync(string movieId, int cinemaId)
         {
-            JsonReader jsonReader = new JsonReader();
-            Multikino multikino = jsonReader.DeserializeMultikino();
-            List<Film> films = multikino.Films;
-            return films;
+            userScore = await MvxApp.Database.GetUserScoreAsync(cinemaId, movieId);
         }
+
+        // Will be needed if we implement filtering so let it be commentd
+        //public override Task Initialize(Showing parameter)
+        //{
+        //    throw new NotImplementedException();
+        //}
     }
 }

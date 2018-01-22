@@ -3,10 +3,11 @@ using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
+using DataModel;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    public class RateViewModel : MvxViewModel
+    public class RateViewModel : MvxViewModel<Movie>
     {
         private readonly IMvxNavigationService _navigationService;
 
@@ -15,6 +16,10 @@ namespace Kina.Mobile.Core.ViewModels
 
         public IMvxAsyncCommand SubmitCommand => _submitCommandCommand;
         public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
+
+        private Movie _parameter;
+        private int cinemaID;
+        private string movieID;
 
         public int ScreenRate { get; set; }
         public int SeatsRate { get; set; }
@@ -44,12 +49,30 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task SubmitAction()
         {
-            await GoBackAction();
+            UserScore score = new UserScore();
+            score.Id_User = 1;
+            score.Id_Cinema = cinemaID;
+            score.Id_Movie = movieID;
+            score.Screen = ScreenRate;
+            score.Seat = SeatsRate;
+            score.Sound = SoundRate;
+            score.Popcorn = PopcornRate;
+            await MvxApp.Database.SaveUserScoreAsync(score);
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private async Task GoBackAction()
         {
             await _navigationService.Close(this);
+        }
+
+        public override Task Initialize(Movie parameter)
+        {
+            _parameter = parameter;
+            Show show = _parameter.Shows[0];
+            cinemaID = show.Id_Cinema;
+            movieID = parameter.Id_Movie;
+            return Task.FromResult(true);
         }
     }
 }
