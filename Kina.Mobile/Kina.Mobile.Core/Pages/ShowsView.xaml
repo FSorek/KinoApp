@@ -39,7 +39,6 @@
   <StackLayout BackgroundColor="#404040">
     <ScrollView>
       <StackLayout>
-        <Label Text="Multikino" BackgroundColor="MediumVioletRed"/>
         <xlf:RepeaterView x:TypeArguments="pvm:ShowsMovieModel" ItemsSource="{Binding Movies}">
           <xlf:RepeaterView.ItemTemplate>
             <DataTemplate>

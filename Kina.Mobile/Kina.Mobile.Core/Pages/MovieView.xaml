@@ -5,53 +5,41 @@
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
              Title="Movie">
-  <ContentPage.Resources>
-    <ResourceDictionary>
-      <Style x:Key="CityTitle" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#fcca01"/>
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="BorderRadius" Value="10"/>
-        <Setter Property="FontSize" Value="12" />
-      </Style>
-      <Style x:Key="CityHeader" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#404040"/>
-        <Setter Property="TextColor" Value="Orange" />
-        <Setter Property="BorderRadius" Value="0"/>
-        <Setter Property="FontSize" Value="9" />
-      </Style>
-      <Style x:Key="CityText" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#404040"/>
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="BorderRadius" Value="0"/>
-        <Setter Property="FontSize" Value="9" />
-      </Style>
-      <Style x:Key="MultiHeader" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#404040"/>
-        <Setter Property="TextColor" Value="Magenta" />
-        <Setter Property="BorderRadius" Value="0"/>
-        <Setter Property="FontSize" Value="9" />
-      </Style>
-    </ResourceDictionary>
-  </ContentPage.Resources>
-  <ScrollView>
-    <StackLayout Spacing="0" Padding="0" BackgroundColor="#404040">
-      <StackLayout Orientation="Horizontal">
-        <Image Source="cat.jpeg" Aspect="AspectFill" HeightRequest="100" WidthRequest="80"/>
-        <Label FontSize="15" Text="{Binding TitleText}" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start" />
-      </StackLayout>
-      <StackLayout>
-        <Button Scale=".5" FontSize="15" Text="Trailer" Command="{Binding OpenYoutubeUrlCommand}" Style="{StaticResource CityTitle}" Margin="5" />
-      </StackLayout>
-      <StackLayout Orientation="Horizontal" BackgroundColor="#808000">
-        <Label FontSize="12" Text="Description" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start"/>
-      </StackLayout>
-      <StackLayout>
-        <Label FontSize="10" Text="{Binding DescriptionText}" HorizontalOptions="Start" VerticalOptions="Start"/>
-        <Label FontSize="12" Text="Check out the trailer on Youtube" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start"/>
-        <Label FontSize="10" Text="{Binding URLText}" Style="Bold" HorizontalOptions="Start" VerticalOptions="Start"/>
-        <Button Scale=".5" FontSize="15" Text="I WAS THERE" Command="{Binding GoToRateViewCommand}" Style="{StaticResource CityTitle}" Margin="5"/>
-        <Button Scale=".5" FontSize="15" Text="Location" Command="{Binding GoToLocationViewCommand}" Style="{StaticResource CityTitle}" Margin="5"/>
-      </StackLayout>
-    </StackLayout>
-  </ScrollView>    
+    <ScrollView>
+        <StackLayout BackgroundColor="#404040">
+            <StackLayout Orientation="Horizontal">
+                <Label FontSize="30" Text="{Binding TitleText}" Style="Bold" TextColor="#fcca01" HorizontalOptions="Center" VerticalOptions="Start" />
+              </StackLayout>
+          <StackLayout Orientation="Horizontal" BackgroundColor="Gray">
+                <Label FontSize="12" Text="Cast" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
+           </StackLayout>
+           <StackLayout>
+                <Label FontSize="10" Text="{Binding Cast}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>
+            </StackLayout>
+          <StackLayout Orientation="Horizontal" BackgroundColor="Gray">
+                <Label FontSize="12" Text="Director" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
+           </StackLayout>
+           <StackLayout>
+                <Label FontSize="10" Text="{Binding Director}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" BackgroundColor="Gray">
+                <Label FontSize="12" Text="Description" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
+            </StackLayout>
+            <StackLayout  Spacing="0" Padding="0">
+                <Label FontSize="10" Text="{Binding DescriptionText}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>                
+            </StackLayout>
+          <Grid x:Name="controlGrid" RowSpacing="0" ColumnSpacing="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+                <Button Scale=".8" FontSize="15" Text="Trailer" Command="{Binding OpenYoutubeUrlCommand}" BackgroundColor="#fcca01" Margin="0" Grid.Column ="3"/>
+                <Button Scale=".8" FontSize="15" Text="I WAS THERE" Command="{Binding GoToRateViewCommand}" BackgroundColor="#fcca01" Margin="0" Grid.Column ="4"/>
+            </Grid>
+        </StackLayout>
+    </ScrollView>
 </mvx:MvxContentPage>
