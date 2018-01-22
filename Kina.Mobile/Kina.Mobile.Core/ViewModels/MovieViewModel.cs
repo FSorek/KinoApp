@@ -15,13 +15,13 @@ namespace Kina.Mobile.Core.ViewModels
     class MovieViewModel : MvxViewModel<Showing>
     {
         private readonly IMvxNavigationService _navigationService;
-        private readonly Services.IAppSettings _settings;
+        //private readonly Services.IAppSettings _settings;
 
         private MvxAsyncCommand _goToRateViewCommandCommand;
 
         public IMvxAsyncCommand GoToRateViewCommand => _goToRateViewCommandCommand;
 
-        private Showing _parameter;
+        //private Showing _parameter;
 
         public MovieViewModel(IMvxNavigationService navigationService)
         {
@@ -36,7 +36,7 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxCommand OpenYoutubeUrlCommand =>
             new MvxCommand(() =>
             {
-                Device.OpenUri(new Uri("https:/youtube.com/"));
+                Device.OpenUri(new Uri("https://www.youtube.com/"));
             });
 
         private async Task GoToRateViewAction()

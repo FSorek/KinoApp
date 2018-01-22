@@ -15,7 +15,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private MvxAsyncCommand _goToMovieViewCommandCommand;
 
-        private Showing _parameter;
+        //private Showing _parameter;
 
         public IMvxAsyncCommand GoToMovieViewCommand => _goToMovieViewCommandCommand;
 
