@@ -19,7 +19,7 @@ namespace Kina.Mobile.Core.ViewModels
         private Movie movie;
 
         private bool[] isStarred;
-        private int movieID;
+        private string movieID;
         private string title;
 
         private List<Show> shows;
@@ -45,7 +45,7 @@ namespace Kina.Mobile.Core.ViewModels
             get { return isStarred[4]; }
         }
 
-        public int MovieID
+        public string MovieID
         {
             get { return movieID; }
             set { movieID = value; }
@@ -90,10 +90,10 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToMovieViewAction()
         {
-            Showing showing = new Showing();
+            Movie param = movie;
 
             //await _navigationService.Navigate<FilterViewModel, Showing>(showing);
-            await _navigationService.Navigate<MovieViewModel>();
+            await _navigationService.Navigate<MovieViewModel, Movie>(param);
         }
 
         private void InitCommands()

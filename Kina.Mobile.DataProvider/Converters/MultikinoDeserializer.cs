@@ -14,7 +14,7 @@ namespace Kina.Mobile.DataProvider.Converters
         private Multikino root;
         //private string json;
 
-        public List<Movie> Deserialize(string json)
+        public List<Movie> Deserialize(string json, int cinemaId)
         {
             //using (var reader = new StreamReader(dataStream))
             //{
@@ -23,10 +23,10 @@ namespace Kina.Mobile.DataProvider.Converters
             //}
             root = Multikino.FromJson(json);
 
-            return MapMovie(root);
+            return MapMovie(root, cinemaId);
         }
 
-        public List<Movie> MapMovie(Multikino from)
+        public List<Movie> MapMovie(Multikino from, int cinemaId)
         {
             List<Movie> mappedList = new List<Movie>();
 
@@ -34,7 +34,7 @@ namespace Kina.Mobile.DataProvider.Converters
             {
                 mappedList.Add(new Movie
                 {
-                    //id?
+                    Id_Movie = film.Id,
                     Name = film.Title,
                     Director = film.InfoDirector,
                     Storyline = film.SynopsisShort,
@@ -47,31 +47,36 @@ namespace Kina.Mobile.DataProvider.Converters
                     Music = null,
                     Cinematography = null,
                     Rating = null,
-                    Shows = MapShow(film),
+                    Shows = MapShow(film, cinemaId),
             });
                 
             }
             return mappedList;
         }
 
-        private static List<Show> MapShow(Film from)
+        private static List<Show> MapShow(Film from, int cinemaId)
         {
             List<Show> mappedList = new List<Show>();
+            var today = DateTime.Today;
 
             foreach (Showing show in from.Showings)
             {
                 foreach (Time time in show.Times)
                 {
-                    mappedList.Add(new Show
+                    if (show.DateTime.Date.Equals(today.Date))
                     {
-                        //id?
-                        ShowDate = show.DateTime,
-                        Start = time.PurpleTime,
-                        is3D = (time.ScreenType == "3D"),
-                        Language = time.Tags[0].Name,
+                        mappedList.Add(new Show
+                        {
+                            Id_Movie = from.Id,
+                            Id_Cinema = cinemaId,
+                            ShowDate = show.DateTime,
+                            Start = time.PurpleTime,
+                            is3D = (time.ScreenType == "3D"),
+                            Language = time.Tags[0].Name,
 
-                        Room = -1
-                    });
+                            Room = -1
+                        });
+                    }
                 }
             }
             return mappedList;

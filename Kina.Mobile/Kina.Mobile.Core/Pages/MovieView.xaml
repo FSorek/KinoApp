@@ -6,23 +6,40 @@
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
              Title="Movie">
     <ScrollView>
-        <StackLayout Spacing="0" Padding="0" BackgroundColor="White">
+        <StackLayout BackgroundColor="#404040">
             <StackLayout Orientation="Horizontal">
-                <Image Source="cat.jpeg" Aspect="AspectFill" HeightRequest="100" WidthRequest="80"/>
-                <Label FontSize="15" Text="{Binding TitleText}" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start" />
+                <Label FontSize="30" Text="{Binding TitleText}" Style="Bold" TextColor="#fcca01" HorizontalOptions="Center" VerticalOptions="Start" />
+              </StackLayout>
+          <StackLayout Orientation="Horizontal" BackgroundColor="Gray">
+                <Label FontSize="12" Text="Cast" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
+           </StackLayout>
+           <StackLayout>
+                <Label FontSize="10" Text="{Binding Cast}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" BackgroundColor="LightGray">
+          <StackLayout Orientation="Horizontal" BackgroundColor="Gray">
+                <Label FontSize="12" Text="Director" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
+           </StackLayout>
+           <StackLayout>
+                <Label FontSize="10" Text="{Binding Director}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>
+            </StackLayout>
+            <StackLayout Orientation="Horizontal" BackgroundColor="Gray">
                 <Label FontSize="12" Text="Description" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
             </StackLayout>
-            <StackLayout>
-                <Label FontSize="10" Text="{Binding DescriptionText}" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
-                <Label FontSize="12" Text="Check out the trailer on Youtube" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
-                <Label FontSize="10" Text="{Binding URLText}" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
-                <Button Scale=".5" FontSize="15" Text="I WAS THERE" Command="{Binding GoToRatePage}" BackgroundColor="Orange" Margin="5"/>
+            <StackLayout  Spacing="0" Padding="0">
+                <Label FontSize="10" Text="{Binding DescriptionText}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>                
             </StackLayout>
-            
-
+          <Grid x:Name="controlGrid" RowSpacing="0" ColumnSpacing="0">
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="Auto" />
+        <ColumnDefinition Width="Auto" />
+      <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+            <ColumnDefinition Width="Auto" />
+      </Grid.ColumnDefinitions>
+                <Button Scale=".8" FontSize="15" Text="Trailer" Command="{Binding OpenYoutubeUrlCommand}" BackgroundColor="#fcca01" Margin="0" Grid.Column ="3"/>
+                <Button Scale=".8" FontSize="15" Text="I WAS THERE" Command="{Binding GoToRateViewCommand}" BackgroundColor="#fcca01" Margin="0" Grid.Column ="4"/>
+            </Grid>
         </StackLayout>
     </ScrollView>
-        
 </mvx:MvxContentPage>
