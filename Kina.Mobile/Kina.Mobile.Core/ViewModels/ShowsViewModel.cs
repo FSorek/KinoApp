@@ -1,9 +1,10 @@
-﻿using CoreMultikinoJson;
-using Kina.Mobile.Core.Model;
+﻿using DataModel;
+using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Threading.Tasks;
 
 namespace Kina.Mobile.Core.ViewModels
@@ -20,6 +21,7 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand GoToMovieViewCommand => _goToMovieViewCommandCommand;
 
         private List<ShowsMovieModel> movies;
+        private List<UserScore> userScore;
 
         public List<ShowsMovieModel> Movies
         {
@@ -32,27 +34,36 @@ namespace Kina.Mobile.Core.ViewModels
             _navigationService = navigationService;
             _settings = settings;
 
-            DateTime d = new DateTime(2018, 1, 8);
+            DataRequestService dataRequestService = new DataRequestService();
+            InitList(dataRequestService);
+            List<Movie> movieList = dataRequestService.MovieList;
+
+            var today = DateTime.Today;
             movies = new List<ShowsMovieModel>();
 
-            List<Film> films = InitList();
-            foreach(Film f in films)
+            foreach(Movie m in movieList)
             {
-                List<ShowsShowsModel> shows = new List<ShowsShowsModel>();
-                foreach (Showing s in f.Showings)
+                if (m.Shows.Count != 0)
                 {
-                    if (s.DateTime.Equals(d))
+                    double score = 0.0;
+                    GetScore(1, 1);
+                    if(userScore.Count != 0)
                     {
-                        foreach (Time t in s.Times)
+                        int i = 0;
+                        if(userScore != null)
                         {
-                            shows.Add(new ShowsShowsModel(t.PurpleTime));
+                            foreach (UserScore s in userScore)
+                            {
+                                if(s.Id_Movie == 1 && s.Id_Cinema == 1)
+                                {
+                                    score += (s.Screen + s.Seat + s.Sound + s.Popcorn) / 4.0;
+                                    i++;
+                                }
+                            }
+                            score /= i;
                         }
-                        int id = 0;
-                        int.TryParse(f.Id, out id);
-                        ShowsMovieModel movieModel = new ShowsMovieModel(id, f.Title, shows, 3.5, _navigationService);
-                        movies.Add(movieModel);
-                        break;
                     }
+                    movies.Add(new ShowsMovieModel(m, score, _navigationService));
                 }
             }
 
@@ -70,13 +81,25 @@ namespace Kina.Mobile.Core.ViewModels
             _goToMovieViewCommandCommand = new MvxAsyncCommand(GoToMovieViewAction);
         }
 
-
-        private List<Film> InitList()
+        private void InitList(DataRequestService dataRequestService)
         {
-            JsonReader jsonReader = new JsonReader();
-            Multikino multikino = jsonReader.DeserializeMultikino();
-            List<Film> films = multikino.Films;
-            return films;
+            //JsonReader jsonReader = new JsonReader();
+            //Multikino multikino = jsonReader.DeserializeMultikino();
+            //List<Film> films = multikino.Films;
+            //return films;
+
+            // Krewetka = 1073, multikino = 14
+            Task.Run(() => dataRequestService.ProvideData(CinemaType.multikino, 14)).Wait();
+            Debug.WriteLine("I'm here");
+        }
+        private void GetScore(int movieId, int cinemaId)
+        {
+            Task.Run(() => GetScoreAsync(movieId, cinemaId)).Wait();
+        }
+        private async Task GetScoreAsync(int movieId, int cinemaId)
+
+        {
+            userScore = await MvxApp.Database.GetUserScoreAsync(cinemaId, movieId);
         }
 
         public override Task Initialize(Showing parameter)

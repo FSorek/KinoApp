@@ -6,6 +6,7 @@
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
              xmlns:xlf="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              xmlns:pvm="clr-namespace:Kina.Mobile.Core.ViewModels;assembly=Kina.Mobile.Core"
+             xmlns:dpm="clr-namespace:DataModel;assembly=Kina.Mobile.DataProvider"
              Title="Shows">
   <ContentPage.Resources>
     <ResourceDictionary>
@@ -78,11 +79,10 @@
                   <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
                          IsVisible="{Binding IsStarredFive}" Grid.Row="0" Grid.Column="5"/>
                   <ScrollView Orientation="Horizontal"  Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
-                    <xlf:RepeaterView x:TypeArguments="pvm:ShowsShowsModel" ItemsSource="{Binding Shows}" Orientation="Horizontal">
+                    <xlf:RepeaterView x:TypeArguments="dpm:Show" ItemsSource="{Binding Shows}" Orientation="Horizontal">
                       <xlf:RepeaterView.ItemTemplate>
                         <DataTemplate>
-                          <Label Text="{Binding Time}" Margin="2, 0" MinimumWidthRequest="40"/>
-                         
+                          <Label Text="{Binding Start}" Margin="2, 0" MinimumWidthRequest="40"/>
                         </DataTemplate>
                       </xlf:RepeaterView.ItemTemplate>
                     </xlf:RepeaterView>
