@@ -1,0 +1,163 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kina.Mobile.Core.Pages.StarView"
+             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
+             xmlns:local="clr-namespace:Kina.Mobile.Core.Behaviors;assembly=Kina.Mobile.Core"
+             Title="Star">
+    
+        <ScrollView>
+        <StackLayout BackgroundColor="#404040">
+            <StackLayout>
+
+                <StackLayout>
+
+
+                        <Label Text="Screen" HorizontalOptions="Start"/>
+                        <StackLayout x:Name="Screen" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
+
+                        <Grid RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredTwo}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredThree}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredFour}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="5"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredFive}" Grid.Row="0" Grid.Column="5"/>
+                        </Grid>
+                    </StackLayout>
+                        <Label Text="Seats" HorizontalOptions="Start"/>
+                        <StackLayout x:Name="Seats" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
+
+                        <Grid RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredTwo}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredThree}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredFour}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="5"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredFive}" Grid.Row="0" Grid.Column="5"/>
+
+
+                        </Grid>
+                        </StackLayout>
+                        <Label Text="Sound" HorizontalOptions="Start"/>
+                        <StackLayout x:Name="Sound" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
+
+                        <Grid RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredTwo}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredThree}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredFour}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="5"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredFive}" Grid.Row="0" Grid.Column="5"/>
+                        </Grid>
+                    </StackLayout>
+                        <Label Text="Popcorn" HorizontalOptions="Start"/>
+                        <StackLayout x:Name="pop" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
+
+                        <Grid RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="*"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                                <ColumnDefinition Width="14"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="*"/>
+                                <RowDefinition Height="*"/>
+                            </Grid.RowDefinitions>
+
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredTwo}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredThree}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredFour}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="5"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                         IsVisible="{Binding IsStarredFive}" Grid.Row="0" Grid.Column="5"/>
+
+                        </Grid>
+                    </StackLayout>
+                </StackLayout>
+
+                </StackLayout>
+
+            </StackLayout>
+
+    </ScrollView>
+</mvx:MvxContentPage>
