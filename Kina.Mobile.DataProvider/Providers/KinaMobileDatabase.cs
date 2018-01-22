@@ -17,6 +17,10 @@ namespace Kina.Mobile.DataProvider.Providers
             _database = new SQLiteAsyncConnection(dbPath);
             _database.DropTableAsync<UserScore>().Wait();
             _database.CreateTableAsync<UserScore>().Wait();
+			_database.DropTableAsync<Show>().Wait();
+            _database.CreateTableAsync<Show>().Wait();
+			_database.DropTableAsync<Movie>().Wait();
+            _database.CreateTableAsync<Movie>().Wait();
         }
 
         public Task<List<UserScore>> GetUserScoreAsync()
@@ -54,6 +58,78 @@ namespace Kina.Mobile.DataProvider.Providers
         public Task<int> DeleteUserScoreAsync(UserScore score)
         {
             return _database.DeleteAsync(score);
+        }
+		
+		public Task<List<Show>> GetShowAsync()
+        {
+            return _database.Table<Show>().ToListAsync();
+        }
+		
+		public Task<Show> GetShowAsync(int Id_Show)
+        {
+            return _database.Table<Show>().Where(s => s.Id_Show == Id_Show).FirstOrDefaultAsync();
+			
+        }
+		
+		public Task<int> SaveShowAsync(Show sh)
+        {
+            if (sh.Id_Show != 0)
+            {
+                return _database.UpdateAsync(sh);
+            }
+            else
+            {
+                return _database.InsertAsync(sh);
+            }
+        }
+
+        public Task<int> DeleteShowAsync(Show sh)
+        {
+            return _database.DeleteAsync(sh);
+        }
+		
+		public Task<List<Movie>> GetMovieAsync()
+        {
+            return _database.Table<Movie>().ToListAsync();
+        }
+
+        public Task<List<Movie>> GetMovieAsync(int Id_Movie, String Name)
+        {
+            return _database.QueryAsync<Movie>("SELECT * FROM Movie WHERE Id_Movie = ? OR Name = ? ", Id_Movie, Name);
+        }
+        /*
+		public Task<List<Movie>> GetMovieAsync(String Name)
+        {
+            return _database.QueryAsync<Movie>("SELECT * FROM Movie WHERE Name = ? ", Name);
+        }
+		
+		public Task<Movie> GetMovieAsync(string Id_Movie)
+        {
+            return _database.Table<Movie>().Where(s => s.Id_Movie == Id_Movie).FirstOrDefaultAsync();
+			
+        }
+
+        public Task<Movie> GetMovieAsync(String Name)
+        {
+            return _database.Table<Movie>().Where(s => s.Name == Name).FirstOrDefaultAsync();
+
+        }*/
+
+        public Task<int> SaveMovieAsync(Movie film)
+        {
+            if (film.Id_Movie != "0")
+            {
+                return _database.UpdateAsync(film);
+            }
+            else
+            {
+                return _database.InsertAsync(film);
+            }
+        }
+
+        public Task<int> DeleteMovieAsync(Movie film)
+        {
+            return _database.DeleteAsync(film);
         }
     }
 }
