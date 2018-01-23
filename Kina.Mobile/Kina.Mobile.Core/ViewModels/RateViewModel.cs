@@ -5,7 +5,6 @@ using System;
 using System.Threading.Tasks;
 using DataModel;
 using Kina.Mobile.Core.Services;
-using Xamarin.Forms;
 using MvvmCross.Platform;
 using Acr.UserDialogs;
 
@@ -30,6 +29,7 @@ namespace Kina.Mobile.Core.ViewModels
         public int SeatsRate { get; set; }
         public int SoundRate { get; set; }
         public int PopcornRate { get; set; }
+        public int CleanlinessRate { get; set; }
 
         public List<String> Cinemas { get; set; }
         public string SelectedCinema { get; set; }
@@ -72,7 +72,8 @@ namespace Kina.Mobile.Core.ViewModels
                     Screen = ScreenRate,
                     Seat = SeatsRate,
                     Sound = SoundRate,
-                    Popcorn = PopcornRate
+                    Popcorn = PopcornRate,
+                    Cleanliness = CleanlinessRate
                 };
                 await MvxApp.Database.SaveUserScoreAsync(score);
                 await _navigationService.Navigate<ShowsViewModel>();
