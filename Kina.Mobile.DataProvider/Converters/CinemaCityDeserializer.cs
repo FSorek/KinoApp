@@ -32,6 +32,11 @@ namespace Kina.Mobile.DataProvider.Converters
 
             foreach (Film film in from.Body.Films)
             {
+                List<string> genres = new List<string>();
+                foreach(var genre in film.AttributeIds)
+                {
+                    genres.Add(genre);
+                }
                 mappedList.Add(new Movie
                 {
                     Id_Movie = film.Id,
@@ -47,6 +52,7 @@ namespace Kina.Mobile.DataProvider.Converters
                     Cinematography = null,
                     Rating = null,
                     Shows = MapShow(from, film.Id, cinemaId),
+                    Genre = genres
                 });
 
             }
