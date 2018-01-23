@@ -27,5 +27,7 @@ namespace DataModel
         // For easier providing data to shows view
 		[Ignore]
         public List<Show> Shows{ get; set; }
+        [Ignore]
+        public List<Genre> Genre { get; set; }
     }
 }
