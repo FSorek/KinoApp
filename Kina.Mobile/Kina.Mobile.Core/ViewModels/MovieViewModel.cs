@@ -3,7 +3,6 @@
 // <url>https://www.linkedin.com/in/pauldatsyuk/</url>
 // ---------------------------------------------------------------
 
-using CoreMultikinoJson;
 using DataModel;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;

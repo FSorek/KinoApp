@@ -13,7 +13,9 @@ namespace Kina.Mobile.Core.ViewModels
     {
         private readonly IMvxNavigationService _navigationService;
 
+        private MvxAsyncCommand _goToScoreViewCommandCommand;
         private MvxAsyncCommand _goToMovieViewCommandCommand;
+        public ICommand GoToScoreViewCommand => _goToScoreViewCommandCommand;
         public ICommand GoToMovieViewCommand => _goToMovieViewCommandCommand;
 
         private Movie movie;
@@ -83,21 +85,24 @@ namespace Kina.Mobile.Core.ViewModels
             _navigationService = navigationService;
 
             InitCommands();
-
-            // Value temporary hardcoded for preview
             InitRating(rating);
         }
 
         private async Task GoToMovieViewAction()
         {
-            Movie param = movie;
+            Movie parameter = movie;
+            await _navigationService.Navigate<MovieViewModel, Movie>(parameter);
+        }
 
-            //await _navigationService.Navigate<FilterViewModel, Showing>(showing);
-            await _navigationService.Navigate<MovieViewModel, Movie>(param);
+        private async Task GoToScoreViewAction()
+        {
+            Movie parameter = movie;
+            await _navigationService.Navigate<ScoreViewModel, Movie>(parameter);
         }
 
         private void InitCommands()
         {
+            _goToScoreViewCommandCommand = new MvxAsyncCommand(GoToScoreViewAction);
             _goToMovieViewCommandCommand = new MvxAsyncCommand(GoToMovieViewAction);
         }
 

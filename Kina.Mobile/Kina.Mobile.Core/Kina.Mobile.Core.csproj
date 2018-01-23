@@ -43,6 +43,7 @@
       <DependentUpon>FormsApp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Model\JsonReader.cs" />
+    <Compile Include="Model\ScoreRow.cs" />
     <Compile Include="Pages\FilterView.xaml.cs">
       <DependentUpon>FilterView.xaml</DependentUpon>
     </Compile>
@@ -54,6 +55,9 @@
     </Compile>
     <Compile Include="Pages\RateView.xaml.cs">
       <DependentUpon>RateView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\ScoreView.xaml.cs">
+      <DependentUpon>ScoreView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\ShowsView.xaml.cs">
       <DependentUpon>ShowsView.xaml</DependentUpon>
@@ -101,6 +105,7 @@
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\RateViewModel.cs" />
+    <Compile Include="ViewModels\ScoreViewModel.cs" />
     <Compile Include="ViewModels\SecondViewModel.cs" />
     <Compile Include="Pages\MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
@@ -288,6 +293,12 @@
       <Project>{41e7110a-4ec2-4e0f-90ab-1efaca852844}</Project>
       <Name>Kina.Mobile.DataProvider</Name>
     </ProjectReference>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="Pages\ScoreView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Import Project="..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets" Condition="Exists('..\..\packages\Xamarin.Forms.2.3.4.247\build\portable-win+net45+wp80+win81+wpa81+MonoAndroid10+Xamarin.iOS10+xamarinmac20\Xamarin.Forms.targets')" />
