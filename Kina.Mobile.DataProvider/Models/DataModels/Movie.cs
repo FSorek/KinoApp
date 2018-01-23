@@ -28,6 +28,6 @@ namespace DataModel
 		[Ignore]
         public List<Show> Shows{ get; set; }
         [Ignore]
-        public List<Genre> Genre { get; set; }
+        public List<String> Genre { get; set; }
     }
 }
