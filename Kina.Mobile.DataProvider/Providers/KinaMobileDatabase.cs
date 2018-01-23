@@ -16,12 +16,29 @@ namespace Kina.Mobile.DataProvider.Providers
             _database.DropTableAsync<UserScore>().Wait();
             _database.CreateTableAsync<UserScore>().Wait();
             _database.CreateTableAsync<Genre>().Wait();
-			//_database.DropTableAsync<Show>().Wait();
+            //_database.DropTableAsync<Show>().Wait();
             //_database.CreateTableAsync<Show>().Wait();
-			//_database.DropTableAsync<Movie>().Wait();
+            //_database.DropTableAsync<Movie>().Wait();
             // _database.CreateTableAsync<Movie>().Wait();
+
+            InsertGenre("dramat", "drama");
+            InsertGenre("thriller", "thriller");
+            InsertGenre("komedia", "comedy");
+            InsertGenre("animowany", "animation");
+            InsertGenre("science-fiction", "sci-fi");
+            InsertGenre("akcja", "action");
+            InsertGenre("romans", "romance");
         }
 
+        private void InsertGenre(string name, string engName)
+        {
+            Genre genre = new Genre
+            {
+                Name = name,
+                EngName = engName
+            };
+            _database.InsertAsync(genre).Wait();
+        }
 
         // User Score starts here
         public Task<List<UserScore>> GetUserScoreAsync()
