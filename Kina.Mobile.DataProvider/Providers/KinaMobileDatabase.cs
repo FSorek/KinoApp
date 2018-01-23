@@ -97,15 +97,10 @@ namespace Kina.Mobile.DataProvider.Providers
         {
             return _database.QueryAsync<Movie>("SELECT * FROM Movie WHERE Id_Movie = ? OR Name = ? ", Id_Movie, Name);
         }
-        /*
-		public Task<List<Movie>> GetMovieAsync(String Name)
-        {
-            return _database.QueryAsync<Movie>("SELECT * FROM Movie WHERE Name = ? ", Name);
-        }
 		
-		public Task<Movie> GetMovieAsync(string Id_Movie)
+		public Task<Movie> GetMovieAsync(int Id)
         {
-            return _database.Table<Movie>().Where(s => s.Id_Movie == Id_Movie).FirstOrDefaultAsync();
+            return _database.Table<Movie>().Where(s => s.Id == Id).FirstOrDefaultAsync();
 			
         }
 
@@ -113,11 +108,10 @@ namespace Kina.Mobile.DataProvider.Providers
         {
             return _database.Table<Movie>().Where(s => s.Name == Name).FirstOrDefaultAsync();
 
-        }*/
-
+        }
         public Task<int> SaveMovieAsync(Movie film)
         {
-            if (film.Id_Movie != "0")
+            if (film.Id != 0)
             {
                 return _database.UpdateAsync(film);
             }

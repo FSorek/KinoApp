@@ -10,7 +10,8 @@ namespace DataModel
 	[Table("Movie")]
     public class Movie
     {
-		[PrimaryKey, AutoIncrement, Column("Id_Movie")]
+		[PrimaryKey, AutoIncrement, Column("Id")]
+		public int Id {get;set;}
         public String Id_Movie{ get; set; }
 		[Column("Name")]
         public String Name{ get; set; }
