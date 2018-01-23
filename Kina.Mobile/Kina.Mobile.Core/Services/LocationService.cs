@@ -1,4 +1,5 @@
-﻿using MvvmCross.Plugins.Location;
+﻿using System;
+using MvvmCross.Plugins.Location;
 using MvvmCross.Plugins.Messenger;
 
 namespace Kina.Mobile.Core.Services
