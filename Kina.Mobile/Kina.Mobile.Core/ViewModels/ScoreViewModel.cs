@@ -55,10 +55,10 @@ namespace Kina.Mobile.Core.ViewModels
                 {
                     counter++;
                     avgSeats += score.Seat;
-                    avgScreen += score.Sound;
+                    avgScreen += score.Screen;
                     avgCleanliness += score.Cleanliness;
                     avgPopcorn += score.Popcorn;
-                    avgSound += avgSound;
+                    avgSound += score.Sound;
                 }
                 avgSeats /= counter;
                 avgScreen /= counter;
