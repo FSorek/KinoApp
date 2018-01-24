@@ -35,7 +35,7 @@ namespace Kina.Mobile.DataProvider.Converters
                 List<string> genres = new List<string>();
                 foreach (var genre in film.Genres.Names)
                 {
-                    genres.Add(genre.Name);
+                    genres.Add(genre.Name.ToLower());
                 }
                 mappedList.Add(new Movie
                 {
