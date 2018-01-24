@@ -9,7 +9,7 @@
              Title="Detailed score">
     <StackLayout BackgroundColor="#404040">
       <!--HEADER LABEL-->
-      <Label Text="{Binding HeaderLabel}"/>
+      <Label Text="{Binding HeaderLabel}" BackgroundColor="#fcca01" TextColor="Black" FontSize="18"/>
       <xlf:RepeaterView x:TypeArguments="mod:ScoreRow" ItemsSource="{Binding ScoreRows}">
         <xlf:RepeaterView.ItemTemplate>
           <DataTemplate>
@@ -26,7 +26,7 @@
                   <RowDefinition Height="*"/>
                 </Grid.RowDefinitions>
                 <!--Stars-->
-                <Label Text="{Binding AttributeName}" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="0"/>
+                <Label Text="{Binding AttributeName}" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="0" TextColor="#fcca01"/>
                 <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
                 <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
                        IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
@@ -46,6 +46,11 @@
           </DataTemplate>
         </xlf:RepeaterView.ItemTemplate>
       </xlf:RepeaterView>
-      <Label Text="{Binding FooterLabel}"/>
+      <StackLayout Orientation="Horizontal">
+        <Label FontSize="14" Text="Our users have scored this show"
+          HorizontalOptions="Start" VerticalOptions="Center"/>
+      <Label HorizontalOptions="FillAndExpand" Text="{Binding FooterLabel}" FontAttributes="Bold" TextColor="#fcca01" WidthRequest="20"/>
+        <Label HorizontalOptions="FillAndExpand" Text="times."/>
+      </StackLayout>
     </StackLayout>
 </mvx:MvxContentPage>

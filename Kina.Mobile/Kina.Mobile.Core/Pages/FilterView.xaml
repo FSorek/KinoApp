@@ -18,7 +18,7 @@
                 SelectedItem="{Binding SelectedGenre, Mode=OneWayToSource}"/>
       </StackLayout>
     </ScrollView>
-    <Button BackgroundColor="Green" Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search"/>
+    <Button BackgroundColor="#fcca01" Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search"/>
     <Button BackgroundColor="Red" Command="{Binding GoBackCommand}" Margin="32, 2" Text="Cancel"/>
   </StackLayout>
 </mvx:MvxContentPage>
