@@ -46,9 +46,10 @@
   <StackLayout BackgroundColor="#404040">
     <ScrollView>
       <StackLayout>
-        <xlf:RepeaterView x:TypeArguments="mod:MovieList" ItemsSource="{Binding MultiList}">
+        <!--<Label Text="Dlugi tekst"/>-->
+        <!--<xlf:RepeaterView x:TypeArguments="mod:MovieList" ItemsSource="{Binding MultiList}">
           <xlf:RepeaterView.ItemTemplate>
-            <DataTemplate>
+            <DataTemplate>-->
               <xlf:RepeaterView x:TypeArguments="pvm:ShowsMovieModel" ItemsSource="{Binding Movies}">
                 <xlf:RepeaterView.ItemTemplate>
                   <DataTemplate>
@@ -103,9 +104,9 @@
                   </DataTemplate>
                 </xlf:RepeaterView.ItemTemplate>
               </xlf:RepeaterView>
-            </DataTemplate>
+            <!--</DataTemplate>
           </xlf:RepeaterView.ItemTemplate>
-        </xlf:RepeaterView>
+        </xlf:RepeaterView>-->
       </StackLayout>
     </ScrollView>
     <StackLayout Orientation="Horizontal">
