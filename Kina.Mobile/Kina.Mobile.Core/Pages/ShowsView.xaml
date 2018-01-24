@@ -46,10 +46,9 @@
   <StackLayout BackgroundColor="#404040">
     <ScrollView>
       <StackLayout>
-        <xlf:RepeaterView x:TypeArguments="mod:MovieList" ItemsSource="{Binding MovieList}">
+        <xlf:RepeaterView x:TypeArguments="mod:MovieList" ItemsSource="{Binding MultiList}">
           <xlf:RepeaterView.ItemTemplate>
             <DataTemplate>
-              <Label Text="{Binding CinemaName}" BackgroundColor="#fcca01" TextColor="Black"/>
               <xlf:RepeaterView x:TypeArguments="pvm:ShowsMovieModel" ItemsSource="{Binding Movies}">
                 <xlf:RepeaterView.ItemTemplate>
                   <DataTemplate>
