@@ -1,11 +1,16 @@
-﻿using System;
+﻿using SQLite;
+using System;
 using System.Collections.Generic;
 
 namespace DataModel
 {
+    [Table("Movie")]
     public class Movie
     {
+		[PrimaryKey, AutoIncrement, Column("Id")]
+		public int Id {get;set;}
         public String Id_Movie{ get; set; }
+		[Column("Name")]
         public String Name{ get; set; }
         public String Original_Name{ get; set; }
         public String Length{ get; set; }
@@ -20,6 +25,9 @@ namespace DataModel
         //public Webscore Id_Webscore{ get; set; }
 
         // For easier providing data to shows view
+		[Ignore]
         public List<Show> Shows{ get; set; }
+        [Ignore]
+        public List<String> Genre { get; set; }
     }
 }

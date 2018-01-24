@@ -42,6 +42,6 @@
          HorizontalOptions="FillAndExpand"/>
       <Button Scale=".5" FontSize="15" Text="Go" Command="{Binding ConfimrLocationCommand}" WidthRequest="64.0" Style="{StaticResource CityTitle}" Margin="2, 2"/>
     </StackLayout>
-    <Button Scale=".5" FontSize="15" Image="Pin.png" Text="Share Your Location" Command="{Binding AutoLocateCommand}" Style="{StaticResource CityTitle}" Margin="5"/>
+    <Button Scale=".5" FontSize="15" Image="PinBlack.png" Text="Share Your Location" Command="{Binding AutoLocateCommand}" Style="{StaticResource CityTitle}" Margin="5"/>
   </StackLayout>
 </mvx:MvxContentPage>

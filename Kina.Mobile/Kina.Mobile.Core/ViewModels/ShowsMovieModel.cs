@@ -1,5 +1,7 @@
 ﻿using CoreMultikinoJson;
 using DataModel;
+using Kina.Mobile.Core.Model;
+using Kina.Mobile.Core.Services;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
@@ -12,8 +14,11 @@ namespace Kina.Mobile.Core.ViewModels
     class ShowsMovieModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IAppSettings _settings;
 
+        private MvxAsyncCommand _goToScoreViewCommandCommand;
         private MvxAsyncCommand _goToMovieViewCommandCommand;
+        public ICommand GoToScoreViewCommand => _goToScoreViewCommandCommand;
         public ICommand GoToMovieViewCommand => _goToMovieViewCommandCommand;
 
         private Movie movie;
@@ -63,15 +68,23 @@ namespace Kina.Mobile.Core.ViewModels
             set { shows = value; }
         }
 
-        public ShowsMovieModel(Movie movie, double rating, IMvxNavigationService navigationService)
+        public ShowsMovieModel(Movie movie, double rating, IMvxNavigationService navigationService, FilterSet parameter, IAppSettings settings)
         {
+            _settings = settings;
             var date = DateTime.Today.Date;
             movieID = movie.Id_Movie;
             title = movie.Name;
             shows = new List<Show>();
             foreach(Show s in movie.Shows)
             {
-                if (s.ShowDate.Date.Equals(DateTime.Today.Date))
+                bool check = true;
+                if(parameter != null)
+                {
+                    int showHour = int.Parse(s.Start.Split(':')[0]);
+                    int parameterHour = int.Parse(parameter.Start.Split(':')[0]);
+                    check = ((showHour > (parameterHour - 1)) && (showHour < (parameterHour + 1))) || (parameterHour == 0);
+                }
+                if (s.ShowDate.Date.Equals(DateTime.Today.Date) && check)
                 {
                     shows.Add(s);
                 }
@@ -83,21 +96,26 @@ namespace Kina.Mobile.Core.ViewModels
             _navigationService = navigationService;
 
             InitCommands();
-
-            // Value temporary hardcoded for preview
             InitRating(rating);
         }
 
         private async Task GoToMovieViewAction()
         {
-            Movie param = movie;
+            Movie parameter = movie;
+            MvxApp.UsingFilter = false;
+            await _navigationService.Navigate<MovieViewModel, Movie>(parameter);
+        }
 
-            //await _navigationService.Navigate<FilterViewModel, Showing>(showing);
-            await _navigationService.Navigate<MovieViewModel, Movie>(param);
+        private async Task GoToScoreViewAction()
+        {
+            Movie parameter = movie;
+            MvxApp.UsingFilter = false;
+            await _navigationService.Navigate<ScoreViewModel, Movie>(parameter);
         }
 
         private void InitCommands()
         {
+            _goToScoreViewCommandCommand = new MvxAsyncCommand(GoToScoreViewAction);
             _goToMovieViewCommandCommand = new MvxAsyncCommand(GoToMovieViewAction);
         }
 

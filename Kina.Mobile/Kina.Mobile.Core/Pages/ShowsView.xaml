@@ -16,6 +16,12 @@
         <Setter Property="BorderRadius" Value="10"/>
         <Setter Property="FontSize" Value="12" />
       </Style>
+      <Style x:Key="FilterButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#fcca01"/>
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="BorderRadius" Value="25"/>
+        <Setter Property="FontSize" Value="12" />
+      </Style>
       <Style x:Key="CityHeader" TargetType="Button">
         <Setter Property="BackgroundColor" Value="#404040"/>
         <Setter Property="TextColor" Value="Orange" />
@@ -43,9 +49,9 @@
           <xlf:RepeaterView.ItemTemplate>
             <DataTemplate>
               <ContentView>
-                <!--Commenting to be sure there is only one item which is tappable-->
-                <!--<ContentView.GestureRecognizers>
-                  <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoToMovieViewCommand}"/>
+                <!--TAP RECOGNIZER-->
+                <ContentView.GestureRecognizers>
+                  <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoToScoreViewCommand}"/>
                 </ContentView.GestureRecognizers>-->
                 <Grid RowSpacing="0">
                   <Grid.ColumnDefinitions>
@@ -93,6 +99,7 @@
             </DataTemplate>
           </xlf:RepeaterView.ItemTemplate>
         </xlf:RepeaterView>
+        <Button Image="Filter.png" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource FilterButton}" Margin="20" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
       </StackLayout>
     </ScrollView>
   </StackLayout>

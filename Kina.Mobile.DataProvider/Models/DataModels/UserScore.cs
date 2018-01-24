@@ -22,6 +22,7 @@ namespace DataModel
         public int Seat { get; set; }
         public int Sound { get; set; }
         public int Popcorn { get; set; }
+        public int Cleanliness { get; set; }
 
         [Column("Id_Cinema")]
         public int Id_Cinema { get; set; }

@@ -43,6 +43,65 @@
                 SelectedItem="{Binding SelectedCinema, Mode=OneWayToSource}"/>
 
         <StackLayout>
+          <Label Text="Cleanliness" HorizontalOptions="Start"/>
+          <StackLayout x:Name="cleStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
+            <Grid>
+              <Grid.Behaviors>
+                <local:StarBehavior x:Name="cleStarOne"
+                                    StarName="starOne"
+                                    GroupName="cleStars"/>
+              </Grid.Behaviors>
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
+
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
+                     IsVisible="{Binding Source={x:Reference cleStarOne}, Path=IsMarked}"/>
+            </Grid>
+            <Grid>
+              <Grid.Behaviors>
+                <local:StarBehavior x:Name="cleStarTwo"
+                                    StarName="starTwo"
+                                    GroupName="cleStars"/>
+              </Grid.Behaviors>
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
+
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
+                     IsVisible="{Binding Source={x:Reference cleStarTwo}, Path=IsMarked}"/>
+            </Grid>
+            <Grid>
+              <Grid.Behaviors>
+                <local:StarBehavior x:Name="cleStarThree"
+                                    StarName="starThree"
+                                    GroupName="cleStars"/>
+              </Grid.Behaviors>
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
+
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
+                     IsVisible="{Binding Source={x:Reference cleStarThree}, Path=IsMarked}"/>
+            </Grid>
+            <Grid>
+              <Grid.Behaviors>
+                <local:StarBehavior x:Name="cleStarFour"
+                                    StarName="starFour"
+                                    GroupName="cleStars"/>
+              </Grid.Behaviors>
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
+
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
+                     IsVisible="{Binding Source={x:Reference cleStarFour}, Path=IsMarked}"/>
+            </Grid>
+            <Grid>
+              <Grid.Behaviors>
+                <local:StarBehavior x:Name="cleStarFive"
+                                    StarName="starFive"
+                                    GroupName="cleStars"
+                                    Rating="{Binding CleanlinessRate, Mode=OneWayToSource}"/>
+              </Grid.Behaviors>
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
+
+              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
+                     IsVisible="{Binding Source={x:Reference cleStarFive}, Path=IsMarked}"/>
+            </Grid>
+          </StackLayout>
           <Label Text="Screen" HorizontalOptions="Start"/>
           <StackLayout x:Name="ScreenStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
             <Grid>

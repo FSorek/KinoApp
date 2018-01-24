@@ -1,4 +1,5 @@
 ﻿using DataModel;
+using Kina.Mobile.Core.Model;
 using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
@@ -9,10 +10,16 @@ using System.Threading.Tasks;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    class ShowsViewModel : MvxViewModel
+    class ShowsViewModel : MvxViewModel<FilterSet>
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly Services.IAppSettings _settings;
+
+        private FilterSet _parameter;
+
+        private MvxAsyncCommand _goToFilterViewCommandCommand;
+
+        public IMvxAsyncCommand GoToFilterViewCommand => _goToFilterViewCommandCommand;
 
         private List<ShowsMovieModel> movies;
         private List<UserScore> userScore;
@@ -62,30 +69,71 @@ namespace Kina.Mobile.Core.ViewModels
         {
             _navigationService = navigationService;
             _settings = settings;
+
+            if (!MvxApp.UsingFilter)
+            {
+                FillWithData();
+            }
+
+            InitCommands();
+        }
+
+        public void FillWithData()
+        {
+            DataRequestService dataRequestService = new DataRequestService();
+            InitList(dataRequestService);
+
             List<Movie> movieList = new List<Movie>();
             DataRequestService dataRequestService = new DataRequestService();
-
+            
             movieList.AddRange(AddMovies(dataRequestService, CinemaType.multikino, 12));
             movieList.AddRange(AddMovies(dataRequestService, CinemaType.multikino, 14));
             movieList.AddRange(AddMovies(dataRequestService, CinemaType.cinemacity, 1073));
-
+            
             var today = DateTime.Today;
             movies = new List<ShowsMovieModel>();
 
-            foreach(Movie m in movieList)
+            foreach (Movie m in movieList)
             {
-                if (m.Shows.Count != 0)
+                bool check = true;
+                bool content = m.Shows.Count != 0;
+                int showAfterFiltering = 0;
+                if (_parameter != null)
+                {
+                    if(_parameter.Title != null)
+                    {
+                        check = m.Name.ToLower().Contains(_parameter.Title.ToLower());
+                    }
+                    if(_parameter.Genre != null)
+                    {
+                        check = check && (m.Genre.Contains(_parameter.Genre.Name) || m.Genre.Contains(_parameter.Genre.EngName));
+                    }
+                    if (content)
+                    {
+                        foreach (var s in m.Shows)
+                        {
+                            
+                            int showHour = int.Parse(s.Start.Split(':')[0]);
+                            int parameterHour = int.Parse(_parameter.Start.Split(':')[0]);
+                            if(((showHour > (parameterHour - 1)) && (showHour < (parameterHour + 1))) || (parameterHour == 0))
+                            {
+                                showAfterFiltering++;
+                            }
+                        }
+                    }
+                }
+                if (content && check)
                 {
                     double score = 0.0;
                     GetScore(m.Id_Movie, m.Shows[0].Id_Cinema);
-                    if(userScore.Count != 0)
+                    if (userScore.Count != 0)
                     {
                         int i = 0;
-                        if(userScore != null)
+                        if (userScore != null)
                         {
                             foreach (UserScore s in userScore)
                             {
-                                if(s.Id_Movie.Equals(m.Id_Movie) && s.Id_Cinema == m.Shows[0].Id_Cinema)
+                                if (s.Id_Movie.Equals(m.Id_Movie) && s.Id_Cinema == m.Shows[0].Id_Cinema)
                                 {
                                     score += (s.Screen + s.Seat + s.Sound + s.Popcorn) / 4.0;
                                     i++;
@@ -94,26 +142,30 @@ namespace Kina.Mobile.Core.ViewModels
                             score /= i;
                         }
                     }
-                    movies.Add(new ShowsMovieModel(m, score, _navigationService));
+                    movies.Add(new ShowsMovieModel(m, score, _navigationService, _parameter, _settings));
                 }
             }
         }
 
         private void InitList(DataRequestService dataRequestService, CinemaType cinema, int cinema_id)
         {
-            // Older version using JsonReader for static testing
-            //JsonReader jsonReader = new JsonReader();
-            //Multikino multikino = jsonReader.DeserializeMultikino();
-            //List<Film> films = multikino.Films;
-            //return films;
-
-            // Krewetka = 1073, multikino = 14
             Task.Run(() => dataRequestService.ProvideData(cinema, cinema_id)).Wait();
             Debug.WriteLine("I'm here");
         }
+
+        public void InitCommands()
+        {
+            _goToFilterViewCommandCommand = new MvxAsyncCommand(GoToFilterViewAction);
+        }
+
         private void GetScore(string movieId, int cinemaId)
         {
             Task.Run(() => GetScoreAsync(movieId, cinemaId)).Wait();
+        }
+
+        private async Task GoToFilterViewAction()
+        {
+            await _navigationService.Navigate<FilterViewModel>();
         }
 
         private async Task GetScoreAsync(string movieId, int cinemaId)
@@ -121,10 +173,14 @@ namespace Kina.Mobile.Core.ViewModels
             userScore = await MvxApp.Database.GetUserScoreAsync(cinemaId, movieId);
         }
 
-        // Will be needed if we implement filtering so let it be commentd
-        //public override Task Initialize(Showing parameter)
-        //{
-        //    throw new NotImplementedException();
-        //}
+        public override Task Initialize(FilterSet parameter)
+        {
+            _parameter = parameter;
+            if (MvxApp.UsingFilter)
+            {
+                FillWithData();
+            }
+            return Task.FromResult(true);
+        }
     }
 }
