@@ -17,6 +17,8 @@ namespace Kina.Mobile.DataProvider.Providers
             _database = new SQLiteAsyncConnection(dbPath);
             _database.DropTableAsync<UserScore>().Wait();
             _database.CreateTableAsync<UserScore>().Wait();
+            _database.DropTableAsync<Cinema>().Wait();
+            _database.CreateTableAsync<Cinema>().Wait();
         }
 
         public Task<List<UserScore>> GetUserScoreAsync()
@@ -39,6 +41,16 @@ namespace Kina.Mobile.DataProvider.Providers
             return _database.Table<UserScore>().Where(s => s.Id_UserScore == Id_UserScore).FirstOrDefaultAsync();
         }
 
+        public Task<Cinema> GetCinemaAsync(int Id_Cinema)
+        {
+            return _database.Table<Cinema>().Where(s => s.Id_Cinema == Id_Cinema).FirstOrDefaultAsync();
+        }
+
+        public Task<List<Cinema>> GetAllCinemaAsync()
+        {
+            return _database.QueryAsync<Cinema>("SELECT * FROM Cinema");
+        }
+
         public Task<int> SaveUserScoreAsync(UserScore score)
         {
             if (score.Id_UserScore != 0)
@@ -48,6 +60,18 @@ namespace Kina.Mobile.DataProvider.Providers
             else
             {
                 return _database.InsertAsync(score);
+            }
+        }
+
+        public Task<int> SaveCinemaAsync(Cinema cinema)
+        {
+            if (cinema.Id_Cinema != 0)
+            {
+                return _database.UpdateAsync(cinema);
+            }
+            else
+            {
+                return _database.InsertAsync(cinema);
             }
         }
 

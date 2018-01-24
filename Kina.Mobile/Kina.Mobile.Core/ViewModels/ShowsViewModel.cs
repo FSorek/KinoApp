@@ -23,14 +23,51 @@ namespace Kina.Mobile.Core.ViewModels
             set { SetProperty(ref movies, value); }
         }
 
+        public List<Movie> AddMovies(DataRequestService dbReq, CinemaType cinemaType, int cinemaId)
+        {
+            var movieList = new List<Movie>();
+
+            InitList(dbReq, CinemaType.multikino, cinemaId);
+            movieList.AddRange(dbReq.MovieList);
+
+            Cinema cinema = new Cinema();
+            cinema.Id_Self = cinemaId;
+            switch (cinemaId)
+            {
+                default: cinema.Latitude = cinema.Longtitude = 0; break;
+                case 12:
+                    cinema.Latitude = 54.44514;
+                    cinema.Longtitude = 18.5654693;
+                    cinema.City = "Sopot";
+                    break;
+                case 14:
+                    cinema.Latitude = 52.3025245;
+                    cinema.Longtitude = 21.0153022;
+                    cinema.City = "Warszawa Targowek";
+                    break;
+                case 1073:
+                    cinema.Latitude = 54.3533975;
+                    cinema.Longtitude = 18.6439144;
+                    cinema.City = "Gdansk";
+                    break;
+            }
+
+            Task.Run(() => MvxApp.Database.SaveCinemaAsync(cinema)).Wait();
+
+            return movieList;
+
+
+        }
         public ShowsViewModel(IMvxNavigationService navigationService, Services.IAppSettings settings)
         {
             _navigationService = navigationService;
             _settings = settings;
-
+            List<Movie> movieList = new List<Movie>();
             DataRequestService dataRequestService = new DataRequestService();
-            InitList(dataRequestService);
-            List<Movie> movieList = dataRequestService.MovieList;
+
+            movieList.AddRange(AddMovies(dataRequestService, CinemaType.multikino, 12));
+            movieList.AddRange(AddMovies(dataRequestService, CinemaType.multikino, 14));
+            movieList.AddRange(AddMovies(dataRequestService, CinemaType.cinemacity, 1073));
 
             var today = DateTime.Today;
             movies = new List<ShowsMovieModel>();
@@ -62,7 +99,7 @@ namespace Kina.Mobile.Core.ViewModels
             }
         }
 
-        private void InitList(DataRequestService dataRequestService)
+        private void InitList(DataRequestService dataRequestService, CinemaType cinema, int cinema_id)
         {
             // Older version using JsonReader for static testing
             //JsonReader jsonReader = new JsonReader();
@@ -71,7 +108,7 @@ namespace Kina.Mobile.Core.ViewModels
             //return films;
 
             // Krewetka = 1073, multikino = 14
-            Task.Run(() => dataRequestService.ProvideData(CinemaType.multikino, 14)).Wait();
+            Task.Run(() => dataRequestService.ProvideData(cinema, cinema_id)).Wait();
             Debug.WriteLine("I'm here");
         }
         private void GetScore(string movieId, int cinemaId)

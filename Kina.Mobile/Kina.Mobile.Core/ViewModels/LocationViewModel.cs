@@ -7,6 +7,7 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using DataModel;
 using MvvmCross.Plugins.Messenger;
 
 namespace Kina.Mobile.Core.ViewModels
@@ -88,6 +89,22 @@ namespace Kina.Mobile.Core.ViewModels
         {
             _autoLocateCommandCommand = new MvxAsyncCommand(AutoLocateAction);
             _confirmLocationCommandCommand = new MvxAsyncCommand(ConfirmLocationAction);
+        }
+
+        public List<Cinema> GetCinemasInRange(int meters)
+        {
+            var cinemas = new List<Cinema>();
+            var cinemasInRange = new List<Cinema>();
+            Task.Run(() => cinemas = MvxApp.Database.GetAllCinemaAsync().Result);
+            foreach (var cinema in cinemas)
+            {
+                if (CalculateDistance(Lat, Lng, cinema.Latitude, cinema.Longtitude) <= meters)
+                {
+                    cinemasInRange.Add(cinema);
+                }
+            }
+
+            return cinemasInRange;
         }
 
         public double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
