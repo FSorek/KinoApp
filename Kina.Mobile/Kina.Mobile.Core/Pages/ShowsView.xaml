@@ -16,6 +16,12 @@
         <Setter Property="BorderRadius" Value="10"/>
         <Setter Property="FontSize" Value="12" />
       </Style>
+      <Style x:Key="FilterButton" TargetType="Button">
+        <Setter Property="BackgroundColor" Value="#fcca01"/>
+        <Setter Property="TextColor" Value="Black" />
+        <Setter Property="BorderRadius" Value="25"/>
+        <Setter Property="FontSize" Value="12" />
+      </Style>
       <Style x:Key="CityHeader" TargetType="Button">
         <Setter Property="BackgroundColor" Value="#404040"/>
         <Setter Property="TextColor" Value="Orange" />
@@ -93,8 +99,8 @@
             </DataTemplate>
           </xlf:RepeaterView.ItemTemplate>
         </xlf:RepeaterView>
+        <Button Image="Filter.png" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource FilterButton}" Margin="20" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
       </StackLayout>
     </ScrollView>
-    <Button Text="Filter" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource CityTitle}"/>
   </StackLayout>
 </mvx:MvxContentPage>
