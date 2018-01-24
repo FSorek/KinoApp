@@ -18,8 +18,10 @@ namespace Kina.Mobile.Core.ViewModels
         private FilterSet _parameter;
 
         private MvxAsyncCommand _goToFilterViewCommandCommand;
+        private MvxAsyncCommand _goToLocationViewCommandCommand;
 
         public IMvxAsyncCommand GoToFilterViewCommand => _goToFilterViewCommandCommand;
+        public IMvxAsyncCommand GoToLocationViewCommand => _goToLocationViewCommandCommand;
 
         private List<ShowsMovieModel> movies;
         private List<UserScore> userScore;
@@ -122,6 +124,8 @@ namespace Kina.Mobile.Core.ViewModels
                 }
                 if (content && check)
                 {
+                    if (_parameter != null && showAfterFiltering == 0)
+                        continue;
                     double score = 0.0;
                     GetScore(m.Id_Movie, m.Shows[0].Id_Cinema);
                     if (userScore.Count != 0)
@@ -154,6 +158,7 @@ namespace Kina.Mobile.Core.ViewModels
         public void InitCommands()
         {
             _goToFilterViewCommandCommand = new MvxAsyncCommand(GoToFilterViewAction);
+            _goToLocationViewCommandCommand = new MvxAsyncCommand(GoToLocationViewAction);
         }
 
         private void GetScore(string movieId, int cinemaId)
@@ -164,6 +169,11 @@ namespace Kina.Mobile.Core.ViewModels
         private async Task GoToFilterViewAction()
         {
             await _navigationService.Navigate<FilterViewModel>();
+        }
+
+        private async Task GoToLocationViewAction()
+        {
+            await _navigationService.Navigate<LocationViewModel>();
         }
 
         private async Task GetScoreAsync(string movieId, int cinemaId)
