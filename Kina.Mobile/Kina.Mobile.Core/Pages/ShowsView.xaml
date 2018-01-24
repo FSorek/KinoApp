@@ -95,5 +95,6 @@
         </xlf:RepeaterView>
       </StackLayout>
     </ScrollView>
+    <Button Text="Filter" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource CityTitle}"/>
   </StackLayout>
 </mvx:MvxContentPage>

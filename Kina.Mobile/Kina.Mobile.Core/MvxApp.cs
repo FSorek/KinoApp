@@ -32,6 +32,8 @@ namespace Kina.Mobile.Core
             }
         }
 
+        public static bool UsingFilter { get; set; }
+
 		public override void Initialize()
 		{
 			CreatableTypes()

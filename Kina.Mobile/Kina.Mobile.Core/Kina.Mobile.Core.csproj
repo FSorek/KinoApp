@@ -42,6 +42,7 @@
     <Compile Include="FormsApp.xaml.cs">
       <DependentUpon>FormsApp.xaml</DependentUpon>
     </Compile>
+    <Compile Include="Model\FilterSet.cs" />
     <Compile Include="Model\JsonReader.cs" />
     <Compile Include="Model\ScoreRow.cs" />
     <Compile Include="Pages\FilterView.xaml.cs">
