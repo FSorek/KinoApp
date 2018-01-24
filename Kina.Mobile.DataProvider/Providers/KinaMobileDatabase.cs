@@ -15,6 +15,7 @@ namespace Kina.Mobile.DataProvider.Providers
             _database = new SQLiteAsyncConnection(dbPath);
             _database.DropTableAsync<UserScore>().Wait();
             _database.CreateTableAsync<UserScore>().Wait();
+            _database.DropTableAsync<Genre>().Wait();
             _database.CreateTableAsync<Genre>().Wait();
             //_database.DropTableAsync<Show>().Wait();
             //_database.CreateTableAsync<Show>().Wait();
