@@ -114,18 +114,19 @@ namespace Kina.Mobile.Core.ViewModels
                         {
                             
                             int showHour = int.Parse(s.Start.Split(':')[0]);
-                            int parameterHour = int.Parse(_parameter.Start.Split(':')[0]);
-                            if(((showHour > (parameterHour - 1)) && (showHour < (parameterHour + 1))) || (parameterHour == 0))
+                            int parameterHourStart = int.Parse(_parameter.Start.Split(':')[0]);
+                            int parameterHourEnd = int.Parse(_parameter.End.Split(':')[0]);
+                            if (((showHour > (parameterHourStart)) && (showHour < (parameterHourEnd))) || (parameterHourStart == 0 && parameterHourEnd == 0))
                             {
                                 showAfterFiltering++;
                             }
                         }
+                        if (showAfterFiltering == 0)
+                            continue;
                     }
                 }
                 if (content && check)
                 {
-                    if (_parameter != null && showAfterFiltering == 0)
-                        continue;
                     double score = 0.0;
                     GetScore(m.Id_Movie, m.Shows[0].Id_Cinema);
                     if (userScore.Count != 0)

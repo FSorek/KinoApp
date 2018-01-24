@@ -81,8 +81,10 @@ namespace Kina.Mobile.Core.ViewModels
                 if(parameter != null)
                 {
                     int showHour = int.Parse(s.Start.Split(':')[0]);
-                    int parameterHour = int.Parse(parameter.Start.Split(':')[0]);
-                    check = ((showHour > (parameterHour - 1)) && (showHour < (parameterHour + 1))) || (parameterHour == 0);
+                    int parameterHourStart = int.Parse(parameter.Start.Split(':')[0]);
+                    int parameterHourEnd = int.Parse(parameter.End.Split(':')[0]);
+
+                    check = ((showHour > (parameterHourStart)) && (showHour < (parameterHourEnd))) || (parameterHourStart == 0 && parameterHourEnd == 0);
                 }
                 if (s.ShowDate.Date.Equals(DateTime.Today.Date) && check)
                 {
@@ -103,6 +105,7 @@ namespace Kina.Mobile.Core.ViewModels
         {
             Movie parameter = movie;
             MvxApp.UsingFilter = false;
+            MvxApp.FilterSettings.ClearFilter();
             await _navigationService.Navigate<MovieViewModel, Movie>(parameter);
         }
 

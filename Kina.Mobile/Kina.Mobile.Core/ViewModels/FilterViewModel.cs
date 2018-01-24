@@ -48,28 +48,28 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToShowsPageAction()
         {
-            FilterSet parameter = new FilterSet();
             if (SelectedGenre != null)
             {
                 foreach (var g in genre)
                 {
                     if (SelectedGenre.ToLower().Equals(g.EngName.ToLower()))
                     {
-                        parameter.Genre = g;
+                        MvxApp.FilterSettings.Genre = g;
                     }
                 }
             }
             if(StartTime != null)
             {
-                parameter.Start = StartTime.ToString(@"h\:mm");
+                MvxApp.FilterSettings.Start = StartTime.ToString(@"h\:mm");
             }
-            //parameter.End = EndTime.ToString(@"h\:mm");
+            if(EndTime != null)
+                MvxApp.FilterSettings.End = EndTime.ToString(@"h\:mm");
             if(Title != null)
             {
-                parameter.Title = Title;
+                MvxApp.FilterSettings.Title = Title;
             }
             MvxApp.UsingFilter = true;
-            await _navigationService.Navigate<ShowsViewModel, FilterSet>(parameter);
+            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
         }
 
         private async Task GoBackAction()
