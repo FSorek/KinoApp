@@ -9,7 +9,7 @@ namespace Kina.Mobile.Core.Services
 {
 	public class AppSettings : IAppSettings
 	{
-        private const string ActiveUserKey = "ActiveUserID";
+        private const string activeUserKey = "ActiveUserID";
         private const string settingsFileName = "Settings.inf";
 		public const string SuperNumberKey = "SuperNumberKey";
 
@@ -31,8 +31,8 @@ namespace Kina.Mobile.Core.Services
 
         public int ActiveUserID
         {
-            get { return _settings.GetValueOrDefault(ActiveUserKey, DefaultAciveUserID, settingsFileName); }
-            set { _settings.AddOrUpdateValue(ActiveUserKey, value, settingsFileName); }
+            get { return _settings.GetValueOrDefault(activeUserKey, DefaultAciveUserID, settingsFileName); }
+            set { _settings.AddOrUpdateValue(activeUserKey, value, settingsFileName); }
         }
     }
 }
