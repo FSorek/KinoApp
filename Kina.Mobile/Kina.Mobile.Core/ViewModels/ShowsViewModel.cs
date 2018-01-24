@@ -81,10 +81,8 @@ namespace Kina.Mobile.Core.ViewModels
         public void FillWithData()
         {
             DataRequestService dataRequestService = new DataRequestService();
-            InitList(dataRequestService);
 
             List<Movie> movieList = new List<Movie>();
-            DataRequestService dataRequestService = new DataRequestService();
             
             movieList.AddRange(AddMovies(dataRequestService, CinemaType.multikino, 12));
             movieList.AddRange(AddMovies(dataRequestService, CinemaType.multikino, 14));
