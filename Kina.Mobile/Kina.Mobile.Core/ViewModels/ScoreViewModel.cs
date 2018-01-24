@@ -67,7 +67,7 @@ namespace Kina.Mobile.Core.ViewModels
                 avgSound /= counter;
             }
 
-            FooterLabel = String.Format("Our users have scored this show {0} times.", counter);
+            FooterLabel = String.Format(" {0} ", counter);
 
             ScoreRows.Add(new ScoreRow(avgCleanliness, "Cleanliness"));
             ScoreRows.Add(new ScoreRow(avgScreen, "Screen"));
