@@ -5,6 +5,7 @@
 
 using Acr.UserDialogs;
 using DataModel;
+using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Helpers;
 using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.ViewModels;
@@ -12,6 +13,7 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.Json;
+using MvvmCross.Plugins.Location;
 using Xamarin.Forms;
 
 namespace Kina.Mobile.Core
@@ -50,7 +52,7 @@ namespace Kina.Mobile.Core
 			Mvx.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
 			Mvx.RegisterSingleton<IUserDialogs>(() => UserDialogs.Instance);
 
-			Resources.AppResources.Culture = Mvx.Resolve<Services.ILocalizeService>().GetCurrentCultureInfo();
+            Resources.AppResources.Culture = Mvx.Resolve<Services.ILocalizeService>().GetCurrentCultureInfo();
 
 			RegisterAppStart<ViewModels.ShowsViewModel>();
 		}

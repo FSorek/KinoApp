@@ -1,4 +1,5 @@
-﻿using MvvmCross.Core.Navigation;
+﻿using Kina.Mobile.Core.Services;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
@@ -6,12 +7,16 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
+using DataModel;
+using MvvmCross.Plugins.Messenger;
 
 namespace Kina.Mobile.Core.ViewModels
 {
     class LocationViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly MvxSubscriptionToken _token;
+
         private MvxAsyncCommand _confirmLocationCommandCommand;
         private MvxAsyncCommand _autoLocateCommandCommand;
 
@@ -20,6 +25,20 @@ namespace Kina.Mobile.Core.ViewModels
 
         public ICommand ConfirmLocationCommand => _confirmLocationCommandCommand;
         public ICommand AutoLocateCommand => _autoLocateCommandCommand;
+
+        private double _lng; //Longtitude of device
+        public double Lng
+        {
+            get { return _lng; }
+            set { _lng = value; RaisePropertyChanged(() => Lng); }
+        }
+
+        private double _lat; //Latitude of device
+        public double Lat
+        {
+            get { return _lat; }
+            set { _lat = value; RaisePropertyChanged(() => Lat); }
+        }
 
         public List<string> Location
         {
@@ -33,9 +52,10 @@ namespace Kina.Mobile.Core.ViewModels
             set { SetProperty(ref selectedLocation, value); }
         }
 
-        public LocationViewModel(IMvxNavigationService navigationService)
+        public LocationViewModel(IMvxNavigationService navigationService, ILocationService service, IMvxMessenger messenger)
         {
             _navigationService = navigationService;
+            _token = messenger.Subscribe<LocationMessage>(OnLocationMessage); //Live Update of device coords
 
             #region Temporary hardcoded content
             location = new List<string>();
@@ -43,6 +63,12 @@ namespace Kina.Mobile.Core.ViewModels
             #endregion
 
             InitCommands();
+        }
+
+        private void OnLocationMessage(LocationMessage locationMessage)
+        {
+            Lat = locationMessage.Lat;
+            Lng = locationMessage.Lng;
         }
 
         private async Task ConfirmLocationAction()
@@ -63,6 +89,38 @@ namespace Kina.Mobile.Core.ViewModels
         {
             _autoLocateCommandCommand = new MvxAsyncCommand(AutoLocateAction);
             _confirmLocationCommandCommand = new MvxAsyncCommand(ConfirmLocationAction);
+        }
+
+        public List<Cinema> GetCinemasInRange(int meters)
+        {
+            var cinemas = new List<Cinema>();
+            var cinemasInRange = new List<Cinema>();
+            Task.Run(() => cinemas = MvxApp.Database.GetAllCinemaAsync().Result);
+            foreach (var cinema in cinemas)
+            {
+                if (CalculateDistance(Lat, Lng, cinema.Latitude, cinema.Longtitude) <= meters)
+                {
+                    cinemasInRange.Add(cinema);
+                }
+            }
+
+            return cinemasInRange;
+        }
+
+        public double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
+        {
+            double rlat1 = Math.PI * lat1 / 180;
+            double rlat2 = Math.PI * lat2 / 180;
+            double theta = lon1 - lon2;
+            double rtheta = Math.PI * theta / 180;
+            double dist =
+                Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
+                Math.Cos(rlat2) * Math.Cos(rtheta);
+            dist = Math.Acos(dist);
+            dist = dist * 180 / Math.PI;
+            dist = dist * 60 * 1.1515;
+
+            return dist * 1.609344;
         }
     }
 }

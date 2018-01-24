@@ -72,7 +72,7 @@ namespace Kina.Mobile.DataProvider.Providers
                 default: MovieList = new List<Movie>(); break;
                 case CinemaType.multikino:
                     MultikinoDeserializer multikinoDeserializer = new MultikinoDeserializer();
-                    MovieList = multikinoDeserializer.Deserialize(dataString, cinemaId);
+                    MovieList = multikinoDeserializer.Deserialize(dataString, cinemaId);                   
                     break;
                 case CinemaType.cinemacity:
                     CinemaCityDeserializer cinemaCityDeserializer = new CinemaCityDeserializer();
