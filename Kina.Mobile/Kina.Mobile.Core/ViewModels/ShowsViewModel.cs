@@ -32,11 +32,14 @@ namespace Kina.Mobile.Core.ViewModels
             set { SetProperty(ref movies, value); }
         }
 
-        public List<Movie> AddMovies(DataRequestService dbReq, CinemaType cinemaType, int cinemaId)
+        public List<Movie> AddMovies(DataRequestService dbReq, String cinemaType, int cinemaId)
         {
             var movieList = new List<Movie>();
 
-            InitList(dbReq, CinemaType.multikino, cinemaId);
+            if(cinemaType == "Multikino")
+                InitList(dbReq, CinemaType.multikino, cinemaId);
+            else if(cinemaType == "CinemaCity")
+                InitList(dbReq, CinemaType.cinemacity, cinemaId);
             movieList.AddRange(dbReq.MovieList);
 
             Cinema cinema = new Cinema();
@@ -48,16 +51,19 @@ namespace Kina.Mobile.Core.ViewModels
                     cinema.Latitude = 54.44514;
                     cinema.Longtitude = 18.5654693;
                     cinema.City = "Sopot";
+                    cinema.CinemaType = "Multikino";
                     break;
                 case 14:
                     cinema.Latitude = 52.3025245;
                     cinema.Longtitude = 21.0153022;
                     cinema.City = "Warszawa Targowek";
+                    cinema.CinemaType = "Multikino";
                     break;
                 case 1073:
                     cinema.Latitude = 54.3533975;
                     cinema.Longtitude = 18.6439144;
                     cinema.City = "Gdansk";
+                    cinema.CinemaType = "CinemaCity";
                     break;
             }
 
@@ -85,11 +91,20 @@ namespace Kina.Mobile.Core.ViewModels
             DataRequestService dataRequestService = new DataRequestService();
 
             List<Movie> movieList = new List<Movie>();
-            
-            movieList.AddRange(AddMovies(dataRequestService, CinemaType.multikino, 12));
-            movieList.AddRange(AddMovies(dataRequestService, CinemaType.multikino, 14));
-            movieList.AddRange(AddMovies(dataRequestService, CinemaType.cinemacity, 1073));
-            
+
+            if (MvxApp.FilterSettings.Cinemas != null)
+            {
+                foreach (var cinema in MvxApp.FilterSettings.Cinemas)
+                {
+                    movieList.AddRange(AddMovies(dataRequestService, cinema.CinemaType, cinema.Id_Self));
+                }
+            }
+            else
+            {
+                movieList.AddRange(AddMovies(dataRequestService, "Multikino", 12));
+                movieList.AddRange(AddMovies(dataRequestService, "Multikino", 14));
+                movieList.AddRange(AddMovies(dataRequestService, "CinemaCity", 1073));  
+            }
             var today = DateTime.Today;
             movies = new List<ShowsMovieModel>();
 
@@ -98,7 +113,7 @@ namespace Kina.Mobile.Core.ViewModels
                 bool check = true;
                 bool content = m.Shows.Count != 0;
                 int showAfterFiltering = 0;
-                if (_parameter != null)
+                if (MvxApp.UsingFilter)
                 {
                     if(_parameter.Title != null)
                     {

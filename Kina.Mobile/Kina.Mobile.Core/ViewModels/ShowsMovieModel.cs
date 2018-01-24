@@ -113,6 +113,7 @@ namespace Kina.Mobile.Core.ViewModels
         {
             Movie parameter = movie;
             MvxApp.UsingFilter = false;
+            MvxApp.FilterSettings.ClearFilter();
             await _navigationService.Navigate<ScoreViewModel, Movie>(parameter);
         }
 

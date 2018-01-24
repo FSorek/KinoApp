@@ -1,4 +1,5 @@
 ﻿using System;
+using System.Diagnostics;
 using MvvmCross.Plugins.Location;
 using MvvmCross.Plugins.Messenger;
 
@@ -32,13 +33,13 @@ namespace Kina.Mobile.Core.Services
 
         private void OnLocation(MvxGeoLocation location)
         {
-            var message = new LocationMessage(this, location.Coordinates.Latitude, location.Coordinates.Latitude);
+            var message = new LocationMessage(this, location.Coordinates.Latitude, location.Coordinates.Longitude);
             _messenger.Publish(message);
         }                                           
 
         private void OnError(MvxLocationError error)
         {
-
+            Debug.WriteLine(error);
         }
     }
 }

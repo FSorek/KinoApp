@@ -69,6 +69,11 @@ namespace Kina.Mobile.DataProvider.Providers
             return _database.Table<Cinema>().Where(s => s.Id_Cinema == Id_Cinema).FirstOrDefaultAsync();
         }
 
+        public Task<Cinema> GetCinemaBySelfIdAsync(int self_id)
+        {
+            return _database.Table<Cinema>().Where(s => s.Id_Self == self_id).FirstOrDefaultAsync();
+        }
+
         public Task<List<Cinema>> GetAllCinemaAsync()
         {
             return _database.QueryAsync<Cinema>("SELECT * FROM Cinema");
@@ -88,7 +93,7 @@ namespace Kina.Mobile.DataProvider.Providers
 
         public Task<int> SaveCinemaAsync(Cinema cinema)
         {
-            if (cinema.Id_Cinema != 0)
+            if (GetCinemaBySelfIdAsync(cinema.Id_Self).Result != null)
             {
                 return _database.UpdateAsync(cinema);
             }

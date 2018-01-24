@@ -3,11 +3,13 @@ using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Diagnostics;
 using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DataModel;
+using Kina.Mobile.Core.Model;
 using MvvmCross.Plugins.Messenger;
 
 namespace Kina.Mobile.Core.ViewModels
@@ -21,7 +23,8 @@ namespace Kina.Mobile.Core.ViewModels
         private MvxAsyncCommand _autoLocateCommandCommand;
 
         private List<string> location;
-        private string selectedLocation;
+
+        private int distance;
 
         public ICommand ConfirmLocationCommand => _confirmLocationCommandCommand;
         public ICommand AutoLocateCommand => _autoLocateCommandCommand;
@@ -46,16 +49,18 @@ namespace Kina.Mobile.Core.ViewModels
             set { SetProperty(ref location, value); }
         }
 
-        public string SelectedLocation
+        public int Distance
         {
-            get { return selectedLocation; }
-            set { SetProperty(ref selectedLocation, value); }
+            get { return distance; }
+            set { SetProperty(ref distance, value); }
         }
+
+
 
         public LocationViewModel(IMvxNavigationService navigationService, ILocationService service, IMvxMessenger messenger)
         {
             _navigationService = navigationService;
-            _token = messenger.Subscribe<LocationMessage>(OnLocationMessage); //Live Update of device coords
+            _token = messenger.SubscribeOnMainThread<LocationMessage>(OnLocationMessage); //Live Update of device coords
 
             #region Temporary hardcoded content
             location = new List<string>();
@@ -73,16 +78,20 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task ConfirmLocationAction()
         {
-            var param = selectedLocation;
-
-            // To be determined, what acctualy this task should do
-            await _navigationService.Close(this);
+            Debug.WriteLine(Lat);
+            Debug.WriteLine(Lng);
+            if (Lat == 0 || Lng == 0)
+            {
+                
+            }
+            MvxApp.FilterSettings.Cinemas = GetCinemasInRange(distance);
+            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
         }
 
         private async Task AutoLocateAction()
         {
-            // To be determined, what acctualy this task should do
-            await _navigationService.Close(this);
+            MvxApp.FilterSettings.Cinemas = null;
+            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
         }
 
         private void InitCommands()
@@ -91,14 +100,14 @@ namespace Kina.Mobile.Core.ViewModels
             _confirmLocationCommandCommand = new MvxAsyncCommand(ConfirmLocationAction);
         }
 
-        public List<Cinema> GetCinemasInRange(int meters)
+        public List<Cinema> GetCinemasInRange(int kilimeters)
         {
             var cinemas = new List<Cinema>();
             var cinemasInRange = new List<Cinema>();
-            Task.Run(() => cinemas = MvxApp.Database.GetAllCinemaAsync().Result);
+            cinemas = Task.Run(() => MvxApp.Database.GetAllCinemaAsync()).Result;
             foreach (var cinema in cinemas)
             {
-                if (CalculateDistance(Lat, Lng, cinema.Latitude, cinema.Longtitude) <= meters)
+                if (CalculateDistance(Lat, Lng, cinema.Latitude, cinema.Longtitude) <= kilimeters)
                 {
                     cinemasInRange.Add(cinema);
                 }
