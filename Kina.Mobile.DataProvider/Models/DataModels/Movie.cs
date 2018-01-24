@@ -1,13 +1,10 @@
 ﻿using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
 namespace DataModel
 {
-	[Table("Movie")]
+    [Table("Movie")]
     public class Movie
     {
 		[PrimaryKey, AutoIncrement, Column("Id")]
@@ -30,5 +27,7 @@ namespace DataModel
         // For easier providing data to shows view
 		[Ignore]
         public List<Show> Shows{ get; set; }
+        [Ignore]
+        public List<String> Genre { get; set; }
     }
 }

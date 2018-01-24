@@ -2,8 +2,6 @@
 using SQLite;
 using System;
 using System.Collections.Generic;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 
 namespace Kina.Mobile.DataProvider.Providers
@@ -17,12 +15,33 @@ namespace Kina.Mobile.DataProvider.Providers
             _database = new SQLiteAsyncConnection(dbPath);
             _database.DropTableAsync<UserScore>().Wait();
             _database.CreateTableAsync<UserScore>().Wait();
-			_database.DropTableAsync<Show>().Wait();
-            _database.CreateTableAsync<Show>().Wait();
-			_database.DropTableAsync<Movie>().Wait();
-            _database.CreateTableAsync<Movie>().Wait();
+            _database.DropTableAsync<Genre>().Wait();
+            _database.CreateTableAsync<Genre>().Wait();
+            //_database.DropTableAsync<Show>().Wait();
+            //_database.CreateTableAsync<Show>().Wait();
+            //_database.DropTableAsync<Movie>().Wait();
+            // _database.CreateTableAsync<Movie>().Wait();
+
+            InsertGenre("dramat", "drama");
+            InsertGenre("thriller", "thriller");
+            InsertGenre("komedia", "comedy");
+            InsertGenre("animowany", "animation");
+            InsertGenre("science-fiction", "sci-fi");
+            InsertGenre("akcja", "action");
+            InsertGenre("romans", "romance");
         }
 
+        private void InsertGenre(string name, string engName)
+        {
+            Genre genre = new Genre
+            {
+                Name = name,
+                EngName = engName
+            };
+            _database.InsertAsync(genre).Wait();
+        }
+
+        // User Score starts here
         public Task<List<UserScore>> GetUserScoreAsync()
         {
             return _database.Table<UserScore>().ToListAsync();
@@ -60,6 +79,7 @@ namespace Kina.Mobile.DataProvider.Providers
             return _database.DeleteAsync(score);
         }
 		
+        // Shows stars here
 		public Task<List<Show>> GetShowAsync()
         {
             return _database.Table<Show>().ToListAsync();
@@ -88,6 +108,7 @@ namespace Kina.Mobile.DataProvider.Providers
             return _database.DeleteAsync(sh);
         }
 		
+        // Movie starts here
 		public Task<List<Movie>> GetMovieAsync()
         {
             return _database.Table<Movie>().ToListAsync();
@@ -124,6 +145,39 @@ namespace Kina.Mobile.DataProvider.Providers
         public Task<int> DeleteMovieAsync(Movie film)
         {
             return _database.DeleteAsync(film);
+        }
+
+        // Genre starts here
+        public Task<List<Genre>> GetGenreAsync()
+        {
+            return _database.Table<Genre>().ToListAsync();
+        }
+
+        public Task<Genre> GetGenreAsync(int id)
+        {
+            return _database.Table<Genre>().Where(g => g.GenreID == id).FirstOrDefaultAsync();
+        }
+
+        public Task<Genre> GetGenreAsync(String name)
+        {
+            return _database.Table<Genre>().Where(g => g.Name == name).FirstOrDefaultAsync();
+        }
+
+        public Task<int> SaveGenreAsync(Genre genre)
+        {
+            if(genre.GenreID != 0)
+            {
+                return _database.UpdateAsync(genre);
+            }
+            else
+            {
+                return _database.InsertAsync(genre);
+            }
+        }
+
+        public Task<int> DeleteGenreAsync(Genre genre)
+        {
+            return _database.DeleteAsync(genre);
         }
     }
 }
