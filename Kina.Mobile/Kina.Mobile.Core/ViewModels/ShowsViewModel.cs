@@ -56,6 +56,7 @@ namespace Kina.Mobile.Core.ViewModels
             {
                 bool check = true;
                 bool content = m.Shows.Count != 0;
+                int showAfterFiltering = 0;
                 if (_parameter != null)
                 {
                     if(_parameter.Title != null)
@@ -70,9 +71,13 @@ namespace Kina.Mobile.Core.ViewModels
                     {
                         foreach (var s in m.Shows)
                         {
+                            
                             int showHour = int.Parse(s.Start.Split(':')[0]);
                             int parameterHour = int.Parse(_parameter.Start.Split(':')[0]);
-                            check = check && ((showHour > (parameterHour - 1)) && (showHour < (parameterHour + 1))) || (parameterHour == 0);
+                            if(((showHour > (parameterHour - 1)) && (showHour < (parameterHour + 1))) || (parameterHour == 0))
+                            {
+                                showAfterFiltering++;
+                            }
                         }
                     }
                 }

@@ -53,7 +53,7 @@ namespace Kina.Mobile.Core.ViewModels
             {
                 foreach (var g in genre)
                 {
-                    if (SelectedGenre.Equals(g.Name))
+                    if (SelectedGenre.ToLower().Equals(g.EngName.ToLower()))
                     {
                         parameter.Genre = g;
                     }
