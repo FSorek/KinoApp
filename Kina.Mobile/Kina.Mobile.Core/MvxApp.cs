@@ -5,6 +5,7 @@
 
 using Acr.UserDialogs;
 using DataModel;
+using Kina.Mobile.Core.Model;
 using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Helpers;
 using Kina.Mobile.DataProvider.Providers;
@@ -35,6 +36,7 @@ namespace Kina.Mobile.Core
         }
 
         public static bool UsingFilter { get; set; }
+	    public static FilterSet FilterSettings { get; set; }
 
 		public override void Initialize()
 		{
@@ -52,6 +54,7 @@ namespace Kina.Mobile.Core
 			Mvx.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
 			Mvx.RegisterSingleton<IUserDialogs>(() => UserDialogs.Instance);
 
+            FilterSettings = new FilterSet();
             Resources.AppResources.Culture = Mvx.Resolve<Services.ILocalizeService>().GetCurrentCultureInfo();
 
 			RegisterAppStart<ViewModels.ShowsViewModel>();

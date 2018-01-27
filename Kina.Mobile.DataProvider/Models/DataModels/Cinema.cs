@@ -23,6 +23,8 @@ namespace DataModel
         public double Latitude { get; set; }
         [Column("City")]
         public string City { get; set; }
+        [Column("CinemaType")]
+        public string CinemaType { get; set; }
         [Ignore]
         public List<Movie> MoviesPlayed { get; set; }
     }

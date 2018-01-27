@@ -44,6 +44,7 @@
     </Compile>
     <Compile Include="Model\FilterSet.cs" />
     <Compile Include="Model\JsonReader.cs" />
+    <Compile Include="Model\LocalizationSettings.cs" />
     <Compile Include="Model\MovieList.cs" />
     <Compile Include="Model\ScoreRow.cs" />
     <Compile Include="Pages\FilterView.xaml.cs">

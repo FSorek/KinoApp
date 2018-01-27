@@ -12,7 +12,7 @@
         <Label Text="Start"/>
         <TimePicker Format="HH\:mm" Time="{Binding StartTime, Mode=OneWayToSource}"/>
         <Label Text="End"/>
-        <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}}"/>
+        <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}"/>
         <Picker Title="Genre"
                 ItemsSource="{Binding Genre}"
                 SelectedItem="{Binding SelectedGenre, Mode=OneWayToSource}"/>
