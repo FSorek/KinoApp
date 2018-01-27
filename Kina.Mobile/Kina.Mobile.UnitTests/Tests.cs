@@ -3,6 +3,7 @@
 // <url>https://www.linkedin.com/in/pauldatsyuk/</url>
 // ---------------------------------------------------------------
 
+
 using Xunit;
 
 namespace Kina.Mobile.UnitTests
@@ -12,7 +13,8 @@ namespace Kina.Mobile.UnitTests
 		[Fact]
 		public void PassingTest()
 		{
-			Assert.Equal(4, 4);
+		    
+            
 		}
 	}
 }

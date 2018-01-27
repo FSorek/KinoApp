@@ -1,0 +1,56 @@
+<?xml version="1.0" encoding="utf-8" ?>
+<mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kina.Mobile.Core.Pages.ScoreView"
+             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
+             xmlns:mod="clr-namespace:Kina.Mobile.Core.Model;assembly=Kina.Mobile.Core"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
+             xmlns:xlf="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
+             Title="Detailed score">
+    <StackLayout BackgroundColor="#404040">
+      <!--HEADER LABEL-->
+      <Label Text="{Binding HeaderLabel}" BackgroundColor="#fcca01" TextColor="Black" FontSize="18"/>
+      <xlf:RepeaterView x:TypeArguments="mod:ScoreRow" ItemsSource="{Binding ScoreRows}">
+        <xlf:RepeaterView.ItemTemplate>
+          <DataTemplate>
+              <Grid RowSpacing="0">
+                <Grid.ColumnDefinitions>
+                  <ColumnDefinition Width="*"/>
+                  <ColumnDefinition Width="32"/>
+                  <ColumnDefinition Width="32"/>
+                  <ColumnDefinition Width="32"/>
+                  <ColumnDefinition Width="32"/>
+                  <ColumnDefinition Width="32"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                  <RowDefinition Height="*"/>
+                </Grid.RowDefinitions>
+                <!--Stars-->
+                <Label Text="{Binding AttributeName}" Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="0" TextColor="#fcca01"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                       IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="2"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                       IsVisible="{Binding IsStarredTwo}" Grid.Row="0" Grid.Column="2"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="3"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                       IsVisible="{Binding IsStarredThree}" Grid.Row="0" Grid.Column="3"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="4"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                       IsVisible="{Binding IsStarredFour}" Grid.Row="0" Grid.Column="4"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="5"/>
+                <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                       IsVisible="{Binding IsStarredFive}" Grid.Row="0" Grid.Column="5"/>
+              </Grid>
+          </DataTemplate>
+        </xlf:RepeaterView.ItemTemplate>
+      </xlf:RepeaterView>
+      <StackLayout Orientation="Horizontal">
+        <Label FontSize="14" Text="Our users have scored this show"
+          HorizontalOptions="Start" VerticalOptions="Center"/>
+      <Label HorizontalOptions="FillAndExpand" Text="{Binding FooterLabel}" FontAttributes="Bold" TextColor="#fcca01" WidthRequest="20"/>
+        <Label HorizontalOptions="FillAndExpand" Text="times."/>
+      </StackLayout>
+    </StackLayout>
+</mvx:MvxContentPage>

@@ -4,12 +4,16 @@ using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
 using DataModel;
+using Kina.Mobile.Core.Services;
+using MvvmCross.Platform;
+using Acr.UserDialogs;
 
 namespace Kina.Mobile.Core.ViewModels
 {
     public class RateViewModel : MvxViewModel<Movie>
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IAppSettings _settings;
 
         private MvxAsyncCommand _submitCommandCommand;
         private MvxAsyncCommand _goBackCommandCommand;
@@ -25,13 +29,15 @@ namespace Kina.Mobile.Core.ViewModels
         public int SeatsRate { get; set; }
         public int SoundRate { get; set; }
         public int PopcornRate { get; set; }
+        public int CleanlinessRate { get; set; }
 
         public List<String> Cinemas { get; set; }
         public string SelectedCinema { get; set; }
 
-        public RateViewModel(IMvxNavigationService navigationService)
+        public RateViewModel(IMvxNavigationService navigationService, IAppSettings settings)
         {
             _navigationService = navigationService;
+            _settings = settings;
 
             InitCommands();
 
@@ -49,16 +55,29 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task SubmitAction()
         {
-            UserScore score = new UserScore();
-            score.Id_User = 1;
-            score.Id_Cinema = cinemaID;
-            score.Id_Movie = movieID;
-            score.Screen = ScreenRate;
-            score.Seat = SeatsRate;
-            score.Sound = SoundRate;
-            score.Popcorn = PopcornRate;
-            await MvxApp.Database.SaveUserScoreAsync(score);
-            await _navigationService.Navigate<ShowsViewModel>();
+            int userID = _settings.ActiveUserID;
+            List<UserScore> userScore = await MvxApp.Database.GetUserScoreAsync(userID, cinemaID, movieID);
+            if (userScore.Count != 0)
+            {
+                Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
+                await _navigationService.Close(this);
+            }
+            else
+            {
+                UserScore score = new UserScore
+                {
+                    Id_User = userID,
+                    Id_Cinema = cinemaID,
+                    Id_Movie = movieID,
+                    Screen = ScreenRate,
+                    Seat = SeatsRate,
+                    Sound = SoundRate,
+                    Popcorn = PopcornRate,
+                    Cleanliness = CleanlinessRate
+                };
+                await MvxApp.Database.SaveUserScoreAsync(score);
+                await _navigationService.Navigate<ShowsViewModel>();
+            }
         }
 
         private async Task GoBackAction()

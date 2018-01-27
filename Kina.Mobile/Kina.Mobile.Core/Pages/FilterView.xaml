@@ -12,13 +12,13 @@
         <Label Text="Start"/>
         <TimePicker Format="HH\:mm" Time="{Binding StartTime, Mode=OneWayToSource}"/>
         <Label Text="End"/>
-        <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}}"/>
+        <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}"/>
         <Picker Title="Genre"
                 ItemsSource="{Binding Genre}"
                 SelectedItem="{Binding SelectedGenre, Mode=OneWayToSource}"/>
       </StackLayout>
     </ScrollView>
-    <Button BackgroundColor="Green" Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search"/>
+    <Button BackgroundColor="#fcca01" Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search"/>
     <Button BackgroundColor="Red" Command="{Binding GoBackCommand}" Margin="32, 2" Text="Cancel"/>
   </StackLayout>
 </mvx:MvxContentPage>

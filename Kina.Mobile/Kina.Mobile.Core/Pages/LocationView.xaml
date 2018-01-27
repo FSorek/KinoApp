@@ -34,14 +34,18 @@
     </ResourceDictionary>
   </ContentPage.Resources>
   <StackLayout BackgroundColor="#404040">
-    <StackLayout Orientation="Horizontal">
-      <Picker x:Name="LocationPicker"
-         Title="Choose location"
-         ItemsSource="{Binding Location}"
-         SelectedItem="{Binding SelectedLocation, Mode=OneWayToSource}"
-         HorizontalOptions="FillAndExpand"/>
-      <Button Scale=".5" FontSize="15" Text="Go" Command="{Binding ConfimrLocationCommand}" WidthRequest="64.0" Style="{StaticResource CityTitle}" Margin="2, 2"/>
+    <StackLayout Orientation="Vertical">
+
+      <Slider x:Name="slider2"
+              Minimum="0"
+              Maximum="100"
+              MinimumWidthRequest="60"
+              Value="{Binding Distance}" />
+        <Label Text="{Binding Distance}" />
+      <Button Scale=".5" FontSize="15" Text="Go" Command="{Binding ConfirmLocationCommand}" WidthRequest="64.0" Style="{StaticResource CityTitle}" Margin="2, 2"/>
     </StackLayout>
-    <Button Scale=".5" FontSize="15" Image="Pin.png" Text="Share Your Location" Command="{Binding AutoLocateCommand}" Style="{StaticResource CityTitle}" Margin="5"/>
+    <Button Scale=".5" FontSize="15" Image="PinBlack.png" Text="Clear location tracking" Command="{Binding AutoLocateCommand}" Style="{StaticResource CityTitle}" Margin="5"/>
+      <Label Text="{Binding Lat}" Margin="2, 0" MinimumWidthRequest="40"/>
+      <Label Text="{Binding Lng}" Margin="2, 0" MinimumWidthRequest="40"/>
   </StackLayout>
 </mvx:MvxContentPage>

@@ -1,20 +1,23 @@
-﻿using CoreMultikinoJson;
-using MvvmCross.Core.Navigation;
+﻿using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using DataModel;
+using Kina.Mobile.Core.Model;
+using Kina.Mobile.Core.Services;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    class FilterViewModel : MvxViewModel<Showing>
+    class FilterViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IAppSettings _settings;
 
         private MvxAsyncCommand _goToShowsPageCommandCommand;
         private MvxAsyncCommand _goBackCommandCommand;
 
-        private Showing _parameter;
+        private List<Genre> genre;
 
         public IMvxAsyncCommand GoToShowsPageCommand => _goToShowsPageCommandCommand;
         public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
@@ -26,48 +29,52 @@ namespace Kina.Mobile.Core.ViewModels
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
-        //public FilterViewModel(IMvxNavigationService navigationService)
-        //{
-        //    _navigationService = navigationService;
-
-        //    InitCommands();
-
-        //    // Temporary hardcoded list
-        //    Genre = new List<string>();
-        //    Genre.Add("Horror");
-        //    Genre.Add("Fantasy");
-        //    Genre.Add("Sci-Fi");
-
-        //}
-
-        public FilterViewModel(IMvxNavigationService navigationService)
+        public FilterViewModel(IMvxNavigationService navigationService, IAppSettings settings)
         {
             _navigationService = navigationService;
+            _settings = settings;
 
             InitCommands();
 
-            // Temporary hardcoded list
+            GetGenres();
+
             Genre = new List<string>();
-            Genre.Add("Horror");
-            Genre.Add("Fantasy");
-            Genre.Add("Sci-Fi");
 
-        }
-
-        public override Task Initialize(Showing parameter)
-        {
-            _parameter = parameter;
-            // return base.Initialize();
-            return Task.FromResult(true);
+            foreach(var g in genre)
+            {
+                Genre.Add(g.EngName);
+            }
         }
 
         private async Task GoToShowsPageAction()
         {
-            await _navigationService.Navigate<ShowsViewModel>();
+            if (SelectedGenre != null)
+            {
+                foreach (var g in genre)
+                {
+                    if (SelectedGenre.ToLower().Equals(g.EngName.ToLower()))
+                    {
+                        MvxApp.FilterSettings.Genre = g;
+                    }
+                }
+            }
+            if(StartTime != null)
+            {
+                MvxApp.FilterSettings.Start = StartTime.ToString(@"h\:mm");
+            }
+            if(EndTime != null)
+                MvxApp.FilterSettings.End = EndTime.ToString(@"h\:mm");
+            if(Title != null)
+            {
+                MvxApp.FilterSettings.Title = Title;
+            }
+            MvxApp.UsingFilter = true;
+            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
         }
 
         private async Task GoBackAction()
         {
+            MvxApp.UsingFilter = false;
             await _navigationService.Close(this);
         }
 
@@ -75,6 +82,16 @@ namespace Kina.Mobile.Core.ViewModels
         {
             _goToShowsPageCommandCommand = new MvxAsyncCommand(GoToShowsPageAction);
             _goBackCommandCommand = new MvxAsyncCommand(GoBackAction);
+        }
+
+        private void GetGenres()
+        {
+            Task.Run(() => GetGenreAsync()).Wait();
+        }
+
+        private async Task GetGenreAsync()
+        {
+            genre = await MvxApp.Database.GetGenreAsync();
         }
     }
 }
