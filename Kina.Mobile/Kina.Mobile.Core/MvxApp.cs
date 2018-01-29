@@ -4,9 +4,7 @@
 // ---------------------------------------------------------------
 
 using Acr.UserDialogs;
-using DataModel;
 using Kina.Mobile.Core.Model;
-using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Helpers;
 using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.ViewModels;
@@ -14,12 +12,11 @@ using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.Json;
-using MvvmCross.Plugins.Location;
 using Xamarin.Forms;
 
 namespace Kina.Mobile.Core
 {
-	public class MvxApp : MvxApplication
+    public class MvxApp : MvxApplication
 	{
         static KinaMobileDatabase _database;
 
@@ -57,7 +54,7 @@ namespace Kina.Mobile.Core
             FilterSettings = new FilterSet();
             Resources.AppResources.Culture = Mvx.Resolve<Services.ILocalizeService>().GetCurrentCultureInfo();
 
-			RegisterAppStart<ViewModels.ShowsViewModel>();
+			RegisterAppStart<ViewModels.LocationInitViewModel>();
 		}
 	}
 }
