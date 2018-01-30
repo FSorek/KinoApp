@@ -5,47 +5,16 @@
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
              Title="Location">
-  <ContentPage.Resources>
-    <ResourceDictionary>
-      <Style x:Key="CityTitle" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#fcca01"/>
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="BorderRadius" Value="10"/>
-        <Setter Property="FontSize" Value="12" />
-      </Style>
-      <Style x:Key="CityHeader" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#404040"/>
-        <Setter Property="TextColor" Value="Orange" />
-        <Setter Property="BorderRadius" Value="0"/>
-        <Setter Property="FontSize" Value="9" />
-      </Style>
-      <Style x:Key="CityText" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#404040"/>
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="BorderRadius" Value="0"/>
-        <Setter Property="FontSize" Value="9" />
-      </Style>
-      <Style x:Key="MultiHeader" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#404040"/>
-        <Setter Property="TextColor" Value="Magenta" />
-        <Setter Property="BorderRadius" Value="0"/>
-        <Setter Property="FontSize" Value="9" />
-      </Style>
-    </ResourceDictionary>
-  </ContentPage.Resources>
-  <StackLayout BackgroundColor="#404040">
-    <StackLayout Orientation="Vertical">
-
+  <StackLayout VerticalOptions="Center">
+    <StackLayout>
+      <Label Text="{Binding DistanceLabel}" />
       <Slider x:Name="slider2"
               Minimum="0"
               Maximum="100"
               MinimumWidthRequest="60"
               Value="{Binding Distance}" />
-        <Label Text="{Binding Distance}" />
-      <Button Scale=".5" FontSize="15" Text="Go" Command="{Binding ConfirmLocationCommand}" WidthRequest="64.0" Style="{StaticResource CityTitle}" Margin="2, 2"/>
+      <Button FontSize="12" Text="Go" Command="{Binding ConfirmLocationCommand}" BorderRadius="25" Margin="2" BackgroundColor="#fcca01" TextColor="Black"/>
     </StackLayout>
-    <Button Scale=".5" FontSize="15" Image="PinBlack.png" Text="Clear location tracking" Command="{Binding AutoLocateCommand}" Style="{StaticResource CityTitle}" Margin="5"/>
-      <Label Text="{Binding Lat}" Margin="2, 0" MinimumWidthRequest="40"/>
-      <Label Text="{Binding Lng}" Margin="2, 0" MinimumWidthRequest="40"/>
+    <Button FontSize="12" Image="PinBlack.png" Text="Clear location tracking" Command="{Binding AutoLocateCommand}" BorderRadius="25" Margin="5" BackgroundColor="#fcca01" TextColor="Black"/>
   </StackLayout>
 </mvx:MvxContentPage>

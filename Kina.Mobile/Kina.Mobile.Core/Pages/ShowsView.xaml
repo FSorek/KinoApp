@@ -99,8 +99,8 @@
       </StackLayout>
     </ScrollView>
     <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
-        <Button Image="PinBlack.png" Command="{Binding GoToLocationViewCommand}" Style="{StaticResource FilterButton}" Margin="20" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
-        <Button Image="Filter.png" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource FilterButton}" Margin="20" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
+        <Button Image="PinBlack.png" Command="{Binding GoToLocationViewCommand}" Style="{StaticResource FilterButton}" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
+        <Button Image="Filter.png" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource FilterButton}" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
     </StackLayout>
   </StackLayout>
 </mvx:MvxContentPage>

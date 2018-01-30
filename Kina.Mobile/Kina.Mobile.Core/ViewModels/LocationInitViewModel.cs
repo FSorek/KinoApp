@@ -41,7 +41,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         public string RangeText
         {
-            get { return String.Format("When using the device's location, find cinemas within {0} km.", distance); }
+            get { return String.Format("Using the device's location, find cinemas at a distance of about {0} km.", distance); }
         }
 
         public int Distance
