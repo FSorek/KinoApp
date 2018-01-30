@@ -89,7 +89,7 @@ namespace Kina.Mobile.Core.ViewModels
                 Mvx.Resolve<IUserDialogs>().Alert("Your device was not able to detect proper location. Please provide your location for this session manually.");
                 return;
             }
-            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private void InitCommands()

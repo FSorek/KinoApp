@@ -39,7 +39,7 @@
             </Style>
         </ResourceDictionary>
     </ContentPage.Resources>
-    <StackLayout BackgroundColor="#404040">
+    <StackLayout>
         <StackLayout VerticalOptions="CenterAndExpand">
             <StackLayout Orientation="Horizontal">
                 <Picker x:Name="LocationPicker"

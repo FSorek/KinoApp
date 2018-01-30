@@ -182,7 +182,7 @@ namespace Kina.Mobile.Core.ViewModels
                             score /= i;
                         }
                     }
-                    movies.Add(new ShowsMovieModel(m, score, _navigationService, _parameter, _settings));
+                    movies.Add(new ShowsMovieModel(m, score, _navigationService, _parameter, _settings, cinemaName));
                 }
             }
 

@@ -9,7 +9,7 @@
              xmlns:mod="clr-namespace:Kina.Mobile.Core.Model;assembly=Kina.Mobile.Core"
              xmlns:dpm="clr-namespace:DataModel;assembly=Kina.Mobile.DataProvider"
              Title="Shows"
-             BackgroundImage="splash.png">
+             BackgroundImage="darkersplash.png">
   <ContentPage.Resources>
     <ResourceDictionary>
       <Style x:Key="CityTitle" TargetType="Button">
@@ -39,10 +39,9 @@
                     <xlf:RepeaterView.ItemTemplate>
                       <DataTemplate>
                         <ContentView Padding="4, 2">
-                          <!--TAP RECOGNIZER-->
                           <ContentView.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoToScoreViewCommand}"/>
-                          </ContentView.GestureRecognizers>-->
+                          </ContentView.GestureRecognizers>
                           <Grid RowSpacing="0">
                             <Grid.ColumnDefinitions>
                               <ColumnDefinition Width="*"/>
@@ -56,7 +55,11 @@
                               <RowDefinition Height="*"/>
                               <RowDefinition Height="25"/>
                             </Grid.RowDefinitions>
-                            <BoxView BackgroundColor="DarkGray" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="6" Opacity="0.25"/>
+                            <BoxView BackgroundColor="DarkGray" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="6" Opacity="0.25">
+                              <BoxView.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoToScoreViewCommand}"/>
+                              </BoxView.GestureRecognizers>
+                            </BoxView>
                             <Button Text = "{Binding Title}" Grid.Row="0" Grid.Column ="0"
                                     Command ="{Binding GoToMovieViewCommand}" BackgroundColor="Transparent" BorderRadius="25" FontSize="12" BorderWidth="0.5" BorderColor="#fcca01" Margin="2"/>
                             <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
