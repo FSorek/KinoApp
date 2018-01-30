@@ -8,7 +8,8 @@
              xmlns:pvm="clr-namespace:Kina.Mobile.Core.ViewModels;assembly=Kina.Mobile.Core"
              xmlns:mod="clr-namespace:Kina.Mobile.Core.Model;assembly=Kina.Mobile.Core"
              xmlns:dpm="clr-namespace:DataModel;assembly=Kina.Mobile.DataProvider"
-             Title="Shows">
+             Title="Shows"
+             BackgroundImage="splash.png">
   <ContentPage.Resources>
     <ResourceDictionary>
       <Style x:Key="CityTitle" TargetType="Button">
@@ -26,7 +27,7 @@
     </ResourceDictionary>
   </ContentPage.Resources>
   <StackLayout>
-    <ScrollView BackgroundColor="#404040">
+    <ScrollView>
       <StackLayout>
         <xlf:RepeaterView x:TypeArguments="mod:MovieList" ItemsSource="{Binding ShowsList}">
           <xlf:RepeaterView.ItemTemplate>
@@ -37,7 +38,7 @@
                   <xlf:RepeaterView x:TypeArguments="pvm:ShowsMovieModel" ItemsSource="{Binding Movies}">
                     <xlf:RepeaterView.ItemTemplate>
                       <DataTemplate>
-                        <ContentView>
+                        <ContentView Padding="4, 2">
                           <!--TAP RECOGNIZER-->
                           <ContentView.GestureRecognizers>
                             <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoToScoreViewCommand}"/>
@@ -53,10 +54,11 @@
                             </Grid.ColumnDefinitions>
                             <Grid.RowDefinitions>
                               <RowDefinition Height="*"/>
-                              <RowDefinition Height="*"/>
+                              <RowDefinition Height="25"/>
                             </Grid.RowDefinitions>
+                            <BoxView BackgroundColor="DarkGray" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="6" Opacity="0.25"/>
                             <Button Text = "{Binding Title}" Grid.Row="0" Grid.Column ="0"
-                                    Style="{StaticResource CityTitle}" Command ="{Binding GoToMovieViewCommand}"/>
+                                    Command ="{Binding GoToMovieViewCommand}" BackgroundColor="Transparent" BorderRadius="25" FontSize="12" BorderWidth="0.5" BorderColor="#fcca01" Margin="2"/>
                             <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
                             <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
                                    IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
@@ -93,7 +95,7 @@
         </xlf:RepeaterView>
       </StackLayout>
     </ScrollView>
-    <StackLayout Orientation="Horizontal">
+    <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
         <Button Image="PinBlack.png" Command="{Binding GoToLocationViewCommand}" Style="{StaticResource FilterButton}" Margin="20" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
         <Button Image="Filter.png" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource FilterButton}" Margin="20" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
     </StackLayout>
