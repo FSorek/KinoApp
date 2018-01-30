@@ -4,8 +4,6 @@ using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
-using System.Text;
 using System.Threading.Tasks;
 using System.Windows.Input;
 using DataModel;
@@ -23,6 +21,8 @@ namespace Kina.Mobile.Core.ViewModels
         private MvxAsyncCommand _autoLocateCommandCommand;
 
         private List<string> location;
+
+        public string DistanceLabel { get { return String.Format("Using the device's location, find cinemas at a distance of about {0} km.", distance); } }
 
         private int distance;
 
