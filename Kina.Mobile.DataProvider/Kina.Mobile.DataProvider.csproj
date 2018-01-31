@@ -38,7 +38,6 @@
   <ItemGroup>
     <Compile Include="Helpers\IFileHelper.cs" />
     <Compile Include="Models\AccessModels\City.cs" />
-    <Compile Include="Models\AccessModels\MovieListAccessModel.cs" />
     <Compile Include="Models\Cinema.cs" />
     <Compile Include="Models\CinemaType.cs" />
     <Compile Include="Models\Movie.cs" />
