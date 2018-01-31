@@ -1,7 +1,7 @@
 ﻿using Acr.UserDialogs;
-using DataModel;
 using Kina.Mobile.Core.Model;
 using Kina.Mobile.Core.Services;
+using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
@@ -9,7 +9,6 @@ using MvvmCross.Plugins.Messenger;
 using System;
 using System.Collections.Generic;
 using System.Diagnostics;
-using System.Linq;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
@@ -28,7 +27,7 @@ namespace Kina.Mobile.Core.ViewModels
         private double _latitude;
         private string selectedLocation;
         private int distance;
-        private Dictionary<string, Cinema> location;
+        private List<string> location;
 
         public ICommand ConfirmLocationCommand => _confirmLocationCommandCommand;
         public ICommand AutoLocateCommand => _autoLocateCommandCommand;
@@ -52,7 +51,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         public List<string> Location
         {
-            get { return location.Keys.ToList(); }
+            get { return location; }
         }
 
         public LocationInitViewModel(IMvxNavigationService navigationService, ILocationService locationService, IMvxMessenger messenger)
@@ -60,10 +59,10 @@ namespace Kina.Mobile.Core.ViewModels
             _navigationService = navigationService;
             _token = messenger.SubscribeOnMainThread<LocationMessage>(OnLocationMessage);
 
-            location = new Dictionary<string, Cinema>();
-            #region Temporary hardcoded content
-            location.Add("Rumia", new Cinema());
-            #endregion
+            DataRequest dataRequest = new DataRequest();
+            location = dataRequest.CityList;
+            GetLocations(dataRequest);
+            location = dataRequest.CityList;
 
             InitCommands();
         }
@@ -76,6 +75,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task ConfirmLocationAction()
         {
+            MvxApp.FilterSettings.City = selectedLocation;
             await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
         }
 
@@ -90,6 +90,11 @@ namespace Kina.Mobile.Core.ViewModels
                 return;
             }
             await _navigationService.Navigate<ShowsViewModel>();
+        }
+
+        private void GetLocations(DataRequest dataRequest)
+        {
+            Task.Run(() => dataRequest.ProvideCities()).Wait();
         }
 
         private void InitCommands()

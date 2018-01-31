@@ -3,7 +3,7 @@
 // <url>https://www.linkedin.com/in/pauldatsyuk/</url>
 // ---------------------------------------------------------------
 
-using DataModel;
+using Kina.Mobile.DataProvider.Models;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;

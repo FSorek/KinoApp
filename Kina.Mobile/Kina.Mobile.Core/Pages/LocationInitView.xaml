@@ -48,7 +48,7 @@
             SelectedItem="{Binding SelectedLocation, Mode=OneWayToSource}"
             HorizontalOptions="FillAndExpand"/>
         <Button Text="Go"
-            Command="{Binding ConfimrLocationCommand}"
+            Command="{Binding ConfirmLocationCommand}"
             Style="{StaticResource FilterButton}"
             WidthRequest="50.0"
             HeightRequest="50.0"

@@ -1,7 +1,7 @@
 ﻿using CoreMultikinoJson;
-using DataModel;
 using Kina.Mobile.Core.Model;
 using Kina.Mobile.Core.Services;
+using Kina.Mobile.DataProvider.Models;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
@@ -24,7 +24,7 @@ namespace Kina.Mobile.Core.ViewModels
         private Movie movie;
 
         private bool[] isStarred;
-        private string movieID;
+        private long movieID;
         private string title;
         private string cinemaName;
 
@@ -51,7 +51,7 @@ namespace Kina.Mobile.Core.ViewModels
             get { return isStarred[4]; }
         }
 
-        public string MovieID
+        public long MovieID
         {
             get { return movieID; }
             set { movieID = value; }
@@ -73,8 +73,8 @@ namespace Kina.Mobile.Core.ViewModels
         {
             _settings = settings;
             var date = DateTime.Today.Date;
-            movieID = movie.Id_Movie;
-            title = movie.Name;
+            movieID = movie.Id;
+            title = movie.OriginalName;
             shows = new List<Show>();
             this.cinemaName = cinemaName;
             foreach(Show s in movie.Shows)

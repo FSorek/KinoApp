@@ -3,10 +3,10 @@ using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
-using DataModel;
 using Kina.Mobile.Core.Services;
 using MvvmCross.Platform;
 using Acr.UserDialogs;
+using Kina.Mobile.DataProvider.Models;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -22,8 +22,8 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
 
         private Movie _parameter;
-        private int cinemaID;
-        private string movieID;
+        private long cinemaID;
+        private long movieID;
 
         public int ScreenRate { get; set; }
         public int SeatsRate { get; set; }
@@ -89,8 +89,8 @@ namespace Kina.Mobile.Core.ViewModels
         {
             _parameter = parameter;
             Show show = _parameter.Shows[0];
-            cinemaID = show.Id_Cinema;
-            movieID = parameter.Id_Movie;
+            cinemaID = show.IdCinema;
+            movieID = parameter.Id;
             return Task.FromResult(true);
         }
     }
