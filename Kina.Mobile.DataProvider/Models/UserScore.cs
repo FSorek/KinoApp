@@ -1,11 +1,6 @@
 ﻿using SQLite;
-using System;
-using System.Collections.Generic;
-using System.Linq;
-using System.Text;
-using System.Threading.Tasks;
 
-namespace DataModel
+namespace Kina.Mobile.DataProvider.Models
 {
     [Table("UserScore")]
     public class UserScore
@@ -25,8 +20,8 @@ namespace DataModel
         public int Cleanliness { get; set; }
 
         [Column("Id_Cinema")]
-        public int Id_Cinema { get; set; }
+        public long Id_Cinema { get; set; }
         [Column("Id_Movie")]
-        public string Id_Movie { get; set; }
+        public long Id_Movie { get; set; }
     }
 }
