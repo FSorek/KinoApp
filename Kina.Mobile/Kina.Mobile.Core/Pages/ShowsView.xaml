@@ -6,8 +6,10 @@
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
              xmlns:xlf="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              xmlns:pvm="clr-namespace:Kina.Mobile.Core.ViewModels;assembly=Kina.Mobile.Core"
+             xmlns:mod="clr-namespace:Kina.Mobile.Core.Model;assembly=Kina.Mobile.Core"
              xmlns:dpm="clr-namespace:DataModel;assembly=Kina.Mobile.DataProvider"
-             Title="Shows">
+             Title="Shows"
+             BackgroundImage="darkersplash.png">
   <ContentPage.Resources>
     <ResourceDictionary>
       <Style x:Key="CityTitle" TargetType="Button">
@@ -22,88 +24,83 @@
         <Setter Property="BorderRadius" Value="25"/>
         <Setter Property="FontSize" Value="12" />
       </Style>
-      <Style x:Key="CityHeader" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#404040"/>
-        <Setter Property="TextColor" Value="Orange" />
-        <Setter Property="BorderRadius" Value="0"/>
-        <Setter Property="FontSize" Value="9" />
-      </Style>
-      <Style x:Key="CityText" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#404040"/>
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="BorderRadius" Value="0"/>
-        <Setter Property="FontSize" Value="9" />
-      </Style>
-      <Style x:Key="MultiHeader" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#404040"/>
-        <Setter Property="TextColor" Value="Magenta" />
-        <Setter Property="BorderRadius" Value="0"/>
-        <Setter Property="FontSize" Value="9" />
-      </Style>
     </ResourceDictionary>
   </ContentPage.Resources>
-  <StackLayout BackgroundColor="#404040">
+  <StackLayout>
     <ScrollView>
       <StackLayout>
-        <xlf:RepeaterView x:TypeArguments="pvm:ShowsMovieModel" ItemsSource="{Binding Movies}">
+        <xlf:RepeaterView x:TypeArguments="mod:MovieList" ItemsSource="{Binding ShowsList}">
           <xlf:RepeaterView.ItemTemplate>
             <DataTemplate>
               <ContentView>
-                <!--TAP RECOGNIZER-->
-                <ContentView.GestureRecognizers>
-                  <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoToScoreViewCommand}"/>
-                </ContentView.GestureRecognizers>-->
-                <Grid RowSpacing="0">
-                  <Grid.ColumnDefinitions>
-                    <ColumnDefinition Width="*"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="14"/>
-                    <ColumnDefinition Width="14"/>
-                  </Grid.ColumnDefinitions>
-                  <Grid.RowDefinitions>
-                    <RowDefinition Height="*"/>
-                    <RowDefinition Height="*"/>
-                  </Grid.RowDefinitions>
-                  <Button Text = "{Binding Title}" Grid.Row="0" Grid.Column ="0"
-                          Style="{StaticResource CityTitle}" Command ="{Binding GoToMovieViewCommand}"/>
-                  <!--Leaving it in source code just for my own convenience-->
-                  <!--<Label Text="{Binding Title}" Grid.Column="0" Grid.Row="0""/>-->
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
-                         IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="2"/>
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
-                         IsVisible="{Binding IsStarredTwo}" Grid.Row="0" Grid.Column="2"/>
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="3"/>
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
-                         IsVisible="{Binding IsStarredThree}" Grid.Row="0" Grid.Column="3"/>
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="4"/>
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
-                         IsVisible="{Binding IsStarredFour}" Grid.Row="0" Grid.Column="4"/>
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="5"/>
-                  <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
-                         IsVisible="{Binding IsStarredFive}" Grid.Row="0" Grid.Column="5"/>
-                  <ScrollView Orientation="Horizontal"  Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
-                    <xlf:RepeaterView x:TypeArguments="dpm:Show" ItemsSource="{Binding Shows}" Orientation="Horizontal">
-                      <xlf:RepeaterView.ItemTemplate>
-                        <DataTemplate>
-                          <Label Text="{Binding Start}" Margin="2, 0" MinimumWidthRequest="40"/>
-                        </DataTemplate>
-                      </xlf:RepeaterView.ItemTemplate>
-                    </xlf:RepeaterView>
-                  </ScrollView>
-                </Grid>
+                <StackLayout>
+                  <Label Text="{Binding CinemaName}" BackgroundColor="{Binding CinemaColor}"/>
+                  <xlf:RepeaterView x:TypeArguments="pvm:ShowsMovieModel" ItemsSource="{Binding Movies}">
+                    <xlf:RepeaterView.ItemTemplate>
+                      <DataTemplate>
+                        <ContentView Padding="4, 2">
+                          <ContentView.GestureRecognizers>
+                            <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoToScoreViewCommand}"/>
+                          </ContentView.GestureRecognizers>
+                          <Grid RowSpacing="0">
+                            <Grid.ColumnDefinitions>
+                              <ColumnDefinition Width="*"/>
+                              <ColumnDefinition Width="14"/>
+                              <ColumnDefinition Width="14"/>
+                              <ColumnDefinition Width="14"/>
+                              <ColumnDefinition Width="14"/>
+                              <ColumnDefinition Width="14"/>
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                              <RowDefinition Height="*"/>
+                              <RowDefinition Height="25"/>
+                            </Grid.RowDefinitions>
+                            <BoxView BackgroundColor="DarkGray" Grid.Row="0" Grid.Column="0" Grid.RowSpan="2" Grid.ColumnSpan="6" Opacity="0.25">
+                              <BoxView.GestureRecognizers>
+                                <TapGestureRecognizer NumberOfTapsRequired="1" Command="{Binding GoToScoreViewCommand}"/>
+                              </BoxView.GestureRecognizers>
+                            </BoxView>
+                            <Button Text = "{Binding Title}" Grid.Row="0" Grid.Column ="0"
+                                    Command ="{Binding GoToMovieViewCommand}" BackgroundColor="Transparent" BorderRadius="25" FontSize="12" BorderWidth="0.5" BorderColor="#fcca01" Margin="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                                   IsVisible="{Binding IsStarredOne}" Grid.Row="0" Grid.Column="1"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                                   IsVisible="{Binding IsStarredTwo}" Grid.Row="0" Grid.Column="2"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                                   IsVisible="{Binding IsStarredThree}" Grid.Row="0" Grid.Column="3"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                                   IsVisible="{Binding IsStarredFour}" Grid.Row="0" Grid.Column="4"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineMicro.png}" Grid.Row="0" Grid.Column="5"/>
+                            <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedMicro.png}"
+                                   IsVisible="{Binding IsStarredFive}" Grid.Row="0" Grid.Column="5"/>
+                            <ScrollView Orientation="Horizontal"  Grid.Column="0" Grid.ColumnSpan="6" Grid.Row="1">
+                              <xlf:RepeaterView x:TypeArguments="dpm:Show" ItemsSource="{Binding Shows}" Orientation="Horizontal">
+                                <xlf:RepeaterView.ItemTemplate>
+                                  <DataTemplate>
+                                    <Label Text="{Binding Start}" Margin="2, 0" MinimumWidthRequest="40"/>
+                                  </DataTemplate>
+                                </xlf:RepeaterView.ItemTemplate>
+                              </xlf:RepeaterView>
+                            </ScrollView>
+                          </Grid>
+                        </ContentView>
+                      </DataTemplate>
+                    </xlf:RepeaterView.ItemTemplate>
+                  </xlf:RepeaterView>
+                </StackLayout>
               </ContentView>
             </DataTemplate>
           </xlf:RepeaterView.ItemTemplate>
         </xlf:RepeaterView>
       </StackLayout>
     </ScrollView>
-      <StackLayout Orientation="Horizontal">
-          <Button Image="PinBlack.png" Command="{Binding GoToLocationViewCommand}" Style="{StaticResource FilterButton}" Margin="20" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
-          <Button Image="Filter.png" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource FilterButton}" Margin="20" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
-      </StackLayout>
+    <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
+        <Button Image="PinBlack.png" Command="{Binding GoToLocationViewCommand}" Style="{StaticResource FilterButton}" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
+        <Button Image="Filter.png" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource FilterButton}" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
+    </StackLayout>
   </StackLayout>
 </mvx:MvxContentPage>

@@ -45,10 +45,15 @@
     <Compile Include="Model\FilterSet.cs" />
     <Compile Include="Model\JsonReader.cs" />
     <Compile Include="Model\LocalizationSettings.cs" />
+    <Compile Include="Model\MovieDataSet.cs" />
     <Compile Include="Model\MovieList.cs" />
     <Compile Include="Model\ScoreRow.cs" />
     <Compile Include="Pages\FilterView.xaml.cs">
       <DependentUpon>FilterView.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="Pages\LocationInitView.xaml.cs">
+      <DependentUpon>LocationInitView.xaml</DependentUpon>
+      <SubType>Code</SubType>
     </Compile>
     <Compile Include="Pages\LocationView.xaml.cs">
       <DependentUpon>LocationView.xaml</DependentUpon>
@@ -106,6 +111,7 @@
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
+    <Compile Include="ViewModels\LocationInitViewModel.cs" />
     <Compile Include="ViewModels\LocationViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
@@ -216,6 +222,10 @@
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
+    <EmbeddedResource Include="Pages\LocationInitView.xaml">
+      <SubType>Designer</SubType>
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+    </EmbeddedResource>
     <EmbeddedResource Include="Resources\AppResources.ua-UK.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.ua-UK.Designer.cs</LastGenOutput>

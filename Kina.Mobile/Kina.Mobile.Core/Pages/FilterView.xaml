@@ -8,17 +8,17 @@
   <StackLayout>
     <ScrollView>
       <StackLayout>
-        <Entry Placeholder="Title" Text="{Binding Title}"/>
-        <Label Text="Start"/>
-        <TimePicker Format="HH\:mm" Time="{Binding StartTime, Mode=OneWayToSource}"/>
-        <Label Text="End"/>
-        <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}"/>
+        <Entry Placeholder="Title" Text="{Binding Title}" Margin="2"/>
+        <Label Text="Start" Margin="2"/>
+        <TimePicker Format="HH\:mm" Time="{Binding StartTime, Mode=OneWayToSource}" Margin="2"/>
+        <Label Text="End" Margin="2"/>
+        <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}" Margin="2"/>
         <Picker Title="Genre"
                 ItemsSource="{Binding Genre}"
                 SelectedItem="{Binding SelectedGenre, Mode=OneWayToSource}"/>
       </StackLayout>
     </ScrollView>
-    <Button BackgroundColor="#fcca01" Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search"/>
-    <Button BackgroundColor="Red" Command="{Binding GoBackCommand}" Margin="32, 2" Text="Cancel"/>
+    <Button BackgroundColor="#fcca01" Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search" FontSize="12" TextColor="Black" BorderRadius="25"/>
+    <Button BackgroundColor="Red" Command="{Binding GoBackCommand}" Margin="32, 2" Text="Cancel" FontSize="12" BorderRadius="25"/>
   </StackLayout>
 </mvx:MvxContentPage>
