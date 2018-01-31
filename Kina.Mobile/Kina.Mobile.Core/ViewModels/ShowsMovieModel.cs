@@ -26,6 +26,7 @@ namespace Kina.Mobile.Core.ViewModels
         private bool[] isStarred;
         private string movieID;
         private string title;
+        private string cinemaName;
 
         private List<Show> shows;
 
@@ -68,13 +69,14 @@ namespace Kina.Mobile.Core.ViewModels
             set { shows = value; }
         }
 
-        public ShowsMovieModel(Movie movie, double rating, IMvxNavigationService navigationService, FilterSet parameter, IAppSettings settings)
+        public ShowsMovieModel(Movie movie, double rating, IMvxNavigationService navigationService, FilterSet parameter, IAppSettings settings, string cinemaName)
         {
             _settings = settings;
             var date = DateTime.Today.Date;
             movieID = movie.Id_Movie;
             title = movie.Name;
             shows = new List<Show>();
+            this.cinemaName = cinemaName;
             foreach(Show s in movie.Shows)
             {
                 bool check = true;
@@ -111,10 +113,10 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToScoreViewAction()
         {
-            Movie parameter = movie;
+            MovieDataSet parameter = new MovieDataSet(movie, cinemaName);
             MvxApp.UsingFilter = false;
             MvxApp.FilterSettings.ClearFilter();
-            await _navigationService.Navigate<ScoreViewModel, Movie>(parameter);
+            await _navigationService.Navigate<ScoreViewModel, MovieDataSet>(parameter);
         }
 
         private void InitCommands()

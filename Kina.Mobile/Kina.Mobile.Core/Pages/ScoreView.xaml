@@ -7,10 +7,10 @@
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
              xmlns:xlf="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
              Title="Detailed score">
-    <StackLayout BackgroundColor="#404040">
+    <StackLayout>
       <!--HEADER LABEL-->
-      <Label Text="{Binding HeaderLabel}" BackgroundColor="#fcca01" TextColor="Black" FontSize="18"/>
-      <xlf:RepeaterView x:TypeArguments="mod:ScoreRow" ItemsSource="{Binding ScoreRows}">
+      <Label Text="{Binding HeaderLabel}" BackgroundColor="#fcca01" TextColor="Black"/>
+      <xlf:RepeaterView x:TypeArguments="mod:ScoreRow" ItemsSource="{Binding ScoreRows}" VerticalOptions="Center">
         <xlf:RepeaterView.ItemTemplate>
           <DataTemplate>
               <Grid RowSpacing="0">
@@ -46,11 +46,6 @@
           </DataTemplate>
         </xlf:RepeaterView.ItemTemplate>
       </xlf:RepeaterView>
-      <StackLayout Orientation="Horizontal">
-        <Label FontSize="14" Text="Our users have scored this show"
-          HorizontalOptions="Start" VerticalOptions="Center"/>
-      <Label HorizontalOptions="FillAndExpand" Text="{Binding FooterLabel}" FontAttributes="Bold" TextColor="#fcca01" WidthRequest="20"/>
-        <Label HorizontalOptions="FillAndExpand" Text="times."/>
-      </StackLayout>
+        <Label Text="{Binding FooterLabel}"/>
     </StackLayout>
 </mvx:MvxContentPage>

@@ -7,6 +7,7 @@ using System;
 using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -31,6 +32,8 @@ namespace Kina.Mobile.Core.ViewModels
             get { return movies; }
             set { SetProperty(ref movies, value); }
         }
+
+        public List<Model.MovieList> ShowsList { get; set; }
 
         public List<Movie> AddMovies(DataRequestService dbReq, String cinemaType, int cinemaId)
         {
@@ -89,22 +92,41 @@ namespace Kina.Mobile.Core.ViewModels
         public void FillWithData()
         {
             DataRequestService dataRequestService = new DataRequestService();
+            ShowsList = new List<Model.MovieList>();
 
-            List<Movie> movieList = new List<Movie>();
+            List<Movie> movieList;
 
             if (MvxApp.FilterSettings.Cinemas != null)
             {
                 foreach (var cinema in MvxApp.FilterSettings.Cinemas)
                 {
+                    movieList = new List<Movie>();
                     movieList.AddRange(AddMovies(dataRequestService, cinema.CinemaType, cinema.Id_Self));
+                    CinemaType type = CinemaType.cinemacity;
+                    switch (cinema.CinemaType)
+                    {
+                        case "Multikino": type = CinemaType.multikino; break;
+                        case "CinemaCity": type = CinemaType.cinemacity; break;
+                    }
+                    ProcessMovies(movieList, String.Format("{0} - {1}", cinema.CinemaType, cinema.City), type);
                 }
             }
             else
             {
+                movieList = new List<Movie>();
                 movieList.AddRange(AddMovies(dataRequestService, "Multikino", 12));
+                ProcessMovies(movieList, "Multikino - Sopot", CinemaType.multikino);
+                movieList = new List<Movie>();
                 movieList.AddRange(AddMovies(dataRequestService, "Multikino", 14));
-                movieList.AddRange(AddMovies(dataRequestService, "CinemaCity", 1073));  
+                ProcessMovies(movieList, "Multikino - Warszawa", CinemaType.multikino);
+                movieList = new List<Movie>();
+                movieList.AddRange(AddMovies(dataRequestService, "CinemaCity", 1073));
+                ProcessMovies(movieList, "Krewetka", CinemaType.cinemacity);
             }
+        }
+
+        private void ProcessMovies(List<Movie> movieList, string cinemaName, CinemaType cinemaType)
+        {
             var today = DateTime.Today;
             movies = new List<ShowsMovieModel>();
 
@@ -160,9 +182,24 @@ namespace Kina.Mobile.Core.ViewModels
                             score /= i;
                         }
                     }
-                    movies.Add(new ShowsMovieModel(m, score, _navigationService, _parameter, _settings));
+                    movies.Add(new ShowsMovieModel(m, score, _navigationService, _parameter, _settings, cinemaName));
                 }
             }
+
+            ShowsList.Add(new Model.MovieList(cinemaName, movies, CinemaColor(cinemaType)));
+        }
+
+        private Color CinemaColor(CinemaType type)
+        {
+            Color cinemaColor = Color.Transparent;
+            switch (type)
+            {
+                default: break;
+                case CinemaType.cinemacity: cinemaColor = Color.OrangeRed; break;
+                case CinemaType.multikino: cinemaColor =  Color.MediumVioletRed; break;
+            }
+
+            return cinemaColor;
         }
 
         private void InitList(DataRequestService dataRequestService, CinemaType cinema, int cinema_id)
