@@ -85,13 +85,13 @@ namespace Kina.Mobile.Core.ViewModels
                 
             }
             MvxApp.FilterSettings.Cinemas = GetCinemasInRange(distance);
-            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private async Task AutoLocateAction()
         {
             MvxApp.FilterSettings.Cinemas = null;
-            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private void InitCommands()

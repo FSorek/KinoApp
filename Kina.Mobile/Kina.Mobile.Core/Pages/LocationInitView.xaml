@@ -56,7 +56,7 @@
       </StackLayout>
       <Label Text="{Binding RangeText}" Margin="8, 2" HorizontalOptions="Center"/>
       <Slider Minimum="0"
-              Maximum="100"
+              Maximum="50"
               MinimumWidthRequest="60"
               Value="{Binding Distance}"/>
       <Button Image="PinBlack.png" Text="Share Your Location"

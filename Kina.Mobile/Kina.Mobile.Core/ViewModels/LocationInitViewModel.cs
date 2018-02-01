@@ -76,25 +76,33 @@ namespace Kina.Mobile.Core.ViewModels
         private async Task ConfirmLocationAction()
         {
             MvxApp.FilterSettings.City = selectedLocation;
-            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
+            MvxApp.FilterSettings.Cinemas = null;
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private async Task AutoLocateAction()
         {
-            MvxApp.FilterSettings.Cinemas = null;
-            Debug.WriteLine(_latitude);
-            Debug.WriteLine(_longtitude);
             if (_latitude == 0 || _longtitude == 0)
             {
                 Mvx.Resolve<IUserDialogs>().Alert("Your device was not able to detect proper location. Please provide your location for this session manually.");
                 return;
             }
+
+            DataRequest dataRequest = new DataRequest();
+            GetCinemasInRange(dataRequest);
+            MvxApp.FilterSettings.Cinemas = dataRequest.CinemaList;
+            MvxApp.FilterSettings.City = null;
             await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private void GetLocations(DataRequest dataRequest)
         {
             Task.Run(() => dataRequest.ProvideCities()).Wait();
+        }
+
+        private void GetCinemasInRange(DataRequest dataRequest)
+        {
+            Task.Run(() => dataRequest.ProvideCinemasInRange(_latitude, _longtitude, distance)).Wait();
         }
 
         private void InitCommands()

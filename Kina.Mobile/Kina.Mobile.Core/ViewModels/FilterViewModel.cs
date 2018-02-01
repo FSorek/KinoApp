@@ -69,7 +69,7 @@ namespace Kina.Mobile.Core.ViewModels
                 MvxApp.FilterSettings.Title = Title;
             }
             MvxApp.UsingFilter = true;
-            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private async Task GoBackAction()
