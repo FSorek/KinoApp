@@ -4,7 +4,8 @@
              x:Class="Kina.Mobile.Core.Pages.FilterView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
-             Title="Filter">
+             Title="Filter"
+                    NavigationPage.HasNavigationBar="false">
   <StackLayout>
     <ScrollView>
       <StackLayout>

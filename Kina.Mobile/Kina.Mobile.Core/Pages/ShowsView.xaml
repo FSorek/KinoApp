@@ -9,7 +9,8 @@
              xmlns:mod="clr-namespace:Kina.Mobile.Core.Model;assembly=Kina.Mobile.Core"
              xmlns:dpm="clr-namespace:DataModel;assembly=Kina.Mobile.DataProvider"
              Title="Shows"
-             BackgroundImage="darkersplash.png">
+             BackgroundImage="darkersplash.png"
+                    NavigationPage.HasNavigationBar="false">
   <ContentPage.Resources>
     <ResourceDictionary>
       <Style x:Key="CityTitle" TargetType="Button">
