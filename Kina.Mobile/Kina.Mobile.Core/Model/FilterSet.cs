@@ -6,7 +6,7 @@ namespace Kina.Mobile.Core.Model
 {
     public class FilterSet
     {
-        public Genre Genre { get; set; }
+        public string Category { get; set; }
         public string Start { get; set; }
         public string End { get; set; }
         public string Title { get; set; }
@@ -15,7 +15,7 @@ namespace Kina.Mobile.Core.Model
 
         public void ClearFilter()
         {
-            Genre = null;
+            Category = null;
             Start = null;
             End = null;
             Title = null;

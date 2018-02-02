@@ -3,10 +3,13 @@
 // <url>https://www.linkedin.com/in/pauldatsyuk/</url>
 // ---------------------------------------------------------------
 
+using Kina.Mobile.Core.Helpers;
 using Kina.Mobile.DataProvider.Models;
+using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
+using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -36,13 +39,6 @@ namespace Kina.Mobile.Core.ViewModels
         {
             _navigationService = navigationService;
 
-            //Temporary hard coded strings
-            TitleText = "Simple Test Title";
-            URLText = "www.Youtube.com";
-            Year = "2017";
-            Cast = " Hugh Jackman, Michelle Williams, Zac Efron";
-            Director = "Michael Gracey";
-            DescriptionText = "Jak zawsze, na moje podziękowania zasługuje wiele osób, bez których ta książka wyglądałaby zupełnie inaczej. Przede wszystkim, mój redaktor i mój agent – Moshe Feder i Joshua Bilmes – dzięki którym projekty osiągają swój pełen potencjał. Jak również moja cudowna żona, Emily, która była dla mnie wielkim wsparciem i pomocą w procesie pisarskim.";
             InitCommands();
         }
 
@@ -68,11 +64,24 @@ namespace Kina.Mobile.Core.ViewModels
             _goToRateViewCommandCommand = new MvxAsyncCommand(GoToRateViewAction);
         }
 
+        private void GetMovieData(DataRequest dataRequest, long id)
+        {
+            Task.Run(() => dataRequest.ProvideMovieData(id)).Wait();
+        }
+
         public override Task Initialize(Movie parameter)
         {
             _parameter = parameter;
-            TitleText = _parameter.Name;
-            DescriptionText = _parameter.Storyline;
+            DataRequest dataRequest = new DataRequest();
+            GetMovieData(dataRequest, _parameter.Id);
+            Movie requested = dataRequest.SelectedMovie;
+            TitleText = requested.OriginalName;
+            DescriptionText = requested.Storyline;
+            Director = requested.Director;
+            URLText = requested.Trailer;
+            Cast = requested.Stars;
+            Year = null;
+
             return Task.FromResult(true);
         }
     }

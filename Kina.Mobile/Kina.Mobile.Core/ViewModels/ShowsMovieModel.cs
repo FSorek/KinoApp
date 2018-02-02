@@ -1,5 +1,4 @@
-﻿using CoreMultikinoJson;
-using Kina.Mobile.Core.Model;
+﻿using Kina.Mobile.Core.Model;
 using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Models;
 using MvvmCross.Core.Navigation;

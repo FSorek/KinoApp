@@ -1,5 +1,6 @@
 ﻿using Kina.Mobile.Core.Model;
 using Kina.Mobile.DataProvider.Models;
+using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
@@ -33,7 +34,9 @@ namespace Kina.Mobile.Core.ViewModels
             long cinemaID = _parameter.MovieData.Shows[0].IdCinema;
             long movieID = _parameter.MovieData.Id;
 
-            GetScore(movieID, cinemaID);
+            DataRequest dataRequest = new DataRequest();
+            GetScore(movieID, cinemaID, dataRequest);
+            userScore = dataRequest.ShowScore;
 
             string Title = _parameter.MovieData.Name;
             string Cinema = _parameter.CinemaName;
@@ -78,14 +81,9 @@ namespace Kina.Mobile.Core.ViewModels
             return Task.FromResult(true);
         }
 
-        private void GetScore(long movieId, long cinemaId)
+        private void GetScore(long movieId, long cinemaId, DataRequest dataRequest)
         {
-            Task.Run(() => GetScoreAsync(movieId, cinemaId)).Wait();
-        }
-
-        private async Task GetScoreAsync(long movieId, long cinemaId)
-        {
-            userScore = await MvxApp.Database.GetUserScoreAsync(cinemaId, movieId);
+            Task.Run(() => dataRequest.ProvideScoreData(movieId, cinemaId)).Wait();
         }
     }
 }

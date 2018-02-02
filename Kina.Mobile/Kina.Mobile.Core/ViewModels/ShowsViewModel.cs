@@ -58,8 +58,11 @@ namespace Kina.Mobile.Core.ViewModels
 
             foreach (Cinema cinema in cinemaList)
             {
-
                 string cinemaName = String.Format("{0} - {1}", cinema.Name, cinema.City);
+                foreach(Movie m in cinema.MoviesPlayed)
+                {
+                    m.Shows[0].IdCinema = cinema.IdCinema;
+                }
                 CinemaType cinemaType = CinemaType.multikino;
                 switch (cinema.Name.Contains("Multikino"))
                 {
@@ -88,9 +91,9 @@ namespace Kina.Mobile.Core.ViewModels
                     {
                         check = m.OriginalName.ToLower().Contains(MvxApp.FilterSettings.Title.ToLower());
                     }
-                    if(MvxApp.FilterSettings.Genre != null)
+                    if(MvxApp.FilterSettings.Category != null)
                     {
-                        check = check && (m.Genre.Contains(MvxApp.FilterSettings.Genre.Name) || m.Genre.Contains(MvxApp.FilterSettings.Genre.EngName));
+                        check = check && (m.Genre.Contains(MvxApp.FilterSettings.Category) || m.Genre.Contains(MvxApp.FilterSettings.Category));
                     }
                     if (content)
                     {
@@ -111,8 +114,10 @@ namespace Kina.Mobile.Core.ViewModels
                 }
                 if (content && check)
                 {
+                    DataRequest dataRequest = new DataRequest();
                     double score = 0.0;
-                    GetScore(m.Id, m.Shows[0].IdCinema);
+                    GetScore(m.Id, m.Shows[0].IdCinema, dataRequest);
+                    userScore = dataRequest.ShowScore;
                     if (userScore.Count != 0)
                     {
                         int i = 0;
@@ -120,7 +125,7 @@ namespace Kina.Mobile.Core.ViewModels
                         {
                             foreach (UserScore s in userScore)
                             {
-                                if (s.Id_Movie.Equals(m.Id) && s.Id_Cinema == m.Shows[0].IdCinema)
+                                if (s.IdMovie.Equals(m.Id) && s.IdCinema == m.Shows[0].IdCinema)
                                 {
                                     score += (s.Screen + s.Seat + s.Sound + s.Popcorn) / 4.0;
                                     i++;
@@ -160,9 +165,9 @@ namespace Kina.Mobile.Core.ViewModels
             _goToLocationViewCommandCommand = new MvxAsyncCommand(GoToLocationViewAction);
         }
 
-        private void GetScore(long movieId, long cinemaId)
+        private void GetScore(long movieId, long cinemaId, DataRequest dataRequest)
         {
-            Task.Run(() => GetScoreAsync(movieId, cinemaId)).Wait();
+            Task.Run(() => dataRequest.ProvideScoreData(movieId, cinemaId)).Wait();
         }
 
         private async Task GoToFilterViewAction()
@@ -172,12 +177,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToLocationViewAction()
         {
-            await _navigationService.Navigate<LocationViewModel>();
-        }
-
-        private async Task GetScoreAsync(long movieId, long cinemaId)
-        {
-            userScore = await MvxApp.Database.GetUserScoreAsync(cinemaId, movieId);
+            await _navigationService.Navigate<LocationInitViewModel>();
         }
     }
 }

@@ -6,7 +6,6 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using Kina.Mobile.Core.Model;
 using MvvmCross.Plugins.Messenger;
 using Kina.Mobile.DataProvider.Models;
 

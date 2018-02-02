@@ -1,5 +1,4 @@
 ﻿using Acr.UserDialogs;
-using Kina.Mobile.Core.Model;
 using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
@@ -8,7 +7,6 @@ using MvvmCross.Platform;
 using MvvmCross.Plugins.Messenger;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
