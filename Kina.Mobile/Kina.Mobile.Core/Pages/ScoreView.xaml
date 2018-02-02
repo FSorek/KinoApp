@@ -6,8 +6,9 @@
              xmlns:mod="clr-namespace:Kina.Mobile.Core.Model;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
              xmlns:xlf="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-             Title="Detailed score">
-    <StackLayout>
+             Title="Detailed score"
+                    NavigationPage.HasNavigationBar="false">
+    <StackLayout >
       <!--HEADER LABEL-->
       <Label Text="{Binding HeaderLabel}" BackgroundColor="#fcca01" TextColor="Black"/>
       <xlf:RepeaterView x:TypeArguments="mod:ScoreRow" ItemsSource="{Binding ScoreRows}" VerticalOptions="Center">

@@ -4,7 +4,8 @@
              x:Class="Kina.Mobile.Core.Pages.MovieView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
-             Title="Movie">
+             Title="Movie"
+             NavigationPage.HasNavigationBar="false">
     <ScrollView>
         <StackLayout>
             <StackLayout Orientation="Horizontal">

@@ -4,7 +4,8 @@
              x:Class="Kina.Mobile.Core.Pages.LocationInitView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
-             Title="Location settings">
+             Title="Location settings"
+                    NavigationPage.HasNavigationBar="false">
   <ContentPage.Resources>
     <ResourceDictionary>
       <Style x:Key="CityTitle" TargetType="Button">
