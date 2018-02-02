@@ -3,10 +3,12 @@ using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System;
 using System.Threading.Tasks;
-using DataModel;
 using Kina.Mobile.Core.Services;
 using MvvmCross.Platform;
 using Acr.UserDialogs;
+using Kina.Mobile.DataProvider.Models;
+using Kina.Mobile.Core.Helpers;
+using Kina.Mobile.DataProvider.Providers;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -22,8 +24,8 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
 
         private Movie _parameter;
-        private int cinemaID;
-        private string movieID;
+        private long cinemaID;
+        private long movieID;
 
         public int ScreenRate { get; set; }
         public int SeatsRate { get; set; }
@@ -55,28 +57,39 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task SubmitAction()
         {
-            int userID = _settings.ActiveUserID;
-            List<UserScore> userScore = await MvxApp.Database.GetUserScoreAsync(userID, cinemaID, movieID);
-            if (userScore.Count != 0)
+            bool isInBase = false;
+            DataRequest dataRequest = new DataRequest();
+            GetScore(movieID, cinemaID, dataRequest);
+            List<UserScore> userScore = dataRequest.ShowScore;
+            string userID = Hardware.DeviceId;
+            foreach(UserScore score in userScore)
             {
-                Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
+                if (score.IdStringUser.Equals(userID))
+                {
+                    Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
+                    isInBase = true;
+                    return;
+                }
+            }
+            if (isInBase)
+            {
                 await _navigationService.Close(this);
             }
             else
             {
                 UserScore score = new UserScore
                 {
-                    Id_User = userID,
-                    Id_Cinema = cinemaID,
-                    Id_Movie = movieID,
+                    IdStringUser = userID,
+                    IdCinema = cinemaID,
+                    IdMovie = movieID,
                     Screen = ScreenRate,
                     Seat = SeatsRate,
                     Sound = SoundRate,
                     Popcorn = PopcornRate,
                     Cleanliness = CleanlinessRate
                 };
-                await MvxApp.Database.SaveUserScoreAsync(score);
-                await _navigationService.Navigate<ShowsViewModel>();
+                await dataRequest.PostScoreAsync(score);
+                await _navigationService.Close(this);
             }
         }
 
@@ -85,12 +98,18 @@ namespace Kina.Mobile.Core.ViewModels
             await _navigationService.Close(this);
         }
 
+        private void GetScore(long movieId, long cinemaId, DataRequest dataRequest)
+        {
+            Task.Run(() => dataRequest.ProvideScoreData(movieId, cinemaId)).Wait();
+        }
+
         public override Task Initialize(Movie parameter)
         {
             _parameter = parameter;
+
             Show show = _parameter.Shows[0];
-            cinemaID = show.Id_Cinema;
-            movieID = parameter.Id_Movie;
+            cinemaID = show.IdCinema;
+            movieID = parameter.Id;
             return Task.FromResult(true);
         }
     }

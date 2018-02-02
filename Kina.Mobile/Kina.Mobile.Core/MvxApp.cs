@@ -5,33 +5,16 @@
 
 using Acr.UserDialogs;
 using Kina.Mobile.Core.Model;
-using Kina.Mobile.DataProvider.Helpers;
-using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
 using MvvmCross.Platform.Platform;
 using MvvmCross.Plugins.Json;
-using Xamarin.Forms;
 
 namespace Kina.Mobile.Core
 {
     public class MvxApp : MvxApplication
 	{
-        static KinaMobileDatabase _database;
-
-        public static KinaMobileDatabase Database
-        {
-            get
-            {
-                if (_database == null)
-                {
-                    _database = new KinaMobileDatabase(DependencyService.Get<IFileHelper>().GetLocalFilePath("KinaMobileSQLite.db3"));
-                }
-                return _database;
-            }
-        }
-
         public static bool UsingFilter { get; set; }
 	    public static FilterSet FilterSettings { get; set; }
 
