@@ -1,27 +1,26 @@
-﻿using SQLite;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
+using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace Kina.Mobile.DataProvider.Models
 {
-    [Table("UserScore")]
     public class UserScore
     {
-        [PrimaryKey, AutoIncrement, Column("Id_UserScore")]
-        public int Id_UserScore { get; set; }
+        [J("cleanliness")] public long Cleanliness { get; set; }
+        [J("id_Cinema")] public long IdCinema { get; set; }
+        [J("id_Movie")] public long IdMovie { get; set; }
+        [J("id_StringUser")] public string IdStringUser { get; set; }
+        [J("id_User")] public long IdUser { get; set; }
+        [J("popcorn")] public long Popcorn { get; set; }
+        [J("screen")] public long Screen { get; set; }
+        [J("seat")] public long Seat { get; set; }
+        [J("sound")] public long Sound { get; set; }
 
-        [Column("Id_User")]
-        public int Id_User { get; set; }
-        //public Cinema Id_Cinema { get; set; }
-        //public Movie Id_Movie { get; set; }
-        //public Score Id_Score { get; set; }
-        public int Screen { get; set; }
-        public int Seat { get; set; }
-        public int Sound { get; set; }
-        public int Popcorn { get; set; }
-        public int Cleanliness { get; set; }
+        public static List<UserScore> FromJson(string json) => JsonConvert.DeserializeObject<List<UserScore>>(json, Converter.Settings);
+    }
 
-        [Column("Id_Cinema")]
-        public long Id_Cinema { get; set; }
-        [Column("Id_Movie")]
-        public long Id_Movie { get; set; }
+    public static class Serialize
+    {
+        public static string ToJson(this UserScore self) => JsonConvert.SerializeObject(self, Converter.Settings);
     }
 }

@@ -1,4 +1,5 @@
-﻿using System.Collections.Generic;
+﻿using Newtonsoft.Json;
+using System.Collections.Generic;
 using J = Newtonsoft.Json.JsonPropertyAttribute;
 
 namespace Kina.Mobile.DataProvider.Models
@@ -20,5 +21,7 @@ namespace Kina.Mobile.DataProvider.Models
         [J("rating")] public string Rating { get; set; }
         [J("shows")] public List<Show> Shows { get; set; }
         [J("genre")] public List<string> Genre { get; set; }
+
+        public static Movie FromJson(string json) => JsonConvert.DeserializeObject<Movie>(json, Converter.Settings);
     }
 }
