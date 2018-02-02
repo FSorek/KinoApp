@@ -4,11 +4,10 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace DataModel
+namespace Kina.Mobile.DataProvider.Models
 {
-    public class MovieList
+    public enum CinemaType
     {
-        public int Id_MovieList { get; set; }
-        public Show Id_Show { get; set; }
+        multikino, cinemacity,
     }
 }

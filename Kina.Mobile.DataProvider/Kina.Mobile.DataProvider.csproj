@@ -36,28 +36,17 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="Converters\CinemaCityDeserializer.cs" />
-    <Compile Include="Converters\MultikinoDeserializer.cs" />
     <Compile Include="Helpers\IFileHelper.cs" />
-    <Compile Include="Models\AccessModels\CinemaCity.cs" />
-    <Compile Include="Models\AccessModels\Multikino.cs" />
-    <Compile Include="Models\DataModels\Address.cs" />
-    <Compile Include="Models\DataModels\Cinema.cs" />
-    <Compile Include="Models\DataModels\Filmweb.cs" />
-    <Compile Include="Models\DataModels\Genre.cs" />
-    <Compile Include="Models\DataModels\MetaCritic.cs" />
-    <Compile Include="Models\DataModels\Movie.cs" />
-    <Compile Include="Models\DataModels\MovieList.cs" />
-    <Compile Include="Models\DataModels\Price.cs" />
-    <Compile Include="Models\DataModels\RottenTomatoes.cs" />
-    <Compile Include="Models\DataModels\Score.cs" />
-    <Compile Include="Models\DataModels\Show.cs" />
-    <Compile Include="Models\DataModels\ShowPrice.cs" />
-    <Compile Include="Models\DataModels\UserScore.cs" />
-    <Compile Include="Models\DataModels\Webscore.cs" />
+    <Compile Include="Models\AccessModels\StringList.cs" />
+    <Compile Include="Models\Cinema.cs" />
+    <Compile Include="Models\CinemaType.cs" />
+    <Compile Include="Models\Movie.cs" />
+    <Compile Include="Models\Converter.cs" />
+    <Compile Include="Models\Show.cs" />
+    <Compile Include="Models\UserScore.cs" />
+    <Compile Include="Models\Genre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
-    <Compile Include="Providers\DataRequestService.cs" />
-    <Compile Include="Providers\KinaMobileDatabase.cs" />
+    <Compile Include="Providers\DataRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=10.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

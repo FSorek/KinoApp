@@ -6,9 +6,8 @@ using System.Collections.Generic;
 using System.Diagnostics;
 using System.Threading.Tasks;
 using System.Windows.Input;
-using DataModel;
-using Kina.Mobile.Core.Model;
 using MvvmCross.Plugins.Messenger;
+using Kina.Mobile.DataProvider.Models;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -85,13 +84,13 @@ namespace Kina.Mobile.Core.ViewModels
                 
             }
             MvxApp.FilterSettings.Cinemas = GetCinemasInRange(distance);
-            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private async Task AutoLocateAction()
         {
             MvxApp.FilterSettings.Cinemas = null;
-            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private void InitCommands()
@@ -104,14 +103,14 @@ namespace Kina.Mobile.Core.ViewModels
         {
             var cinemas = new List<Cinema>();
             var cinemasInRange = new List<Cinema>();
-            cinemas = Task.Run(() => MvxApp.Database.GetAllCinemaAsync()).Result;
-            foreach (var cinema in cinemas)
-            {
-                if (CalculateDistance(Lat, Lng, cinema.Latitude, cinema.Longtitude) <= kilimeters)
-                {
-                    cinemasInRange.Add(cinema);
-                }
-            }
+            //cinemas = Task.Run(() => MvxApp.Database.GetAllCinemaAsync()).Result;
+            //foreach (var cinema in cinemas)
+            //{
+            //    if (CalculateDistance(Lat, Lng, cinema.Latitude, cinema.Longtitude) <= kilimeters)
+            //    {
+            //        cinemasInRange.Add(cinema);
+            //    }
+            //}
 
             return cinemasInRange;
         }

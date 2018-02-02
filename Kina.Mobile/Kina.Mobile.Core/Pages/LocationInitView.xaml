@@ -4,7 +4,7 @@
              x:Class="Kina.Mobile.Core.Pages.LocationInitView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
-             Title="Welcome in Kina.App"
+             Title="Location settings"
                     NavigationPage.HasNavigationBar="false">
   <ContentPage.Resources>
     <ResourceDictionary>
@@ -49,7 +49,7 @@
             SelectedItem="{Binding SelectedLocation, Mode=OneWayToSource}"
             HorizontalOptions="FillAndExpand"/>
         <Button Text="Go"
-            Command="{Binding ConfimrLocationCommand}"
+            Command="{Binding ConfirmLocationCommand}"
             Style="{StaticResource FilterButton}"
             WidthRequest="50.0"
             HeightRequest="50.0"
@@ -57,7 +57,7 @@
       </StackLayout>
       <Label Text="{Binding RangeText}" Margin="8, 2" HorizontalOptions="Center"/>
       <Slider Minimum="0"
-              Maximum="100"
+              Maximum="50"
               MinimumWidthRequest="60"
               Value="{Binding Distance}"/>
       <Button Image="PinBlack.png" Text="Share Your Location"

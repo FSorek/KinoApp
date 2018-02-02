@@ -63,6 +63,8 @@ namespace Kina.Mobile.Droid
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahText = global::Kina.Mobile.Droid.Resource.Styleable.ProgressWheel_ahText;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextColor = global::Kina.Mobile.Droid.Resource.Styleable.ProgressWheel_ahTextColor;
 			global::AndroidHUD.Resource.Styleable.ProgressWheel_ahTextSize = global::Kina.Mobile.Droid.Resource.Styleable.ProgressWheel_ahTextSize;
+			global::Cheesebaron.MvxPlugins.DeviceInfo.Droid.Resource.String.ApplicationName = global::Kina.Mobile.Droid.Resource.String.ApplicationName;
+			global::Cheesebaron.MvxPlugins.DeviceInfo.Droid.Resource.String.Hello = global::Kina.Mobile.Droid.Resource.String.Hello;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxBind = global::Kina.Mobile.Droid.Resource.Attribute.MvxBind;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxDropDownItemTemplate = global::Kina.Mobile.Droid.Resource.Attribute.MvxDropDownItemTemplate;
 			global::MvvmCross.Binding.Droid.Resource.Attribute.MvxGroupItemTemplate = global::Kina.Mobile.Droid.Resource.Attribute.MvxGroupItemTemplate;
@@ -3774,8 +3776,11 @@ namespace Kina.Mobile.Droid
 		public partial class String
 		{
 			
+			// aapt resource value: 0x7f090040
+			public const int ApplicationName = 2131296320;
+			
 			// aapt resource value: 0x7f09003f
-			public const int ApplicationName = 2131296319;
+			public const int Hello = 2131296319;
 			
 			// aapt resource value: 0x7f090015
 			public const int abc_action_bar_home_description = 2131296277;

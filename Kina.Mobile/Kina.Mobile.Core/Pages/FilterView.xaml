@@ -4,7 +4,7 @@
              x:Class="Kina.Mobile.Core.Pages.FilterView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
-             Title="Filter"
+             Title="Filter settings"
                     NavigationPage.HasNavigationBar="false">
   <StackLayout>
     <ScrollView>
@@ -14,9 +14,9 @@
         <TimePicker Format="HH\:mm" Time="{Binding StartTime, Mode=OneWayToSource}" Margin="2"/>
         <Label Text="End" Margin="2"/>
         <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}" Margin="2"/>
-        <Picker Title="Genre"
-                ItemsSource="{Binding Genre}"
-                SelectedItem="{Binding SelectedGenre, Mode=OneWayToSource}"/>
+        <Picker Title="Category"
+                ItemsSource="{Binding Categories}"
+                SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}"/>
       </StackLayout>
     </ScrollView>
     <Button BackgroundColor="#fcca01" Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search" FontSize="12" TextColor="Black" BorderRadius="25"/>
