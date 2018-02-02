@@ -6,6 +6,7 @@ using System.Threading.Tasks;
 using DataModel;
 using Kina.Mobile.Core.Model;
 using Kina.Mobile.Core.Services;
+using Kina.Mobile.DataProvider.Providers;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -17,13 +18,11 @@ namespace Kina.Mobile.Core.ViewModels
         private MvxAsyncCommand _goToShowsPageCommandCommand;
         private MvxAsyncCommand _goBackCommandCommand;
 
-        private List<Genre> genre;
-
         public IMvxAsyncCommand GoToShowsPageCommand => _goToShowsPageCommandCommand;
         public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
 
-        public List<string> Genre { get; set; }
-        public string SelectedGenre { get; set; }
+        public List<string> Categories { get; set; }
+        public string SelectedCategory { get; set; }
 
         public string Title { get; set; }
         public TimeSpan StartTime { get; set; }
@@ -36,40 +35,38 @@ namespace Kina.Mobile.Core.ViewModels
 
             InitCommands();
 
-            GetGenres();
+            DataRequest dataRequest = new DataRequest();
+            GetCategories(dataRequest);
 
-            Genre = new List<string>();
-
-            foreach(var g in genre)
-            {
-                Genre.Add(g.EngName);
-            }
+            Categories = dataRequest.CategoryList;
         }
 
         private async Task GoToShowsPageAction()
         {
-            if (SelectedGenre != null)
+            if (SelectedCategory != null)
             {
-                foreach (var g in genre)
+                foreach (var g in Categories)
                 {
-                    if (SelectedGenre.ToLower().Equals(g.EngName.ToLower()))
+                    if (SelectedCategory.ToLower().Equals(g.ToLower()))
                     {
-                        MvxApp.FilterSettings.Genre = g;
+                        MvxApp.FilterSettings.Category = g;
                     }
                 }
             }
-            if(StartTime != null)
+            else MvxApp.FilterSettings.Category = null;
+            if (StartTime != null)
             {
                 MvxApp.FilterSettings.Start = StartTime.ToString(@"h\:mm");
             }
-            if(EndTime != null)
-                MvxApp.FilterSettings.End = EndTime.ToString(@"h\:mm");
-            if(Title != null)
+            else MvxApp.FilterSettings.Start = null;
+            if (EndTime != null)
             {
-                MvxApp.FilterSettings.Title = Title;
+                MvxApp.FilterSettings.End = EndTime.ToString(@"h\:mm");
             }
+            else MvxApp.FilterSettings.End = null;
+            MvxApp.FilterSettings.Title = Title;
             MvxApp.UsingFilter = true;
-            await _navigationService.Navigate<ShowsViewModel, FilterSet>(MvxApp.FilterSettings);
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private async Task GoBackAction()
@@ -84,14 +81,9 @@ namespace Kina.Mobile.Core.ViewModels
             _goBackCommandCommand = new MvxAsyncCommand(GoBackAction);
         }
 
-        private void GetGenres()
+        private void GetCategories(DataRequest dataRequest)
         {
-            Task.Run(() => GetGenreAsync()).Wait();
-        }
-
-        private async Task GetGenreAsync()
-        {
-            genre = await MvxApp.Database.GetGenreAsync();
+            Task.Run(() => dataRequest.ProvideCategories()).Wait();
         }
     }
 }
