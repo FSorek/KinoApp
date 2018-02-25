@@ -1,5 +1,4 @@
-﻿using Kina.Mobile.Core.ViewModels;
-using System.Collections.Generic;
+﻿using System.Collections.Generic;
 using Xamarin.Forms;
 
 namespace Kina.Mobile.Core.Model
@@ -7,10 +6,10 @@ namespace Kina.Mobile.Core.Model
     class MovieList
     {
         public string CinemaName { get; set; }
-        public List<ShowsMovieModel> Movies { get; set; }
+        public List<MovieListItem> Movies { get; set; }
         public Color CinemaColor { get; set; }
 
-        public MovieList(string cinemaName, List<ShowsMovieModel> movies, Color cinemaColor)
+        public MovieList(string cinemaName, List<MovieListItem> movies, Color cinemaColor)
         {
             CinemaName = cinemaName;
             Movies = movies;

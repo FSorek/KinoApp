@@ -34,9 +34,12 @@
   </PropertyGroup>
   <ItemGroup>
     <!-- A reference to the entire .NET Framework is automatically included -->
+    <Folder Include="Mappers\" />
   </ItemGroup>
   <ItemGroup>
     <Compile Include="Helpers\IFileHelper.cs" />
+    <Compile Include="Models\SimpleMovie.cs" />
+    <Compile Include="Models\SimpleShow.cs" />
     <Compile Include="Models\AccessModels\StringList.cs" />
     <Compile Include="Models\Cinema.cs" />
     <Compile Include="Models\CinemaType.cs" />

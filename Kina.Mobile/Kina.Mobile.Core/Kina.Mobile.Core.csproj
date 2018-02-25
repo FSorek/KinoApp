@@ -42,9 +42,9 @@
       <DependentUpon>FormsApp.xaml</DependentUpon>
     </Compile>
     <Compile Include="Helpers\Hardware.cs" />
-    <Compile Include="Model\FilterSet.cs" />
+    <Compile Include="Model\BasicShowData.cs" />
+    <Compile Include="Model\Filter.cs" />
     <Compile Include="Model\LocalizationSettings.cs" />
-    <Compile Include="Model\MovieDataSet.cs" />
     <Compile Include="Model\MovieList.cs" />
     <Compile Include="Model\ScoreRow.cs" />
     <Compile Include="Pages\FilterView.xaml.cs">
@@ -122,7 +122,7 @@
     </Compile>
     <Compile Include="Helpers\TranslateExtension.cs" />
     <Compile Include="Services\ILocalizeService.cs" />
-    <Compile Include="ViewModels\ShowsMovieModel.cs" />
+    <Compile Include="Model\MovieListItem.cs" />
     <Compile Include="ViewModels\ShowsViewModel.cs" />
   </ItemGroup>
   <ItemGroup>

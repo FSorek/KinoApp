@@ -1,7 +1,6 @@
 ﻿using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
-using System;
 using System.Threading.Tasks;
 using Kina.Mobile.Core.Services;
 using MvvmCross.Platform;
@@ -9,10 +8,11 @@ using Acr.UserDialogs;
 using Kina.Mobile.DataProvider.Models;
 using Kina.Mobile.Core.Helpers;
 using Kina.Mobile.DataProvider.Providers;
+using Kina.Mobile.Core.Model;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    public class RateViewModel : MvxViewModel<Movie>
+    public class RateViewModel : MvxViewModel<BasicShowData>
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly IAppSettings _settings;
@@ -23,7 +23,6 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand SubmitCommand => _submitCommandCommand;
         public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
 
-        private Movie _parameter;
         private long cinemaID;
         private long movieID;
 
@@ -33,7 +32,6 @@ namespace Kina.Mobile.Core.ViewModels
         public int PopcornRate { get; set; }
         public int CleanlinessRate { get; set; }
 
-        public List<String> Cinemas { get; set; }
         public string SelectedCinema { get; set; }
 
         public RateViewModel(IMvxNavigationService navigationService, IAppSettings settings)
@@ -42,11 +40,6 @@ namespace Kina.Mobile.Core.ViewModels
             _settings = settings;
 
             InitCommands();
-
-            Cinemas = new List<String>();
-            Cinemas.Add("Multikino X");
-            Cinemas.Add("Mutlikino Y");
-            Cinemas.Add("CinemaCity X");
         }
 
         private void InitCommands()
@@ -71,6 +64,7 @@ namespace Kina.Mobile.Core.ViewModels
                     return;
                 }
             }
+
             if (isInBase)
             {
                 await _navigationService.Close(this);
@@ -103,13 +97,10 @@ namespace Kina.Mobile.Core.ViewModels
             Task.Run(() => dataRequest.ProvideScoreData(movieId, cinemaId)).Wait();
         }
 
-        public override Task Initialize(Movie parameter)
+        public override Task Initialize(BasicShowData parameter)
         {
-            _parameter = parameter;
-
-            Show show = _parameter.Shows[0];
-            cinemaID = show.IdCinema;
-            movieID = parameter.Id;
+            cinemaID = parameter.IdCinema;
+            movieID = parameter.IdMovie;
             return Task.FromResult(true);
         }
     }

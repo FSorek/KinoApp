@@ -9,11 +9,11 @@ using System.Threading.Tasks;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    class ScoreViewModel : MvxViewModel<MovieDataSet>
+    class ScoreViewModel : MvxViewModel<BasicShowData>
     {
         private readonly IMvxNavigationService _navigationService;
 
-        private MovieDataSet _parameter;
+        private BasicShowData _parameter;
         private List<UserScore> userScore;
 
         public List<ScoreRow> ScoreRows { get; set; }
@@ -27,21 +27,21 @@ namespace Kina.Mobile.Core.ViewModels
             _navigationService = navigationService;
         }
 
-        public override Task Initialize(MovieDataSet parameter)
+        public override Task Initialize(BasicShowData parameter)
         {
             _parameter = parameter;
 
-            long cinemaID = _parameter.MovieData.Shows[0].IdCinema;
-            long movieID = _parameter.MovieData.Id;
+            long cinemaID = _parameter.IdCinema;
+            long movieID = _parameter.IdMovie;
 
             DataRequest dataRequest = new DataRequest();
             GetScore(movieID, cinemaID, dataRequest);
             userScore = dataRequest.ShowScore;
 
-            string Title = _parameter.MovieData.Name;
-            string Cinema = _parameter.CinemaName;
+            string title = _parameter.MovieName;
+            string cinema = _parameter.CinemaName;
 
-            HeaderLabel = String.Format("{0} in {1}", Title, Cinema);
+            HeaderLabel = String.Format("User ratings of the {0} movie in {1}", title, cinema);
 
             ScoreRows = new List<ScoreRow>();
 

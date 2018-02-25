@@ -36,7 +36,7 @@
               <ContentView>
                 <StackLayout>
                   <Label Text="{Binding CinemaName}" BackgroundColor="{Binding CinemaColor}"/>
-                  <xlf:RepeaterView x:TypeArguments="pvm:ShowsMovieModel" ItemsSource="{Binding Movies}">
+                  <xlf:RepeaterView x:TypeArguments="mod:MovieListItem" ItemsSource="{Binding Movies}">
                     <xlf:RepeaterView.ItemTemplate>
                       <DataTemplate>
                         <ContentView Padding="4, 2">
