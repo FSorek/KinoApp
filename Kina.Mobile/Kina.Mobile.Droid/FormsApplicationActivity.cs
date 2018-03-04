@@ -8,15 +8,16 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views;
-using MvvmCross.Forms.Droid;
-using MvvmCross.Forms.Presenters;
+using MvvmCross.Forms.Droid.Views;
+using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
 using Xamarin.Forms;
 
 namespace Kina.Mobile.Droid
 {
-	[Activity(Label = "FormsApplicationActivity", ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "FormsApplicationActivity", ScreenOrientation = ScreenOrientation.Portrait)]
 	public class FormsApplicationActivity : MvxFormsApplicationActivity
 	{
 		protected override void OnCreate(Bundle bundle)
@@ -27,7 +28,7 @@ namespace Kina.Mobile.Droid
 
 			UserDialogs.Init(this);
 
-			var formsPresenter = (MvxFormsPagePresenter)Mvx.Resolve<IMvxAndroidViewPresenter>();
+			var formsPresenter = (MvxFormsAndroidViewPresenter) Mvx.Resolve<IMvxAndroidViewPresenter>();
 			LoadApplication(formsPresenter.FormsApplication);
 
 			Mvx.Resolve<IMvxAppStart>().Start();

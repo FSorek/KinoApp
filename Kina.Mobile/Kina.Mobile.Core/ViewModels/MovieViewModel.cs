@@ -68,7 +68,7 @@ namespace Kina.Mobile.Core.ViewModels
             Task.Run(() => dataRequest.ProvideMovieData(id)).Wait();
         }
 
-        public override Task Initialize(BasicShowData parameter)
+        public override void Prepare(BasicShowData parameter)
         {
             _parameter = parameter;
             DataRequest dataRequest = new DataRequest();
@@ -80,8 +80,6 @@ namespace Kina.Mobile.Core.ViewModels
             URLText = requested.Trailer;
             Cast = requested.Stars;
             Year = null;
-
-            return Task.FromResult(true);
         }
     }
 }

@@ -42,14 +42,12 @@ namespace Kina.Mobile.Core.ViewModels
 			await _navigationService.Close(this);
 		});
 
-		public override Task Initialize(Dictionary<string, string> parameter)
+		public override void Prepare(Dictionary<string, string> parameter)
 		{
 			_parameter = parameter;
 
 			if (_parameter != null && _parameter.ContainsKey("ButtonText"))
 				MainPageButtonText = "ButtonText";
-
-			return Task.FromResult(true);
 		}
 
 		public int SuperNumber

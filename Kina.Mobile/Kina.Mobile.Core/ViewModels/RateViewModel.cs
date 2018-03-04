@@ -97,11 +97,10 @@ namespace Kina.Mobile.Core.ViewModels
             Task.Run(() => dataRequest.ProvideScoreData(movieId, cinemaId)).Wait();
         }
 
-        public override Task Initialize(BasicShowData parameter)
+        public override void Prepare(BasicShowData parameter)
         {
             cinemaID = parameter.IdCinema;
             movieID = parameter.IdMovie;
-            return Task.FromResult(true);
         }
     }
 }
