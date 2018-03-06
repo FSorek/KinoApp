@@ -8,7 +8,6 @@ using MvvmCross.Plugins.Messenger;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using System.Windows.Input;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -27,8 +26,8 @@ namespace Kina.Mobile.Core.ViewModels
         private int distance;
         private List<string> location;
 
-        public ICommand ConfirmLocationCommand => _confirmLocationCommandCommand;
-        public ICommand AutoLocateCommand => _autoLocateCommandCommand;
+        public IMvxAsyncCommand ConfirmLocationCommand => _confirmLocationCommandCommand;
+        public IMvxAsyncCommand AutoLocateCommand => _autoLocateCommandCommand;
 
         public string SelectedLocation
         {

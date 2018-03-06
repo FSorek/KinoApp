@@ -27,8 +27,10 @@ namespace Kina.Mobile.DataProvider.Providers
 
         private static string GetCinemasInRangeUri(double latitude, double longtitude, int distance)
         {
-            NumberFormatInfo format = new NumberFormatInfo();
-            format.NumberDecimalSeparator = ".";
+            NumberFormatInfo format = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = "."
+            };
             return String.Format("https://epertuar.azurewebsites.net/api/Show/Distance?Lng={0}&Lat={1}&range={2}",
                 longtitude.ToString(format), latitude.ToString(format), distance.ToString(format));
         }

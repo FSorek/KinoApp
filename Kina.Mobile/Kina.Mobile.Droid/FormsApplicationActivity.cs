@@ -8,10 +8,8 @@ using Android.App;
 using Android.Content.PM;
 using Android.OS;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Core.Views;
 using MvvmCross.Droid.Views;
 using MvvmCross.Forms.Droid.Views;
-using MvvmCross.Forms.Views;
 using MvvmCross.Platform;
 using Xamarin.Forms;
 
