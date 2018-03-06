@@ -37,7 +37,7 @@ namespace Kina.Mobile.Core
             FilterSettings = new Filter();
             Resources.AppResources.Culture = Mvx.Resolve<Services.ILocalizeService>().GetCurrentCultureInfo();
 
-            RegisterNavigationServiceAppStart<ViewModels.LocationInitViewModel>();
+            RegisterNavigationServiceAppStart<ViewModels.MasterDetailaViewModel>();
 		}
 	}
 }

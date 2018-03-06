@@ -6,8 +6,8 @@
     xmlns:mvx="clr-namespace:MvvmCross.Forms.Platform;assembly=MvvmCross.Forms">
 	<mvx:MvxFormsApplication.Resources>
 		<ResourceDictionary>
-            <Color x:Key="Primary">#2196F3</Color>
-            <Color x:Key="PrimaryDark">#1976D2</Color>
+            <Color x:Key="Primary">#FFD000</Color>
+            <Color x:Key="PrimaryDark">#FFD500</Color>
             <Color x:Key="Accent">#96d1ff</Color>
             <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
             <Color x:Key="DarkBackgroundColor">#C0C0C0</Color>
