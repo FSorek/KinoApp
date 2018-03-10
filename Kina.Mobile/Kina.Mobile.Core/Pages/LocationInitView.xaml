@@ -4,18 +4,7 @@
              x:Class="Kina.Mobile.Core.Pages.LocationInitView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             Title="Location settings"
-                    NavigationPage.HasNavigationBar="false">
-  <ContentPage.Resources>
-    <ResourceDictionary>
-      <Style x:Key="FilterButton" TargetType="Button">
-        <Setter Property="BackgroundColor" Value="#fcca01"/>
-        <Setter Property="TextColor" Value="Black" />
-        <Setter Property="BorderRadius" Value="25"/>
-        <Setter Property="FontSize" Value="12" />
-      </Style>
-    </ResourceDictionary>
-  </ContentPage.Resources>
+             Title="Location settings">
   <StackLayout>
     <StackLayout VerticalOptions="CenterAndExpand">
       <StackLayout Orientation="Horizontal">
@@ -26,7 +15,6 @@
             HorizontalOptions="FillAndExpand"/>
         <Button Text="Go"
             Command="{Binding ConfirmLocationCommand}"
-            Style="{StaticResource FilterButton}"
             WidthRequest="50.0"
             HeightRequest="50.0"
             Margin="2, 2"/>
@@ -38,7 +26,6 @@
               Value="{Binding Distance}"/>
       <Button Image="PinBlack.png" Text="Share Your Location"
           Command="{Binding AutoLocateCommand}"
-          Style="{StaticResource FilterButton}"
           Margin="8, 2"/>
     </StackLayout>
   </StackLayout>

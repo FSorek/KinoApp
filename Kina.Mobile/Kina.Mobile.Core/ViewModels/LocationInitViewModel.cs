@@ -11,7 +11,7 @@ using System.Threading.Tasks;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    class LocationInitViewModel : MvxViewModel
+    public class LocationInitViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
 
@@ -70,14 +70,14 @@ namespace Kina.Mobile.Core.ViewModels
             _longtitude = locationMessage.Lng;
         }
 
-        private async Task ConfirmLocationAction()
+        private async Task ConfirmLocation()
         {
             MvxApp.FilterSettings.City = selectedLocation;
             MvxApp.FilterSettings.Cinemas = null;
-            await _navigationService.Navigate<ShowsViewModel>();
+            await ShowMasterDetailView();
         }
 
-        private async Task AutoLocateAction()
+        private async Task AutoDetectLocation()
         {
             if (_latitude == 0 || _longtitude == 0)
             {
@@ -89,7 +89,12 @@ namespace Kina.Mobile.Core.ViewModels
             GetCinemasInRange(dataRequest);
             MvxApp.FilterSettings.Cinemas = dataRequest.CinemaList;
             MvxApp.FilterSettings.City = null;
-            await _navigationService.Navigate<ShowsViewModel>();
+            await ShowMasterDetailView();
+        }
+
+        private async Task ShowMasterDetailView()
+        {
+            await _navigationService.Navigate<MasterDetailaViewModel>();
         }
 
         private void GetLocations(DataRequest dataRequest)
@@ -104,8 +109,8 @@ namespace Kina.Mobile.Core.ViewModels
 
         private void InitCommands()
         {
-            _autoLocateCommandCommand = new MvxAsyncCommand(AutoLocateAction);
-            _confirmLocationCommandCommand = new MvxAsyncCommand(ConfirmLocationAction);
+            _autoLocateCommandCommand = new MvxAsyncCommand(AutoDetectLocation);
+            _confirmLocationCommandCommand = new MvxAsyncCommand(ConfirmLocation);
         }
     }
 }

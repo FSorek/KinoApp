@@ -4,8 +4,7 @@
              x:Class="Kina.Mobile.Core.Pages.MovieView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             Title="Movie"
-             NavigationPage.HasNavigationBar="false">
+             Title="Movie">
     <ScrollView>
         <StackLayout>
             <StackLayout Orientation="Horizontal">
@@ -30,8 +29,8 @@
                 <Label FontSize="10" Text="{Binding DescriptionText}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>                
             </StackLayout>
           <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Button FontSize="12" Text="Trailer" Command="{Binding OpenYoutubeUrlCommand}" BackgroundColor="#fcca01" BorderRadius="25" Margin="2" TextColor="Black"/>
-            <Button FontSize="12" Text="I WAS THERE" Command="{Binding GoToRateViewCommand}" BackgroundColor="#fcca01" BorderRadius="25" Margin="2" TextColor="Black"/>
+            <Button FontSize="12" Text="Trailer" Command="{Binding OpenYoutubeUrlCommand}" Margin="2"/>
+            <Button FontSize="12" Text="I WAS THERE" Command="{Binding GoToRateViewCommand}" Margin="2"/>
           </StackLayout>
         </StackLayout>
     </ScrollView>

@@ -21,11 +21,17 @@ namespace Kina.Mobile.Core.Pages
         public MasterView()
         {
             InitializeComponent();
+            NavigationMenu.ItemTapped += (sender, e) => { ToggleClicked(); };
         }
 
         public void ToggleClicked(object sender, EventArgs e)
         {
-            if(Parent is MasterDetailPage md)
+            ToggleClicked();
+        }
+
+        private void ToggleClicked()
+        {
+            if (Parent is MasterDetailPage md)
             {
                 md.MasterBehavior = MasterBehavior.Popover;
                 md.IsPresented = !md.IsPresented;

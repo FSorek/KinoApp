@@ -4,8 +4,7 @@
              x:Class="Kina.Mobile.Core.Pages.FilterView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             Title="Filter settings"
-                    NavigationPage.HasNavigationBar="false">
+             Title="Filter settings">
   <StackLayout>
     <ScrollView>
       <StackLayout>
@@ -19,7 +18,7 @@
                 SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}"/>
       </StackLayout>
     </ScrollView>
-    <Button BackgroundColor="#fcca01" Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search" FontSize="12" TextColor="Black" BorderRadius="25"/>
-    <Button BackgroundColor="Red" Command="{Binding GoBackCommand}" Margin="32, 2" Text="Cancel" FontSize="12" BorderRadius="25"/>
+    <Button Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search" FontSize="12"/>
+    <Button BackgroundColor="Red" Command="{Binding GoBackCommand}" Margin="32, 2" Text="Cancel" FontSize="12"/>
   </StackLayout>
 </mvx:MvxContentPage>

@@ -6,6 +6,5 @@
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
              xmlns:pages="clr-namespace:Kina.Mobile.Core.Pages"
-             xmlns:viewModels="clr-namespace:Kina.Mobile.Core.ViewModels;assembly=Kina.Mobile.Core"
-                         Icon="Icon.png">
+             xmlns:viewModels="clr-namespace:Kina.Mobile.Core.ViewModels;assembly=Kina.Mobile.Core">
 </mvx:MvxMasterDetailPage>

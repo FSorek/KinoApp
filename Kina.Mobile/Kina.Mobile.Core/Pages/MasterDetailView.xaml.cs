@@ -18,6 +18,11 @@ namespace Kina.Mobile.Core.Pages
         public MasterDetailaView()
         {
             InitializeComponent();
+
+            if (Device.RuntimePlatform == Device.UWP)
+            {
+                MasterBehavior = MasterBehavior.Popover;
+            }
         }
 
         protected override void OnAppearing()

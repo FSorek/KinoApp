@@ -6,8 +6,7 @@
              xmlns:mod="clr-namespace:Kina.Mobile.Core.Model;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
              xmlns:xlf="clr-namespace:XLabs.Forms.Controls;assembly=XLabs.Forms"
-             Title="Detailed score"
-                    NavigationPage.HasNavigationBar="false">
+             Title="Detailed score">
     <StackLayout >
       <!--HEADER LABEL-->
       <Label Text="{Binding HeaderLabel}" BackgroundColor="#fcca01" TextColor="Black"/>

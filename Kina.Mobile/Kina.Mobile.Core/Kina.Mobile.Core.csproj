@@ -47,6 +47,7 @@
     <Compile Include="Model\Filter.cs" />
     <Compile Include="Model\LocalizationSettings.cs" />
     <Compile Include="Model\MovieList.cs" />
+    <Compile Include="Model\NavigationItem.cs" />
     <Compile Include="Model\ScoreRow.cs" />
     <Compile Include="Pages\FilterView.xaml.cs">
       <DependentUpon>FilterView.xaml</DependentUpon>
@@ -54,9 +55,6 @@
     <Compile Include="Pages\LocationInitView.xaml.cs">
       <DependentUpon>LocationInitView.xaml</DependentUpon>
       <SubType>Code</SubType>
-    </Compile>
-    <Compile Include="Pages\LocationView.xaml.cs">
-      <DependentUpon>LocationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MasterDetailView.xaml.cs">
       <DependentUpon>MasterDetailView.xaml</DependentUpon>
@@ -305,12 +303,6 @@
       <SubType>Designer</SubType>
     </EmbeddedResource>
     <EmbeddedResource Include="Pages\ShowsView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\LocationView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>

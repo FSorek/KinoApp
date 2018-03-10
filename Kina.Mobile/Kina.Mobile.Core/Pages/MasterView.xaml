@@ -7,10 +7,14 @@
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
              xmlns:viewModels="clr-namespace:Kina.Mobile.Core.ViewModels;assembly=Kina.Mobile.Core"
              Title="Master"
-                    Icon="Icon.png">
+             Icon="Menu.png">
     <StackLayout>
-        <Label Text="I'm a master navigation page"/>
-        <Button Text="Toggle Master"
-                Clicked="ToggleClicked"/>
+        <ListView ItemsSource="{Binding NavigationItems}" x:Name="NavigationMenu">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <TextCell Text="{Binding ItemName}" Command="{Binding ItemNavigationCommand}"/>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
     </StackLayout>
 </mvx:MvxContentPage>
