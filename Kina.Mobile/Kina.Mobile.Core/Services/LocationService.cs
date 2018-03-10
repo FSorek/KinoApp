@@ -28,7 +28,11 @@ namespace Kina.Mobile.Core.Services
         {
             _watcher = watcher;
             _messenger = messenger;
-            _watcher.Start(new MvxLocationOptions(), OnLocation, OnError);
+            var options = new MvxLocationOptions
+            {
+                MovementThresholdInM = 2500
+            };
+            _watcher.Start(options, OnLocation, OnError);
         }
 
         private void OnLocation(MvxGeoLocation location)
