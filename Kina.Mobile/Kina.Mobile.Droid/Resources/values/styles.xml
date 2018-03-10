@@ -1,0 +1,9 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<resources>
+  <style name="Theme.Kino.Mobile" parent="@style/Theme.Kino.Mobile.Base" />
+  <style name="Theme.Kino.Mobile.Base" parent="android:Theme.DeviceDefault">
+    <item name="android:colorPrimary">@color/colorPrimary</item>
+    <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+    <!--<item name="android:windowBackground">@color/lightWhite</item>-->
+  </style>
+</resources>

@@ -3128,44 +3128,44 @@ namespace Kina.Mobile.Droid
 		public partial class Color
 		{
 			
-			// aapt resource value: 0x7f0d004a
-			public const int abc_background_cache_hint_selector_material_dark = 2131558474;
-			
-			// aapt resource value: 0x7f0d004b
-			public const int abc_background_cache_hint_selector_material_light = 2131558475;
-			
-			// aapt resource value: 0x7f0d004c
-			public const int abc_btn_colored_borderless_text_material = 2131558476;
-			
-			// aapt resource value: 0x7f0d004d
-			public const int abc_btn_colored_text_material = 2131558477;
-			
 			// aapt resource value: 0x7f0d004e
-			public const int abc_color_highlight_material = 2131558478;
+			public const int abc_background_cache_hint_selector_material_dark = 2131558478;
 			
 			// aapt resource value: 0x7f0d004f
-			public const int abc_hint_foreground_material_dark = 2131558479;
+			public const int abc_background_cache_hint_selector_material_light = 2131558479;
 			
 			// aapt resource value: 0x7f0d0050
-			public const int abc_hint_foreground_material_light = 2131558480;
+			public const int abc_btn_colored_borderless_text_material = 2131558480;
+			
+			// aapt resource value: 0x7f0d0051
+			public const int abc_btn_colored_text_material = 2131558481;
+			
+			// aapt resource value: 0x7f0d0052
+			public const int abc_color_highlight_material = 2131558482;
+			
+			// aapt resource value: 0x7f0d0053
+			public const int abc_hint_foreground_material_dark = 2131558483;
+			
+			// aapt resource value: 0x7f0d0054
+			public const int abc_hint_foreground_material_light = 2131558484;
 			
 			// aapt resource value: 0x7f0d0005
 			public const int abc_input_method_navigation_guard = 2131558405;
 			
-			// aapt resource value: 0x7f0d0051
-			public const int abc_primary_text_disable_only_material_dark = 2131558481;
-			
-			// aapt resource value: 0x7f0d0052
-			public const int abc_primary_text_disable_only_material_light = 2131558482;
-			
-			// aapt resource value: 0x7f0d0053
-			public const int abc_primary_text_material_dark = 2131558483;
-			
-			// aapt resource value: 0x7f0d0054
-			public const int abc_primary_text_material_light = 2131558484;
-			
 			// aapt resource value: 0x7f0d0055
-			public const int abc_search_url_text = 2131558485;
+			public const int abc_primary_text_disable_only_material_dark = 2131558485;
+			
+			// aapt resource value: 0x7f0d0056
+			public const int abc_primary_text_disable_only_material_light = 2131558486;
+			
+			// aapt resource value: 0x7f0d0057
+			public const int abc_primary_text_material_dark = 2131558487;
+			
+			// aapt resource value: 0x7f0d0058
+			public const int abc_primary_text_material_light = 2131558488;
+			
+			// aapt resource value: 0x7f0d0059
+			public const int abc_search_url_text = 2131558489;
 			
 			// aapt resource value: 0x7f0d0006
 			public const int abc_search_url_text_normal = 2131558406;
@@ -3176,32 +3176,32 @@ namespace Kina.Mobile.Droid
 			// aapt resource value: 0x7f0d0008
 			public const int abc_search_url_text_selected = 2131558408;
 			
-			// aapt resource value: 0x7f0d0056
-			public const int abc_secondary_text_material_dark = 2131558486;
-			
-			// aapt resource value: 0x7f0d0057
-			public const int abc_secondary_text_material_light = 2131558487;
-			
-			// aapt resource value: 0x7f0d0058
-			public const int abc_tint_btn_checkable = 2131558488;
-			
-			// aapt resource value: 0x7f0d0059
-			public const int abc_tint_default = 2131558489;
-			
 			// aapt resource value: 0x7f0d005a
-			public const int abc_tint_edittext = 2131558490;
+			public const int abc_secondary_text_material_dark = 2131558490;
 			
 			// aapt resource value: 0x7f0d005b
-			public const int abc_tint_seek_thumb = 2131558491;
+			public const int abc_secondary_text_material_light = 2131558491;
 			
 			// aapt resource value: 0x7f0d005c
-			public const int abc_tint_spinner = 2131558492;
+			public const int abc_tint_btn_checkable = 2131558492;
 			
 			// aapt resource value: 0x7f0d005d
-			public const int abc_tint_switch_thumb = 2131558493;
+			public const int abc_tint_default = 2131558493;
 			
 			// aapt resource value: 0x7f0d005e
-			public const int abc_tint_switch_track = 2131558494;
+			public const int abc_tint_edittext = 2131558494;
+			
+			// aapt resource value: 0x7f0d005f
+			public const int abc_tint_seek_thumb = 2131558495;
+			
+			// aapt resource value: 0x7f0d0060
+			public const int abc_tint_spinner = 2131558496;
+			
+			// aapt resource value: 0x7f0d0061
+			public const int abc_tint_switch_thumb = 2131558497;
+			
+			// aapt resource value: 0x7f0d0062
+			public const int abc_tint_switch_track = 2131558498;
 			
 			// aapt resource value: 0x7f0d0009
 			public const int accent_material_dark = 2131558409;
@@ -3257,11 +3257,20 @@ namespace Kina.Mobile.Droid
 			// aapt resource value: 0x7f0d0003
 			public const int cardview_shadow_start_color = 2131558403;
 			
+			// aapt resource value: 0x7f0d004c
+			public const int colorAccent = 2131558476;
+			
+			// aapt resource value: 0x7f0d004a
+			public const int colorPrimary = 2131558474;
+			
+			// aapt resource value: 0x7f0d004b
+			public const int colorPrimaryDark = 2131558475;
+			
 			// aapt resource value: 0x7f0d003f
 			public const int design_bottom_navigation_shadow_color = 2131558463;
 			
-			// aapt resource value: 0x7f0d005f
-			public const int design_error = 2131558495;
+			// aapt resource value: 0x7f0d0063
+			public const int design_error = 2131558499;
 			
 			// aapt resource value: 0x7f0d0040
 			public const int design_fab_shadow_end_color = 2131558464;
@@ -3293,8 +3302,8 @@ namespace Kina.Mobile.Droid
 			// aapt resource value: 0x7f0d0049
 			public const int design_textinput_error_color_light = 2131558473;
 			
-			// aapt resource value: 0x7f0d0060
-			public const int design_tint_password_toggle = 2131558496;
+			// aapt resource value: 0x7f0d0064
+			public const int design_tint_password_toggle = 2131558500;
 			
 			// aapt resource value: 0x7f0d0017
 			public const int dim_foreground_disabled_material_dark = 2131558423;
@@ -3319,6 +3328,9 @@ namespace Kina.Mobile.Droid
 			
 			// aapt resource value: 0x7f0d001e
 			public const int highlighted_text_material_light = 2131558430;
+			
+			// aapt resource value: 0x7f0d004d
+			public const int lightWhite = 2131558477;
 			
 			// aapt resource value: 0x7f0d001f
 			public const int material_blue_grey_800 = 2131558431;
@@ -3413,11 +3425,11 @@ namespace Kina.Mobile.Droid
 			// aapt resource value: 0x7f0d003c
 			public const int switch_thumb_disabled_material_light = 2131558460;
 			
-			// aapt resource value: 0x7f0d0061
-			public const int switch_thumb_material_dark = 2131558497;
+			// aapt resource value: 0x7f0d0065
+			public const int switch_thumb_material_dark = 2131558501;
 			
-			// aapt resource value: 0x7f0d0062
-			public const int switch_thumb_material_light = 2131558498;
+			// aapt resource value: 0x7f0d0066
+			public const int switch_thumb_material_light = 2131558502;
 			
 			// aapt resource value: 0x7f0d003d
 			public const int switch_thumb_normal_material_dark = 2131558461;
@@ -4147,26 +4159,26 @@ namespace Kina.Mobile.Droid
 			// aapt resource value: 0x7f020053
 			public const int avd_hide_password = 2130837587;
 			
-			// aapt resource value: 0x7f020118
-			public const int avd_hide_password_1 = 2130837784;
-			
 			// aapt resource value: 0x7f020119
-			public const int avd_hide_password_2 = 2130837785;
+			public const int avd_hide_password_1 = 2130837785;
 			
 			// aapt resource value: 0x7f02011a
-			public const int avd_hide_password_3 = 2130837786;
+			public const int avd_hide_password_2 = 2130837786;
+			
+			// aapt resource value: 0x7f02011b
+			public const int avd_hide_password_3 = 2130837787;
 			
 			// aapt resource value: 0x7f020054
 			public const int avd_show_password = 2130837588;
 			
-			// aapt resource value: 0x7f02011b
-			public const int avd_show_password_1 = 2130837787;
-			
 			// aapt resource value: 0x7f02011c
-			public const int avd_show_password_2 = 2130837788;
+			public const int avd_show_password_1 = 2130837788;
 			
 			// aapt resource value: 0x7f02011d
-			public const int avd_show_password_3 = 2130837789;
+			public const int avd_show_password_2 = 2130837789;
+			
+			// aapt resource value: 0x7f02011e
+			public const int avd_show_password_3 = 2130837790;
 			
 			// aapt resource value: 0x7f020055
 			public const int darkersplash = 2130837589;
@@ -4637,121 +4649,124 @@ namespace Kina.Mobile.Droid
 			public const int Icon = 2130837744;
 			
 			// aapt resource value: 0x7f0200f1
-			public const int mr_button_connected_dark = 2130837745;
+			public const int Menu = 2130837745;
 			
 			// aapt resource value: 0x7f0200f2
-			public const int mr_button_connected_light = 2130837746;
+			public const int mr_button_connected_dark = 2130837746;
 			
 			// aapt resource value: 0x7f0200f3
-			public const int mr_button_connecting_dark = 2130837747;
+			public const int mr_button_connected_light = 2130837747;
 			
 			// aapt resource value: 0x7f0200f4
-			public const int mr_button_connecting_light = 2130837748;
+			public const int mr_button_connecting_dark = 2130837748;
 			
 			// aapt resource value: 0x7f0200f5
-			public const int mr_button_dark = 2130837749;
+			public const int mr_button_connecting_light = 2130837749;
 			
 			// aapt resource value: 0x7f0200f6
-			public const int mr_button_light = 2130837750;
+			public const int mr_button_dark = 2130837750;
 			
 			// aapt resource value: 0x7f0200f7
-			public const int mr_dialog_close_dark = 2130837751;
+			public const int mr_button_light = 2130837751;
 			
 			// aapt resource value: 0x7f0200f8
-			public const int mr_dialog_close_light = 2130837752;
+			public const int mr_dialog_close_dark = 2130837752;
 			
 			// aapt resource value: 0x7f0200f9
-			public const int mr_dialog_material_background_dark = 2130837753;
+			public const int mr_dialog_close_light = 2130837753;
 			
 			// aapt resource value: 0x7f0200fa
-			public const int mr_dialog_material_background_light = 2130837754;
+			public const int mr_dialog_material_background_dark = 2130837754;
 			
 			// aapt resource value: 0x7f0200fb
-			public const int mr_group_collapse = 2130837755;
+			public const int mr_dialog_material_background_light = 2130837755;
 			
 			// aapt resource value: 0x7f0200fc
-			public const int mr_group_expand = 2130837756;
+			public const int mr_group_collapse = 2130837756;
 			
 			// aapt resource value: 0x7f0200fd
-			public const int mr_media_pause_dark = 2130837757;
+			public const int mr_group_expand = 2130837757;
 			
 			// aapt resource value: 0x7f0200fe
-			public const int mr_media_pause_light = 2130837758;
+			public const int mr_media_pause_dark = 2130837758;
 			
 			// aapt resource value: 0x7f0200ff
-			public const int mr_media_play_dark = 2130837759;
+			public const int mr_media_pause_light = 2130837759;
 			
 			// aapt resource value: 0x7f020100
-			public const int mr_media_play_light = 2130837760;
+			public const int mr_media_play_dark = 2130837760;
 			
 			// aapt resource value: 0x7f020101
-			public const int mr_media_stop_dark = 2130837761;
+			public const int mr_media_play_light = 2130837761;
 			
 			// aapt resource value: 0x7f020102
-			public const int mr_media_stop_light = 2130837762;
+			public const int mr_media_stop_dark = 2130837762;
 			
 			// aapt resource value: 0x7f020103
-			public const int mr_vol_type_audiotrack_dark = 2130837763;
+			public const int mr_media_stop_light = 2130837763;
 			
 			// aapt resource value: 0x7f020104
-			public const int mr_vol_type_audiotrack_light = 2130837764;
+			public const int mr_vol_type_audiotrack_dark = 2130837764;
 			
 			// aapt resource value: 0x7f020105
-			public const int navigation_empty_icon = 2130837765;
+			public const int mr_vol_type_audiotrack_light = 2130837765;
 			
 			// aapt resource value: 0x7f020106
-			public const int notification_action_background = 2130837766;
+			public const int navigation_empty_icon = 2130837766;
 			
 			// aapt resource value: 0x7f020107
-			public const int notification_bg = 2130837767;
+			public const int notification_action_background = 2130837767;
 			
 			// aapt resource value: 0x7f020108
-			public const int notification_bg_low = 2130837768;
+			public const int notification_bg = 2130837768;
 			
 			// aapt resource value: 0x7f020109
-			public const int notification_bg_low_normal = 2130837769;
+			public const int notification_bg_low = 2130837769;
 			
 			// aapt resource value: 0x7f02010a
-			public const int notification_bg_low_pressed = 2130837770;
+			public const int notification_bg_low_normal = 2130837770;
 			
 			// aapt resource value: 0x7f02010b
-			public const int notification_bg_normal = 2130837771;
+			public const int notification_bg_low_pressed = 2130837771;
 			
 			// aapt resource value: 0x7f02010c
-			public const int notification_bg_normal_pressed = 2130837772;
+			public const int notification_bg_normal = 2130837772;
 			
 			// aapt resource value: 0x7f02010d
-			public const int notification_icon_background = 2130837773;
-			
-			// aapt resource value: 0x7f020116
-			public const int notification_template_icon_bg = 2130837782;
-			
-			// aapt resource value: 0x7f020117
-			public const int notification_template_icon_low_bg = 2130837783;
+			public const int notification_bg_normal_pressed = 2130837773;
 			
 			// aapt resource value: 0x7f02010e
-			public const int notification_tile_bg = 2130837774;
+			public const int notification_icon_background = 2130837774;
+			
+			// aapt resource value: 0x7f020117
+			public const int notification_template_icon_bg = 2130837783;
+			
+			// aapt resource value: 0x7f020118
+			public const int notification_template_icon_low_bg = 2130837784;
 			
 			// aapt resource value: 0x7f02010f
-			public const int notify_panel_notification_icon_bg = 2130837775;
+			public const int notification_tile_bg = 2130837775;
 			
 			// aapt resource value: 0x7f020110
-			public const int Pin = 2130837776;
+			public const int notify_panel_notification_icon_bg = 2130837776;
 			
 			// aapt resource value: 0x7f020111
-			public const int PinBlack = 2130837777;
+			public const int Pin = 2130837777;
 			
 			// aapt resource value: 0x7f020112
-			public const int roundedbg = 2130837778;
+			public const int PinBlack = 2130837778;
 			
 			// aapt resource value: 0x7f020113
-			public const int roundedbgdark = 2130837779;
+			public const int roundedbg = 2130837779;
 			
 			// aapt resource value: 0x7f020114
-			public const int splash = 2130837780;
+			public const int roundedbgdark = 2130837780;
 			
 			// aapt resource value: 0x7f020115
-			public const int TitleBackground = 2130837781;
+			public const int splash = 2130837781;
+			
+			// aapt resource value: 0x7f020116
+			public const int TitleBackground = 2130837782;
 			
 			static Drawable()
 			{
@@ -6714,6 +6729,12 @@ namespace Kina.Mobile.Droid
 			
 			// aapt resource value: 0x7f0c017f
 			public const int Theme_Design_NoActionBar = 2131493247;
+			
+			// aapt resource value: 0x7f0c018a
+			public const int Theme_Kino_Mobile = 2131493258;
+			
+			// aapt resource value: 0x7f0c018b
+			public const int Theme_Kino_Mobile_Base = 2131493259;
 			
 			// aapt resource value: 0x7f0c0003
 			public const int Theme_MediaRouter = 2131492867;
