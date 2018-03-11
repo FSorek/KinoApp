@@ -1,51 +1,43 @@
-﻿using Kina.Mobile.Core.Services;
+﻿using Acr.UserDialogs;
+using Kina.Mobile.Core.Services;
+using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
+using MvvmCross.Plugins.Messenger;
 using System;
 using System.Collections.Generic;
-using System.Diagnostics;
 using System.Threading.Tasks;
-using System.Windows.Input;
-using MvvmCross.Plugins.Messenger;
-using Kina.Mobile.DataProvider.Models;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    class LocationViewModel : MvxViewModel
+    public class LocationViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+
         private readonly MvxSubscriptionToken _token;
 
         private MvxAsyncCommand _confirmLocationCommandCommand;
         private MvxAsyncCommand _autoLocateCommandCommand;
 
+        private double _longtitude;
+        private double _latitude;
+        private string selectedLocation;
+        private int distance;
         private List<string> location;
 
-        public string DistanceLabel { get { return String.Format("Using the device's location, find cinemas at a distance of about {0} km.", distance); } }
+        public IMvxAsyncCommand ConfirmLocationCommand => _confirmLocationCommandCommand;
+        public IMvxAsyncCommand AutoLocateCommand => _autoLocateCommandCommand;
 
-        private int distance;
-
-        public ICommand ConfirmLocationCommand => _confirmLocationCommandCommand;
-        public ICommand AutoLocateCommand => _autoLocateCommandCommand;
-
-        private double _lng; //Longtitude of device
-        public double Lng
+        public string SelectedLocation
         {
-            get { return _lng; }
-            set { _lng = value; RaisePropertyChanged(() => Lng); }
+            get { return selectedLocation; }
+            set { SetProperty(ref selectedLocation, value); }
         }
 
-        private double _lat; //Latitude of device
-        public double Lat
+        public string RangeText
         {
-            get { return _lat; }
-            set { _lat = value; RaisePropertyChanged(() => Lat); }
-        }
-
-        public List<string> Location
-        {
-            get { return location; }
-            set { SetProperty(ref location, value); }
+            get { return String.Format("Using the device's location, find cinemas at a distance of about {0} km.", distance); }
         }
 
         public int Distance
@@ -54,81 +46,76 @@ namespace Kina.Mobile.Core.ViewModels
             set { SetProperty(ref distance, value); }
         }
 
+        public List<string> Location
+        {
+            get { return location; }
+        }
 
-
-        public LocationViewModel(IMvxNavigationService navigationService, ILocationService service, IMvxMessenger messenger)
+        public LocationViewModel(IMvxNavigationService navigationService, ILocationService locationService, IMvxMessenger messenger)
         {
             _navigationService = navigationService;
-            _token = messenger.SubscribeOnMainThread<LocationMessage>(OnLocationMessage); //Live Update of device coords
+            _token = messenger.SubscribeOnMainThread<LocationMessage>(OnLocationMessage);
 
-            #region Temporary hardcoded content
-            location = new List<string>();
-            location.Add("Gdańsk");
-            #endregion
+            DataRequest dataRequest = new DataRequest();
+            location = dataRequest.CityList;
+            GetLocations(dataRequest);
+            location = dataRequest.CityList;
 
             InitCommands();
         }
 
         private void OnLocationMessage(LocationMessage locationMessage)
         {
-            Lat = locationMessage.Lat;
-            Lng = locationMessage.Lng;
+            _latitude = locationMessage.Lat;
+            _longtitude = locationMessage.Lng;
         }
 
-        private async Task ConfirmLocationAction()
+        private async Task ConfirmLocation()
         {
-            Debug.WriteLine(Lat);
-            Debug.WriteLine(Lng);
-            if (Lat == 0 || Lng == 0)
+            if (selectedLocation == null)
             {
-                
+                Mvx.Resolve<IUserDialogs>().Alert("Location was not idicated. Please provide your location for this session before proceeding.");
+                //return;
             }
-            MvxApp.FilterSettings.Cinemas = GetCinemasInRange(distance);
-            await _navigationService.Navigate<ShowsViewModel>();
+            MvxApp.FilterSettings.City = selectedLocation;
+            MvxApp.FilterSettings.Cinemas = null;
+            await ShowMasterDetailView();
         }
 
-        private async Task AutoLocateAction()
+        private async Task AutoDetectLocation()
         {
-            MvxApp.FilterSettings.Cinemas = null;
-            await _navigationService.Navigate<ShowsViewModel>();
+            if (_latitude == 0 || _longtitude == 0)
+            {
+                Mvx.Resolve<IUserDialogs>().Alert("Your device was not able to detect proper location. Please provide your location for this session manually.");
+                return;
+            }
+
+            DataRequest dataRequest = new DataRequest();
+            GetCinemasInRange(dataRequest);
+            MvxApp.FilterSettings.Cinemas = dataRequest.CinemaList;
+            MvxApp.FilterSettings.City = null;
+            await ShowMasterDetailView();
+        }
+
+        private async Task ShowMasterDetailView()
+        {
+            await _navigationService.Navigate<MasterDetailViewModel>();
+        }
+
+        private void GetLocations(DataRequest dataRequest)
+        {
+            Task.Run(() => dataRequest.ProvideCities()).Wait();
+        }
+
+        private void GetCinemasInRange(DataRequest dataRequest)
+        {
+            Task.Run(() => dataRequest.ProvideCinemasInRange(_latitude, _longtitude, distance)).Wait();
         }
 
         private void InitCommands()
         {
-            _autoLocateCommandCommand = new MvxAsyncCommand(AutoLocateAction);
-            _confirmLocationCommandCommand = new MvxAsyncCommand(ConfirmLocationAction);
-        }
-
-        public List<Cinema> GetCinemasInRange(int kilimeters)
-        {
-            var cinemas = new List<Cinema>();
-            var cinemasInRange = new List<Cinema>();
-            //cinemas = Task.Run(() => MvxApp.Database.GetAllCinemaAsync()).Result;
-            //foreach (var cinema in cinemas)
-            //{
-            //    if (CalculateDistance(Lat, Lng, cinema.Latitude, cinema.Longtitude) <= kilimeters)
-            //    {
-            //        cinemasInRange.Add(cinema);
-            //    }
-            //}
-
-            return cinemasInRange;
-        }
-
-        public double CalculateDistance(double lat1, double lon1, double lat2, double lon2)
-        {
-            double rlat1 = Math.PI * lat1 / 180;
-            double rlat2 = Math.PI * lat2 / 180;
-            double theta = lon1 - lon2;
-            double rtheta = Math.PI * theta / 180;
-            double dist =
-                Math.Sin(rlat1) * Math.Sin(rlat2) + Math.Cos(rlat1) *
-                Math.Cos(rlat2) * Math.Cos(rtheta);
-            dist = Math.Acos(dist);
-            dist = dist * 180 / Math.PI;
-            dist = dist * 60 * 1.1515;
-
-            return dist * 1.609344;
+            _autoLocateCommandCommand = new MvxAsyncCommand(AutoDetectLocation);
+            _confirmLocationCommandCommand = new MvxAsyncCommand(ConfirmLocation);
         }
     }
 }

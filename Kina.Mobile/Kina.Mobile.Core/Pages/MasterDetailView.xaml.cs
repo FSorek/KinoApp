@@ -13,9 +13,9 @@ using Xamarin.Forms.Xaml;
 namespace Kina.Mobile.Core.Pages
 {
     [MvxMasterDetailPagePresentation(MasterDetailPosition.Root, WrapInNavigationPage = false)]
-    public partial class MasterDetailaView : MvxMasterDetailPage<MasterDetailaViewModel>
+    public partial class MasterDetailView : MvxMasterDetailPage<MasterDetailViewModel>
     {
-        public MasterDetailaView()
+        public MasterDetailView()
         {
             InitializeComponent();
 

@@ -1,8 +1,11 @@
-﻿using MvvmCross.Forms.Views;
+﻿using Kina.Mobile.Core.ViewModels;
+using MvvmCross.Forms.Views;
+using MvvmCross.Forms.Views.Attributes;
 
 namespace Kina.Mobile.Core.Pages
 {
-    public partial class ShowsView : MvxContentPage
+    [MvxMasterDetailPagePresentation()]
+    public partial class ShowsView : MvxContentPage<ShowsViewModel>
     {
         public ShowsView()
         {

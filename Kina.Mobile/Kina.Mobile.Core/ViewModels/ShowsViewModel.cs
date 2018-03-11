@@ -10,7 +10,7 @@ using Xamarin.Forms;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    class ShowsViewModel : MvxViewModel
+    public class ShowsViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly Services.IAppSettings _settings;
@@ -167,7 +167,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToLocationViewAction()
         {
-            await _navigationService.Navigate<LocationInitViewModel>();
+            await _navigationService.Navigate<LocationViewModel>();
         }
     }
 }

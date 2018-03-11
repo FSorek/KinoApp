@@ -1,5 +1,6 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
-<mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+<mvx:MvxContentPage x:TypeArguments="viewModels:ShowsViewModel"
+             xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kina.Mobile.Core.Pages.ShowsView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
@@ -8,8 +9,8 @@
              xmlns:pvm="clr-namespace:Kina.Mobile.Core.ViewModels;assembly=Kina.Mobile.Core"
              xmlns:mod="clr-namespace:Kina.Mobile.Core.Model;assembly=Kina.Mobile.Core"
              xmlns:dpm="clr-namespace:Kina.Mobile.DataProvider.Models;assembly=Kina.Mobile.DataProvider"
-             Title="Shows list"
-             BackgroundImage="darkersplash.png">
+             xmlns:viewModels="clr-namespace:Kina.Mobile.Core.ViewModels;assembly=Kina.Mobile.Core"
+             Title="Shows list">
   <ContentPage.Resources>
     <ResourceDictionary>
       <Style x:Key="CityTitle" TargetType="Button">
@@ -98,9 +99,5 @@
         </xlf:RepeaterView>
       </StackLayout>
     </ScrollView>
-    <StackLayout Orientation="Horizontal" BackgroundColor="Transparent">
-        <Button Image="PinBlack.png" Command="{Binding GoToLocationViewCommand}" Style="{StaticResource FilterButton}" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
-        <Button Image="Filter.png" Command="{Binding GoToFilterViewCommand}" Style="{StaticResource FilterButton}" HorizontalOptions="LayoutOptions.End" WidthRequest="50" HeightRequest="50"/>
-    </StackLayout>
   </StackLayout>
 </mvx:MvxContentPage>

@@ -8,7 +8,7 @@ using System.Threading.Tasks;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    public class MasterDetailaViewModel : MvxViewModel
+    public class MasterDetailViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
 
@@ -18,7 +18,7 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand ShowDetailCommand => _showDetailCommandCommand;
         public IMvxAsyncCommand ShowInitialMenuCommand => _showInitialMenuCommandCommand;
 
-        public MasterDetailaViewModel(IMvxNavigationService navigationService)
+        public MasterDetailViewModel(IMvxNavigationService navigationService)
         {
             _navigationService = navigationService;
             InitializeCommands();
@@ -32,12 +32,12 @@ namespace Kina.Mobile.Core.ViewModels
 
         public async Task ShowInitialViewModel()
         {
-            await _navigationService.Navigate<MasterViewModel>();
+            await _navigationService.Navigate<NavigationViewModel>();
         }
 
         private async Task ShowDetailViewModel()
         {
-            await _navigationService.Navigate<DetailViewModel>();
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         public override void ViewAppeared()

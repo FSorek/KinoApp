@@ -52,18 +52,15 @@
     <Compile Include="Pages\FilterView.xaml.cs">
       <DependentUpon>FilterView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\LocationInitView.xaml.cs">
-      <DependentUpon>LocationInitView.xaml</DependentUpon>
+    <Compile Include="Pages\LocationView.xaml.cs">
+      <DependentUpon>LocationView.xaml</DependentUpon>
       <SubType>Code</SubType>
     </Compile>
     <Compile Include="Pages\MasterDetailView.xaml.cs">
       <DependentUpon>MasterDetailView.xaml</DependentUpon>
     </Compile>
-    <Compile Include="Pages\DetailView.xaml.cs">
-      <DependentUpon>DetailView.xaml</DependentUpon>
-    </Compile>
-    <Compile Include="Pages\MasterView.xaml.cs">
-      <DependentUpon>MasterView.xaml</DependentUpon>
+    <Compile Include="Pages\NavigationView.xaml.cs">
+      <DependentUpon>NavigationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Pages\MovieView.xaml.cs">
       <DependentUpon>MovieView.xaml</DependentUpon>
@@ -117,13 +114,11 @@
     <Compile Include="Services\IAppSettings.cs" />
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\LocationService.cs" />
-    <Compile Include="ViewModels\DetailViewModel.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
-    <Compile Include="ViewModels\LocationInitViewModel.cs" />
     <Compile Include="ViewModels\LocationViewModel.cs" />
     <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MasterDetailViewModel.cs" />
-    <Compile Include="ViewModels\MasterViewModel.cs" />
+    <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\RateViewModel.cs" />
     <Compile Include="ViewModels\ScoreViewModel.cs" />
@@ -231,10 +226,11 @@
   <ItemGroup>
     <None Include="app.config" />
     <EmbeddedResource Include="Model\multikino.json" />
+    <Compile Include="CustomViews\NavigationCell.cs" />
     <None Include="packages.config" />
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\LocationInitView.xaml">
+    <EmbeddedResource Include="Pages\LocationView.xaml">
       <SubType>Designer</SubType>
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
     </EmbeddedResource>
@@ -276,7 +272,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <Folder Include="CustomViews\" />
     <Folder Include="Repository\" />
     <Folder Include="Triggers\" />
   </ItemGroup>
@@ -334,16 +329,14 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\MasterView.xaml">
+    <EmbeddedResource Include="Pages\NavigationView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\DetailView.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
+    <EmbeddedResource Include="Resources\Images\Funnel.png" />
+    <EmbeddedResource Include="Resources\Images\Pin.png" />
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
