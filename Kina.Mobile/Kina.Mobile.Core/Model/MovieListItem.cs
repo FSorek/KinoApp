@@ -1,5 +1,4 @@
-﻿using Kina.Mobile.Core.Model;
-using Kina.Mobile.Core.Services;
+﻿using Kina.Mobile.Core.ViewModels;
 using Kina.Mobile.DataProvider.Models;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
@@ -8,26 +7,24 @@ using System.Collections.Generic;
 using System.Threading.Tasks;
 using System.Windows.Input;
 
-namespace Kina.Mobile.Core.ViewModels
+namespace Kina.Mobile.Core.Model
 {
-    class ShowsMovieModel
+    public class MovieListItem
     {
         private readonly IMvxNavigationService _navigationService;
-        private readonly IAppSettings _settings;
 
         private MvxAsyncCommand _goToScoreViewCommandCommand;
         private MvxAsyncCommand _goToMovieViewCommandCommand;
         public ICommand GoToScoreViewCommand => _goToScoreViewCommandCommand;
         public ICommand GoToMovieViewCommand => _goToMovieViewCommandCommand;
 
-        private Movie movie;
+        private SimpleMovie movie;
+        private BasicShowData basicShowData;
 
         private bool[] isStarred;
-        private long movieID;
         private string title;
-        private string cinemaName;
 
-        private List<Show> shows;
+        private List<SimpleShow> shows;
 
         public bool IsStarredOne
         {
@@ -50,40 +47,34 @@ namespace Kina.Mobile.Core.ViewModels
             get { return isStarred[4]; }
         }
 
-        public long MovieID
-        {
-            get { return movieID; }
-            set { movieID = value; }
-        }
-
         public string Title
         {
             get { return title; }
             set { title = value; }
         }
 
-        public List<Show> Shows
+        public List<SimpleShow> Shows
         {
             get { return shows; }
             set { shows = value; }
         }
 
-        public ShowsMovieModel(Movie movie, double rating, IMvxNavigationService navigationService, FilterSet parameter, IAppSettings settings, string cinemaName)
+        public MovieListItem(BasicShowData basicShowData, SimpleMovie movie, double overallRating, IMvxNavigationService navigationService)
         {
-            _settings = settings;
             var date = DateTime.Today.Date;
-            movieID = movie.Id;
-            title = movie.OriginalName;
-            shows = new List<Show>();
-            this.cinemaName = cinemaName;
-            foreach(Show s in movie.Shows)
+            this.basicShowData = basicShowData;
+            title = movie.Name;
+            shows = new List<SimpleShow>();
+            foreach(SimpleShow s in movie.Shows)
             {
+                string start = MvxApp.FilterSettings.Start;
+                string end = MvxApp.FilterSettings.End;
                 bool check = true;
-                if(parameter != null)
+                if(start != null && end != null)
                 {
                     int showHour = int.Parse(s.Start.Split(':')[0]);
-                    int parameterHourStart = int.Parse(parameter.Start.Split(':')[0]);
-                    int parameterHourEnd = int.Parse(parameter.End.Split(':')[0]);
+                    int parameterHourStart = int.Parse(start.Split(':')[0]);
+                    int parameterHourEnd = int.Parse(end.Split(':')[0]);
 
                     check = ((showHour > (parameterHourStart)) && (showHour < (parameterHourEnd))) || (parameterHourStart == 0 && parameterHourEnd == 0);
                 }
@@ -99,23 +90,21 @@ namespace Kina.Mobile.Core.ViewModels
             _navigationService = navigationService;
 
             InitCommands();
-            InitRating(rating);
+            InitRating(overallRating);
         }
 
         private async Task GoToMovieViewAction()
         {
-            Movie parameter = movie;
             MvxApp.UsingFilter = false;
             MvxApp.FilterSettings.ClearFilter();
-            await _navigationService.Navigate<MovieViewModel, Movie>(parameter);
+            await _navigationService.Navigate<MovieViewModel, BasicShowData>(basicShowData);
         }
 
         private async Task GoToScoreViewAction()
         {
-            MovieDataSet parameter = new MovieDataSet(movie, cinemaName);
             MvxApp.UsingFilter = false;
             MvxApp.FilterSettings.ClearFilter();
-            await _navigationService.Navigate<ScoreViewModel, MovieDataSet>(parameter);
+            await _navigationService.Navigate<ScoreViewModel, BasicShowData>(basicShowData);
         }
 
         private void InitCommands()

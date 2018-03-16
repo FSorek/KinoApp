@@ -16,7 +16,7 @@ namespace Kina.Mobile.Core
     public class MvxApp : MvxApplication
 	{
         public static bool UsingFilter { get; set; }
-	    public static FilterSet FilterSettings { get; set; }
+	    public static Filter FilterSettings { get; set; }
 
 		public override void Initialize()
 		{
@@ -34,10 +34,10 @@ namespace Kina.Mobile.Core
 			Mvx.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
 			Mvx.RegisterSingleton<IUserDialogs>(() => UserDialogs.Instance);
 
-            FilterSettings = new FilterSet();
+            FilterSettings = new Filter();
             Resources.AppResources.Culture = Mvx.Resolve<Services.ILocalizeService>().GetCurrentCultureInfo();
 
-			RegisterAppStart<ViewModels.LocationInitViewModel>();
+            RegisterNavigationServiceAppStart<ViewModels.LocationViewModel>();
 		}
 	}
 }

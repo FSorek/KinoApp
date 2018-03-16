@@ -3,10 +3,9 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kina.Mobile.Core.Pages.RateView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
-             xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
              xmlns:local="clr-namespace:Kina.Mobile.Core.Behaviors;assembly=Kina.Mobile.Core"
-             Title="Rate this show"
-                    NavigationPage.HasNavigationBar="false">
+             Title="Rate this show">
   <ScrollView>
     <StackLayout>
       <StackLayout>

@@ -5,13 +5,12 @@
 
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
-using System.Collections.Generic;
 using Xamarin.Forms;
 using System;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-	public class MainViewModel : MvxViewModel
+    public class MainViewModel : MvxViewModel
 	{
 		private readonly IMvxNavigationService _navigationService;
 		private readonly Services.IAppSettings _settings;

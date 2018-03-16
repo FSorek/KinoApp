@@ -27,8 +27,10 @@ namespace Kina.Mobile.DataProvider.Providers
 
         private static string GetCinemasInRangeUri(double latitude, double longtitude, int distance)
         {
-            NumberFormatInfo format = new NumberFormatInfo();
-            format.NumberDecimalSeparator = ".";
+            NumberFormatInfo format = new NumberFormatInfo
+            {
+                NumberDecimalSeparator = "."
+            };
             return String.Format("https://epertuar.azurewebsites.net/api/Show/Distance?Lng={0}&Lat={1}&range={2}",
                 longtitude.ToString(format), latitude.ToString(format), distance.ToString(format));
         }
@@ -36,9 +38,18 @@ namespace Kina.Mobile.DataProvider.Providers
         private async Task<string> GetResponse(string uri)
         {
             var client = new HttpClient();
-            var httpResponse = await client.GetAsync(uri);
-            httpResponse.EnsureSuccessStatusCode();
-            var responseStream = await httpResponse.Content.ReadAsStringAsync();
+            string responseStream = null;
+            try
+            {
+                var httpResponse = await client.GetAsync(uri);
+                httpResponse.EnsureSuccessStatusCode();
+                responseStream = await httpResponse.Content.ReadAsStringAsync();
+            }
+            catch
+            {
+                throw new Exception();
+            }
+
             return responseStream;
         }
 
@@ -46,46 +57,88 @@ namespace Kina.Mobile.DataProvider.Providers
         {
             CinemaList = new List<Cinema>();
             string uri = GetShowsUri(city);
-            string dataString = await GetResponse(uri);
-            List<Cinema> cinemas = Cinema.FromJson(dataString);
-            CinemaList.AddRange(cinemas);
+            try
+            {
+                string dataString = await GetResponse(uri);
+                List<Cinema> cinemas = Cinema.FromJson(dataString);
+                CinemaList.AddRange(cinemas);
+            }
+            catch
+            {
+
+            }
         }
 
         public async Task ProvideCinemasInRange(double latitude, double longtitude, int distance)
         {
             CinemaList = new List<Cinema>();
             string uri = GetCinemasInRangeUri(latitude, longtitude, distance);
-            string dataString = await GetResponse(uri);
-            List<Cinema> cinemas = Cinema.FromJson(dataString);
-            CinemaList.AddRange(cinemas);
+            try
+            {
+                string dataString = await GetResponse(uri);
+                List<Cinema> cinemas = Cinema.FromJson(dataString);
+                CinemaList.AddRange(cinemas);
+            }
+            catch
+            {
+
+            }
         }
 
         public async Task ProvideCities()
         {
             string uri = GetCityUri();
-            string dataString = await GetResponse(uri);
-            CityList = StringList.FromJson(dataString);
+            try
+            {
+                string dataString = await GetResponse(uri);
+                CityList = StringList.FromJson(dataString);
+            }
+            catch
+            {
+                CityList = new List<string>();
+            }
         }
 
         public async Task ProvideCategories()
         {
             string uri = GetCategoryUri();
-            string dataString = await GetResponse(uri);
-            CategoryList = StringList.FromJson(dataString);
+            try
+            {
+                string dataString = await GetResponse(uri);
+                CategoryList = StringList.FromJson(dataString);
+            }
+            catch
+            {
+                CategoryList = new List<string>();
+            }
         }
 
         public async Task ProvideMovieData(long id)
         {
             string uri = GetMovieUri(id);
-            string dataString = await GetResponse(uri);
-            SelectedMovie = Movie.FromJson(dataString);
+            try
+            {
+                string dataString = await GetResponse(uri);
+                SelectedMovie = Movie.FromJson(dataString);
+            }
+            catch
+            {
+                SelectedMovie = new Movie();
+            }
         }
 
         public async Task ProvideScoreData(long movieId, long cinemaId)
         {
             string uri = GetScoreUri(movieId, cinemaId);
-            string dataString = await GetResponse(uri);
-            ShowScore = UserScore.FromJson(dataString);
+            try
+            {
+                string dataString = await GetResponse(uri);
+                ShowScore = UserScore.FromJson(dataString);
+            }
+            catch
+            {
+                ShowScore = new List<UserScore>();
+            }
         }
 
         public async Task PostScoreAsync(UserScore userScore)

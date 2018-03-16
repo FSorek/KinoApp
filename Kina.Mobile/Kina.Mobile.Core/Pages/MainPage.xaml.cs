@@ -3,7 +3,7 @@
 // <url>https://www.linkedin.com/in/pauldatsyuk/</url>
 // ---------------------------------------------------------------
 
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Views;
 
 namespace Kina.Mobile.Core.Pages
 {

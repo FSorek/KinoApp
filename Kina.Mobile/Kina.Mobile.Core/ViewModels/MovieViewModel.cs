@@ -3,19 +3,18 @@
 // <url>https://www.linkedin.com/in/pauldatsyuk/</url>
 // ---------------------------------------------------------------
 
-using Kina.Mobile.Core.Helpers;
+using Kina.Mobile.Core.Model;
 using Kina.Mobile.DataProvider.Models;
 using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
-using System.Diagnostics;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    class MovieViewModel : MvxViewModel<Movie>
+    class MovieViewModel : MvxViewModel<BasicShowData>
     {
         private readonly IMvxNavigationService _navigationService;
         //private readonly Services.IAppSettings _settings;
@@ -26,7 +25,7 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand GoToLocationViewCommand => _goToLocationViewCommandCommand;
         public IMvxAsyncCommand GoToRateViewCommand => _goToRateViewCommandCommand;
 
-        private Movie _parameter;
+        private BasicShowData _parameter;
 
         public string TitleText { get; set; }
         public string URLText { get; set; }
@@ -50,7 +49,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToRateViewAction()
         {
-            await _navigationService.Navigate<RateViewModel, Movie>(_parameter);
+            await _navigationService.Navigate<RateViewModel, BasicShowData>(_parameter);
         }
 
         private async Task GoToLocationViewAction()
@@ -69,11 +68,11 @@ namespace Kina.Mobile.Core.ViewModels
             Task.Run(() => dataRequest.ProvideMovieData(id)).Wait();
         }
 
-        public override Task Initialize(Movie parameter)
+        public override void Prepare(BasicShowData parameter)
         {
             _parameter = parameter;
             DataRequest dataRequest = new DataRequest();
-            GetMovieData(dataRequest, _parameter.Id);
+            GetMovieData(dataRequest, _parameter.IdMovie);
             Movie requested = dataRequest.SelectedMovie;
             TitleText = requested.OriginalName;
             DescriptionText = requested.Storyline;
@@ -81,8 +80,6 @@ namespace Kina.Mobile.Core.ViewModels
             URLText = requested.Trailer;
             Cast = requested.Stars;
             Year = null;
-
-            return Task.FromResult(true);
         }
     }
 }
