@@ -3,8 +3,6 @@ using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using DataModel;
-using Kina.Mobile.Core.Model;
 using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Providers;
 

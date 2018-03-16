@@ -1,10 +1,9 @@
-﻿using DataModel;
-using Kina.Mobile.DataProvider.Models;
+﻿using Kina.Mobile.DataProvider.Models;
 using System.Collections.Generic;
 
 namespace Kina.Mobile.Core.Model
 {
-    public class FilterSet
+    public class Filter
     {
         public string Category { get; set; }
         public string Start { get; set; }
