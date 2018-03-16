@@ -3,23 +3,36 @@
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kina.Mobile.Core.Pages.FilterView"
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
-             xmlns:mvx="clr-namespace:MvvmCross.Forms.Core;assembly=MvvmCross.Forms"
-             Title="Filter settings"
-                    NavigationPage.HasNavigationBar="false">
-  <StackLayout>
-    <ScrollView>
-      <StackLayout>
-        <Entry Placeholder="Title" Text="{Binding Title}" Margin="2"/>
-        <Label Text="Start" Margin="2"/>
-        <TimePicker Format="HH\:mm" Time="{Binding StartTime, Mode=OneWayToSource}" Margin="2"/>
-        <Label Text="End" Margin="2"/>
-        <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}" Margin="2"/>
-        <Picker Title="Category"
-                ItemsSource="{Binding Categories}"
-                SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}"/>
-      </StackLayout>
-    </ScrollView>
-    <Button BackgroundColor="#fcca01" Command="{Binding GoToShowsPageCommand}" Margin="32, 2" Text="Search" FontSize="12" TextColor="Black" BorderRadius="25"/>
-    <Button BackgroundColor="Red" Command="{Binding GoBackCommand}" Margin="32, 2" Text="Cancel" FontSize="12" BorderRadius="25"/>
-  </StackLayout>
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             Title="Filter settings">
+  <ScrollView>
+    <Grid>
+      <Grid.ColumnDefinitions>
+        <ColumnDefinition Width="*"/>
+      </Grid.ColumnDefinitions>
+      <Grid.RowDefinitions>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+        <RowDefinition Height="auto"/>
+      </Grid.RowDefinitions>
+      <Entry Placeholder="Title" Text="{Binding Title}" Margin="2"
+             Grid.Column="0" Grid.Row="0"/>
+      <Label Text="Start" Margin="2" Grid.Column="0" Grid.Row="1"/>
+      <TimePicker Format="HH\:mm" Time="{Binding StartTime, Mode=OneWayToSource}"
+                  Grid.Column="0" Grid.Row="2"/>
+      <Label Text="End" Margin="2" Grid.Column="0" Grid.Row="3"/>
+      <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}"
+                  Grid.Column="0" Grid.Row="4"/>
+      <Picker Title="Category" ItemsSource="{Binding Categories}"
+              SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}"
+              HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="5"/>
+      <Button Command="{Binding GoToShowsPageCommand}" Text="Search"
+              Grid.Column="0" Grid.Row="6"/>
+      <!--<Button BackgroundColor="Red" Command="{Binding GoBackCommand}" Text="Cancel"/>-->
+    </Grid>
+  </ScrollView>
 </mvx:MvxContentPage>

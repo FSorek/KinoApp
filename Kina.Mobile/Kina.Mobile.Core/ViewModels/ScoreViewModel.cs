@@ -27,7 +27,7 @@ namespace Kina.Mobile.Core.ViewModels
             _navigationService = navigationService;
         }
 
-        public override Task Initialize(BasicShowData parameter)
+        public override void Prepare(BasicShowData parameter)
         {
             _parameter = parameter;
 
@@ -77,8 +77,6 @@ namespace Kina.Mobile.Core.ViewModels
             ScoreRows.Add(new ScoreRow(avgSeats, "Seats"));
             ScoreRows.Add(new ScoreRow(avgSound, "Sound"));
             ScoreRows.Add(new ScoreRow(avgPopcorn, "Snacks"));
-
-            return Task.FromResult(true);
         }
 
         private void GetScore(long movieId, long cinemaId, DataRequest dataRequest)

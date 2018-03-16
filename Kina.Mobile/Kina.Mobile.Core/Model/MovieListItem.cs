@@ -9,7 +9,7 @@ using System.Windows.Input;
 
 namespace Kina.Mobile.Core.Model
 {
-    class MovieListItem
+    public class MovieListItem
     {
         private readonly IMvxNavigationService _navigationService;
 

@@ -5,8 +5,8 @@
 
 using Android.Content;
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Core;
-using MvvmCross.Forms.Droid;
+using MvvmCross.Forms.Droid.Platform;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Platform;
 using MvvmCross.Platform.Platform;
 using Plugin.Settings;
@@ -14,7 +14,7 @@ using Plugin.Settings.Abstractions;
 
 namespace Kina.Mobile.Droid
 {
-	public class Setup : MvxFormsAndroidSetup
+    public class Setup : MvxFormsAndroidSetup
 	{
 		public Setup(Context applicationContext)
 			: base(applicationContext)

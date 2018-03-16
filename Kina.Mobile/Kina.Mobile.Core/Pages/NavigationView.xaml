@@ -1,0 +1,34 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvx:MvxContentPage x:TypeArguments="viewModels:NavigationViewModel"
+             xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             x:Class="Kina.Mobile.Core.Pages.NavigationView"
+             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:viewModels="clr-namespace:Kina.Mobile.Core.ViewModels;assembly=Kina.Mobile.Core"
+             xmlns:customViews="clr-namespace:Kina.Mobile.Core.CustomViews;assembly=Kina.Mobile.Core"
+             Title="Navigation"
+             Icon="Menu.png"
+             NavigationPage.HasNavigationBar="False">
+    <StackLayout>
+        <ListView ItemsSource="{Binding NavigationItems}" x:Name="NavigationMenu">
+            <ListView.ItemTemplate>
+                <DataTemplate>
+                    <customViews:NavigationCell Command="{Binding ItemNavigationCommand}">
+                        <Grid>
+                            <Grid.ColumnDefinitions>
+                                <ColumnDefinition Width="48"/>
+                                <ColumnDefinition Width="*" />
+                            </Grid.ColumnDefinitions>
+                            <Grid.RowDefinitions>
+                                <RowDefinition Height="48"/>
+                            </Grid.RowDefinitions>
+                            <Image Source="{Binding Icon}" Grid.Column="0" Grid.Row="0"/>
+                            <Label Text="{Binding ItemName}" Grid.Column="1" Grid.Row="0" VerticalOptions="Center"/>
+                        </Grid>
+                    </customViews:NavigationCell>
+                </DataTemplate>
+            </ListView.ItemTemplate>
+        </ListView>
+    </StackLayout>
+</mvx:MvxContentPage>

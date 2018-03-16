@@ -3,7 +3,7 @@ using Xamarin.Forms;
 
 namespace Kina.Mobile.Core.Model
 {
-    class MovieList
+    public class MovieList
     {
         public string CinemaName { get; set; }
         public List<MovieListItem> Movies { get; set; }

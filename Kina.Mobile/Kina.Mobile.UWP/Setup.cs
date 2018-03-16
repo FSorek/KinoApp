@@ -4,9 +4,10 @@
 // ---------------------------------------------------------------
 
 using MvvmCross.Core.ViewModels;
-using MvvmCross.Forms.Core;
+using MvvmCross.Forms.Platform;
 using MvvmCross.Forms.Uwp;
 using MvvmCross.Platform;
+using MvvmCross.Platform.Logging;
 using MvvmCross.Platform.Platform;
 using Plugin.Settings;
 using Plugin.Settings.Abstractions;
@@ -15,7 +16,7 @@ using XamlControls = Windows.UI.Xaml.Controls;
 
 namespace Kina.Mobile.UWP
 {
-	public class Setup : MvxFormsWindowsSetup
+    public class Setup : MvxFormsWindowsSetup
 	{
 		private readonly LaunchActivatedEventArgs _launchActivatedEventArgs;
 
@@ -32,7 +33,12 @@ namespace Kina.Mobile.UWP
 			Mvx.RegisterSingleton<ISettings>(CrossSettings.Current);
 		}
 
-		protected override MvxFormsApplication CreateFormsApplication()
+        protected override MvxLogProviderType GetDefaultLogProviderType()
+        {
+            return MvxLogProviderType.None;
+        }
+
+        protected override MvxFormsApplication CreateFormsApplication()
 		{
 			return new Core.FormsApp();
 		}
