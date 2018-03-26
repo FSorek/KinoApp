@@ -15,7 +15,7 @@
                     <beh:StarBehavior x:Name="BoxBehavior"
                                       StarName="{Binding Source={x:Reference ThisView}, Path=BoxNumber}"
                                       GroupName="{Binding Source={x:Reference ThisView}, Path=Group}"
-                                      IsMarked="{Binding Source={x:Reference ThisView}, Path=Rating, Mode=OneWayToSource}"/>
+                                      IsMarked="{Binding Source={x:Reference ThisView}, Path=BoxMarked, Mode=OneWayToSource}"/>
                 </Grid.Behaviors>
                 <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
 

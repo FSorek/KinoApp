@@ -2,320 +2,93 @@
 <mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
              xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
              x:Class="Kina.Mobile.Core.Pages.RateView"
-             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             xmlns:local="clr-namespace:Kina.Mobile.Core.Behaviors;assembly=Kina.Mobile.Core"
+             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews;assembly=Kina.Mobile.Core"
              Title="Rate this show">
   <ScrollView>
     <StackLayout>
-      <StackLayout>
-        <StackLayout>
-          <Label Text="Cleanliness" HorizontalOptions="Start"/>
-          <StackLayout x:Name="cleStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="cleStarOne"
-                                    StarName="starOne"
-                                    GroupName="cleStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
+      <Grid>
+        <Grid.ColumnDefinitions>
+          <ColumnDefinition Width="auto"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+          <ColumnDefinition Width="*"/>
+        </Grid.ColumnDefinitions>
+        <Grid.RowDefinitions>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+          <RowDefinition Height="*"/>
+        </Grid.RowDefinitions>
+        
+        <Label Text="Cleanliness" Grid.Column="0" Grid.Row="0" VerticalOptions="Center"/>
+        <views:RatingBox BoxNumber="first" Group="CleanGroup" Grid.Column="1" Grid.Row="0"
+                         BoxMarked="{Binding CleanlinessRateMarked[0], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="second" Group="CleanGroup" Grid.Column="2" Grid.Row="0"
+                         BoxMarked="{Binding CleanlinessRateMarked[1], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="third" Group="CleanGroup" Grid.Column="3" Grid.Row="0"
+                         BoxMarked="{Binding CleanlinessRateMarked[2], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fourth" Group="CleanGroup" Grid.Column="4" Grid.Row="0"
+                         BoxMarked="{Binding CleanlinessRateMarked[3], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fifth" Group="CleanGroup" Grid.Column="5" Grid.Row="0"
+                         BoxMarked="{Binding CleanlinessRateMarked[4], Mode=OneWayToSource}"/>
+        
+        <Label Text="Screen" Grid.Column="0" Grid.Row="1" VerticalOptions="Center"/>
+        <views:RatingBox BoxNumber="first" Group="ScreenGroup" Grid.Column="1" Grid.Row="1"
+                         BoxMarked="{Binding ScreenRateMarked[0]}"/>
+        <views:RatingBox BoxNumber="second" Group="ScreenGroup" Grid.Column="2" Grid.Row="1"
+                         BoxMarked="{Binding ScreenRateMarked[1], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="third" Group="ScreenGroup" Grid.Column="3" Grid.Row="1"
+                         BoxMarked="{Binding ScreenRateMarked[2], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fourth" Group="ScreenGroup" Grid.Column="4" Grid.Row="1"
+                         BoxMarked="{Binding ScreenRateMarked[3], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fifth" Group="ScreenGroup" Grid.Column="5" Grid.Row="1"
+                         BoxMarked="{Binding ScreenRateMarked[4], Mode=OneWayToSource}"/>
+        
+        <Label Text="Seats" Grid.Column="0" Grid.Row="2" VerticalOptions="Center"/>
+        <views:RatingBox BoxNumber="first" Group="SeatsGroup" Grid.Column="1" Grid.Row="2"
+                         BoxMarked="{Binding SeatsRateMarked[0], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="second" Group="SeatsGroup" Grid.Column="2" Grid.Row="2"
+                         BoxMarked="{Binding SeatsRateMarked[1], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="third" Group="SeatsGroup" Grid.Column="3" Grid.Row="2"
+                         BoxMarked="{Binding SeatsRateMarked[2], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fourth" Group="SeatsGroup" Grid.Column="4" Grid.Row="2"
+                         BoxMarked="{Binding SeatsRateMarked[3], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fifth" Group="SeatsGroup" Grid.Column="5" Grid.Row="2"
+                         BoxMarked="{Binding SeatsRateMarked[4], Mode=OneWayToSource}"/>
+        
+        <Label Text="Sound" Grid.Column="0" Grid.Row="3" VerticalOptions="Center"/>
+        <views:RatingBox BoxNumber="first" Group="SoundGroup" Grid.Column="1" Grid.Row="3"
+                         BoxMarked="{Binding SoundRateMarked[0], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="second" Group="SoundGroup" Grid.Column="2" Grid.Row="3"
+                         BoxMarked="{Binding SoundRateMarked[1], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="third" Group="SoundGroup" Grid.Column="3" Grid.Row="3"
+                         BoxMarked="{Binding SoundRateMarked[2], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fourth" Group="SoundGroup" Grid.Column="4" Grid.Row="3"
+                         BoxMarked="{Binding SoundRateMarked[3], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fifth" Group="SoundGroup" Grid.Column="5" Grid.Row="3"
+                         BoxMarked="{Binding SoundRateMarked[4], Mode=OneWayToSource}"/>
+        
+        <Label Text="Snacks" Grid.Column="0" Grid.Row="4" VerticalOptions="Center"/>
+        <views:RatingBox BoxNumber="first" Group="SnacksGroup" Grid.Column="1" Grid.Row="4"
+                         BoxMarked="{Binding PopcornRateMarked[0], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="second" Group="SnacksGroup" Grid.Column="2" Grid.Row="4"
+                         BoxMarked="{Binding PopcornRateMarked[1], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="third" Group="SnacksGroup" Grid.Column="3" Grid.Row="4"
+                         BoxMarked="{Binding PopcornRateMarked[2], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fourth" Group="SnacksGroup" Grid.Column="4" Grid.Row="4"
+                         BoxMarked="{Binding PopcornRateMarked[3], Mode=OneWayToSource}"/>
+        <views:RatingBox BoxNumber="fifth" Group="SnacksGroup" Grid.Column="5" Grid.Row="4"
+                         BoxMarked="{Binding PopcornRateMarked[4], Mode=OneWayToSource}"/>
 
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference cleStarOne}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="cleStarTwo"
-                                    StarName="starTwo"
-                                    GroupName="cleStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference cleStarTwo}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="cleStarThree"
-                                    StarName="starThree"
-                                    GroupName="cleStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference cleStarThree}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="cleStarFour"
-                                    StarName="starFour"
-                                    GroupName="cleStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference cleStarFour}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="cleStarFive"
-                                    StarName="starFive"
-                                    GroupName="cleStars"
-                                    Rating="{Binding CleanlinessRate, Mode=OneWayToSource}"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference cleStarFive}, Path=IsMarked}"/>
-            </Grid>
-          </StackLayout>
-          <Label Text="Screen" HorizontalOptions="Start"/>
-          <StackLayout x:Name="ScreenStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="scrStarOne"
-                                    StarName="starOne"
-                                    GroupName="screenStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference scrStarOne}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="scrStarTwo"
-                                    StarName="starTwo"
-                                    GroupName="screenStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference scrStarTwo}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="scrStarThree"
-                                    StarName="starThree"
-                                    GroupName="screenStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference scrStarThree}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="scrStarFour"
-                                    StarName="starFour"
-                                    GroupName="screenStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference scrStarFour}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="scrStarFive"
-                                    StarName="starFive"
-                                    GroupName="screenStars"
-                                    Rating="{Binding ScreenRate, Mode=OneWayToSource}"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference scrStarFive}, Path=IsMarked}"/>
-            </Grid>
-          </StackLayout>
-          <Label Text="Seats" HorizontalOptions="Start"/>
-          <StackLayout x:Name="SeatsStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="seatStarOne"
-                                    StarName="starOne"
-                                    GroupName="seatsStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference seatStarOne}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="seatStarTwo"
-                                    StarName="starTwo"
-                                    GroupName="seatsStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference seatStarTwo}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="seatStarThree"
-                                    StarName="starThree"
-                                    GroupName="seatsStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference seatStarThree}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="seatStarFour"
-                                    StarName="starFour"
-                                    GroupName="seatsStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference seatStarFour}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="seatStarFive"
-                                    StarName="starFive"
-                                    GroupName="seatsStars"
-                                    Rating="{Binding SeatsRate, Mode=OneWayToSource}"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference seatStarFive}, Path=IsMarked}"/>
-            </Grid>
-          </StackLayout>
-          <Label Text="Sound" HorizontalOptions="Start"/>
-          <StackLayout x:Name="SoundStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="soundStarOne"
-                                    StarName="starOne"
-                                    GroupName="soundStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference soundStarOne}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="soundStarTwo"
-                                    StarName="starTwo"
-                                    GroupName="soundStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference soundStarTwo}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="soundStarThree"
-                                    StarName="starThree"
-                                    GroupName="soundStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference soundStarThree}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="soundStarFour"
-                                    StarName="starFour"
-                                    GroupName="soundStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference soundStarFour}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="soundStarFive"
-                                    StarName="starFive"
-                                    GroupName="soundStars"
-                                    Rating="{Binding SoundRate, Mode=OneWayToSource}"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference soundStarFive}, Path=IsMarked}"/>
-            </Grid>
-          </StackLayout>
-          <Label Text="Popcorn" HorizontalOptions="Start"/>
-          <StackLayout x:Name="popStack" HeightRequest="32" Orientation="Horizontal" HorizontalOptions="LayoutOptions.Center">
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="popStarOne"
-                                    StarName="starOne"
-                                    GroupName="popStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference popStarOne}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="popStarTwo"
-                                    StarName="starTwo"
-                                    GroupName="popStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference popStarTwo}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="popStarThree"
-                                    StarName="starThree"
-                                    GroupName="popStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference popStarThree}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="popStarFour"
-                                    StarName="starFour"
-                                    GroupName="popStars"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference popStarFour}, Path=IsMarked}"/>
-            </Grid>
-            <Grid>
-              <Grid.Behaviors>
-                <local:StarBehavior x:Name="popStarFive"
-                                    StarName="starFive"
-                                    GroupName="popStars"
-                                    Rating="{Binding PopcornRate, Mode=OneWayToSource}"/>
-              </Grid.Behaviors>
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starOutlineSmall.png}"/>
-
-              <Image Source="{res:ImageResource Kina.Mobile.Core.Resources.starMarkedSmall.png}"
-                     IsVisible="{Binding Source={x:Reference popStarFive}, Path=IsMarked}"/>
-            </Grid>
-          </StackLayout>
-        </StackLayout>
-
-      </StackLayout>
+      </Grid>
       <Button Text="Accept"
               Command="{Binding SubmitCommand}"
-              Margin="32, 2"
-              TextColor="Black"
-              BorderRadius="25"
-              BackgroundColor="#fcca01"
-              FontSize="12"/>
+              Margin="32, 2"/>
       <Button Text="No thanks"
               BackgroundColor="Transparent"
               Command="{Binding GoBackCommand}"
