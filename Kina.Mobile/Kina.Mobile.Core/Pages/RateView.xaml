@@ -5,6 +5,7 @@
              xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
              xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
              xmlns:local="clr-namespace:Kina.Mobile.Core.Behaviors;assembly=Kina.Mobile.Core"
+             xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews;assembly=Kina.Mobile.Core"
              Title="Rate this show">
   <ScrollView>
     <StackLayout>

@@ -1,0 +1,21 @@
+﻿<?xml version="1.0" encoding="utf-8" ?>
+<mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
+             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+             xmlns:beh="clr-namespace:Kina.Mobile.Core.Behaviors;assembly=Kina.Mobile.Core"
+             xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
+             xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews;assembly=Kina.Mobile.Core"
+             x:Class="Kina.Mobile.Core.Pages.PageView">
+    <ContentPage.Content>
+        <StackLayout Orientation="Horizontal">
+            <views:RatingBox x:Name="Boxz" BoxNumber="one" Group="stgroup"/>
+            <views:RatingBox x:Name="Box" BoxNumber="two" Group="stgroup"/>
+            <views:RatingBox x:Name="Boxa" BoxNumber="three" Group="stgroup"/>
+            <views:RatingBox x:Name="Boxb" BoxNumber="four" Group="stgroup"/>
+            <views:RatingBox x:Name="Boxc" BoxNumber="five" Group="stgroup"/>
+        </StackLayout>
+        <StackLayout>
+            <Label Text="Widac" IsVisible="{Binding Source={x:Reference Box}, Path=Rating}"/>
+        </StackLayout>
+    </ContentPage.Content>
+</mvx:MvxContentPage>
