@@ -178,6 +178,9 @@ csx/
 ecf/
 rcf/
 
+# Windows Explorer specific files
+Thumbs.db
+
 # Windows Store app package directories and files
 AppPackages/
 BundleArtifacts/
