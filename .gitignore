@@ -178,7 +178,7 @@ csx/
 ecf/
 rcf/
 
-# Windows Explorer specific files
+# Windows Explorer files
 Thumbs.db
 
 # Windows Store app package directories and files
