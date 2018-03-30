@@ -37,7 +37,11 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Converters\BooleanRateConverter.cs" />
     <Compile Include="Behaviors\StarBehavior.cs" />
+    <Compile Include="CustomViews\RatingBox.xaml.cs">
+      <DependentUpon>RatingBox.xaml</DependentUpon>
+    </Compile>
     <Compile Include="FormsApp.xaml.cs">
       <DependentUpon>FormsApp.xaml</DependentUpon>
     </Compile>
@@ -337,6 +341,12 @@
   <ItemGroup>
     <EmbeddedResource Include="Resources\Images\Funnel.png" />
     <EmbeddedResource Include="Resources\Images\Pin.png" />
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomViews\RatingBox.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
   </ItemGroup>
   <Import Project="$(MSBuildExtensionsPath32)\Microsoft\Portable\$(TargetFrameworkVersion)\Microsoft.Portable.CSharp.targets" />
   <Target Name="EnsureNuGetPackageBuildImports" BeforeTargets="PrepareForBuild">
