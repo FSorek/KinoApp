@@ -9,6 +9,7 @@ using Kina.Mobile.DataProvider.Models;
 using Kina.Mobile.Core.Helpers;
 using Kina.Mobile.DataProvider.Providers;
 using Kina.Mobile.Core.Model;
+using Kina.Mobile.Core.Converters;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -20,17 +21,22 @@ namespace Kina.Mobile.Core.ViewModels
         private MvxAsyncCommand _submitCommandCommand;
         private MvxAsyncCommand _goBackCommandCommand;
 
-        public IMvxAsyncCommand SubmitCommand => _submitCommandCommand;
-        public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
-
+        private bool[] screenRateMarked;
+        private bool[] seatsRateMarked;
+        private bool[] soundRateMarked;
+        private bool[] popcornRateMarked;
+        private bool[] cleanlinessRateMarked;
         private long cinemaID;
         private long movieID;
 
-        public int ScreenRate { get; set; }
-        public int SeatsRate { get; set; }
-        public int SoundRate { get; set; }
-        public int PopcornRate { get; set; }
-        public int CleanlinessRate { get; set; }
+        public IMvxAsyncCommand SubmitCommand => _submitCommandCommand;
+        public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
+
+        public bool[] ScreenRateMarked => screenRateMarked;
+        public bool[] SeatsRateMarked => seatsRateMarked;
+        public bool[] SoundRateMarked => soundRateMarked;
+        public bool[] PopcornRateMarked => popcornRateMarked;
+        public bool[] CleanlinessRateMarked => cleanlinessRateMarked;
 
         public string SelectedCinema { get; set; }
 
@@ -38,6 +44,11 @@ namespace Kina.Mobile.Core.ViewModels
         {
             _navigationService = navigationService;
             _settings = settings;
+            screenRateMarked = new bool[5];
+            seatsRateMarked = new bool[5];
+            soundRateMarked = new bool[5];
+            popcornRateMarked = new bool[5];
+            cleanlinessRateMarked = new bool[5];
 
             InitCommands();
         }
@@ -51,6 +62,7 @@ namespace Kina.Mobile.Core.ViewModels
         private async Task SubmitAction()
         {
             bool isInBase = false;
+            BooleanRateConverter booleanRateConverter = new BooleanRateConverter();
             DataRequest dataRequest = new DataRequest();
             GetScore(movieID, cinemaID, dataRequest);
             List<UserScore> userScore = dataRequest.ShowScore;
@@ -76,11 +88,11 @@ namespace Kina.Mobile.Core.ViewModels
                     IdStringUser = userID,
                     IdCinema = cinemaID,
                     IdMovie = movieID,
-                    Screen = ScreenRate,
-                    Seat = SeatsRate,
-                    Sound = SoundRate,
-                    Popcorn = PopcornRate,
-                    Cleanliness = CleanlinessRate
+                    Screen = (long)booleanRateConverter.Convert(screenRateMarked, typeof(int), null, null),
+                    Seat = (long)booleanRateConverter.Convert(seatsRateMarked, typeof(int), null, null),
+                    Sound = (long)booleanRateConverter.Convert(soundRateMarked, typeof(int), null, null),
+                    Popcorn = (long)booleanRateConverter.Convert(popcornRateMarked, typeof(int), null, null),
+                    Cleanliness = (long)booleanRateConverter.Convert(cleanlinessRateMarked, typeof(int), null, null)
                 };
                 await dataRequest.PostScoreAsync(score);
                 await _navigationService.Close(this);
