@@ -24,6 +24,7 @@ namespace Kina.Mobile.Core.ViewModels
         private double _latitude;
         private string selectedLocation;
         private int distance;
+        private string rangeText;
         private List<string> location;
 
         public IMvxAsyncCommand ConfirmLocationCommand => _confirmLocationCommandCommand;
@@ -38,17 +39,23 @@ namespace Kina.Mobile.Core.ViewModels
         public string RangeText
         {
             get { return String.Format("Using the device's location, find cinemas at a distance of about {0} km.", distance); }
+            set { SetProperty(ref rangeText, String.Format("Using the device's location, find cinemas at a distance of about {0} km.", value)); }
         }
 
         public int Distance
         {
             get { return distance; }
-            set { SetProperty(ref distance, value); }
+            set
+            {
+                RangeText = value.ToString();
+                SetProperty(ref distance, value);
+            }
         }
 
         public List<string> Location
         {
             get { return location; }
+            set { SetProperty(ref location, value); }
         }
 
         public LocationViewModel(IMvxNavigationService navigationService, ILocationService locationService, IMvxMessenger messenger)
@@ -57,9 +64,10 @@ namespace Kina.Mobile.Core.ViewModels
             _token = messenger.SubscribeOnMainThread<LocationMessage>(OnLocationMessage);
 
             DataRequest dataRequest = new DataRequest();
-            location = dataRequest.CityList;
             GetLocations(dataRequest);
-            location = dataRequest.CityList;
+            Location = dataRequest.CityList;
+            Location = new List<string>();
+            Location.AddRange(dataRequest.CityList);
 
             InitCommands();
         }
