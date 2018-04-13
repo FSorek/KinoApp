@@ -84,9 +84,6 @@
     <Compile Include="Behaviors\EventToCommandBehavior.cs" />
     <Compile Include="Converters\NegateBooleanConverter.cs" />
     <Compile Include="DebugTrace.cs" />
-    <Compile Include="Pages\SecondPage.xaml.cs">
-      <DependentUpon>SecondPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Resources\AppResources.ru-RU.Designer.cs">
       <DependentUpon>AppResources.ru-RU.resx</DependentUpon>
       <AutoGen>True</AutoGen>
@@ -120,16 +117,11 @@
     <Compile Include="Services\LocationService.cs" />
     <Compile Include="ViewModels\FilterViewModel.cs" />
     <Compile Include="ViewModels\LocationViewModel.cs" />
-    <Compile Include="ViewModels\MainViewModel.cs" />
     <Compile Include="ViewModels\MasterDetailViewModel.cs" />
     <Compile Include="ViewModels\NavigationViewModel.cs" />
     <Compile Include="ViewModels\MovieViewModel.cs" />
     <Compile Include="ViewModels\RateViewModel.cs" />
     <Compile Include="ViewModels\ScoreViewModel.cs" />
-    <Compile Include="ViewModels\SecondViewModel.cs" />
-    <Compile Include="Pages\MainPage.xaml.cs">
-      <DependentUpon>MainPage.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Helpers\TranslateExtension.cs" />
     <Compile Include="Services\ILocalizeService.cs" />
     <Compile Include="Model\MovieListItem.cs" />
@@ -257,16 +249,6 @@
     <EmbeddedResource Include="Resources\AppResources.resx">
       <Generator>ResXFileCodeGenerator</Generator>
       <LastGenOutput>AppResources.Designer.cs</LastGenOutput>
-    </EmbeddedResource>
-    <EmbeddedResource Include="Pages\MainPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
-  </ItemGroup>
-  <ItemGroup>
-    <EmbeddedResource Include="Pages\SecondPage.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
