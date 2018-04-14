@@ -1,12 +1,8 @@
-﻿using System;
-using System.Globalization;
-using Xamarin.Forms;
-
-namespace Kina.Mobile.Core.Converters
+﻿namespace Kina.Mobile.Core.Converters
 {
-    class BooleanRateConverter : IValueConverter
+    class BooleanRateConverter
     {
-        public object Convert(object value, Type targetType, object parameter, CultureInfo culture)
+        public long Convert(object value)
         {
             int rate = 0;
             foreach(var boolean in (bool[])value)
@@ -20,7 +16,7 @@ namespace Kina.Mobile.Core.Converters
             return rate;
         }
 
-        public object ConvertBack(object value, Type targetType, object parameter, CultureInfo culture)
+        public object ConvertBack(object value, object parameter)
         {
             bool[] boolean = new bool[(int)parameter];
             for(int index = (int)value; index >= 0; --index)

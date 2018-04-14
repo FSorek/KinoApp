@@ -22,7 +22,7 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand GoToLocationViewCommand => _goToLocationViewCommandCommand;
 
         private List<MovieListItem> movies;
-        private float userScore;
+        private double userScore;
 
         public List<MovieListItem> Movies
         {
