@@ -152,13 +152,9 @@ namespace Kina.Mobile.DataProvider.Providers
             var responseMsg = new HttpResponseMessage();
             var client = new HttpClient();
             var stringContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(userScore), System.Text.Encoding.UTF8, "application/json");
-            ////client.BaseAddress = new Uri("https://epertuar.azurewebsites.net");
-            //var json = Serialize.ToJson(userScore);
-            //
-            ////var json = Newtonsoft.Json.JsonConvert.SerializeObject(userScore);
 
             responseMsg = await client.PostAsync("https://epertuar.azurewebsites.net/api/Rating", stringContent);
-            return true;
+            return responseMsg.IsSuccessStatusCode;
         }
     }
 }

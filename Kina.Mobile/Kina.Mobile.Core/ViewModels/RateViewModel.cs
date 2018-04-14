@@ -67,21 +67,6 @@ namespace Kina.Mobile.Core.ViewModels
             GetScore(movieID, cinemaID, dataRequest);
             List<UserScore> userScore = dataRequest.ShowScore;
             string userID = Hardware.DeviceId;
-            //foreach(UserScore score in userScore)
-            //{
-            //    if (score.IdStringUser.Equals(userID))
-            //    {
-            //        Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
-            //        isInBase = true;
-            //        return;
-            //    }
-            //}
-
-            //if (isInBase)
-            //{
-            //    await _navigationService.Close(this);
-            //}
-            //else
             try
             {
                 UserScore score = new UserScore
