@@ -90,11 +90,11 @@ namespace Kina.Mobile.Core.ViewModels
                     IdStringUser = userID,
                     IdCinema = cinemaID,
                     IdMovie = movieID,
-                    Screen = 5,
-                    Seat = 5,
-                    Sound = 5,
-                    Popcorn = 5,
-                    Cleanliness = 5
+                    Screen = booleanRateConverter.Convert(screenRateMarked),
+                    Seat = booleanRateConverter.Convert(seatsRateMarked),
+                    Sound = booleanRateConverter.Convert(soundRateMarked),
+                    Popcorn = booleanRateConverter.Convert(popcornRateMarked),
+                    Cleanliness = booleanRateConverter.Convert(cleanlinessRateMarked)
                 };
                 if (!await dataRequest.PostScoreAsync(score))
                 {
