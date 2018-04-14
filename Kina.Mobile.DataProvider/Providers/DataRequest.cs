@@ -145,13 +145,16 @@ namespace Kina.Mobile.DataProvider.Providers
             }
         }
 
-        public async Task PostScoreAsync(UserScore userScore)
+        public async Task<bool> PostScoreAsync(UserScore userScore)
         {
-            var client = new HttpClient();
-            //client.BaseAddress = new Uri("https://epertuar.azurewebsites.net");
             var json = Serialize.ToJson(userScore);
-            //var json = Newtonsoft.Json.JsonConvert.SerializeObject(userScore);
-            await client.PostAsync("https://epertuar.azurewebsites.net/api/Rating", new StringContent(json));
+            
+            var responseMsg = new HttpResponseMessage();
+            var client = new HttpClient();
+            var stringContent = new StringContent(Newtonsoft.Json.JsonConvert.SerializeObject(userScore), System.Text.Encoding.UTF8, "application/json");
+
+            responseMsg = await client.PostAsync("https://epertuar.azurewebsites.net/api/Rating", stringContent);
+            return responseMsg.IsSuccessStatusCode;
         }
     }
 }
