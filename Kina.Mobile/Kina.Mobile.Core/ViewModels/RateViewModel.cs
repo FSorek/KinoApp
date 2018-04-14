@@ -61,30 +61,32 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task SubmitAction()
         {
-            bool isInBase = false;
+            //bool isInBase = false;
             BooleanRateConverter booleanRateConverter = new BooleanRateConverter();
             DataRequest dataRequest = new DataRequest();
             GetScore(movieID, cinemaID, dataRequest);
             List<UserScore> userScore = dataRequest.ShowScore;
             string userID = Hardware.DeviceId;
-            foreach(UserScore score in userScore)
-            {
-                if (score.IdStringUser.Equals(userID))
-                {
-                    Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
-                    isInBase = true;
-                    return;
-                }
-            }
+            //foreach(UserScore score in userScore)
+            //{
+            //    if (score.IdStringUser.Equals(userID))
+            //    {
+            //        Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
+            //        isInBase = true;
+            //        return;
+            //    }
+            //}
 
-            if (isInBase)
-            {
-                await _navigationService.Close(this);
-            }
-            else
+            //if (isInBase)
+            //{
+            //    await _navigationService.Close(this);
+            //}
+            //else
+            try
             {
                 UserScore score = new UserScore
                 {
+                    IdUser = 0,
                     IdStringUser = userID,
                     IdCinema = cinemaID,
                     IdMovie = movieID,
@@ -94,9 +96,17 @@ namespace Kina.Mobile.Core.ViewModels
                     Popcorn = booleanRateConverter.Convert(popcornRateMarked),
                     Cleanliness = booleanRateConverter.Convert(cleanlinessRateMarked)
                 };
-                await dataRequest.PostScoreAsync(score);
-                await _navigationService.Close(this);
+                if (!await dataRequest.PostScoreAsync(score))
+                {
+                    Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
+                }
+            } catch(System.Exception e)
+            {
+                System.Diagnostics.Debug.WriteLine(e.Message + e.StackTrace);
             }
+
+            await _navigationService.Close(this);
+
         }
 
         private async Task GoBackAction()
