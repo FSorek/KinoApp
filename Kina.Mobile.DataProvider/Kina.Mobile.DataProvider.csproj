@@ -37,6 +37,7 @@
     <Folder Include="Mappers\" />
   </ItemGroup>
   <ItemGroup>
+    <Compile Include="Helpers\Diagnostics.cs" />
     <Compile Include="Helpers\IFileHelper.cs" />
     <Compile Include="Models\SimpleMovie.cs" />
     <Compile Include="Models\SimpleShow.cs" />
