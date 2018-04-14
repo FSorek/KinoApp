@@ -41,7 +41,6 @@ namespace Kina.Mobile.DataProvider.Providers
 
         private async Task<string> GetResponse(string uri)
         {
-            Diagnostics.CreateReportMessage("GetResponse - Started for " + uri);
             string responseStream = null;
             try
             {
@@ -53,18 +52,15 @@ namespace Kina.Mobile.DataProvider.Providers
             {
                 throw new Exception();
             }
-            Diagnostics.CreateReportMessage("GetResponse - Finished");
             return responseStream;
         }
 
         public async Task ProvideShowsFromCity(string city)
         {
-            Diagnostics.CreateReportMessage("Provide Shows From City - Started");
             hch.Proxy = null;
             hch.UseProxy = false;
             CinemaList = new List<Cinema>();
             string uri = GetShowsUri(city);
-            Diagnostics.CreateReportMessage("Provide Shows From City - Try/Catch Started");
             try
             {
                 string dataString = await GetResponse(uri);
@@ -75,7 +71,6 @@ namespace Kina.Mobile.DataProvider.Providers
             {
                 Diagnostics.CreateReportMessage(e.Message);
             }
-            Diagnostics.CreateReportMessage("Provide Shows From City - Finished");
         }
 
         public async Task ProvideCinemasInRange(double latitude, double longtitude, int distance)

@@ -44,7 +44,6 @@ namespace Kina.Mobile.Core.ViewModels
 
         public void FillWithData()
         {
-            DataProvider.Helpers.Diagnostics.CreateReportMessage("FillWithData - Started");
             DataRequest dataRequest = new DataRequest();
 
             ShowsList = new List<MovieList>();
@@ -62,12 +61,10 @@ namespace Kina.Mobile.Core.ViewModels
                 string cinemaName = String.Format("{0} - {1}", cinema.Name, cinema.City);
                 ProcessMovies(cinema, cinemaName, (CinemaType) cinema.CinemaType);
             }
-            DataProvider.Helpers.Diagnostics.CreateReportMessage("FillWithData - Finished");
         }
 
         private void ProcessMovies(Cinema cinema, string cinemaName, CinemaType cinemaType)
         {
-            DataProvider.Helpers.Diagnostics.CreateReportMessage("ProcessMovies - Started");
             var today = DateTime.Today;
             movies = new List<MovieListItem>();
             foreach (SimpleMovie movie in cinema.MoviesPlayed)
@@ -110,7 +107,6 @@ namespace Kina.Mobile.Core.ViewModels
                 }
             }
             ShowsList.Add(new MovieList(cinemaName, movies, CinemaColor(cinemaType)));
-            DataProvider.Helpers.Diagnostics.CreateReportMessage("ProcessMovies - Finished");
         }
 
         private Color CinemaColor(CinemaType type)
