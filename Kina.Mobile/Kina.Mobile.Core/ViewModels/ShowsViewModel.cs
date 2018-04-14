@@ -22,7 +22,7 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand GoToLocationViewCommand => _goToLocationViewCommandCommand;
 
         private List<MovieListItem> movies;
-        private List<UserScore> userScore;
+        private float userScore;
 
         public List<MovieListItem> Movies
         {
@@ -55,7 +55,7 @@ namespace Kina.Mobile.Core.ViewModels
                 GetData(dataRequest, MvxApp.FilterSettings.City);
                 cinemaList = dataRequest.CinemaList;
             }
-
+            
             foreach (Cinema cinema in cinemaList)
             {
                 string cinemaName = String.Format("{0} - {1}", cinema.Name, cinema.City);
@@ -67,7 +67,6 @@ namespace Kina.Mobile.Core.ViewModels
         {
             var today = DateTime.Today;
             movies = new List<MovieListItem>();
-
             foreach (SimpleMovie movie in cinema.MoviesPlayed)
             {
                 bool check = true;
@@ -102,32 +101,11 @@ namespace Kina.Mobile.Core.ViewModels
                 }
                 if (content && check)
                 {
-                    DataRequest dataRequest = new DataRequest();
-                    double score = 0.0;
-                    GetScore(movie.Id, cinema.IdCinema, dataRequest);
-                    userScore = dataRequest.ShowScore;
-                    if (userScore.Count != 0)
-                    {
-                        int i = 0;
-                        if (userScore != null)
-                        {
-                            foreach (UserScore s in userScore)
-                            {
-                                if (s.IdMovie.Equals(movie.Id) && s.IdCinema == cinema.IdCinema)
-                                {
-                                    score += (s.Screen + s.Seat + s.Sound + s.Popcorn) / 4.0;
-                                    i++;
-                                }
-                            }
-                            score /= i;
-                        }
-                    }
-
+                    userScore = movie.AverageRating;
                     BasicShowData basicShowData = new BasicShowData(cinema.IdCinema, movie.Id, cinemaName);
-                    movies.Add(new MovieListItem(basicShowData ,movie, score, _navigationService));
+                    movies.Add(new MovieListItem(basicShowData ,movie, userScore, _navigationService));
                 }
             }
-
             ShowsList.Add(new MovieList(cinemaName, movies, CinemaColor(cinemaType)));
         }
 
