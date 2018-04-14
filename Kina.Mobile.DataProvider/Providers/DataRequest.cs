@@ -4,6 +4,7 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
+using Kina.Mobile.DataProvider.Helpers;
 
 namespace Kina.Mobile.DataProvider.Providers
 {
@@ -19,7 +20,10 @@ namespace Kina.Mobile.DataProvider.Providers
         private static string GetCityUri() => "https://epertuar.azurewebsites.net/api/Cinema/Cities";
         private static string GetCategoryUri() => "https://epertuar.azurewebsites.net/api/Movie/Genres";
         private static string GetMovieUri(long id) => String.Format("https://epertuar.azurewebsites.net/api/Movie/{0}", id);
-
+        private static HttpClient responseClient = new HttpClient();
+        private static HttpResponseMessage httpResponseMsg = new HttpResponseMessage();
+        HttpClientHandler hch = new HttpClientHandler();
+        
         private static string GetScoreUri(long movieId, long cinemaId)
         {
             return String.Format("https://epertuar.azurewebsites.net/api/Rating?IdC={0}&IdMovie={1}", cinemaId, movieId);
@@ -37,36 +41,41 @@ namespace Kina.Mobile.DataProvider.Providers
 
         private async Task<string> GetResponse(string uri)
         {
-            var client = new HttpClient();
+            Diagnostics.CreateReportMessage("GetResponse - Started for " + uri);
             string responseStream = null;
             try
             {
-                var httpResponse = await client.GetAsync(uri);
-                httpResponse.EnsureSuccessStatusCode();
-                responseStream = await httpResponse.Content.ReadAsStringAsync();
+                httpResponseMsg = await responseClient.GetAsync(uri);
+                httpResponseMsg.EnsureSuccessStatusCode();
+                responseStream = await httpResponseMsg.Content.ReadAsStringAsync();
             }
             catch
             {
                 throw new Exception();
             }
-
+            Diagnostics.CreateReportMessage("GetResponse - Finished");
             return responseStream;
         }
 
         public async Task ProvideShowsFromCity(string city)
         {
+            Diagnostics.CreateReportMessage("Provide Shows From City - Started");
+            hch.Proxy = null;
+            hch.UseProxy = false;
             CinemaList = new List<Cinema>();
             string uri = GetShowsUri(city);
+            Diagnostics.CreateReportMessage("Provide Shows From City - Try/Catch Started");
             try
             {
                 string dataString = await GetResponse(uri);
                 List<Cinema> cinemas = Cinema.FromJson(dataString);
                 CinemaList.AddRange(cinemas);
             }
-            catch
+            catch(Exception e)
             {
-
+                Diagnostics.CreateReportMessage(e.Message);
             }
+            Diagnostics.CreateReportMessage("Provide Shows From City - Finished");
         }
 
         public async Task ProvideCinemasInRange(double latitude, double longtitude, int distance)
