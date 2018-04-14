@@ -88,11 +88,11 @@ namespace Kina.Mobile.Core.ViewModels
                     IdStringUser = userID,
                     IdCinema = cinemaID,
                     IdMovie = movieID,
-                    Screen = (long)booleanRateConverter.Convert(screenRateMarked, typeof(int), null, null),
-                    Seat = (long)booleanRateConverter.Convert(seatsRateMarked, typeof(int), null, null),
-                    Sound = (long)booleanRateConverter.Convert(soundRateMarked, typeof(int), null, null),
-                    Popcorn = (long)booleanRateConverter.Convert(popcornRateMarked, typeof(int), null, null),
-                    Cleanliness = (long)booleanRateConverter.Convert(cleanlinessRateMarked, typeof(int), null, null)
+                    Screen = booleanRateConverter.Convert(screenRateMarked),
+                    Seat = booleanRateConverter.Convert(seatsRateMarked),
+                    Sound = booleanRateConverter.Convert(soundRateMarked),
+                    Popcorn = booleanRateConverter.Convert(popcornRateMarked),
+                    Cleanliness = booleanRateConverter.Convert(cleanlinessRateMarked)
                 };
                 await dataRequest.PostScoreAsync(score);
                 await _navigationService.Close(this);
