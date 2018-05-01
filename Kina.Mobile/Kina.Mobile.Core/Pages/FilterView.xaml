@@ -1,38 +1,30 @@
-<?xml version="1.0" encoding="utf-8" ?>
+﻿<?xml version="1.0" encoding="utf-8" ?>
 <mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Kina.Mobile.Core.Pages.FilterView"
-             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
-             xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             Title="Filter settings">
-  <ScrollView>
-    <Grid>
-      <Grid.ColumnDefinitions>
-        <ColumnDefinition Width="*"/>
-      </Grid.ColumnDefinitions>
-      <Grid.RowDefinitions>
-        <RowDefinition Height="auto"/>
-        <RowDefinition Height="auto"/>
-        <RowDefinition Height="auto"/>
-        <RowDefinition Height="auto"/>
-        <RowDefinition Height="auto"/>
-        <RowDefinition Height="auto"/>
-        <RowDefinition Height="auto"/>
-      </Grid.RowDefinitions>
-      <Entry Placeholder="Title" Text="{Binding Title}" Margin="2"
-             Grid.Column="0" Grid.Row="0"/>
-      <Label Text="Start" Margin="2" Grid.Column="0" Grid.Row="1"/>
-      <TimePicker Format="HH\:mm" Time="{Binding StartTime, Mode=OneWayToSource}"
-                  Grid.Column="0" Grid.Row="2"/>
-      <Label Text="End" Margin="2" Grid.Column="0" Grid.Row="3"/>
-      <TimePicker Format="HH\:mm" Time="{Binding EndTime, Mode=OneWayToSource}"
-                  Grid.Column="0" Grid.Row="4"/>
-      <Picker Title="Category" ItemsSource="{Binding Categories}"
-              SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}"
-              HorizontalOptions="FillAndExpand" Grid.Column="0" Grid.Row="5"/>
-      <Button Command="{Binding GoToShowsPageCommand}" Text="Search"
-              Grid.Column="0" Grid.Row="6"/>
-      <!--<Button BackgroundColor="Red" Command="{Binding GoBackCommand}" Text="Cancel"/>-->
-    </Grid>
-  </ScrollView>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                    x:Class="Kina.Mobile.Core.Pages.FilterView"
+                    Title="Filter">
+    <ScrollView>
+        <StackLayout Style="{StaticResource ContentStackLayoutStyle}">
+            <Label Style="{StaticResource ViewStyle}"
+                   Text="Enter a title of the movie you are looking for, or pick the start and end time to limit the number of shows displayed. Leave blank fields to not use these settings."/>
+            <Entry Placeholder="Title"
+                   Style="{StaticResource SettingStyle}"
+                   Text="{Binding Title}"/>
+            <Label Text="Pick the start time"/>
+            <TimePicker Style="{StaticResource TimePickerStyle}"
+                        Time="{Binding StartTime}"/>
+            <Label Text="Pick the end time"/>
+            <TimePicker Style="{StaticResource TimePickerStyle}"
+                        Time="{Binding EndTime}"/>
+            <Picker ItemsSource="{Binding Categories}"
+                    Margin="0"
+                    SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}"
+                    Style="{StaticResource SettingStyle}"
+                    Title="Category"/>
+            <Button Command="{Binding GoToShowsPageCommand}"
+                    HorizontalOptions="Start"
+                    Text="Search"/>
+        </StackLayout>
+    </ScrollView>
 </mvx:MvxContentPage>

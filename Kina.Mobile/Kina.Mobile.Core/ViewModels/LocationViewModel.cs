@@ -1,6 +1,5 @@
 ﻿using Acr.UserDialogs;
 using Kina.Mobile.Core.Services;
-using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
@@ -11,9 +10,10 @@ using System.Threading.Tasks;
 
 namespace Kina.Mobile.Core.ViewModels
 {
-    public class LocationViewModel : MvxViewModel
+    public class LocationViewModel : MvxViewModel<List<string>>
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IDataService _dataService;
 
         private readonly MvxSubscriptionToken _token;
 
@@ -22,18 +22,18 @@ namespace Kina.Mobile.Core.ViewModels
 
         private double _longtitude;
         private double _latitude;
-        private string selectedLocation;
+        private int _selectedLocationIndex;
         private int distance;
         private string rangeText;
-        private List<string> location;
+        private List<string> _locations;
 
         public IMvxAsyncCommand ConfirmLocationCommand => _confirmLocationCommandCommand;
         public IMvxAsyncCommand AutoLocateCommand => _autoLocateCommandCommand;
 
-        public string SelectedLocation
+        public int SelectedLocationIndex
         {
-            get { return selectedLocation; }
-            set { SetProperty(ref selectedLocation, value); }
+            get { return _selectedLocationIndex; }
+            set { SetProperty(ref _selectedLocationIndex, value); }
         }
 
         public string RangeText
@@ -52,22 +52,20 @@ namespace Kina.Mobile.Core.ViewModels
             }
         }
 
-        public List<string> Location
+        public List<string> Locations
         {
-            get { return location; }
-            set { SetProperty(ref location, value); }
+            get { return _locations; }
+            set { SetProperty(ref _locations, value); }
         }
 
-        public LocationViewModel(IMvxNavigationService navigationService, ILocationService locationService, IMvxMessenger messenger)
+        public LocationViewModel(IMvxNavigationService navigationService, IDataService dataService,
+            ILocationService locationService, IMvxMessenger messenger)
         {
             _navigationService = navigationService;
+            _dataService = dataService;
             _token = messenger.SubscribeOnMainThread<LocationMessage>(OnLocationMessage);
 
-            DataRequest dataRequest = new DataRequest();
-            GetLocations(dataRequest);
-            Location = dataRequest.CityList;
-            Location = new List<string>();
-            Location.AddRange(dataRequest.CityList);
+            Locations = Task.Run(() => _dataService.GetCities()).Result;
 
             InitCommands();
         }
@@ -78,14 +76,14 @@ namespace Kina.Mobile.Core.ViewModels
             _longtitude = locationMessage.Lng;
         }
 
-        private async Task ConfirmLocation()
+        private async Task ConfirmSelectedLocation()
         {
-            if (selectedLocation == null)
+            if (_selectedLocationIndex == -1)
             {
                 Mvx.Resolve<IUserDialogs>().Alert("Location was not idicated. Please provide your location for this session before proceeding.");
-                //return;
             }
-            MvxApp.FilterSettings.City = selectedLocation;
+
+            MvxApp.FilterSettings.City = _locations[_selectedLocationIndex];
             MvxApp.FilterSettings.Cinemas = null;
             await ShowMasterDetailView();
         }
@@ -98,9 +96,7 @@ namespace Kina.Mobile.Core.ViewModels
                 return;
             }
 
-            DataRequest dataRequest = new DataRequest();
-            GetCinemasInRange(dataRequest);
-            MvxApp.FilterSettings.Cinemas = dataRequest.CinemaList;
+            MvxApp.FilterSettings.Cinemas = Task.Run(() => _dataService.GetCinemasInRange(_latitude, _longtitude, distance)).Result;
             MvxApp.FilterSettings.City = null;
             await ShowMasterDetailView();
         }
@@ -110,20 +106,15 @@ namespace Kina.Mobile.Core.ViewModels
             await _navigationService.Navigate<MasterDetailViewModel>();
         }
 
-        private void GetLocations(DataRequest dataRequest)
-        {
-            Task.Run(() => dataRequest.ProvideCities()).Wait();
-        }
-
-        private void GetCinemasInRange(DataRequest dataRequest)
-        {
-            Task.Run(() => dataRequest.ProvideCinemasInRange(_latitude, _longtitude, distance)).Wait();
-        }
-
         private void InitCommands()
         {
             _autoLocateCommandCommand = new MvxAsyncCommand(AutoDetectLocation);
-            _confirmLocationCommandCommand = new MvxAsyncCommand(ConfirmLocation);
+            _confirmLocationCommandCommand = new MvxAsyncCommand(ConfirmSelectedLocation);
+        }
+
+        public override void Prepare(List<string> parameter)
+        {
+            Locations = parameter;
         }
     }
 }
