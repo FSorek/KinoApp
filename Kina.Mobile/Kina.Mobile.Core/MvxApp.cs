@@ -5,6 +5,7 @@
 
 using Acr.UserDialogs;
 using Kina.Mobile.Core.Model;
+using Kina.Mobile.Core.Services;
 using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using MvvmCross.Platform.IoC;
@@ -32,6 +33,7 @@ namespace Kina.Mobile.Core
 
 			Mvx.RegisterType<Services.IAppSettings, Services.AppSettings>();
 			Mvx.RegisterType<IMvxJsonConverter, MvxJsonConverter>();
+            Mvx.RegisterType<IDataConverter, DataConverter>();
 			Mvx.RegisterSingleton<IUserDialogs>(() => UserDialogs.Instance);
 
             FilterSettings = new Filter();
