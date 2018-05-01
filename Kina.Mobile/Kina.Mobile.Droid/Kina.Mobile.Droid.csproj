@@ -239,7 +239,6 @@
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Bootstrap\LocationPluginBootstrap.cs" />
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
-    <Compile Include="Helpers\FileHelper.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="LinkerPleaseInclude.cs" />
     <Compile Include="FormsApplicationActivity.cs" />
