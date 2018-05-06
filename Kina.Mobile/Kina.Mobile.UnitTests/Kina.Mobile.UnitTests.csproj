@@ -96,6 +96,7 @@
     <Compile Include="Helpers\ResourceIdentifierUnitTests.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
     <Compile Include="Services\DataServiceUnitTests.cs" />
+    <Compile Include="Services\FilterServiceUnitTests.cs" />
   </ItemGroup>
   <ItemGroup>
     <ProjectReference Include="..\..\Kina.Mobile.DataProvider\Kina.Mobile.DataProvider.csproj">

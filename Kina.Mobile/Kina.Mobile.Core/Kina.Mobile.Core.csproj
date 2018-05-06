@@ -37,10 +37,17 @@
     <WarningLevel>4</WarningLevel>
   </PropertyGroup>
   <ItemGroup>
+    <Compile Include="Behaviors\RatingCellBehavior.cs" />
     <Compile Include="Converters\BooleanRateConverter.cs" />
     <Compile Include="Behaviors\StarBehavior.cs" />
     <Compile Include="CustomViews\RatingBox.xaml.cs">
       <DependentUpon>RatingBox.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomViews\RatingCell.xaml.cs">
+      <DependentUpon>RatingCell.xaml</DependentUpon>
+    </Compile>
+    <Compile Include="CustomViews\RatingControl.xaml.cs">
+      <DependentUpon>RatingControl.xaml</DependentUpon>
     </Compile>
     <Compile Include="FormsApp.xaml.cs">
       <DependentUpon>FormsApp.xaml</DependentUpon>
@@ -53,6 +60,7 @@
       <DependentUpon>LocationView.xaml</DependentUpon>
     </Compile>
     <Compile Include="Services\DataConverter.cs" />
+    <Compile Include="Services\FilterService.cs" />
     <Compile Include="Services\IDataConverter.cs" />
     <Compile Include="Helpers\ResourceIdentifier.cs" />
     <Compile Include="Helpers\Settings.cs" />
@@ -62,9 +70,6 @@
     <Compile Include="Model\MovieList.cs" />
     <Compile Include="Model\NavigationItem.cs" />
     <Compile Include="Model\ScoreRow.cs" />
-    <Compile Include="Pages\Filter2View.xaml.cs">
-      <DependentUpon>Filter2View.xaml</DependentUpon>
-    </Compile>
     <Compile Include="Pages\MasterDetailView.xaml.cs">
       <DependentUpon>MasterDetailView.xaml</DependentUpon>
     </Compile>
@@ -121,6 +126,7 @@
     <Compile Include="Services\HttpService.cs" />
     <Compile Include="Services\IAppSettings.cs" />
     <Compile Include="Services\IDataService.cs" />
+    <Compile Include="Services\IFilterService.cs" />
     <Compile Include="Services\IHttpService.cs" />
     <Compile Include="Services\ILocationService.cs" />
     <Compile Include="Services\LocationService.cs" />
@@ -279,10 +285,6 @@
     </EmbeddedResource>
   </ItemGroup>
   <ItemGroup>
-    <EmbeddedResource Include="Pages\Filter2View.xaml">
-      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
-      <SubType>Designer</SubType>
-    </EmbeddedResource>
     <EmbeddedResource Include="Pages\MovieView.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
@@ -342,6 +344,16 @@
   </ItemGroup>
   <ItemGroup>
     <EmbeddedResource Include="Pages\FilterView.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+  </ItemGroup>
+  <ItemGroup>
+    <EmbeddedResource Include="CustomViews\RatingCell.xaml">
+      <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
+      <SubType>Designer</SubType>
+    </EmbeddedResource>
+    <EmbeddedResource Include="CustomViews\RatingControl.xaml">
       <Generator>MSBuild:UpdateDesignTimeXaml</Generator>
       <SubType>Designer</SubType>
     </EmbeddedResource>
