@@ -36,7 +36,6 @@
     <!-- A reference to the entire .NET Framework is automatically included -->
   </ItemGroup>
   <ItemGroup>
-    <Compile Include="DataRequest.cs" />
     <Compile Include="Models\SimpleMovie.cs" />
     <Compile Include="Models\SimpleShow.cs" />
     <Compile Include="Models\AccessModels\StringList.cs" />
@@ -48,6 +47,7 @@
     <Compile Include="Models\UserScore.cs" />
     <Compile Include="Models\Genre.cs" />
     <Compile Include="Properties\AssemblyInfo.cs" />
+    <Compile Include="Providers\DataRequest.cs" />
   </ItemGroup>
   <ItemGroup>
     <Reference Include="Newtonsoft.Json, Version=11.0.0.0, Culture=neutral, PublicKeyToken=30ad4fe6b2a6aeed, processorArchitecture=MSIL">

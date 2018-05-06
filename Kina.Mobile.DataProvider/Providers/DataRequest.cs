@@ -4,7 +4,6 @@ using System.Collections.Generic;
 using System.Globalization;
 using System.Net.Http;
 using System.Threading.Tasks;
-using Kina.Mobile.DataProvider.Helpers;
 
 namespace Kina.Mobile.DataProvider.Providers
 {
@@ -69,7 +68,6 @@ namespace Kina.Mobile.DataProvider.Providers
             }
             catch(Exception e)
             {
-                Diagnostics.CreateReportMessage(e.Message);
             }
         }
 
