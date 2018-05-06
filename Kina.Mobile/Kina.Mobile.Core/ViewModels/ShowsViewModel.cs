@@ -1,4 +1,5 @@
 ﻿using Kina.Mobile.Core.Model;
+using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Models;
 using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
@@ -13,7 +14,8 @@ namespace Kina.Mobile.Core.ViewModels
     public class ShowsViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
-        private readonly Services.IAppSettings _settings;
+        private readonly IAppSettings _settings;
+        private readonly IFilterService _filterService;
 
         private MvxAsyncCommand _goToFilterViewCommandCommand;
         private MvxAsyncCommand _goToLocationViewCommandCommand;
@@ -32,10 +34,11 @@ namespace Kina.Mobile.Core.ViewModels
 
         public List<MovieList> ShowsList { get; set; }
 
-        public ShowsViewModel(IMvxNavigationService navigationService, Services.IAppSettings settings)
+        public ShowsViewModel(IMvxNavigationService navigationService, Services.IAppSettings settings, IFilterService filterService)
         {
             _navigationService = navigationService;
             _settings = settings;
+            _filterService = filterService;
 
             FillWithData();
 
