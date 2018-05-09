@@ -5,15 +5,17 @@ using Xamarin.Forms;
 
 namespace Kina.Mobile.Core.Behaviors
 {
-    public class RatingCellBehavior : BehaviorBase<RatingCell>
+    public class RatingCellBehavior : Behavior<RatingCell>
     {
         private TapGestureRecognizer _tapRecognizer;
+        private RatingControl _attachedControl;
         private List<RatingCell> _cells;
 
         public static readonly BindableProperty IsReadOnlyProperty =
             BindableProperty.Create("IsReadOnly", typeof(bool), typeof(RatingCellBehavior), false);
         public static readonly BindableProperty ValueProperty =
-            BindableProperty.Create("Value", typeof(double), typeof(RatingCellBehavior), default(double), propertyChanged: OnValuePropertyChanged);
+            BindableProperty.Create("Value", typeof(double), typeof(RatingCellBehavior), default(double), BindingMode.TwoWay,
+                propertyChanged: OnValuePropertyChanged);
 
         public bool IsReadOnly
         {
@@ -27,9 +29,14 @@ namespace Kina.Mobile.Core.Behaviors
             set => SetValue(ValueProperty, value);
         }
 
-        public RatingCellBehavior()
+        public RatingCellBehavior(RatingControl attachedControl)
         {
+            _attachedControl = attachedControl;
             _cells = new List<RatingCell>();
+        }
+
+        public RatingCellBehavior() : this(null)
+        {
         }
 
         protected override void OnAttachedTo(RatingCell bindable)
@@ -81,6 +88,10 @@ namespace Kina.Mobile.Core.Behaviors
                 }
 
                 Value = newValue;
+                if (_attachedControl != null)
+                {
+                    _attachedControl.Value = Value;
+                }
             }
         }
     }

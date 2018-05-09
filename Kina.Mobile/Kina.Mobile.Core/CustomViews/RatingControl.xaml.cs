@@ -40,25 +40,25 @@ namespace Kina.Mobile.Core.CustomViews
             set => SetValue(ValueProperty, value);
         }
 
-		public RatingControl()
-		{
-            _cellBehavior = new RatingCellBehavior();
+        public RatingControl()
+        {
+            _cellBehavior = new RatingCellBehavior(this);
 
             InitializeComponent();
 
-            Binding ValueBinding = new Binding(nameof(RatingCellBehavior.Value))
+            Binding ValueBinding = new Binding(nameof(ValueProperty))
             {
-                Source = _cellBehavior
+                Source = this,
             };
 
-            SetBinding(ValueProperty, ValueBinding);
+            SetBinding(RatingCellBehavior.ValueProperty, ValueBinding);
 
-            Binding IsReadOnlyBinding = new Binding(nameof(RatingCellBehavior.IsReadOnly))
+            Binding IsReadOnlyBinding = new Binding(nameof(IsReadOnlyProperty))
             {
-                Source = _cellBehavior
+                Source = this
             };
 
-            SetBinding(IsReadOnlyProperty, IsReadOnlyBinding);
+            SetBinding(RatingCellBehavior.IsReadOnlyProperty, IsReadOnlyBinding);
 
             FirstCell.Behaviors.Add(_cellBehavior);
             SecondCell.Behaviors.Add(_cellBehavior);
