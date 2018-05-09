@@ -38,7 +38,6 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Behaviors\RatingCellBehavior.cs" />
-    <Compile Include="Behaviors\StarBehavior.cs" />
     <Compile Include="CustomViews\RatingCell.xaml.cs">
       <DependentUpon>RatingCell.xaml</DependentUpon>
     </Compile>
@@ -69,7 +68,6 @@
     <Compile Include="Helpers\ResourceIdentifier.cs" />
     <Compile Include="Helpers\Settings.cs" />
     <Compile Include="Model\BasicShowData.cs" />
-    <Compile Include="Model\Filter.cs" />
     <Compile Include="Model\LocalizationSettings.cs" />
     <Compile Include="Model\NavigationItem.cs" />
     <Compile Include="Model\ScoreRow.cs" />
