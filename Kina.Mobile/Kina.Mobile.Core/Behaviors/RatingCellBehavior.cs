@@ -55,7 +55,7 @@ namespace Kina.Mobile.Core.Behaviors
             var behavior = (RatingCellBehavior)bindable;
             foreach (var cell in behavior._cells)
             {
-                if (behavior.Value >= cell.CellNumber)
+                if (behavior.Value > cell.CellNumber)
                 {
                     cell.IsMarked = true;
                 }
