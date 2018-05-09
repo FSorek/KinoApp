@@ -66,7 +66,7 @@ namespace Kina.Mobile.Core.ViewModels
                 Popcorn = (long)SnacksRating,
                 Cleanliness = (long)CleanlinessRating
             };
-            if (await _dataService.PostScore(score))
+            if (!await _dataService.PostScore(score))
             {
                 Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
             }
