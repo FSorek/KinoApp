@@ -9,6 +9,7 @@ using Kina.Mobile.DataProvider.Models;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -36,6 +37,12 @@ namespace Kina.Mobile.Core.ViewModels
         public string Cast { get; set; }
         public string Director { get; set; }
         public string Genre { get; set; }
+
+        public double CleanlinessRating { get; set; }
+        public double ScreenRating { get; set; }
+        public double SeatsRating { get; set; }
+        public double SoundRating { get; set; }
+        public double SnacksRating { get; set; }
 
         public MovieViewModel(IMvxNavigationService navigationService, IDataService dataService)
         {
@@ -86,6 +93,22 @@ namespace Kina.Mobile.Core.ViewModels
             Cast = requested.Stars;
             Year = null;
             AverageRating = parameter.AverageRating;
+
+            List<UserScore> ratings = Task.Run(() => _dataService.GetRating(parameter.IdMovie, parameter.IdCinema)).Result;
+            foreach(var rating in ratings)
+            {
+                CleanlinessRating += rating.Cleanliness;
+                ScreenRating += rating.Screen;
+                SeatsRating += rating.Seat;
+                SnacksRating += rating.Popcorn;
+                SoundRating += rating.Sound;
+            }
+
+            CleanlinessRating /= ratings.Count;
+            ScreenRating /= ratings.Count;
+            SeatsRating /= ratings.Count;
+            SnacksRating /= ratings.Count;
+            SoundRating /= ratings.Count;
         }
     }
 }

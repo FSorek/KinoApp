@@ -11,13 +11,12 @@ namespace Kina.Mobile.Core.ViewModels
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly IDataService _dataService;
+        private readonly IFilterService _filterService;
         private readonly IAppSettings _settings;
 
         private MvxAsyncCommand _goToShowsPageCommandCommand;
-        private MvxAsyncCommand _goBackCommandCommand;
 
         public IMvxAsyncCommand GoToShowsPageCommand => _goToShowsPageCommandCommand;
-        public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
 
         public List<string> Categories { get; set; }
         public string SelectedCategory { get; set; }
@@ -26,10 +25,11 @@ namespace Kina.Mobile.Core.ViewModels
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
-        public FilterViewModel(IMvxNavigationService navigationService, IDataService dataService, IAppSettings settings)
+        public FilterViewModel(IMvxNavigationService navigationService, IDataService dataService, IFilterService filterService, IAppSettings settings)
         {
             _navigationService = navigationService;
             _dataService = dataService;
+            _filterService = filterService;
             _settings = settings;
 
             InitCommands();
@@ -39,42 +39,45 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToShowsPageAction()
         {
+            _filterService.ClearFilter();
             if (SelectedCategory != null)
             {
                 foreach (var g in Categories)
                 {
                     if (SelectedCategory.ToLower().Equals(g.ToLower()))
                     {
-                        MvxApp.FilterSettings.Category = g;
+                        _filterService.Category = g;
+                        _filterService.IsActive = true;
                     }
                 }
             }
-            else MvxApp.FilterSettings.Category = null;
-            if (StartTime != null)
-            {
-                MvxApp.FilterSettings.Start = StartTime.ToString(@"h\:mm");
-            }
-            else MvxApp.FilterSettings.Start = null;
-            if (EndTime != null)
-            {
-                MvxApp.FilterSettings.End = EndTime.ToString(@"h\:mm");
-            }
-            else MvxApp.FilterSettings.End = null;
-            MvxApp.FilterSettings.Title = Title;
-            MvxApp.UsingFilter = true;
-            await _navigationService.Navigate<ShowsViewModel>();
-        }
+            else _filterService.Category = null;
 
-        private async Task GoBackAction()
-        {
-            MvxApp.UsingFilter = false;
-            await _navigationService.Close(this);
+            if (EndTime != default(TimeSpan))
+            {
+                _filterService.Start = StartTime;
+                _filterService.IsActive = true;
+            }
+
+            if (EndTime != default(TimeSpan))
+            {
+                _filterService.End = EndTime;
+                _filterService.IsActive = true;
+            }
+
+            if (Title.Length > 0)
+            {
+                _filterService.Title = Title;
+                _filterService.IsActive = true;
+            }
+            else _filterService.Title = null;
+
+            await _navigationService.Navigate<ShowsViewModel>();
         }
 
         private void InitCommands()
         {
             _goToShowsPageCommandCommand = new MvxAsyncCommand(GoToShowsPageAction);
-            _goBackCommandCommand = new MvxAsyncCommand(GoBackAction);
         }
     }
 }

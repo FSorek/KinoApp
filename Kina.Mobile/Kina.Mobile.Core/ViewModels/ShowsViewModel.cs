@@ -41,10 +41,10 @@ namespace Kina.Mobile.Core.ViewModels
 
         public void FillWithData()
         {
-            List<Cinema> cinemas = MvxApp.FilterSettings.Cinemas;
-            if (MvxApp.FilterSettings.Cinemas == null)
+            List<Cinema> cinemas = _filterService.Cinemas;
+            if (_filterService.Cinemas == null)
             {
-                cinemas = Task.Run(() => _dataService.GetCinemasInCity(MvxApp.FilterSettings.City)).Result;
+                cinemas = Task.Run(() => _dataService.GetCinemasInCity(_filterService.City)).Result;
             }
 
             foreach (Cinema cinema in cinemas)
@@ -60,6 +60,14 @@ namespace Kina.Mobile.Core.ViewModels
             var group = new Group<MovieShows>(textColor, cinemaName, cinema.Name.Substring(0, 1) + cinema.City.Substring(0, 2));
             foreach (SimpleMovie movie in cinema.MoviesPlayed)
             {
+                if (_filterService.IsActive)
+                {
+                    if (!_filterService.Check(movie))
+                    {
+                        continue;
+                    }
+                }
+
                 string shows = "";
                 foreach (var show in movie.Shows)
                 {

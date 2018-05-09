@@ -14,6 +14,7 @@ namespace Kina.Mobile.Core.ViewModels
     {
         private readonly IMvxNavigationService _navigationService;
         private readonly IDataService _dataService;
+        private readonly IFilterService _filterService;
 
         private readonly MvxSubscriptionToken _token;
 
@@ -23,8 +24,8 @@ namespace Kina.Mobile.Core.ViewModels
         private double _longtitude;
         private double _latitude;
         private int _selectedLocationIndex;
-        private int distance;
-        private string rangeText;
+        private int _distance;
+        private string _rangeText;
         private List<string> _locations;
 
         public IMvxAsyncCommand ConfirmLocationCommand => _confirmLocationCommandCommand;
@@ -38,17 +39,17 @@ namespace Kina.Mobile.Core.ViewModels
 
         public string RangeText
         {
-            get { return String.Format("Using the device's location, find cinemas at a distance of about {0} km.", distance); }
-            set { SetProperty(ref rangeText, String.Format("Using the device's location, find cinemas at a distance of about {0} km.", value)); }
+            get { return String.Format("Using the device's location, find cinemas at a distance of about {0} km.", _distance); }
+            set { SetProperty(ref _rangeText, String.Format("Using the device's location, find cinemas at a distance of about {0} km.", value)); }
         }
 
         public int Distance
         {
-            get { return distance; }
+            get { return _distance; }
             set
             {
                 RangeText = value.ToString();
-                SetProperty(ref distance, value);
+                SetProperty(ref _distance, value);
             }
         }
 
@@ -59,10 +60,11 @@ namespace Kina.Mobile.Core.ViewModels
         }
 
         public LocationViewModel(IMvxNavigationService navigationService, IDataService dataService,
-            ILocationService locationService, IMvxMessenger messenger)
+            ILocationService locationService, IFilterService filterService, IMvxMessenger messenger)
         {
             _navigationService = navigationService;
             _dataService = dataService;
+            _filterService = filterService;
             _token = messenger.SubscribeOnMainThread<LocationMessage>(OnLocationMessage);
 
             Locations = Task.Run(() => _dataService.GetCities()).Result;
@@ -83,8 +85,8 @@ namespace Kina.Mobile.Core.ViewModels
                 Mvx.Resolve<IUserDialogs>().Alert("Location was not idicated. Please provide your location for this session before proceeding.");
             }
 
-            MvxApp.FilterSettings.City = _locations[_selectedLocationIndex];
-            MvxApp.FilterSettings.Cinemas = null;
+            _filterService.City = _locations[_selectedLocationIndex];
+            _filterService.Cinemas = null;
             await ShowMasterDetailView();
         }
 
@@ -96,8 +98,8 @@ namespace Kina.Mobile.Core.ViewModels
                 return;
             }
 
-            MvxApp.FilterSettings.Cinemas = Task.Run(() => _dataService.GetCinemasInRange(_latitude, _longtitude, distance)).Result;
-            MvxApp.FilterSettings.City = null;
+            _filterService.Cinemas = await _dataService.GetCinemasInRange(_latitude, _longtitude, _distance);
+            _filterService.City = null;
             await ShowMasterDetailView();
         }
 

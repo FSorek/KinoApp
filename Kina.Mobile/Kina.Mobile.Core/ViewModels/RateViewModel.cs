@@ -8,6 +8,7 @@ using MvvmCross.Core.ViewModels;
 using MvvmCross.Platform;
 using System.Collections.Generic;
 using System.Threading.Tasks;
+using Xamarin.Forms;
 
 namespace Kina.Mobile.Core.ViewModels
 {
@@ -18,13 +19,11 @@ namespace Kina.Mobile.Core.ViewModels
         private readonly IAppSettings _settings;
 
         private MvxAsyncCommand _submitCommandCommand;
-        private MvxAsyncCommand _goBackCommandCommand;
 
         private long cinemaID;
         private long movieID;
 
         public IMvxAsyncCommand SubmitCommand => _submitCommandCommand;
-        public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
 
         public double CleanlinessRating { get; set; }
         public double ScreenRating { get; set; }
@@ -44,42 +43,38 @@ namespace Kina.Mobile.Core.ViewModels
         private void InitCommands()
         {
             _submitCommandCommand = new MvxAsyncCommand(SubmitAction);
-            _goBackCommandCommand = new MvxAsyncCommand(GoBackAction);
         }
 
         private async Task SubmitAction()
         {
             List<UserScore> userScore = await _dataService.GetRating(movieID, cinemaID);
-            string userID = Hardware.DeviceId;
-            try
+            string userId = null;
+            if (Device.RuntimePlatform != Device.UWP)
             {
-                UserScore score = new UserScore
-                {
-                    IdUser = 0,
-                    IdStringUser = userID,
-                    IdCinema = cinemaID,
-                    IdMovie = movieID,
-                    Screen = (long)ScreenRating,
-                    Seat = (long)SeatsRating,
-                    Sound = (long)SoundRating,
-                    Popcorn = (long)SnacksRating,
-                    Cleanliness = (long)CleanlinessRating
-                };
-                if (await _dataService.PostScore(score))
-                {
-                    Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
-                }
-            } catch(System.Exception e)
-            {
-                System.Diagnostics.Debug.WriteLine(e.Message + e.StackTrace);
+                userId = Hardware.DeviceId;
             }
 
-            await _navigationService.Close(this);
+            UserScore score = new UserScore
+            {
+                IdUser = 0,
+                IdStringUser = userId,
+                IdCinema = cinemaID,
+                IdMovie = movieID,
+                Screen = (long)ScreenRating,
+                Seat = (long)SeatsRating,
+                Sound = (long)SoundRating,
+                Popcorn = (long)SnacksRating,
+                Cleanliness = (long)CleanlinessRating
+            };
+            if (await _dataService.PostScore(score))
+            {
+                Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
+            }
+            //else
+            //{
+            //    Mvx.Resolve<IUserDialogs>().Alert("Thank you for scoring this show!");
+            //}
 
-        }
-
-        private async Task GoBackAction()
-        {
             await _navigationService.Close(this);
         }
 
