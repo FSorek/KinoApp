@@ -19,11 +19,11 @@
             <Grid.RowDefinitions>
                 <RowDefinition Height="{Binding CellSize}"/>
             </Grid.RowDefinitions>
-            <views:RatingCell x:Name="FirstCell" CellNumber="1"  Grid.Column="0" Grid.Row="0"/>
-            <views:RatingCell x:Name="SecondCell" CellNumber="2" Grid.Column="1" Grid.Row="0"/>
-            <views:RatingCell x:Name="ThirdCell" CellNumber="3" Grid.Column="2" Grid.Row="0"/>
-            <views:RatingCell x:Name="FourthCell" CellNumber="4" Grid.Column="3" Grid.Row="0"/>
-            <views:RatingCell x:Name="FifthCell" CellNumber="5" Grid.Column="4" Grid.Row="0"/>
+            <views:RatingCell x:Name="FirstCell" CellNumber="0"  Grid.Column="0" Grid.Row="0"/>
+            <views:RatingCell x:Name="SecondCell" CellNumber="1" Grid.Column="1" Grid.Row="0"/>
+            <views:RatingCell x:Name="ThirdCell" CellNumber="2" Grid.Column="2" Grid.Row="0"/>
+            <views:RatingCell x:Name="FourthCell" CellNumber="3" Grid.Column="3" Grid.Row="0"/>
+            <views:RatingCell x:Name="FifthCell" CellNumber="4" Grid.Column="4" Grid.Row="0"/>
         </Grid>
   </ContentView.Content>
 </ContentView>
