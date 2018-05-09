@@ -1,54 +1,42 @@
-﻿using MvvmCross.Core.Navigation;
+﻿using Acr.UserDialogs;
+using Kina.Mobile.Core.Helpers;
+using Kina.Mobile.Core.Model;
+using Kina.Mobile.Core.Services;
+using Kina.Mobile.DataProvider.Models;
+using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
+using MvvmCross.Platform;
 using System.Collections.Generic;
 using System.Threading.Tasks;
-using Kina.Mobile.Core.Services;
-using MvvmCross.Platform;
-using Acr.UserDialogs;
-using Kina.Mobile.DataProvider.Models;
-using Kina.Mobile.Core.Helpers;
-using Kina.Mobile.DataProvider.Providers;
-using Kina.Mobile.Core.Model;
-using Kina.Mobile.Core.Converters;
 
 namespace Kina.Mobile.Core.ViewModels
 {
     public class RateViewModel : MvxViewModel<BasicShowData>
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IDataService _dataService;
         private readonly IAppSettings _settings;
 
         private MvxAsyncCommand _submitCommandCommand;
         private MvxAsyncCommand _goBackCommandCommand;
 
-        private bool[] screenRateMarked;
-        private bool[] seatsRateMarked;
-        private bool[] soundRateMarked;
-        private bool[] popcornRateMarked;
-        private bool[] cleanlinessRateMarked;
         private long cinemaID;
         private long movieID;
 
         public IMvxAsyncCommand SubmitCommand => _submitCommandCommand;
         public IMvxAsyncCommand GoBackCommand => _goBackCommandCommand;
 
-        public bool[] ScreenRateMarked => screenRateMarked;
-        public bool[] SeatsRateMarked => seatsRateMarked;
-        public bool[] SoundRateMarked => soundRateMarked;
-        public bool[] PopcornRateMarked => popcornRateMarked;
-        public bool[] CleanlinessRateMarked => cleanlinessRateMarked;
+        public double CleanlinessRating { get; set; }
+        public double ScreenRating { get; set; }
+        public double SeatsRating { get; set; }
+        public double SoundRating { get; set; }
+        public double SnacksRating { get; set; }
 
-        public string SelectedCinema { get; set; }
-
-        public RateViewModel(IMvxNavigationService navigationService, IAppSettings settings)
+        public RateViewModel(IMvxNavigationService navigationService, IDataService dataService, IAppSettings settings)
         {
             _navigationService = navigationService;
+            _dataService = dataService;
             _settings = settings;
-            screenRateMarked = new bool[5];
-            seatsRateMarked = new bool[5];
-            soundRateMarked = new bool[5];
-            popcornRateMarked = new bool[5];
-            cleanlinessRateMarked = new bool[5];
 
             InitCommands();
         }
@@ -61,11 +49,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task SubmitAction()
         {
-            //bool isInBase = false;
-            BooleanRateConverter booleanRateConverter = new BooleanRateConverter();
-            DataRequest dataRequest = new DataRequest();
-            GetScore(movieID, cinemaID, dataRequest);
-            List<UserScore> userScore = dataRequest.ShowScore;
+            List<UserScore> userScore = await _dataService.GetRating(movieID, cinemaID);
             string userID = Hardware.DeviceId;
             try
             {
@@ -75,13 +59,13 @@ namespace Kina.Mobile.Core.ViewModels
                     IdStringUser = userID,
                     IdCinema = cinemaID,
                     IdMovie = movieID,
-                    Screen = booleanRateConverter.Convert(screenRateMarked),
-                    Seat = booleanRateConverter.Convert(seatsRateMarked),
-                    Sound = booleanRateConverter.Convert(soundRateMarked),
-                    Popcorn = booleanRateConverter.Convert(popcornRateMarked),
-                    Cleanliness = booleanRateConverter.Convert(cleanlinessRateMarked)
+                    Screen = (long)ScreenRating,
+                    Seat = (long)SeatsRating,
+                    Sound = (long)SoundRating,
+                    Popcorn = (long)SnacksRating,
+                    Cleanliness = (long)CleanlinessRating
                 };
-                if (!await dataRequest.PostScoreAsync(score))
+                if (await _dataService.PostScore(score))
                 {
                     Mvx.Resolve<IUserDialogs>().Alert("You have already scored this show!");
                 }
@@ -97,11 +81,6 @@ namespace Kina.Mobile.Core.ViewModels
         private async Task GoBackAction()
         {
             await _navigationService.Close(this);
-        }
-
-        private void GetScore(long movieId, long cinemaId, DataRequest dataRequest)
-        {
-            Task.Run(() => dataRequest.ProvideScoreData(movieId, cinemaId)).Wait();
         }
 
         public override void Prepare(BasicShowData parameter)

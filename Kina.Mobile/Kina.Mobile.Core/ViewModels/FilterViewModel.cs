@@ -4,13 +4,13 @@ using System;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Kina.Mobile.Core.Services;
-using Kina.Mobile.DataProvider.Providers;
 
 namespace Kina.Mobile.Core.ViewModels
 {
     class FilterViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IDataService _dataService;
         private readonly IAppSettings _settings;
 
         private MvxAsyncCommand _goToShowsPageCommandCommand;
@@ -26,17 +26,15 @@ namespace Kina.Mobile.Core.ViewModels
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
 
-        public FilterViewModel(IMvxNavigationService navigationService, IAppSettings settings)
+        public FilterViewModel(IMvxNavigationService navigationService, IDataService dataService, IAppSettings settings)
         {
             _navigationService = navigationService;
+            _dataService = dataService;
             _settings = settings;
 
             InitCommands();
 
-            DataRequest dataRequest = new DataRequest();
-            GetCategories(dataRequest);
-
-            Categories = dataRequest.CategoryList;
+            Categories = Task.Run(() => _dataService.GetCategories()).Result;
         }
 
         private async Task GoToShowsPageAction()
@@ -77,11 +75,6 @@ namespace Kina.Mobile.Core.ViewModels
         {
             _goToShowsPageCommandCommand = new MvxAsyncCommand(GoToShowsPageAction);
             _goBackCommandCommand = new MvxAsyncCommand(GoBackAction);
-        }
-
-        private void GetCategories(DataRequest dataRequest)
-        {
-            Task.Run(() => dataRequest.ProvideCategories()).Wait();
         }
     }
 }

@@ -6,12 +6,14 @@
         public long IdMovie;
         public string CinemaName;
         public string MovieName;
+        public double AverageRating;
 
-        public BasicShowData(long IdCinema, long IdMovie, string CinemaName)
+        public BasicShowData(long idCinema, long idMovie, string cinemaName, double averageRating)
         {
-            this.IdCinema = IdCinema;
-            this.IdMovie = IdMovie;
-            this.CinemaName = CinemaName;
+            IdCinema = idCinema;
+            IdMovie = idMovie;
+            CinemaName = cinemaName;
+            AverageRating = averageRating;
         }
     }
 }
