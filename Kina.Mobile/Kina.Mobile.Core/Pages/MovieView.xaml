@@ -1,37 +1,118 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Kina.Mobile.Core.Pages.MovieView"
-             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
-             xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             Title="Movie">
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                    xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews"
+                    x:Class="Kina.Mobile.Core.Pages.MovieView">
     <ScrollView>
         <StackLayout>
-            <StackLayout Orientation="Horizontal">
-                <Label FontSize="30" Text="{Binding TitleText}" Style="Bold" TextColor="#fcca01" HorizontalOptions="Center" VerticalOptions="Start" />
-              </StackLayout>
-          <StackLayout Orientation="Horizontal" BackgroundColor="#64A9A9A9">
-                <Label FontSize="12" Text="Cast" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
-           </StackLayout>
-           <StackLayout>
-                <Label FontSize="10" Text="{Binding Cast}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>
+            <StackLayout BackgroundColor="LightGray"
+                         Orientation="Horizontal"
+                         Style="{StaticResource ContentStackLayoutStyle}">
+                <!--<Image BackgroundColor="#0078D7"
+                           Source="{Binding ImageSource}"
+                           Style="{StaticResource TileStyle}"
+                           VerticalOptions="End"
+                           x:Name="Tile"/>-->
+                <!--<StackLayout Padding="18, 0"
+                                 VerticalOptions="End"
+                                 x:Name="DetailsStackLayout">-->
+                <StackLayout VerticalOptions="End"
+                             x:Name="DetailsStackLayout">
+                    <Label Style="{StaticResource TitleStyle}"
+                           Text="{Binding Title}"/>
+                    <StackLayout Orientation="Horizontal">
+                        <views:RatingControl IsReadOnly="true"
+                                             Style="{StaticResource ReadOnlyRatingControlStyle}"
+                                             Value="{Binding AverageRating}"/>
+                        <Label Text="•"/>
+                        <Label Text="{Binding Genre}"/>
+                    </StackLayout>
+                    <Label Text="{Binding Shows}"/>
+                    <StackLayout Orientation="Horizontal"
+                                 x:Name="ButtonStackLayout">
+                        <Button Text="Cinema website"/>
+                        <Button Text="See trailer on YouTube"/>
+                    </StackLayout>
+                </StackLayout>
             </StackLayout>
-          <StackLayout Orientation="Horizontal" BackgroundColor="#64A9A9A9">
-                <Label FontSize="12" Text="Director" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
-           </StackLayout>
-           <StackLayout>
-                <Label FontSize="10" Text="{Binding Director}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>
+            <StackLayout Style="{StaticResource ContentStackLayoutStyle}">
+                <Label Style="{StaticResource SubtitleStyle}"
+                       Text="Description"/>
+                <Label Style="{StaticResource BodyStyle}"
+                       Text="{Binding Description}"/>
+                <Label Style="{StaticResource SubtitleStyle}"
+                       Text="Additional information"/>
+                <Label FontAttributes="Bold"
+                       Text="Director:"/>
+                <Label Style="{StaticResource BodyStyle}"
+                       Text="{Binding Director}"/>
+                <Label FontAttributes="Bold"
+                       Text="Cast:"/>
+                <Label Style="{StaticResource BodyStyle}"
+                       Text="{Binding Cast}"/>
+                <StackLayout Orientation="Horizontal"
+                             Style="{StaticResource ViewStyle}">
+                    <Label Style="{StaticResource SubtitleStyle}"
+                           Text="Ratings"/>
+                    <Button Command="{Binding GoToRateViewCommand}"
+                            HorizontalOptions="EndAndExpand"
+                            Text="Rate it"/>
+                </StackLayout>
+                <Grid Style="{StaticResource ViewStyle}">
+                    <Grid.ColumnDefinitions>
+                        <ColumnDefinition Width="auto"/>
+                        <ColumnDefinition Width="auto"/>
+                    </Grid.ColumnDefinitions>
+                    <Grid.RowDefinitions>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                        <RowDefinition Height="auto"/>
+                    </Grid.RowDefinitions>
+                    <Label Grid.Column="0"
+                           Grid.Row="0"
+                           Text="Cleanliness"/>
+                    <views:RatingControl Grid.Column="1"
+                                         Grid.Row="0"
+                                         IsReadOnly="True"
+                                         Style="{StaticResource ReadOnlyRatingControlStyle}"
+                                         Value="{Binding CleanlinessRating}"/>
+                    <Label Grid.Column="0"
+                           Grid.Row="1"
+                           Text="Screen"/>
+                    <views:RatingControl Grid.Column="1"
+                                         Grid.Row="1"
+                                         IsReadOnly="True"
+                                         Style="{StaticResource ReadOnlyRatingControlStyle}"
+                                         Value="{Binding ScreenRating}"/>
+                    <Label Grid.Column="0"
+                           Grid.Row="2"
+                           Text="Seats"/>
+                    <views:RatingControl Grid.Column="1"
+                                         Grid.Row="2"
+                                         IsReadOnly="True"
+                                         Style="{StaticResource ReadOnlyRatingControlStyle}"
+                                         Value="{Binding SeatsRating}"/>
+                    <Label Grid.Column="0"
+                           Grid.Row="3"
+                           Text="Sound"/>
+                    <views:RatingControl Grid.Column="1"
+                                         Grid.Row="3"
+                                         IsReadOnly="True"
+                                         Style="{StaticResource ReadOnlyRatingControlStyle}"
+                                         Value="{Binding SoundRating}"/>
+                    <Label Grid.Column="0"
+                           Grid.Row="4"
+                           Text="Snacks"/>
+                    <views:RatingControl Grid.Column="1"
+                                         Grid.Row="4"
+                                         IsReadOnly="True"
+                                         Style="{StaticResource ReadOnlyRatingControlStyle}"
+                                         Value="{Binding SnacksRating}"/>
+                </Grid>
             </StackLayout>
-            <StackLayout Orientation="Horizontal" BackgroundColor="#64A9A9A9">
-                <Label FontSize="12" Text="Description" Style="Bold" TextColor="Black" HorizontalOptions="Start" VerticalOptions="Start"/>
-            </StackLayout>
-            <StackLayout  Spacing="0" Padding="0">
-                <Label FontSize="10" Text="{Binding DescriptionText}" TextColor="White" HorizontalOptions="Start" VerticalOptions="Start"/>                
-            </StackLayout>
-          <StackLayout Orientation="Horizontal" HorizontalOptions="Center">
-            <Button FontSize="12" Text="Trailer" Command="{Binding OpenYoutubeUrlCommand}" Margin="2"/>
-            <Button FontSize="12" Text="I WAS THERE" Command="{Binding GoToRateViewCommand}" Margin="2"/>
-          </StackLayout>
         </StackLayout>
     </ScrollView>
 </mvx:MvxContentPage>

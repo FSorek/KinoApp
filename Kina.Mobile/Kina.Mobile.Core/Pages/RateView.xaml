@@ -1,99 +1,57 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Kina.Mobile.Core.Pages.RateView"
-             xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
-             xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews;assembly=Kina.Mobile.Core"
-             Title="Rate this show">
-  <ScrollView>
-    <StackLayout>
-      <Grid>
-        <Grid.ColumnDefinitions>
-          <ColumnDefinition Width="auto"/>
-          <ColumnDefinition Width="*"/>
-          <ColumnDefinition Width="*"/>
-          <ColumnDefinition Width="*"/>
-          <ColumnDefinition Width="*"/>
-          <ColumnDefinition Width="*"/>
-        </Grid.ColumnDefinitions>
-        <Grid.RowDefinitions>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-          <RowDefinition Height="*"/>
-        </Grid.RowDefinitions>
-        
-        <Label Text="Cleanliness" Grid.Column="0" Grid.Row="0" VerticalOptions="Center"/>
-        <views:RatingBox BoxNumber="first" Group="CleanGroup" Grid.Column="1" Grid.Row="0"
-                         BoxMarked="{Binding CleanlinessRateMarked[0], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="second" Group="CleanGroup" Grid.Column="2" Grid.Row="0"
-                         BoxMarked="{Binding CleanlinessRateMarked[1], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="third" Group="CleanGroup" Grid.Column="3" Grid.Row="0"
-                         BoxMarked="{Binding CleanlinessRateMarked[2], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fourth" Group="CleanGroup" Grid.Column="4" Grid.Row="0"
-                         BoxMarked="{Binding CleanlinessRateMarked[3], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fifth" Group="CleanGroup" Grid.Column="5" Grid.Row="0"
-                         BoxMarked="{Binding CleanlinessRateMarked[4], Mode=OneWayToSource}"/>
-        
-        <Label Text="Screen" Grid.Column="0" Grid.Row="1" VerticalOptions="Center"/>
-        <views:RatingBox BoxNumber="first" Group="ScreenGroup" Grid.Column="1" Grid.Row="1"
-                         BoxMarked="{Binding ScreenRateMarked[0]}"/>
-        <views:RatingBox BoxNumber="second" Group="ScreenGroup" Grid.Column="2" Grid.Row="1"
-                         BoxMarked="{Binding ScreenRateMarked[1], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="third" Group="ScreenGroup" Grid.Column="3" Grid.Row="1"
-                         BoxMarked="{Binding ScreenRateMarked[2], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fourth" Group="ScreenGroup" Grid.Column="4" Grid.Row="1"
-                         BoxMarked="{Binding ScreenRateMarked[3], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fifth" Group="ScreenGroup" Grid.Column="5" Grid.Row="1"
-                         BoxMarked="{Binding ScreenRateMarked[4], Mode=OneWayToSource}"/>
-        
-        <Label Text="Seats" Grid.Column="0" Grid.Row="2" VerticalOptions="Center"/>
-        <views:RatingBox BoxNumber="first" Group="SeatsGroup" Grid.Column="1" Grid.Row="2"
-                         BoxMarked="{Binding SeatsRateMarked[0], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="second" Group="SeatsGroup" Grid.Column="2" Grid.Row="2"
-                         BoxMarked="{Binding SeatsRateMarked[1], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="third" Group="SeatsGroup" Grid.Column="3" Grid.Row="2"
-                         BoxMarked="{Binding SeatsRateMarked[2], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fourth" Group="SeatsGroup" Grid.Column="4" Grid.Row="2"
-                         BoxMarked="{Binding SeatsRateMarked[3], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fifth" Group="SeatsGroup" Grid.Column="5" Grid.Row="2"
-                         BoxMarked="{Binding SeatsRateMarked[4], Mode=OneWayToSource}"/>
-        
-        <Label Text="Sound" Grid.Column="0" Grid.Row="3" VerticalOptions="Center"/>
-        <views:RatingBox BoxNumber="first" Group="SoundGroup" Grid.Column="1" Grid.Row="3"
-                         BoxMarked="{Binding SoundRateMarked[0], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="second" Group="SoundGroup" Grid.Column="2" Grid.Row="3"
-                         BoxMarked="{Binding SoundRateMarked[1], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="third" Group="SoundGroup" Grid.Column="3" Grid.Row="3"
-                         BoxMarked="{Binding SoundRateMarked[2], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fourth" Group="SoundGroup" Grid.Column="4" Grid.Row="3"
-                         BoxMarked="{Binding SoundRateMarked[3], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fifth" Group="SoundGroup" Grid.Column="5" Grid.Row="3"
-                         BoxMarked="{Binding SoundRateMarked[4], Mode=OneWayToSource}"/>
-        
-        <Label Text="Snacks" Grid.Column="0" Grid.Row="4" VerticalOptions="Center"/>
-        <views:RatingBox BoxNumber="first" Group="SnacksGroup" Grid.Column="1" Grid.Row="4"
-                         BoxMarked="{Binding PopcornRateMarked[0], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="second" Group="SnacksGroup" Grid.Column="2" Grid.Row="4"
-                         BoxMarked="{Binding PopcornRateMarked[1], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="third" Group="SnacksGroup" Grid.Column="3" Grid.Row="4"
-                         BoxMarked="{Binding PopcornRateMarked[2], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fourth" Group="SnacksGroup" Grid.Column="4" Grid.Row="4"
-                         BoxMarked="{Binding PopcornRateMarked[3], Mode=OneWayToSource}"/>
-        <views:RatingBox BoxNumber="fifth" Group="SnacksGroup" Grid.Column="5" Grid.Row="4"
-                         BoxMarked="{Binding PopcornRateMarked[4], Mode=OneWayToSource}"/>
-
-      </Grid>
-      <Button Text="Accept"
-              Command="{Binding SubmitCommand}"
-              Margin="32, 2"/>
-      <Button Text="No thanks"
-              BackgroundColor="Transparent"
-              Command="{Binding GoBackCommand}"
-              FontSize="12"
-              Margin="32, 2"/>
-    </StackLayout>
-  </ScrollView>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                    xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews"
+                    x:Class="Kina.Mobile.Core.Pages.RateView">
+    <ScrollView>
+        <StackLayout Style="{StaticResource ContentStackLayoutStyle}">
+            <Grid Style="{StaticResource ViewStyle}">
+                <Grid.ColumnDefinitions>
+                    <ColumnDefinition Width="auto"/>
+                    <ColumnDefinition Width="auto"/>
+                </Grid.ColumnDefinitions>
+                <Grid.RowDefinitions>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                    <RowDefinition Height="auto"/>
+                </Grid.RowDefinitions>
+                <Label Grid.Column="0"
+                       Grid.Row="0"
+                       Text="Cleanliness"/>
+                <views:RatingControl Grid.Column="1"
+                                     Grid.Row="0"
+                                     Value="{Binding CleanlinessRating, Mode=OneWayToSource}"/>
+                <Label Grid.Column="0"
+                       Grid.Row="1"
+                       Text="Screen"/>
+                <views:RatingControl Grid.Column="1"
+                                     Grid.Row="1"
+                                     Value="{Binding ScreenRating, Mode=OneWayToSource}"/>
+                <Label Grid.Column="0"
+                       Grid.Row="2"
+                       Text="Seats"/>
+                <views:RatingControl Grid.Column="1"
+                                     Grid.Row="2"
+                                     Value="{Binding SeatsRating, Mode=OneWayToSource}"/>
+                <Label Grid.Column="0"
+                       Grid.Row="3"
+                       Text="Sound"/>
+                <views:RatingControl Grid.Column="1"
+                                     Grid.Row="3"
+                                     Value="{Binding SoundRating, Mode=OneWayToSource}"/>
+                <Label Grid.Column="0"
+                       Grid.Row="4"
+                       Text="Snacks"/>
+                <views:RatingControl Grid.Column="1"
+                                     Grid.Row="4"
+                                     Value="{Binding SnacksRating, Mode=OneWayToSource}"/>
+            </Grid>
+            <Button Command="{Binding SubmitCommand}"
+                    HorizontalOptions="Center"
+                    Text="Submit"/>
+        </StackLayout>
+    </ScrollView>
 </mvx:MvxContentPage>
