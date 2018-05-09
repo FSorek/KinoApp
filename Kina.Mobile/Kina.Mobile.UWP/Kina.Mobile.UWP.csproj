@@ -119,6 +119,8 @@
     <Content Include="Assets\Square44x44Logo.targetsize-24_altform-unplated.png" />
     <Content Include="Assets\StoreLogo.png" />
     <Content Include="Assets\Wide310x150Logo.scale-200.png" />
+    <Content Include="RatingCell.png" />
+    <Content Include="RatingCellOutline.png" />
   </ItemGroup>
   <ItemGroup>
     <ApplicationDefinition Include="App.xaml">
@@ -181,7 +183,7 @@
       <Version>3.1.1</Version>
     </PackageReference>
     <PackageReference Include="Xamarin.Forms">
-      <Version>2.5.1.444934</Version>
+      <Version>2.5.1.527436</Version>
     </PackageReference>
   </ItemGroup>
   <ItemGroup>
