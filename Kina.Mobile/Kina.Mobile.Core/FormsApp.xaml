@@ -3,7 +3,8 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="Kina.Mobile.Core.FormsApp"
-    xmlns:mvx="clr-namespace:MvvmCross.Forms.Platform;assembly=MvvmCross.Forms">
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Platform;assembly=MvvmCross.Forms"
+    xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews">
 	<mvx:MvxFormsApplication.Resources>
 		<ResourceDictionary>
             <Color x:Key="Primary">#A38018</Color>
@@ -40,9 +41,17 @@
       <Style BasedOn="{StaticResource BodyStyle}" TargetType="View" x:Key="SettingStyle">
         <Setter Property="WidthRequest" Value="450.0"/>
       </Style>
+      <Style TargetType="Image" x:Key="TileStyle">
+        <Setter Property="HeightRequest" Value="150.0"/>
+        <Setter Property="WidthRequest" Value="150.0"/>
+      </Style>
       <Style TargetType="TimePicker" x:Key="TimePickerStyle">
         <Setter Property="HorizontalOptions" Value="Start"/>
         <Setter Property="Margin" Value="0, 0, 0, 18"/>
+      </Style>
+      <Style TargetType="views:RatingControl" x:Key="ReadOnlyRatingControlStyle">
+        <Setter Property="CellSize" Value="16"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
       </Style>
       <Style TargetType="Label" x:Key="SubtitleStyle">
         <Setter Property="FontAttributes" Value="Bold"/>
