@@ -6,20 +6,15 @@ namespace Kina.Mobile.Core.Services
 {
     public class FilterService : IFilterService
     {
+        public bool IsActive { get; set; }
         public string Category { get; set; }
         public List<Cinema> Cinemas { get; set; }
         public string City { get; set; }
-        public string End { get; set; }
-        public string Start { get; set; }
+        public TimeSpan End { get; set; }
+        public TimeSpan Start { get; set; }
         public string Title { get; set; }
 
-        public FilterService()
-        {
-            End = "00:00";
-            Start = "00:00";
-        }
-
-        public bool Check(Movie movie)
+        public bool Check(SimpleMovie movie)
         {
             if (Title != null)
             {
@@ -46,16 +41,21 @@ namespace Kina.Mobile.Core.Services
                 int showsAfter = 0;
                 foreach (var s in movie.Shows)
                 {
-                    if (s.ShowDate.Date.Equals(DateTime.Today.Date))
-                    {
-                        int showHour = int.Parse(s.Start.Split(':')[0]);
-                        int startParameter = int.Parse(Start.Split(':')[0]);
-                        int endParameter = int.Parse(End.Split(':')[0]);
-                        if (((showHour > startParameter) && (showHour < endParameter)) || (startParameter == 0 && endParameter == 0))
+                    //if (s.ShowDate.Date.Equals(DateTime.Today.Date))
+                    //{
+                        if (Start != default(TimeSpan) && End != default(TimeSpan))
+                        {
+                            TimeSpan showHour = TimeSpan.Parse(s.Start);
+                            if ((showHour > Start) && (showHour < End))
+                            {
+                                showsAfter++;
+                            }
+                        }
+                        else
                         {
                             showsAfter++;
                         }
-                    }
+                    //}
                 }
 
                 if (showsAfter == 0)
@@ -70,9 +70,10 @@ namespace Kina.Mobile.Core.Services
         public void ClearFilter()
         {
             Category = null;
-            Start = null;
-            End = null;
+            Start = default(TimeSpan);
+            End = default(TimeSpan);
             Title = null;
+            IsActive = false;
         }
     }
 }

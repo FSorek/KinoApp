@@ -11,23 +11,23 @@ namespace Kina.Mobile.UnitTests.Services
         string _title;
         string _genre;
         private FilterService _serviceUnderTest;
-        private Movie _movie;
+        private SimpleMovie _movie;
 
         public FilterServiceUnitTests()
         {
             _title = "Just antoher day";
             _genre = "Action";
             _serviceUnderTest = new FilterService();
-            _movie = new Movie()
+            _movie = new SimpleMovie
             {
                 Name = _title,
                 Genre = new List<string>
                 {
                     _genre
                 },
-                Shows = new List<Show>
+                Shows = new List<SimpleShow>
                 {
-                    new Show
+                    new SimpleShow
                     {
                         ShowDate = DateTime.Today.Date,
                         Start = "10:00"
@@ -40,12 +40,12 @@ namespace Kina.Mobile.UnitTests.Services
         public void ClearingFilterNullifingAllAttributes()
         {
             _serviceUnderTest.Category = "Some category";
-            _serviceUnderTest.End = "HH:MM";
-            _serviceUnderTest.Start = "HH:MM";
+            _serviceUnderTest.End = TimeSpan.Parse("6:00");
+            _serviceUnderTest.Start = TimeSpan.Parse("9:00");
             _serviceUnderTest.Title = "SomeTitle";
 
             _serviceUnderTest.ClearFilter();
-            List<string> actual = new List<string>
+            List<object> actual = new List<object>
             {
                 _serviceUnderTest.Category,
                 _serviceUnderTest.End,
@@ -53,7 +53,10 @@ namespace Kina.Mobile.UnitTests.Services
                 _serviceUnderTest.Title
             };
 
-            Assert.All(actual, s => Assert.Null(s));
+            Assert.Collection(actual, s => Assert.Null(s),
+                                      s => Assert.Equal(default(TimeSpan), (TimeSpan)s),
+                                      s => Assert.Equal(default(TimeSpan), (TimeSpan)s),
+                                      s => Assert.Null(s));
         }
 
         [Fact]
@@ -66,14 +69,14 @@ namespace Kina.Mobile.UnitTests.Services
         [Fact]
         public void CheckingMovieWithoutShowsReturnsFalse()
         {
-            Movie movie = new Movie
+            SimpleMovie movie = new SimpleMovie
             {
                 Name = "Just another day",
                 Genre = new List<string>
                 {
                     "Action"
                 },
-                Shows = new List<Show>()
+                Shows = new List<SimpleShow>()
             };
 
             var actual = _serviceUnderTest.Check(movie);
@@ -84,16 +87,16 @@ namespace Kina.Mobile.UnitTests.Services
         public void CheckingMovieWithoutShowsForTodayReturnsFalse()
         {
             FilterService serviceUnderTest = new FilterService();
-            _movie = new Movie
+            _movie = new SimpleMovie
             {
                 Name = "Just another day",
                 Genre = new List<string>
                 {
                     "Action"
                 },
-                Shows = new List<Show>
+                Shows = new List<SimpleShow>
                 {
-                    new Show
+                    new SimpleShow
                     {
                         ShowDate = DateTime.Today.Date.AddDays(1.0),
                         Start = "10:00"
@@ -144,8 +147,8 @@ namespace Kina.Mobile.UnitTests.Services
         [Fact]
         public void CheckingMovieBeforeStartSettingReturnsFalse()
         {
-            _serviceUnderTest.Start = "11:00";
-            _serviceUnderTest.End = "12:00";
+            _serviceUnderTest.Start = TimeSpan.Parse("11:00");
+            _serviceUnderTest.End = TimeSpan.Parse("12:00");
 
             var actual = _serviceUnderTest.Check(_movie);
             Assert.False(actual);
@@ -154,8 +157,8 @@ namespace Kina.Mobile.UnitTests.Services
         [Fact]
         public void CheckingMovieAfterEndSettingReturnsFalse()
         {
-            _serviceUnderTest.Start = "07:00";
-            _serviceUnderTest.End = "09:00";
+            _serviceUnderTest.Start = TimeSpan.Parse("07:00");
+            _serviceUnderTest.End = TimeSpan.Parse("09:00");
 
             var actual = _serviceUnderTest.Check(_movie);
             Assert.False(actual);
@@ -164,8 +167,8 @@ namespace Kina.Mobile.UnitTests.Services
         [Fact]
         public void CheckingMovieBetweenStartAndEndSettingReturnsTrue()
         {
-            _serviceUnderTest.Start = "09:00";
-            _serviceUnderTest.End = "12:00";
+            _serviceUnderTest.Start = TimeSpan.Parse("09:00");
+            _serviceUnderTest.End = TimeSpan.Parse("12:00");
 
             var actual = _serviceUnderTest.Check(_movie);
             Assert.True(actual);
