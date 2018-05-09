@@ -83,6 +83,7 @@ namespace Kina.Mobile.Core.ViewModels
             if (_selectedLocationIndex == -1)
             {
                 Mvx.Resolve<IUserDialogs>().Alert("Location was not idicated. Please provide your location for this session before proceeding.");
+                return;
             }
 
             _filterService.City = _locations[_selectedLocationIndex];
