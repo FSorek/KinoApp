@@ -4,22 +4,29 @@
                     xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                     xmlns:vm="clr-namespace:Kina.Mobile.Core.ViewModels"
                     x:Class="Kina.Mobile.Core.Pages.ShowsView"
-                    x:TypeArguments="vm:ShowsViewModel">
-    <StackLayout HorizontalOptions="CenterAndExpand"
+                    x:TypeArguments="vm:ShowsViewModel"
+                    Title="Repertoires">
+    <mvx:MvxContentPage.Content>
+        <StackLayout HorizontalOptions="CenterAndExpand"
                  Style="{StaticResource ContentStackLayoutStyle}">
-        <ListView GroupDisplayBinding="{Binding DisplayName}"
+            <ListView GroupDisplayBinding="{Binding DisplayName}"
                   GroupShortNameBinding="{Binding ShortName}"
                   HasUnevenRows="True"
                   IsGroupingEnabled="True"
                   ItemsSource="{Binding Repertoires}"
                   WidthRequest="800.0"
                   x:Name="RepertoireList">
-            <ListView.GroupHeaderTemplate>
-                <DataTemplate>
-                    <TextCell Text="{Binding DisplayName}"
+                <ListView.GroupHeaderTemplate>
+                    <DataTemplate>
+                        <TextCell Text="{Binding DisplayName}"
                               TextColor="{Binding TextColor}"/>
-                </DataTemplate>
-            </ListView.GroupHeaderTemplate>
-        </ListView>
-    </StackLayout>
+                    </DataTemplate>
+                </ListView.GroupHeaderTemplate>
+            </ListView>
+        </StackLayout>
+    </mvx:MvxContentPage.Content>
+    <mvx:MvxContentPage.ToolbarItems>
+        <ToolbarItem Icon="Filter.png" Text="Filter" Order="Primary"/>
+        <ToolbarItem Text="Location settings" Order="Secondary"/>
+    </mvx:MvxContentPage.ToolbarItems>
 </mvx:MvxContentPage>
