@@ -21,8 +21,8 @@ namespace Kina.Mobile.Core.ViewModels
         private MvxAsyncCommand _confirmLocationCommandCommand;
         private MvxAsyncCommand _autoLocateCommandCommand;
 
-        private double _longtitude;
-        private double _latitude;
+        private static double _longtitude;
+        private static double _latitude;
         private int _selectedLocationIndex;
         private int _distance;
         private string _rangeText;
