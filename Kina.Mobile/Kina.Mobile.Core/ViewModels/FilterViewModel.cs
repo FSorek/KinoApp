@@ -65,10 +65,13 @@ namespace Kina.Mobile.Core.ViewModels
                 _filterService.IsActive = true;
             }
 
-            if (Title.Length > 0)
+            if (Title != null)
             {
-                _filterService.Title = Title;
-                _filterService.IsActive = true;
+                if (Title.Length > 0)
+                {
+                    _filterService.Title = Title;
+                    _filterService.IsActive = true;
+                }
             }
             else _filterService.Title = null;
 
