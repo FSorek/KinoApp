@@ -25,8 +25,4 @@
             </ListView>
         </StackLayout>
     </mvx:MvxContentPage.Content>
-    <mvx:MvxContentPage.ToolbarItems>
-        <ToolbarItem Icon="Filter.png" Text="Filter" Order="Primary"/>
-        <ToolbarItem Text="Location settings" Order="Secondary"/>
-    </mvx:MvxContentPage.ToolbarItems>
 </mvx:MvxContentPage>
