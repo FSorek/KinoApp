@@ -1,34 +1,30 @@
 ﻿<?xml version="1.0" encoding="utf-8" ?>
 <mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
-             xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
-             x:Class="Kina.Mobile.Core.Pages.LocationView"
-             xmlns:res="clr-namespace:Kina.Mobile.Core.Resources;assembly=Kina.Mobile.Core"
-             xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
-             Title="Location settings">
-  <Grid VerticalOptions="CenterAndExpand" HorizontalOptions="CenterAndExpand">
-    <Grid.ColumnDefinitions>
-      <ColumnDefinition Width="*"/>
-      <ColumnDefinition Width="auto"/>
-    </Grid.ColumnDefinitions>
-    <Grid.RowDefinitions>
-      <RowDefinition Height="auto"/>
-      <RowDefinition Height="auto"/>
-      <RowDefinition Height="auto"/>
-      <RowDefinition Height="auto"/>
-    </Grid.RowDefinitions>
-    <Picker x:Name="LocationPicker" Title="Choose location"
-            ItemsSource="{Binding Location}"
-            SelectedItem="{Binding SelectedLocation, Mode=OneWayToSource}"
-            HorizontalOptions="FillAndExpand"
-            Grid.Column="0" Grid.Row="0"/>
-    <Button Text="Go" Command="{Binding ConfirmLocationCommand}"
-           Grid.Column="1" Grid.Row="0"/>
-    <Label Text="{Binding RangeText}" Margin="8, 2"
-           Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="1"/>
-    <Slider Minimum="0" Maximum="50" Value="{Binding Distance}"
-            Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="2" Margin="8, 2"/>
-    <Button Image="PinWhite.png" Text="Share Your Location"
-            Command="{Binding AutoLocateCommand}"
-            Grid.Column="0" Grid.ColumnSpan="2" Grid.Row="3"/>
-  </Grid>
+                    xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
+                    xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                    x:Class="Kina.Mobile.Core.Pages.LocationView"
+                    Title="Location">
+    <ScrollView>
+        <StackLayout Style="{StaticResource ContentStackLayoutStyle}">
+            <Picker ItemsSource="{Binding Locations}"
+                Margin="0"
+                SelectedIndex="{Binding SelectedLocationIndex, Mode=OneWayToSource}"
+                Style="{StaticResource SettingStyle}"
+                Title="Pick your location"/>
+            <Button Command="{Binding ConfirmLocationCommand}"
+                HorizontalOptions="Start"
+                Text="Use location"/>
+            <Label Style="{StaticResource BodyStyle}"
+               Text="To indicate the area in which you are looking for cinemas, pick your location above. You can also use the device's location to find the cinema at a specific distance."/>
+            <Label Text="{Binding RangeText}"/>
+            <Slider Margin="0"
+                Maximum="50"
+                Minimum="0"
+                Style="{StaticResource SettingStyle}"
+                Value="{Binding Distance}"/>
+            <Button Command="{Binding AutoLocateCommand}"
+                HorizontalOptions="Start"
+                Text="Share your location"/>
+        </StackLayout>
+    </ScrollView>
 </mvx:MvxContentPage>

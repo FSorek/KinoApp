@@ -1,6 +1,6 @@
 ﻿using Kina.Mobile.Core.Model;
+using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Models;
-using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
@@ -13,7 +13,9 @@ namespace Kina.Mobile.Core.ViewModels
     public class ShowsViewModel : MvxViewModel
     {
         private readonly IMvxNavigationService _navigationService;
-        private readonly Services.IAppSettings _settings;
+        private readonly IAppSettings _settings;
+        private readonly IFilterService _filterService;
+        private readonly IDataService _dataService;
 
         private MvxAsyncCommand _goToFilterViewCommandCommand;
         private MvxAsyncCommand _goToLocationViewCommandCommand;
@@ -21,21 +23,16 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand GoToFilterViewCommand => _goToFilterViewCommandCommand;
         public IMvxAsyncCommand GoToLocationViewCommand => _goToLocationViewCommandCommand;
 
-        private List<MovieListItem> movies;
-        private double userScore;
+        public List<Group<MovieShows>> Repertoires { get; set; }
 
-        public List<MovieListItem> Movies
-        {
-            get { return movies; }
-            set { SetProperty(ref movies, value); }
-        }
-
-        public List<MovieList> ShowsList { get; set; }
-
-        public ShowsViewModel(IMvxNavigationService navigationService, Services.IAppSettings settings)
+        public ShowsViewModel(IMvxNavigationService navigationService, IDataService dataService,
+            IFilterService filterService, IAppSettings settings)
         {
             _navigationService = navigationService;
             _settings = settings;
+            _filterService = filterService;
+            _dataService = dataService;
+            Repertoires = new List<Group<MovieShows>>();
 
             FillWithData();
 
@@ -44,19 +41,13 @@ namespace Kina.Mobile.Core.ViewModels
 
         public void FillWithData()
         {
-            DataRequest dataRequest = new DataRequest();
-
-            ShowsList = new List<MovieList>();
-            List<Cinema> cinemaList = MvxApp.FilterSettings.Cinemas;
-
-            // If Cinemas is null, then City is definied
-            if (MvxApp.FilterSettings.Cinemas == null)
+            List<Cinema> cinemas = _filterService.Cinemas;
+            if (_filterService.Cinemas == null)
             {
-                GetData(dataRequest, MvxApp.FilterSettings.City);
-                cinemaList = dataRequest.CinemaList;
+                cinemas = Task.Run(() => _dataService.GetCinemasInCity(_filterService.City)).Result;
             }
-            
-            foreach (Cinema cinema in cinemaList)
+
+            foreach (Cinema cinema in cinemas)
             {
                 string cinemaName = String.Format("{0} - {1}", cinema.Name, cinema.City);
                 ProcessMovies(cinema, cinemaName, (CinemaType) cinema.CinemaType);
@@ -65,48 +56,44 @@ namespace Kina.Mobile.Core.ViewModels
 
         private void ProcessMovies(Cinema cinema, string cinemaName, CinemaType cinemaType)
         {
-            var today = DateTime.Today;
-            movies = new List<MovieListItem>();
+            var textColor = CinemaColor(cinemaType);
+            var group = new Group<MovieShows>(textColor, cinemaName, cinema.Name.Substring(0, 1) + cinema.City.Substring(0, 2));
             foreach (SimpleMovie movie in cinema.MoviesPlayed)
             {
-                bool check = true;
-                bool content = movie.Shows.Count != 0;
-                int showAfterFiltering = 0;
-                if (MvxApp.UsingFilter)
+                if (_filterService.IsActive)
                 {
-                    if(MvxApp.FilterSettings.Title != null)
+                    if (!_filterService.Check(movie))
                     {
-                        check = movie.Name.ToLower().Contains(MvxApp.FilterSettings.Title.ToLower());
-                    }
-                    if(MvxApp.FilterSettings.Category != null)
-                    {
-                        check = check && (movie.Genre.Contains(MvxApp.FilterSettings.Category) || movie.Genre.Contains(MvxApp.FilterSettings.Category));
-                    }
-                    if (content)
-                    {
-                        foreach (var s in movie.Shows)
-                        {
-                            
-                            int showHour = int.Parse(s.Start.Split(':')[0]);
-                            int parameterHourStart = int.Parse(MvxApp.FilterSettings.Start.Split(':')[0]);
-                            int parameterHourEnd = int.Parse(MvxApp.FilterSettings.End.Split(':')[0]);
-                            if (((showHour > (parameterHourStart)) && (showHour < (parameterHourEnd))) || (parameterHourStart == 0 && parameterHourEnd == 0))
-                            {
-                                showAfterFiltering++;
-                            }
-                        }
-                        if (showAfterFiltering == 0)
-                            continue;
+                        continue;
                     }
                 }
-                if (content && check)
+
+                string shows = "";
+                foreach (var show in movie.Shows)
                 {
-                    userScore = movie.AverageRating;
-                    BasicShowData basicShowData = new BasicShowData(cinema.IdCinema, movie.Id, cinemaName);
-                    movies.Add(new MovieListItem(basicShowData ,movie, userScore, _navigationService));
+                    shows = shows + show.Start + ", ";
                 }
+
+                string genre = null;
+                if (movie.Genre != null)
+                {
+                    if (movie.Genre.Count > 0)
+                    {
+                        genre = movie.Genre[0];
+                    }
+                }
+
+                var showData = new BasicShowData(cinema.IdCinema, movie.Id, cinemaName, movie.AverageRating);
+                MvxAsyncCommand command = new MvxAsyncCommand(async () =>
+                {
+                    await _navigationService.Navigate<MovieViewModel, BasicShowData>(showData);
+                });
+
+                var movieShows = new MovieShows(movie.Name, genre, shows, movie.AverageRating, command);
+                group.Add(movieShows);
             }
-            ShowsList.Add(new MovieList(cinemaName, movies, CinemaColor(cinemaType)));
+
+            Repertoires.Add(group);
         }
 
         private Color CinemaColor(CinemaType type)
@@ -122,20 +109,10 @@ namespace Kina.Mobile.Core.ViewModels
             return cinemaColor;
         }
 
-        private void GetData(DataRequest dataRequest, string city)
-        {
-            Task.Run(() => dataRequest.ProvideShowsFromCity(city)).Wait();
-        }
-
         public void InitCommands()
         {
             _goToFilterViewCommandCommand = new MvxAsyncCommand(GoToFilterViewAction);
             _goToLocationViewCommandCommand = new MvxAsyncCommand(GoToLocationViewAction);
-        }
-
-        private void GetScore(long movieId, long cinemaId, DataRequest dataRequest)
-        {
-            Task.Run(() => dataRequest.ProvideScoreData(movieId, cinemaId)).Wait();
         }
 
         private async Task GoToFilterViewAction()

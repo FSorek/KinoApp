@@ -15,7 +15,7 @@ using Xamarin.Forms;
 
 namespace Kina.Mobile.Droid
 {
-    [Activity(Label = "FormsApplicationActivity", ScreenOrientation = ScreenOrientation.Portrait)]
+    [Activity(Label = "FormsApplicationActivity", ConfigurationChanges = ConfigChanges.ScreenSize | ConfigChanges.Orientation)]
 	public class FormsApplicationActivity : MvxFormsApplicationActivity
 	{
 		protected override void OnCreate(Bundle bundle)

@@ -3,10 +3,12 @@
     xmlns="http://xamarin.com/schemas/2014/forms" 
     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml" 
     x:Class="Kina.Mobile.Core.FormsApp"
-    xmlns:mvx="clr-namespace:MvvmCross.Forms.Platform;assembly=MvvmCross.Forms">
+    xmlns:mvx="clr-namespace:MvvmCross.Forms.Platform;assembly=MvvmCross.Forms"
+    xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews">
 	<mvx:MvxFormsApplication.Resources>
 		<ResourceDictionary>
-            <Color x:Key="Primary">#A38018</Color>
+            <!--<Color x:Key="Primary">#780030</Color>-->
+      <Color x:Key="Primary">#780030</Color>
             <Color x:Key="PrimaryDark">#7A6012</Color>
             <Color x:Key="Accent">#96d1ff</Color>
             <Color x:Key="LightBackgroundColor">#FAFAFA</Color>
@@ -17,10 +19,44 @@
               <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
               <Setter Property="BarTextColor" Value="White" />
             </Style>
-            <Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-                <Setter Property="TextColor" Value="{StaticResource LightTextColor}" />
-            </Style>
+
+      <Style TargetType="StackLayout" x:Key="ContentStackLayoutStyle">
+        <Setter Property="Padding" Value="24"/>
+      </Style>
+      <Style TargetType="View" x:Key="ViewStyle">
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="WidthRequest" Value="800.0"/>
+      </Style>
+      <Style BasedOn="{StaticResource ViewStyle}" TargetType="View" x:Key="BodyStyle">
+        <Setter Property="Margin" Value="0, 0, 0, 18"/>
+      </Style>
+      <Style BasedOn="{StaticResource BodyStyle}" TargetType="BoxView" x:Key="SeparatorStyle">
+        <Setter Property="BackgroundColor" Value="Black"/>
+        <Setter Property="HeightRequest" Value="1"/>
+      </Style>
+      <Style BasedOn="{StaticResource BodyStyle}" TargetType="View" x:Key="SettingStyle">
+        <Setter Property="WidthRequest" Value="450.0"/>
+      </Style>
+      <Style TargetType="Image" x:Key="TileStyle">
+        <Setter Property="HeightRequest" Value="150.0"/>
+        <Setter Property="WidthRequest" Value="150.0"/>
+      </Style>
+      <Style TargetType="TimePicker" x:Key="TimePickerStyle">
+        <Setter Property="HorizontalOptions" Value="Start"/>
+        <Setter Property="Margin" Value="0, 0, 0, 18"/>
+      </Style>
+      <Style TargetType="views:RatingControl" x:Key="ReadOnlyRatingControlStyle">
+        <Setter Property="CellSize" Value="16"/>
+        <Setter Property="VerticalOptions" Value="Center"/>
+      </Style>
+      <Style TargetType="Label" x:Key="SubtitleStyle">
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="24"/>
+      </Style>
+      <Style TargetType="Label" x:Key="TitleStyle">
+        <Setter Property="FontAttributes" Value="Bold"/>
+        <Setter Property="FontSize" Value="30"/>
+      </Style>
 		</ResourceDictionary>
 	</mvx:MvxFormsApplication.Resources>
 </mvx:MvxFormsApplication>

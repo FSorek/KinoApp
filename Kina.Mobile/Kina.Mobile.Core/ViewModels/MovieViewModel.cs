@@ -4,11 +4,12 @@
 // ---------------------------------------------------------------
 
 using Kina.Mobile.Core.Model;
+using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Models;
-using Kina.Mobile.DataProvider.Providers;
 using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
+using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -17,6 +18,7 @@ namespace Kina.Mobile.Core.ViewModels
     class MovieViewModel : MvxViewModel<BasicShowData>
     {
         private readonly IMvxNavigationService _navigationService;
+        private readonly IDataService _dataService;
         //private readonly Services.IAppSettings _settings;
 
         private MvxAsyncCommand _goToLocationViewCommandCommand;
@@ -27,16 +29,25 @@ namespace Kina.Mobile.Core.ViewModels
 
         private BasicShowData _parameter;
 
-        public string TitleText { get; set; }
+        public double AverageRating { get; set; }
+        public string Title { get; set; }
         public string URLText { get; set; }
-        public string DescriptionText { get; set; }
+        public string Description { get; set; }
         public string Year { get; set; }
         public string Cast { get; set; }
         public string Director { get; set; }
+        public string Genre { get; set; }
 
-        public MovieViewModel(IMvxNavigationService navigationService)
+        public double CleanlinessRating { get; set; }
+        public double ScreenRating { get; set; }
+        public double SeatsRating { get; set; }
+        public double SoundRating { get; set; }
+        public double SnacksRating { get; set; }
+
+        public MovieViewModel(IMvxNavigationService navigationService, IDataService dataService)
         {
             _navigationService = navigationService;
+            _dataService = dataService;
 
             InitCommands();
         }
@@ -63,23 +74,41 @@ namespace Kina.Mobile.Core.ViewModels
             _goToRateViewCommandCommand = new MvxAsyncCommand(GoToRateViewAction);
         }
 
-        private void GetMovieData(DataRequest dataRequest, long id)
-        {
-            Task.Run(() => dataRequest.ProvideMovieData(id)).Wait();
-        }
-
         public override void Prepare(BasicShowData parameter)
         {
             _parameter = parameter;
-            DataRequest dataRequest = new DataRequest();
-            GetMovieData(dataRequest, _parameter.IdMovie);
-            Movie requested = dataRequest.SelectedMovie;
-            TitleText = requested.OriginalName;
-            DescriptionText = requested.Storyline;
+            Movie requested = Task.Run(() => _dataService.GetMovie(parameter.IdMovie)).Result;
+            Title = requested.OriginalName;
+            if (requested.Genre != null)
+            {
+                if (requested.Genre.Count > 0)
+                {
+                    Genre = requested.Genre[0];
+                }
+            }
+
+            Description = requested.Storyline;
             Director = requested.Director;
             URLText = requested.Trailer;
             Cast = requested.Stars;
             Year = null;
+            AverageRating = parameter.AverageRating;
+
+            List<UserScore> ratings = Task.Run(() => _dataService.GetRating(parameter.IdMovie, parameter.IdCinema)).Result;
+            foreach(var rating in ratings)
+            {
+                CleanlinessRating += rating.Cleanliness;
+                ScreenRating += rating.Screen;
+                SeatsRating += rating.Seat;
+                SnacksRating += rating.Popcorn;
+                SoundRating += rating.Sound;
+            }
+
+            CleanlinessRating /= ratings.Count;
+            ScreenRating /= ratings.Count;
+            SeatsRating /= ratings.Count;
+            SnacksRating /= ratings.Count;
+            SoundRating /= ratings.Count;
         }
     }
 }
