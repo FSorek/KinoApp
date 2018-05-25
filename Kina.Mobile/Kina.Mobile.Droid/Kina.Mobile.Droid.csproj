@@ -276,12 +276,6 @@
     <Folder Include="Views\" />
   </ItemGroup>
   <ItemGroup>
-    <AndroidResource Include="Resources\drawable\darkersplash.png" />
-  </ItemGroup>
-  <ItemGroup>
-    <AndroidResource Include="Resources\drawable\TitleBackground.png" />
-  </ItemGroup>
-  <ItemGroup>
     <AndroidResource Include="Resources\values\Colors.xml" />
   </ItemGroup>
   <ItemGroup>
