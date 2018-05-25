@@ -19,11 +19,6 @@
               <Setter Property="BarBackgroundColor" Value="{StaticResource Primary}" />
               <Setter Property="BarTextColor" Value="White" />
             </Style>
-            <!--<Style TargetType="Button">
-                <Setter Property="BackgroundColor" Value="{StaticResource Primary}" />
-              <Setter Property="BorderColor" Value="{StaticResource Primary}"/>
-                <Setter Property="TextColor" Value="{StaticResource LightTextColor}" />
-            </Style>-->
 
       <Style TargetType="StackLayout" x:Key="ContentStackLayoutStyle">
         <Setter Property="Padding" Value="24"/>
