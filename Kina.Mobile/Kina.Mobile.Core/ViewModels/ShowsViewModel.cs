@@ -23,7 +23,7 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand GoToFilterViewCommand => _goToFilterViewCommandCommand;
         public IMvxAsyncCommand GoToLocationViewCommand => _goToLocationViewCommandCommand;
 
-        public List<Group<MovieShows>> Repertoires { get; set; }
+        public MvxObservableCollection<Group<MovieShows>> Repertoires { get; set; }
 
         public ShowsViewModel(IMvxNavigationService navigationService, IDataService dataService,
             IFilterService filterService, IAppSettings settings)
@@ -32,7 +32,7 @@ namespace Kina.Mobile.Core.ViewModels
             _settings = settings;
             _filterService = filterService;
             _dataService = dataService;
-            Repertoires = new List<Group<MovieShows>>();
+            Repertoires = new MvxObservableCollection<Group<MovieShows>>();
 
             FillWithData();
 
@@ -41,6 +41,11 @@ namespace Kina.Mobile.Core.ViewModels
 
         public void FillWithData()
         {
+            if (Repertoires.Count != 0)
+            {
+                Repertoires.Clear();
+            }
+
             List<Cinema> cinemas = _filterService.Cinemas;
             if (_filterService.Cinemas == null)
             {
