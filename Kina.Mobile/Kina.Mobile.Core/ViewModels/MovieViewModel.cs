@@ -1,9 +1,4 @@
-﻿// ---------------------------------------------------------------
-// <author>Paul Datsyuk</author>
-// <url>https://www.linkedin.com/in/pauldatsyuk/</url>
-// ---------------------------------------------------------------
-
-using Kina.Mobile.Core.Model;
+﻿using Kina.Mobile.Core.Model;
 using Kina.Mobile.Core.Services;
 using Kina.Mobile.DataProvider.Models;
 using MvvmCross.Core.Navigation;
@@ -38,6 +33,8 @@ namespace Kina.Mobile.Core.ViewModels
         public string Director { get; set; }
         public string Genre { get; set; }
 
+        public bool IsYouTubeLink { get; set; }
+
         public double CleanlinessRating { get; set; }
         public double ScreenRating { get; set; }
         public double SeatsRating { get; set; }
@@ -55,7 +52,7 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxCommand OpenYoutubeUrlCommand =>
             new MvxCommand(() =>
             {
-                Device.OpenUri(new Uri("https://www.youtube.com/"));
+                Device.OpenUri(new Uri(URLText));
             });
 
         private async Task GoToRateViewAction()
@@ -93,6 +90,11 @@ namespace Kina.Mobile.Core.ViewModels
             Cast = requested.Stars;
             Year = null;
             AverageRating = parameter.AverageRating;
+
+            if (URLText.Contains("youtube.com/"))
+            {
+                IsYouTubeLink = true;
+            }
 
             List<UserScore> ratings = Task.Run(() => _dataService.GetRating(parameter.IdMovie, parameter.IdCinema)).Result;
             foreach(var rating in ratings)
