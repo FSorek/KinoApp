@@ -5,6 +5,7 @@ using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -34,8 +35,6 @@ namespace Kina.Mobile.Core.ViewModels
             _dataService = dataService;
             Repertoires = new MvxObservableCollection<Group<MovieShows>>();
 
-            FillWithData();
-
             InitCommands();
         }
 
@@ -61,6 +60,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private void ProcessMovies(Cinema cinema, string cinemaName, CinemaType cinemaType)
         {
+            var cultureInfo = new CultureInfo("en-US");
             var textColor = CinemaColor(cinemaType);
             var group = new Group<MovieShows>(textColor, cinemaName, cinema.Name.Substring(0, 1) + cinema.City.Substring(0, 2));
             foreach (SimpleMovie movie in cinema.MoviesPlayed)
@@ -76,7 +76,11 @@ namespace Kina.Mobile.Core.ViewModels
                 string shows = "";
                 foreach (var show in movie.Shows)
                 {
-                    shows = shows + show.Start + ", ";
+                    show.ShowDate = DateTime.Parse(show.ShowDate.ToString(), cultureInfo);
+                    if (show.ShowDate.Date.Equals(DateTime.Today))
+                    {
+                        shows = shows + show.Start + ", ";
+                    }
                 }
 
                 string genre = null;
