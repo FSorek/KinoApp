@@ -16,6 +16,15 @@ namespace Kina.Mobile.Core.Pages
             InitializeComponent ();
 		}
 
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext.DataContext is ShowsViewModel context)
+            {
+                context.FillWithData();
+            }
+        }
+
         protected override void OnSizeAllocated(double width, double height)
         {
             base.OnSizeAllocated(width, height);
