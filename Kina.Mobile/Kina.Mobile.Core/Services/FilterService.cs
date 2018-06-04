@@ -1,11 +1,14 @@
 ﻿using Kina.Mobile.DataProvider.Models;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 
 namespace Kina.Mobile.Core.Services
 {
     public class FilterService : IFilterService
     {
+
+        private CultureInfo _cultureInfo = new CultureInfo("en-US");
         public bool IsActive { get; set; }
         public string Category { get; set; }
         public List<Cinema> Cinemas { get; set; }
@@ -41,8 +44,8 @@ namespace Kina.Mobile.Core.Services
                 int showsAfter = 0;
                 foreach (var s in movie.Shows)
                 {
-                    //if (s.ShowDate.Date.Equals(DateTime.Today.Date))
-                    //{
+                    if (DateTime.Parse(s.ShowDate.ToString(), _cultureInfo).Date.Equals(DateTime.Today.AddDays(-1)))
+                    {
                         if (Start != default(TimeSpan) && End != default(TimeSpan))
                         {
                             TimeSpan showHour = TimeSpan.Parse(s.Start);
@@ -55,7 +58,7 @@ namespace Kina.Mobile.Core.Services
                         {
                             showsAfter++;
                         }
-                    //}
+                    }
                 }
 
                 if (showsAfter == 0)
