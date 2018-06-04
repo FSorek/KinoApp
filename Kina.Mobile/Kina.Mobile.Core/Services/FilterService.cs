@@ -44,7 +44,7 @@ namespace Kina.Mobile.Core.Services
                 int showsAfter = 0;
                 foreach (var s in movie.Shows)
                 {
-                    if (DateTime.Parse(s.ShowDate.ToString(), _cultureInfo).Date.Equals(DateTime.Today.AddDays(-1)))
+                    if (DateTime.Parse(s.ShowDate.ToString(), _cultureInfo).Date.Equals(DateTime.Today))
                     {
                         if (Start != default(TimeSpan) && End != default(TimeSpan))
                         {
