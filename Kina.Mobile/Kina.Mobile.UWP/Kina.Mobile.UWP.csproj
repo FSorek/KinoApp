@@ -96,6 +96,7 @@
     <Compile Include="Bootstrap\JsonPluginBootstrap.cs" />
     <Compile Include="Bootstrap\LocationPluginBootstrap.cs" />
     <Compile Include="Bootstrap\MessengerPluginBootstrap.cs" />
+    <Compile Include="CustomRenderers\ProgressIndicatorRenderer.cs" />
     <Compile Include="MainPage.xaml.cs">
       <DependentUpon>MainPage.xaml</DependentUpon>
     </Compile>
@@ -192,9 +193,7 @@
       <Version>2.5.1.527436</Version>
     </PackageReference>
   </ItemGroup>
-  <ItemGroup>
-    <Folder Include="CustomRenderers\" />
-  </ItemGroup>
+  <ItemGroup />
   <PropertyGroup Condition=" '$(VisualStudioVersion)' == '' or '$(VisualStudioVersion)' &lt; '14.0' ">
     <VisualStudioVersion>14.0</VisualStudioVersion>
   </PropertyGroup>
