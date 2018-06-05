@@ -3,26 +3,42 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                     xmlns:vm="clr-namespace:Kina.Mobile.Core.ViewModels"
+                    xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews"
+                    xmlns:c="clr-namespace:Kina.Mobile.Core.Converters"
                     x:Class="Kina.Mobile.Core.Pages.ShowsView"
                     x:TypeArguments="vm:ShowsViewModel"
                     Title="Repertoires">
     <mvx:MvxContentPage.Content>
-        <StackLayout HorizontalOptions="CenterAndExpand"
-                 Style="{StaticResource ContentStackLayoutStyle}">
-            <ListView GroupDisplayBinding="{Binding DisplayName}"
-                  GroupShortNameBinding="{Binding ShortName}"
-                  HasUnevenRows="True"
-                  IsGroupingEnabled="True"
-                  ItemsSource="{Binding Repertoires}"
-                  WidthRequest="800.0"
-                  x:Name="RepertoireList">
-                <ListView.GroupHeaderTemplate>
-                    <DataTemplate>
-                        <TextCell Text="{Binding DisplayName}"
-                              TextColor="{Binding TextColor}"/>
-                    </DataTemplate>
-                </ListView.GroupHeaderTemplate>
-            </ListView>
+        <StackLayout>
+            <views:ProgressIndicator Color="{StaticResource Primary}"
+                                     HeightRequest="60"
+                                     IsRunning="{Binding BackgroundActivity}"
+                                     IsVisible="{Binding BackgroundActivity}"
+                                     VerticalOptions="CenterAndExpand"
+                                     WidthRequest="60"/>
+            <StackLayout HorizontalOptions="CenterAndExpand"
+                         Style="{StaticResource ContentStackLayoutStyle}">
+                <ListView GroupDisplayBinding="{Binding DisplayName}"
+                          GroupShortNameBinding="{Binding ShortName}"
+                          HasUnevenRows="True"
+                          IsGroupingEnabled="True"
+                          IsVisible="{Binding BackgroundActivity, Converter={StaticResource BoolNegation}}"
+                          ItemsSource="{Binding Repertoires}"
+                          WidthRequest="800.0"
+                          x:Name="RepertoireList">
+                    <ListView.GroupHeaderTemplate>
+                        <DataTemplate>
+                            <TextCell Text="{Binding DisplayName}"
+                                      TextColor="{Binding TextColor}"/>
+                        </DataTemplate>
+                    </ListView.GroupHeaderTemplate>
+                </ListView>
+            </StackLayout>
         </StackLayout>
     </mvx:MvxContentPage.Content>
+    <mvx:MvxContentPage.Resources>
+        <ResourceDictionary>
+            <c:NegateBooleanConverter x:Key="BoolNegation"/>
+        </ResourceDictionary>
+    </mvx:MvxContentPage.Resources>
 </mvx:MvxContentPage>

@@ -3,7 +3,8 @@
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
                     xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews"
-                    x:Class="Kina.Mobile.Core.Pages.RateView">
+                    x:Class="Kina.Mobile.Core.Pages.RateView"
+                    Title="Rate this show">
     <ScrollView>
         <StackLayout Style="{StaticResource ContentStackLayoutStyle}">
             <Grid Style="{StaticResource ViewStyle}">
