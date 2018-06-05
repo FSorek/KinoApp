@@ -76,8 +76,8 @@ namespace Kina.Mobile.Core.ViewModels
                 string shows = "";
                 foreach (var show in movie.Shows)
                 {
-                    show.ShowDate = DateTime.Parse(show.ShowDate.ToString(), cultureInfo);
-                    if (show.ShowDate.Date.Equals(DateTime.Today))
+                    var date = DateTime.Parse(show.ShowDate.Date.ToString(), cultureInfo);
+                    if (date.Equals(DateTime.Today))
                     {
                         shows = shows + show.Start + ", ";
                     }
