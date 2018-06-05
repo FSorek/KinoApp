@@ -28,9 +28,16 @@ namespace Kina.Mobile.Core.ViewModels
         private string _rangeText;
         private List<string> _locations;
         private bool _locationSet;
+        private bool _backgroundActivity;
 
         public IMvxAsyncCommand ConfirmLocationCommand => _confirmLocationCommandCommand;
         public IMvxAsyncCommand AutoLocateCommand => _autoLocateCommandCommand;
+
+        public bool BackgroundActivity
+        {
+            get { return _backgroundActivity; }
+            set { SetProperty(ref _backgroundActivity, value); }
+        }
 
         public int SelectedLocationIndex
         {
@@ -91,6 +98,7 @@ namespace Kina.Mobile.Core.ViewModels
                 return;
             }
 
+            BackgroundActivity = true;
             _filterService.City = _locations[_selectedLocationIndex];
             _filterService.Cinemas = null;
             await ShowMasterDetailView();
@@ -104,6 +112,7 @@ namespace Kina.Mobile.Core.ViewModels
                 return;
             }
 
+            BackgroundActivity = true;
             _filterService.Cinemas = await _dataService.GetCinemasInRange(_latitude, _longtitude, _distance);
             _filterService.City = null;
             await ShowMasterDetailView();

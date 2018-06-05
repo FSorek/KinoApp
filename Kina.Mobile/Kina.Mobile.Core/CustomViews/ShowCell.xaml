@@ -6,14 +6,6 @@
     <ViewCell.View>
         <StackLayout Orientation="Horizontal"
                      Padding="18">
-            <!--<Image BackgroundColor="#0078D7"
-                   IsVisible="{Binding IsTileVisible}"
-                   Source="{Binding ImageSource}"
-                   Style="{StaticResource TileStyle}"
-                   VerticalOptions="Start"
-                   x:Name="Tile"/>-->
-            <!--<StackLayout Padding="18, 0"
-                         x:Name="DetailsStackLayout">-->
             <StackLayout x:Name="DetailsStackLayout">
                 <Label Style="{StaticResource SubtitleStyle}"
                        Text="{Binding Title}"

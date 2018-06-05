@@ -2,29 +2,46 @@
 <mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                    xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews"
+                    xmlns:c="clr-namespace:Kina.Mobile.Core.Converters"
                     x:Class="Kina.Mobile.Core.Pages.FilterView"
                     Title="Filter">
-    <ScrollView>
-        <StackLayout Style="{StaticResource ContentStackLayoutStyle}">
-            <Label Style="{StaticResource ViewStyle}"
-                   Text="Enter a title of the movie you are looking for, or pick the start and end time to limit the number of shows displayed. Leave blank fields to not use these settings."/>
-            <Entry Placeholder="Title"
-                   Style="{StaticResource SettingStyle}"
-                   Text="{Binding Title}"/>
-            <Label Text="Pick the start time"/>
-            <TimePicker Style="{StaticResource TimePickerStyle}"
-                        Time="{Binding StartTime}"/>
-            <Label Text="Pick the end time"/>
-            <TimePicker Style="{StaticResource TimePickerStyle}"
-                        Time="{Binding EndTime}"/>
-            <Picker ItemsSource="{Binding Categories}"
-                    Margin="0"
-                    SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}"
-                    Style="{StaticResource SettingStyle}"
-                    Title="Category"/>
-            <Button Command="{Binding GoToShowsPageCommand}"
-                    HorizontalOptions="Start"
-                    Text="Search"/>
-        </StackLayout>
-    </ScrollView>
+    <mvx:MvxContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout IsVisible="{Binding BackgroundActivity, Converter={StaticResource BoolNegation}}"
+                             Style="{StaticResource ContentStackLayoutStyle}">
+                    <Label Style="{StaticResource ViewStyle}"
+                           Text="Enter a title of the movie you are looking for, or pick the start and end time to limit the number of shows displayed. Leave blank fields to not use these settings."/>
+                    <Entry Placeholder="Title"
+                           Style="{StaticResource SettingStyle}"
+                           Text="{Binding Title}"/>
+                    <Label Text="Pick the start time"/>
+                    <TimePicker Style="{StaticResource TimePickerStyle}"
+                                Time="{Binding StartTime}"/>
+                    <Label Text="Pick the end time"/>
+                    <TimePicker Style="{StaticResource TimePickerStyle}"
+                                Time="{Binding EndTime}"/>
+                    <Picker ItemsSource="{Binding Categories}"
+                            Margin="0"
+                            SelectedItem="{Binding SelectedCategory, Mode=OneWayToSource}"
+                            Style="{StaticResource SettingStyle}"
+                            Title="Category"/>
+                    <Button Command="{Binding GoToShowsPageCommand}"
+                            Text="Search"/>
+                </StackLayout>
+                <views:ProgressIndicator Color="{StaticResource Primary}"
+                                         HeightRequest="60"
+                                         IsRunning="{Binding BackgroundActivity}"
+                                         IsVisible="{Binding BackgroundActivity}"
+                                         VerticalOptions="CenterAndExpand"
+                                         WidthRequest="60"/>
+            </StackLayout>
+        </ScrollView>
+    </mvx:MvxContentPage.Content>
+    <mvx:MvxContentPage.Resources>
+        <ResourceDictionary>
+            <c:NegateBooleanConverter x:Key="BoolNegation"/>
+        </ResourceDictionary>
+    </mvx:MvxContentPage.Resources>
 </mvx:MvxContentPage>

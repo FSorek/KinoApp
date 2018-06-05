@@ -2,29 +2,47 @@
 <mvx:MvxContentPage xmlns="http://xamarin.com/schemas/2014/forms"
                     xmlns:x="http://schemas.microsoft.com/winfx/2009/xaml"
                     xmlns:mvx="clr-namespace:MvvmCross.Forms.Views;assembly=MvvmCross.Forms"
+                    xmlns:views="clr-namespace:Kina.Mobile.Core.CustomViews"
+                    xmlns:c="clr-namespace:Kina.Mobile.Core.Converters"
                     x:Class="Kina.Mobile.Core.Pages.LocationView"
                     Title="Location">
-    <ScrollView>
-        <StackLayout Style="{StaticResource ContentStackLayoutStyle}">
-            <Picker ItemsSource="{Binding Locations}"
-                Margin="0"
-                SelectedIndex="{Binding SelectedLocationIndex, Mode=OneWayToSource}"
-                Style="{StaticResource SettingStyle}"
-                Title="Pick your location"/>
-            <Button Command="{Binding ConfirmLocationCommand}"
-                HorizontalOptions="Start"
-                Text="Use location"/>
-            <Label Style="{StaticResource BodyStyle}"
-               Text="To indicate the area in which you are looking for cinemas, pick your location above. You can also use the device's location to find the cinema at a specific distance."/>
-            <Label Text="{Binding RangeText}"/>
-            <Slider Margin="0"
-                Maximum="50"
-                Minimum="0"
-                Style="{StaticResource SettingStyle}"
-                Value="{Binding Distance}"/>
-            <Button Command="{Binding AutoLocateCommand}"
-                HorizontalOptions="Start"
-                Text="Share your location"/>
-        </StackLayout>
-    </ScrollView>
+    <mvx:MvxContentPage.Content>
+        <ScrollView>
+            <StackLayout>
+                <StackLayout IsVisible="{Binding BackgroundActivity, Converter={StaticResource BoolNegation}}"
+                             Style="{StaticResource ContentStackLayoutStyle}">
+                    <Picker ItemsSource="{Binding Locations}"
+                            Margin="0"
+                            SelectedIndex="{Binding SelectedLocationIndex, Mode=OneWayToSource}"
+                            Style="{StaticResource SettingStyle}"
+                            Title="Pick your location"/>
+                    <Button Command="{Binding ConfirmLocationCommand}"
+                            HorizontalOptions="Start"
+                            Text="Use location"/>
+                    <Label Style="{StaticResource BodyStyle}"
+                           Text="To indicate the area in which you are looking for cinemas, pick your location above. You can also use the device's location to find the cinema at a specific distance."/>
+                    <Label Text="{Binding RangeText}"/>
+                    <Slider Margin="0"
+                            Maximum="50"
+                            Minimum="0"
+                            Style="{StaticResource SettingStyle}"
+                            Value="{Binding Distance}"/>
+                    <Button Command="{Binding AutoLocateCommand}"
+                            HorizontalOptions="Start"
+                            Text="Share your location"/>
+                </StackLayout>
+                <views:ProgressIndicator Color="{StaticResource Primary}"
+                                         HeightRequest="60"
+                                         IsRunning="{Binding BackgroundActivity}"
+                                         IsVisible="{Binding BackgroundActivity}"
+                                         VerticalOptions="CenterAndExpand"
+                                         WidthRequest="60"/>
+            </StackLayout>
+        </ScrollView>
+    </mvx:MvxContentPage.Content>
+    <mvx:MvxContentPage.Resources>
+        <ResourceDictionary>
+            <c:NegateBooleanConverter x:Key="BoolNegation"/>
+        </ResourceDictionary>
+    </mvx:MvxContentPage.Resources>
 </mvx:MvxContentPage>

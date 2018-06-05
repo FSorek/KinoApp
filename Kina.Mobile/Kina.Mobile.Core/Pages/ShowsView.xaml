@@ -8,18 +8,18 @@
                     Title="Repertoires">
     <mvx:MvxContentPage.Content>
         <StackLayout HorizontalOptions="CenterAndExpand"
-                 Style="{StaticResource ContentStackLayoutStyle}">
+                     Style="{StaticResource ContentStackLayoutStyle}">
             <ListView GroupDisplayBinding="{Binding DisplayName}"
-                  GroupShortNameBinding="{Binding ShortName}"
-                  HasUnevenRows="True"
-                  IsGroupingEnabled="True"
-                  ItemsSource="{Binding Repertoires}"
-                  WidthRequest="800.0"
-                  x:Name="RepertoireList">
+                      GroupShortNameBinding="{Binding ShortName}"
+                      HasUnevenRows="True"
+                      IsGroupingEnabled="True"
+                      ItemsSource="{Binding Repertoires}"
+                      WidthRequest="800.0"
+                      x:Name="RepertoireList">
                 <ListView.GroupHeaderTemplate>
                     <DataTemplate>
                         <TextCell Text="{Binding DisplayName}"
-                              TextColor="{Binding TextColor}"/>
+                                  TextColor="{Binding TextColor}"/>
                     </DataTemplate>
                 </ListView.GroupHeaderTemplate>
             </ListView>
