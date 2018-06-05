@@ -21,17 +21,10 @@ namespace Kina.Mobile.Core.ViewModels
         private MvxAsyncCommand _goToFilterViewCommandCommand;
         private MvxAsyncCommand _goToLocationViewCommandCommand;
 
-        private bool _backgroundActivity;
-
         public IMvxAsyncCommand GoToFilterViewCommand => _goToFilterViewCommandCommand;
         public IMvxAsyncCommand GoToLocationViewCommand => _goToLocationViewCommandCommand;
 
         public MvxObservableCollection<Group<MovieShows>> Repertoires { get; set; }
-        public bool BackgroundActivity
-        {
-            get { return _backgroundActivity; }
-            set { SetProperty(ref _backgroundActivity, value); }
-        }
 
         public ShowsViewModel(IMvxNavigationService navigationService, IDataService dataService,
             IFilterService filterService, IAppSettings settings)
@@ -47,7 +40,6 @@ namespace Kina.Mobile.Core.ViewModels
 
         public void FillWithData()
         {
-            BackgroundActivity = true;
             if (Repertoires.Count != 0)
             {
                 Repertoires.Clear();
@@ -64,8 +56,6 @@ namespace Kina.Mobile.Core.ViewModels
                 string cinemaName = String.Format("{0} - {1}", cinema.Name, cinema.City);
                 ProcessMovies(cinema, cinemaName, (CinemaType) cinema.CinemaType);
             }
-
-            BackgroundActivity = false;
         }
 
         private void ProcessMovies(Cinema cinema, string cinemaName, CinemaType cinemaType)
