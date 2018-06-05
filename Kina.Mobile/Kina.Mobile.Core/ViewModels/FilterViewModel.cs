@@ -16,6 +16,8 @@ namespace Kina.Mobile.Core.ViewModels
 
         private MvxAsyncCommand _goToShowsPageCommandCommand;
 
+        private bool _backgroundActivity;
+
         public IMvxAsyncCommand GoToShowsPageCommand => _goToShowsPageCommandCommand;
 
         public List<string> Categories { get; set; }
@@ -24,6 +26,12 @@ namespace Kina.Mobile.Core.ViewModels
         public string Title { get; set; }
         public TimeSpan StartTime { get; set; }
         public TimeSpan EndTime { get; set; }
+
+        public bool BackgroundActivity
+        {
+            get { return _backgroundActivity; }
+            set { SetProperty(ref _backgroundActivity, value); }
+        }
 
         public FilterViewModel(IMvxNavigationService navigationService, IDataService dataService, IFilterService filterService, IAppSettings settings)
         {
@@ -39,6 +47,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task GoToShowsPageAction()
         {
+            BackgroundActivity = true;
             _filterService.ClearFilter();
             if (SelectedCategory != null)
             {
