@@ -102,7 +102,10 @@ namespace Kina.Mobile.Core.ViewModels
                 group.Add(movieShows);
             }
 
-            Repertoires.Add(group);
+            if (group.Count != 0)
+            {
+                Repertoires.Add(group);
+            }
         }
 
         private Color CinemaColor(CinemaType type)
