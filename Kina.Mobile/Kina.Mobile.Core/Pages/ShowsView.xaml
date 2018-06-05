@@ -10,12 +10,6 @@
                     Title="Repertoires">
     <mvx:MvxContentPage.Content>
         <StackLayout>
-            <views:ProgressIndicator Color="{StaticResource Primary}"
-                                     HeightRequest="60"
-                                     IsRunning="{Binding BackgroundActivity}"
-                                     IsVisible="{Binding BackgroundActivity}"
-                                     VerticalOptions="CenterAndExpand"
-                                     WidthRequest="60"/>
             <StackLayout HorizontalOptions="CenterAndExpand"
                          Style="{StaticResource ContentStackLayoutStyle}">
                 <ListView GroupDisplayBinding="{Binding DisplayName}"
@@ -34,6 +28,12 @@
                     </ListView.GroupHeaderTemplate>
                 </ListView>
             </StackLayout>
+            <views:ProgressIndicator Color="{StaticResource Primary}"
+                                     HeightRequest="60"
+                                     IsRunning="{Binding BackgroundActivity}"
+                                     IsVisible="{Binding BackgroundActivity}"
+                                     VerticalOptions="CenterAndExpand"
+                                     WidthRequest="60"/>
         </StackLayout>
     </mvx:MvxContentPage.Content>
     <mvx:MvxContentPage.Resources>
