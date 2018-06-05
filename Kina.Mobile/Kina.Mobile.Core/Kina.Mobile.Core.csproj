@@ -38,6 +38,7 @@
   </PropertyGroup>
   <ItemGroup>
     <Compile Include="Behaviors\RatingCellBehavior.cs" />
+    <Compile Include="CustomViews\ProgressIndicator.cs" />
     <Compile Include="CustomViews\RatingCell.xaml.cs">
       <DependentUpon>RatingCell.xaml</DependentUpon>
     </Compile>
