@@ -27,6 +27,7 @@ namespace Kina.Mobile.Core.ViewModels
         private int _distance;
         private string _rangeText;
         private List<string> _locations;
+        private bool _locationSet;
 
         public IMvxAsyncCommand ConfirmLocationCommand => _confirmLocationCommandCommand;
         public IMvxAsyncCommand AutoLocateCommand => _autoLocateCommandCommand;
@@ -68,6 +69,10 @@ namespace Kina.Mobile.Core.ViewModels
             _token = messenger.SubscribeOnMainThread<LocationMessage>(OnLocationMessage);
 
             Locations = Task.Run(() => _dataService.GetCities()).Result;
+            if (_filterService.Cinemas != null || _filterService.City != null)
+            {
+                _locationSet = true;
+            }
 
             InitCommands();
         }
@@ -106,7 +111,14 @@ namespace Kina.Mobile.Core.ViewModels
 
         private async Task ShowMasterDetailView()
         {
-            await _navigationService.Navigate<MasterDetailViewModel>();
+            if (!_locationSet)
+            {
+                await _navigationService.Navigate<MasterDetailViewModel>();
+            }
+            else
+            {
+                await _navigationService.Close(this);
+            }
         }
 
         private void InitCommands()

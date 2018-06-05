@@ -9,14 +9,6 @@
             <StackLayout BackgroundColor="LightGray"
                          Orientation="Horizontal"
                          Style="{StaticResource ContentStackLayoutStyle}">
-                <!--<Image BackgroundColor="#0078D7"
-                           Source="{Binding ImageSource}"
-                           Style="{StaticResource TileStyle}"
-                           VerticalOptions="End"
-                           x:Name="Tile"/>-->
-                <!--<StackLayout Padding="18, 0"
-                                 VerticalOptions="End"
-                                 x:Name="DetailsStackLayout">-->
                 <StackLayout VerticalOptions="End"
                              x:Name="DetailsStackLayout">
                     <Label Style="{StaticResource TitleStyle}"
@@ -31,8 +23,9 @@
                     <Label Text="{Binding Shows}"/>
                     <StackLayout Orientation="Horizontal"
                                  x:Name="ButtonStackLayout">
-                        <Button Text="Cinema website"/>
-                        <Button Text="See trailer on YouTube"/>
+                        <Button Command="{Binding OpenYoutubeUrlCommand}"
+                                IsVisible="{Binding IsYouTubeLink}"
+                                Text="See trailer on YouTube"/>
                     </StackLayout>
                 </StackLayout>
             </StackLayout>

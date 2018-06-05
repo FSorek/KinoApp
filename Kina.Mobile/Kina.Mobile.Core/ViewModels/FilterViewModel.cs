@@ -75,7 +75,7 @@ namespace Kina.Mobile.Core.ViewModels
             }
             else _filterService.Title = null;
 
-            await _navigationService.Navigate<ShowsViewModel>();
+            await _navigationService.Close(this);
         }
 
         private void InitCommands()

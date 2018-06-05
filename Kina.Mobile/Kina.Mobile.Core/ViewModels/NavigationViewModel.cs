@@ -4,8 +4,6 @@ using MvvmCross.Core.ViewModels;
 using System.Collections.Generic;
 using System.Threading.Tasks;
 using Xamarin.Forms;
-using Kina.Mobile.Core.Resources;
-using System;
 
 namespace Kina.Mobile.Core.ViewModels
 {

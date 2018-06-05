@@ -5,6 +5,7 @@ using MvvmCross.Core.Navigation;
 using MvvmCross.Core.ViewModels;
 using System;
 using System.Collections.Generic;
+using System.Globalization;
 using System.Threading.Tasks;
 using Xamarin.Forms;
 
@@ -23,7 +24,7 @@ namespace Kina.Mobile.Core.ViewModels
         public IMvxAsyncCommand GoToFilterViewCommand => _goToFilterViewCommandCommand;
         public IMvxAsyncCommand GoToLocationViewCommand => _goToLocationViewCommandCommand;
 
-        public List<Group<MovieShows>> Repertoires { get; set; }
+        public MvxObservableCollection<Group<MovieShows>> Repertoires { get; set; }
 
         public ShowsViewModel(IMvxNavigationService navigationService, IDataService dataService,
             IFilterService filterService, IAppSettings settings)
@@ -32,15 +33,18 @@ namespace Kina.Mobile.Core.ViewModels
             _settings = settings;
             _filterService = filterService;
             _dataService = dataService;
-            Repertoires = new List<Group<MovieShows>>();
-
-            FillWithData();
+            Repertoires = new MvxObservableCollection<Group<MovieShows>>();
 
             InitCommands();
         }
 
         public void FillWithData()
         {
+            if (Repertoires.Count != 0)
+            {
+                Repertoires.Clear();
+            }
+
             List<Cinema> cinemas = _filterService.Cinemas;
             if (_filterService.Cinemas == null)
             {
@@ -56,6 +60,7 @@ namespace Kina.Mobile.Core.ViewModels
 
         private void ProcessMovies(Cinema cinema, string cinemaName, CinemaType cinemaType)
         {
+            var cultureInfo = new CultureInfo("en-US");
             var textColor = CinemaColor(cinemaType);
             var group = new Group<MovieShows>(textColor, cinemaName, cinema.Name.Substring(0, 1) + cinema.City.Substring(0, 2));
             foreach (SimpleMovie movie in cinema.MoviesPlayed)
@@ -71,7 +76,11 @@ namespace Kina.Mobile.Core.ViewModels
                 string shows = "";
                 foreach (var show in movie.Shows)
                 {
-                    shows = shows + show.Start + ", ";
+                    var date = DateTime.Parse(show.ShowDate.Date.ToString(), cultureInfo);
+                    if (date.Equals(DateTime.Today))
+                    {
+                        shows = shows + show.Start + ", ";
+                    }
                 }
 
                 string genre = null;
@@ -93,7 +102,10 @@ namespace Kina.Mobile.Core.ViewModels
                 group.Add(movieShows);
             }
 
-            Repertoires.Add(group);
+            if (group.Count != 0)
+            {
+                Repertoires.Add(group);
+            }
         }
 
         private Color CinemaColor(CinemaType type)
