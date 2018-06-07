@@ -24,7 +24,6 @@ namespace Kina.Mobile.Core.Services
             try
             {
                 string dataString = await _httpService.Get(uri);
-                //categories = StringList.FromJson(dataString);
                 categories = (List<string>)_converter.FromJson(dataString, typeof(List<string>));
             }
             catch
@@ -42,7 +41,6 @@ namespace Kina.Mobile.Core.Services
             try
             {
                 string dataString = await _httpService.Get(uri);
-                //cinemas = Cinema.FromJson(dataString);
                 cinemas = (List<Cinema>)_converter.FromJson(dataString, typeof(List<Cinema>));
             }
             catch
@@ -60,7 +58,6 @@ namespace Kina.Mobile.Core.Services
             try
             {
                 string dataString = await _httpService.Get(uri);
-                //cinemas = Cinema.FromJson(dataString);
                 cinemas = (List<Cinema>)_converter.FromJson(dataString, typeof(List<Cinema>));
             }
             catch
@@ -78,7 +75,6 @@ namespace Kina.Mobile.Core.Services
             try
             {
                 string dataString = await _httpService.Get(uri);
-                //cities = StringList.FromJson(dataString);
                 cities = (List<string>)_converter.FromJson(dataString, typeof(List<string>));
             }
             catch
@@ -96,7 +92,6 @@ namespace Kina.Mobile.Core.Services
             try
             {
                 string dataString = await _httpService.Get(uri);
-                //movie = Movie.FromJson(dataString);
                 movie = (Movie)_converter.FromJson(dataString, typeof(Movie));
             }
             catch
@@ -114,7 +109,6 @@ namespace Kina.Mobile.Core.Services
             try
             {
                 string dataString = await _httpService.Get(uri);
-                //rating = UserScore.FromJson(dataString);
                 rating = (List<UserScore>)_converter.FromJson(dataString, typeof(List<UserScore>));
             }
             catch
@@ -127,7 +121,6 @@ namespace Kina.Mobile.Core.Services
 
         public async Task<bool> PostScore(UserScore userScore)
         {
-            //var stringContent = new StringContent(JsonConvert.SerializeObject(userScore), System.Text.Encoding.UTF8, "application/json");
             var stringContent = new StringContent(_converter.SerializeScore(userScore), System.Text.Encoding.UTF8, "application/json");
             var isSuccessStatusCode = await _httpService.Post(ResourceIdentifier.RatingUri(), stringContent);
             return isSuccessStatusCode;

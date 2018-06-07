@@ -1,4 +1,5 @@
-﻿using MvvmCross.Forms.Views;
+﻿using Kina.Mobile.Core.ViewModels;
+using MvvmCross.Forms.Views;
 using Xamarin.Forms;
 using Xamarin.Forms.Xaml;
 
@@ -11,6 +12,15 @@ namespace Kina.Mobile.Core.Pages
 		{
 			InitializeComponent ();
 		}
+
+        protected override void OnAppearing()
+        {
+            base.OnAppearing();
+            if (BindingContext.DataContext is MovieViewModel context)
+            {
+                context.FillWithData();
+            }
+        }
 
         protected override void OnSizeAllocated(double width, double height)
         {
@@ -31,14 +41,14 @@ namespace Kina.Mobile.Core.Pages
             else
             {
                 ButtonStackLayout.Orientation = StackOrientation.Horizontal;
-                if (width <= 640)
-                {
-                    SetMinimumLayout();
-                }
-                else
-                {
-                    SetWideLayout();
-                }
+                //if (width <= 640)
+                //{
+                //    SetMinimumLayout();
+                //}
+                //else
+                //{
+                //    SetWideLayout();
+                //}
             }
         }
 
