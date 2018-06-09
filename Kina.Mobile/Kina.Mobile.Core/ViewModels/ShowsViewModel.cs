@@ -60,7 +60,6 @@ namespace Kina.Mobile.Core.ViewModels
 
         private void ProcessMovies(Cinema cinema, string cinemaName, CinemaType cinemaType)
         {
-            var cultureInfo = new CultureInfo("en-US");
             var textColor = CinemaColor(cinemaType);
             var group = new Group<MovieShows>(textColor, cinemaName, cinema.Name.Substring(0, 1) + cinema.City.Substring(0, 2));
             foreach (SimpleMovie movie in cinema.MoviesPlayed)
@@ -76,8 +75,7 @@ namespace Kina.Mobile.Core.ViewModels
                 string shows = "";
                 foreach (var show in movie.Shows)
                 {
-                    var date = DateTime.Parse(show.ShowDate.Date.ToString(), cultureInfo);
-                    if (date.Equals(DateTime.Today))
+                    if (show.ShowDate.Date.Equals(DateTime.Today))
                     {
                         shows = shows + show.Start + ", ";
                     }

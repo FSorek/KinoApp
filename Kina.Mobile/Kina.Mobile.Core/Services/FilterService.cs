@@ -7,8 +7,6 @@ namespace Kina.Mobile.Core.Services
 {
     public class FilterService : IFilterService
     {
-
-        private CultureInfo _cultureInfo = new CultureInfo("en-US");
         public bool IsActive { get; set; }
         public string Category { get; set; }
         public List<Cinema> Cinemas { get; set; }
@@ -44,8 +42,7 @@ namespace Kina.Mobile.Core.Services
                 int showsAfter = 0;
                 foreach (var s in movie.Shows)
                 {
-                    var date = DateTime.Parse(s.ShowDate.Date.ToString(), _cultureInfo);
-                    if (date.Equals(DateTime.Today))
+                    if (s.ShowDate.Date.Equals(DateTime.Today))
                     {
                         if (Start != default(TimeSpan) && End != default(TimeSpan))
                         {
