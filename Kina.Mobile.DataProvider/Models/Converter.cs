@@ -1,4 +1,5 @@
 ﻿using Newtonsoft.Json;
+using System.Globalization;
 
 namespace Kina.Mobile.DataProvider.Models
 {
@@ -8,6 +9,7 @@ namespace Kina.Mobile.DataProvider.Models
         {
             MetadataPropertyHandling = MetadataPropertyHandling.Ignore,
             DateParseHandling = DateParseHandling.None,
+            Culture = new CultureInfo("en-US")
         };
     }
 }
