@@ -1,10 +1,10 @@
 ﻿<?xml version="1.0" encoding="utf-8"?>
 <Package xmlns="http://schemas.microsoft.com/appx/manifest/foundation/windows10" xmlns:mp="http://schemas.microsoft.com/appx/2014/phone/manifest" xmlns:uap="http://schemas.microsoft.com/appx/manifest/uap/windows10" IgnorableNamespaces="uap mp">
-  <Identity Name="ec2da877-a252-49ba-b198-dfbe4c62b264" Publisher="CN=PaulDatsiuk" Version="1.0.0.0" />
+  <Identity Name="ec2da877-a252-49ba-b198-dfbe4c62b264" Publisher="CN=Licencjat_MSz_FSo_FSw_ASz" Version="1.2.0.0" />
   <mp:PhoneIdentity PhoneProductId="ec2da877-a252-49ba-b198-dfbe4c62b264" PhonePublisherId="00000000-0000-0000-0000-000000000000" />
   <Properties>
     <DisplayName>Epertuar</DisplayName>
-    <PublisherDisplayName>PaulDatsiuk</PublisherDisplayName>
+    <PublisherDisplayName>Michał Szypiorowski, Filip Sorek, Fabian Swakowski, Artur Szarnecki</PublisherDisplayName>
     <Logo>Assets\StoreLogo.png</Logo>
   </Properties>
   <Dependencies>

@@ -71,6 +71,11 @@ namespace Kina.Mobile.Core.Behaviors
                     cell.IsMarked = false;
                 }
             }
+
+            if (behavior._attachedControl != null)
+            {
+                behavior._attachedControl.Value = behavior.Value;
+            }
         }
 
         private void OnTapped(object sender, EventArgs e)
@@ -88,10 +93,6 @@ namespace Kina.Mobile.Core.Behaviors
                 }
 
                 Value = newValue;
-                if (_attachedControl != null)
-                {
-                    _attachedControl.Value = Value;
-                }
             }
         }
     }
